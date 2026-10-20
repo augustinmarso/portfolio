@@ -692,6 +692,11 @@
     "title": "Gorillachoc",
     "cover": {
       "src": "/projects/gorillachoc/thumb.webp",
+      "width": 604,
+      "height": 900
+    },
+    "hover": {
+      "src": "/projects/gorillachoc/hover.webp",
       "width": 600,
       "height": 900
     },

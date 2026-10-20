@@ -28,6 +28,7 @@ const COVERS = {
   "cafetiere-au-beurre": "_covers",
   "banc-tapis-petite-voiture": "_covers",
   "le-choix-de-malo": "_covers",
+  gorillachoc: "_covers",
 };
 
 const slugify = (s) =>
