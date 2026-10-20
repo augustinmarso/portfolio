@@ -225,9 +225,9 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
                       fill
                       sizes={`${p.w}px`}
                       draggable={false}
-                      className="pointer-events-none object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] group-focus-visible:scale-[1.06]"
+                      className="pointer-events-none object-cover"
                     />
-                    {/* Image de survol : l'objet en usage, révélée en fondu sans recadrage */}
+                    {/* Image de survol, au même cadrage : seule la personne apparaît (changement d'image, sans animation) */}
                     {p.project.hover && (
                       <Image
                         src={p.project.hover.src}
@@ -235,7 +235,7 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
                         fill
                         sizes={`${p.w * 2}px`}
                         draggable={false}
-                        className="pointer-events-none bg-background object-contain opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100"
+                        className="pointer-events-none object-cover opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
                       />
                     )}
                   </div>
