@@ -1,25 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { SiteNav } from "@/components/site-nav";
+import { SiteHeader } from "@/components/site-header";
 import { asset } from "@/lib/projects";
 
 export const metadata: Metadata = { title: "Contact — Augustin Marsollier" };
 
 const EMAIL = "marsollier.augustin@gmail.com";
-const BEHANCE = "https://www.behance.net/augusti-marsoll1";
+const PHONE = { display: "07 49 32 47 31", href: "tel:+33749324731" };
+const BEHANCE = "https://www.behance.net/augustimarsoll1";
 
 export default function ContactPage() {
   return (
     <main className="flex min-h-dvh flex-col px-4 pb-4 pt-4 sm:px-6 sm:pb-6">
-      <header className="flex flex-wrap-reverse items-end justify-between gap-x-6 gap-y-3">
-        <Link href="/" className="text-[clamp(3.25rem,9vw,7.5rem)] font-bold leading-[0.8] tracking-[-0.06em]">
-          marsollier
-        </Link>
-        <div className="ml-auto">
-          <SiteNav active="/contact" />
-        </div>
-      </header>
+      <SiteHeader active="/contact" />
 
       <div className="grid flex-1 gap-10 pt-6 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:grid-cols-2">
         <div className="flex flex-col">
@@ -31,6 +25,12 @@ export default function ContactPage() {
             dsaa design produit — ensaama, paris
           </p>
 
+          <p className="mt-8">
+            <a href={PHONE.href} className="hover:underline">
+              {PHONE.display}
+            </a>
+          </p>
+
           <section className="mt-12">
             <h2 className="text-2xl sm:text-3xl">projets &amp; collaborations</h2>
             <a href={`mailto:${EMAIL}`} className="mt-6 block hover:underline">
@@ -39,10 +39,10 @@ export default function ContactPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl sm:text-3xl">portfolio</h2>
-            <a href={BEHANCE} target="_blank" rel="noreferrer" className="mt-6 block underline underline-offset-4">
-              voir le portfolio complet sur behance
-            </a>
+            <h2 className="text-2xl sm:text-3xl">parcours</h2>
+            <Link href="/cv" className="mt-6 block underline underline-offset-4">
+              voir le cv
+            </Link>
           </section>
 
           <p className="mt-auto pt-16">
@@ -51,7 +51,7 @@ export default function ContactPage() {
             </a>
             ,
             <br />
-            <Link href="/" className="hover:underline">
+            <Link href="/arborescence" className="hover:underline">
               tous les projets
             </Link>
           </p>

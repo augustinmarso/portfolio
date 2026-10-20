@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { EinkFlash, READER_MODE_SCRIPT } from "@/components/reader-mode";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
+// Scoutie Sans (Google Fonts, août 2026) n'est pas encore dans la liste de next/font :
+// chargée par la feuille de style Google, variable 200–800.
+const FONT_CSS =
+  "https://fonts.googleapis.com/css2?family=Scoutie+Sans:ital,wght@0,200..800;1,200..800&display=swap";
 
 export const metadata: Metadata = {
   title: "Augustin Marsollier — Portfolio",
@@ -14,8 +14,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr" className={`${spaceGrotesk.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="fr" className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: READER_MODE_SCRIPT }} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="stylesheet" href={FONT_CSS} />
+      </head>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <EinkFlash />
+      </body>
     </html>
   );
 }

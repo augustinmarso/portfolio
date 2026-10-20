@@ -7,7 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: "Scoutie Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -128,12 +128,37 @@
     @apply font-sans;
   }
 }
-/* Portfolio : rouge des numéros, bleu des notes */
-:root {
-  --accent-red: #e5322d;
-  --accent-blue: #2b4cff;
+/* Mode liseuse : rendu « écran à encre » (papier, encre, niveaux de gris, pas d'animation). */
+html[data-mode="liseuse"] {
+  --background: #e8e6e0;
+  --foreground: #161616;
+  --muted: #d9d6ce;
+  --muted-foreground: #5c5b57;
+  --border: #b9b6ad;
+  --card: #e8e6e0;
+  --popover: #e8e6e0;
 }
-@theme inline {
-  --color-red: var(--accent-red);
-  --color-blue: var(--accent-blue);
+html[data-mode="liseuse"] img,
+html[data-mode="liseuse"] video {
+  filter: grayscale(1) contrast(1.12) brightness(1.02);
+}
+html[data-mode="liseuse"] *,
+html[data-mode="liseuse"] *::before,
+html[data-mode="liseuse"] *::after {
+  transition: none !important;
+  animation: none !important;
+  scroll-behavior: auto !important;
+}
+/* Rafraîchissement d'écran à encre : un bref flash noir puis blanc au changement de page. */
+.eink-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  animation: eink-flash 260ms steps(1, end) forwards !important;
+}
+@keyframes eink-flash {
+  0% { background: #161616; }
+  40% { background: #f4f3ef; }
+  100% { background: transparent; }
 }

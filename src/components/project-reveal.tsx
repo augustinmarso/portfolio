@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import gsap from "gsap";
+import { isReaderMode } from "@/components/reader-mode";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
@@ -13,7 +14,7 @@ export function ProjectReveal({ children }: { children: React.ReactNode }) {
 
   useGSAP(
     () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || isReaderMode()) return;
       gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) => {
         gsap.from(el, {
           opacity: 0,

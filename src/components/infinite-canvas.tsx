@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
+import { isReaderMode } from "@/components/reader-mode";
 import { useGSAP } from "@gsap/react";
 import type { Project } from "@/lib/projects";
 
@@ -84,7 +85,7 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
     () => {
       leaving.current = false;
       gsap.set(".canvas-card", { clearProps: "opacity,transform" });
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches || isReaderMode();
       const ease = reduce ? 1 : 0.085;
       const tick = () => {
         const c = current.current;

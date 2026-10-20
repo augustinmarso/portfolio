@@ -1,0 +1,16 @@
+{
+  "slug": "ratp",
+  "year": "2025",
+  "context": "DN MADE Objet, ENSAAMA — projet CAREFUL, en binôme avec Jesse Desuraume-Rajol",
+  "themes": [
+    "objet",
+    "espace public",
+    "service"
+  ],
+  "intro": "Certains voyageurs perçoivent les barres d'appui du métro parisien comme des foyers de microbes et adoptent des gestes inhabituels pour limiter le contact. Du bout des doigts propose une série de prises individuelles à fixer sur les barres existantes. Inspirées des prises d'escalade et des vertèbres, elles épousent les gestes observés (pincer, appuyer, crocheter avec deux doigts) et offrent une accroche stable avec un minimum de contact. Projet réalisé avec Jesse Desuraume-Rajol.",
+  "captions": [
+    "Prise bleue fixée sur une barre, modélisation Rhino et rendu Blender",
+    "Démarche : croquis des habitudes, autocollants, modélisation 3D, tests en glaise",
+    "Maquettes imprimées en 3D à l'échelle 1 et modélisation des prises"
+  ]
+}

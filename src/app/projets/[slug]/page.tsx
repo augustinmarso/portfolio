@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectReveal } from "@/components/project-reveal";
+import { SiteHeader } from "@/components/site-header";
+import { VideoPlayer } from "@/components/video-player";
 import { getProject, projects } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -11,7 +13,10 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/projets/[slug]">): Promise<Metadata> {
   const project = getProject((await params).slug);
-  return { title: project ? `${project.title} — Augustin Marsollier` : "Projet" };
+  return {
+    title: project ? `${project.title} — Augustin Marsollier` : "Projet",
+    description: project?.text?.intro,
+  };
 }
 
 export default async function ProjectPage({ params }: PageProps<"/projets/[slug]">) {
@@ -21,46 +26,87 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
 
   const i = projects.indexOf(project);
   const next = projects[(i + 1) % projects.length];
+  const text = project.text;
 
   return (
     <ProjectReveal>
-      <main className="mx-auto w-full max-w-6xl px-4 pb-24 sm:px-8">
-        <nav className="sticky top-0 z-10 -mx-4 flex items-center justify-between bg-background/90 px-4 py-4 text-sm backdrop-blur sm:-mx-8 sm:px-8">
-          <Link href="/" className="hover:underline">
-            ← Tous les projets
-          </Link>
-          <span className="text-muted-foreground">Augustin Marsollier</span>
-        </nav>
+      <main className="w-full px-4 pb-16 pt-4 sm:px-6">
+        <SiteHeader active={null} size="md" />
 
-        <header className="reveal grid gap-2 pb-10 pt-12 sm:pt-20">
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-7xl">{project.title}</h1>
-          <p className="text-sm text-blue">{project.images.length} planches</p>
-        </header>
+        <section className="grid gap-10 pt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:pt-16">
+          <div className="reveal lg:sticky lg:top-6 lg:self-start">
+            <h1 className="text-4xl font-bold lowercase leading-[0.95] tracking-tight sm:text-5xl">{project.title}</h1>
 
-        <div className="grid gap-4 sm:gap-6">
-          {project.images.map((img, n) => (
-            <Image
-              key={img.src}
-              src={img.src}
-              alt={`${project.title} — planche ${n + 1}`}
-              width={img.width}
-              height={img.height}
-              priority={n === 0}
-              sizes="(min-width: 1152px) 1088px, 100vw"
-              className="reveal h-auto w-full bg-muted"
-            />
-          ))}
-        </div>
+            <dl className="mt-8 grid gap-1 text-lg font-semibold leading-snug tracking-tight">
+              {text?.year && (
+                <div className="flex gap-2">
+                  <dt className="text-muted-foreground">année</dt>
+                  <dd>{text.year}</dd>
+                </div>
+              )}
+              {text?.context && (
+                <div className="flex gap-2">
+                  <dt className="shrink-0 text-muted-foreground">contexte</dt>
+                  <dd className="lowercase">{text.context}</dd>
+                </div>
+              )}
+              {text?.themes.length ? (
+                <div className="flex gap-2">
+                  <dt className="text-muted-foreground">thèmes</dt>
+                  <dd>
+                    {text.themes.map((t, n) => (
+                      <span key={t}>
+                        <Link href={`/arborescence?theme=${encodeURIComponent(t)}`} className="underline-offset-4 hover:underline">
+                          {t}
+                        </Link>
+                        {n < text.themes.length - 1 && ", "}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              ) : null}
+              <div className="flex gap-2">
+                <dt className="text-muted-foreground">planches</dt>
+                <dd>{project.images.length}</dd>
+              </div>
+            </dl>
 
-        <Link
-          href={`/projets/${next.slug}`}
-          className="reveal group mt-24 flex items-end justify-between gap-6 border-t pt-8"
-        >
+            {text?.intro && <p className="mt-8 max-w-prose text-lg leading-relaxed">{text.intro}</p>}
+          </div>
+
+          <div className="grid gap-12">
+            {project.video && (
+              <figure className="reveal">
+                <VideoPlayer src={project.video.src} poster={project.video.poster} label={`Vidéo de présentation — ${project.title}`} />
+                <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">vidéo de présentation</figcaption>
+              </figure>
+            )}
+            {project.images.map((img, n) => {
+              const caption = text?.captions[n];
+              return (
+                <figure key={img.src} className="reveal">
+                  <Image
+                    src={img.src}
+                    alt={caption || `${project.title} — planche ${n + 1}`}
+                    width={img.width}
+                    height={img.height}
+                    priority={n === 0 && !project.video}
+                    sizes="(min-width: 1024px) 66vw, 100vw"
+                    className="h-auto w-full bg-muted"
+                  />
+                  {caption && (
+                    <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">{caption.toLowerCase()}</figcaption>
+                  )}
+                </figure>
+              );
+            })}
+          </div>
+        </section>
+
+        <Link href={`/projets/${next.slug}`} className="reveal group mt-24 flex items-end justify-between gap-6 border-t pt-6">
           <div>
-            <span className="text-sm text-muted-foreground">Projet suivant</span>
-            <p className="text-3xl font-semibold tracking-tight group-hover:underline sm:text-5xl">
-              {next.title}
-            </p>
+            <span className="text-lg font-semibold text-muted-foreground">projet suivant</span>
+            <p className="text-3xl font-bold lowercase tracking-tight group-hover:underline sm:text-5xl">{next.title}</p>
           </div>
           <Image
             src={next.cover.src}

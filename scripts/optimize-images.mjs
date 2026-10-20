@@ -33,12 +33,14 @@ for (const dir of (await fs.readdir(SRC, { withFileTypes: true })).filter((d) =>
     const animated = /\.gif$/i.test(file);
     const name = String(i + 1).padStart(2, "0");
     const full = await sharp(input, { animated, limitInputPixels: false })
+      .rotate() // applique l'orientation EXIF des photos d'appareil
       .resize({ width: FULL, height: FULL, fit: "inside", withoutEnlargement: true })
       .webp({ quality: 80 })
       .toFile(path.join(outDir, `${name}.webp`));
     images.push({ src: `/projects/${slug}/${name}.webp`, width: full.width, height: animated ? full.pageHeight ?? full.height : full.height });
     if (i === 0) {
       const t = await sharp(input, { limitInputPixels: false })
+        .rotate()
         .resize({ width: THUMB, height: THUMB, fit: "inside", withoutEnlargement: true })
         .webp({ quality: 78 })
         .toFile(path.join(outDir, "thumb.webp"));
