@@ -4,3 +4,6 @@ export const SOCIALS = [
   { label: "instagram", href: "https://www.instagram.com/augustin_marsollier/" },
   { label: "behance", href: "https://www.behance.net/augustimarsoll1" },
 ] as const;
+
+// Salle Google Meet permanente : les visiteurs demandent à entrer, Augustin les admet.
+export const MEET = "https://meet.google.com/poz-crmg-qtx";

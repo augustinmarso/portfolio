@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { SiteHeader } from "@/components/site-header";
 import { asset } from "@/lib/projects";
-import { SOCIALS } from "@/lib/socials";
+import { MEET, SOCIALS } from "@/lib/socials";
 
 export const metadata: Metadata = { title: "Contact — Augustin Marsollier" };
 
@@ -40,6 +40,10 @@ export default function ContactPage() {
             {" — "}
             <a href={`mailto:${EMAIL}`} className="hover:underline">
               {EMAIL}
+            </a>
+            <br />
+            <a href={MEET} target="_blank" rel="noreferrer" className="hover:underline">
+              appel visio → google meet
             </a>
           </p>
 
