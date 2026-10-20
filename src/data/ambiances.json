@@ -96,5 +96,33 @@
     "source": "https://commons.wikimedia.org/wiki/File:Sound_of_a_MoHa_201_series_electric_multiple_unit_train_on_the_Chūō_Main_Line_(Ochanomizu–Yotsuya),_Tokyo,_Japan_-_20101010.ogg",
     "auteur": "Toshinori baba",
     "licence": "domaine public"
+  },
+  "ephemeride": {
+    "file": "/ambiances/ephemeride.mp3",
+    "titre": "horloge murale qui fait tic-tac",
+    "source": "https://commons.wikimedia.org/wiki/File:LA2_kitchen_clock.ogg",
+    "auteur": "LA2",
+    "licence": "domaine public"
+  },
+  "le-jeu-de-la-grenouille": {
+    "file": "/ambiances/le-jeu-de-la-grenouille.mp3",
+    "titre": "chœur de rainettes au bord d'une mare, la nuit",
+    "source": "https://commons.wikimedia.org/wiki/File:Spring_Peeper_Frogs_(Pseudacris_crucifer)_singing_on_night_of_April_21_of_2019_in_North_Pittston_PA.ogg",
+    "auteur": "JohnDziak",
+    "licence": "CC0"
+  },
+  "la-societe-de-jeux": {
+    "file": "/ambiances/la-societe-de-jeux.mp3",
+    "titre": "groupe réuni autour d'une table, voix étouffées",
+    "source": "https://commons.wikimedia.org/wiki/File:Group_discussion_3.ogg",
+    "auteur": "ezwa (pdsounds.org)",
+    "licence": "domaine public"
+  },
+  "collection-d-objets-liturgiques": {
+    "file": "/ambiances/collection-d-objets-liturgiques.mp3",
+    "titre": "pas dans une église, réverbération",
+    "source": "https://commons.wikimedia.org/wiki/File:Church_people_walking_steps_with_reverb.ogg",
+    "auteur": "stephan (pdsounds.org)",
+    "licence": "domaine public"
   }
 }
