@@ -90,7 +90,7 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
       leaving.current = false;
       gsap.set(".canvas-card", { clearProps: "opacity,transform" });
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const ease = reduce ? 1 : 0.085;
+      const ease = reduce ? 1 : 0.055;
       const tick = () => {
         const c = current.current;
         c.x += (target.current.x - c.x) * ease;

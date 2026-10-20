@@ -32,7 +32,7 @@ export function ScrollRing({ projects }: { projects: Project[] }) {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
     const tick = () => {
-      current.current += (target.current - current.current) * (reduce ? 1 : 0.08);
+      current.current += (target.current - current.current) * (reduce ? 1 : 0.05);
       if (ringRef.current) ringRef.current.style.transform = `translateZ(${-radius}px) rotateX(-12deg) rotateY(${current.current}deg)`;
       const idx = ((Math.round(-current.current / step) % n) + n) % n;
       setFront((f) => (f === idx ? f : idx));
@@ -41,7 +41,7 @@ export function ScrollRing({ projects }: { projects: Project[] }) {
     raf = requestAnimationFrame(tick);
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
-      target.current -= (e.deltaY + e.deltaX) * 0.08;
+      target.current -= (e.deltaY + e.deltaX) * 0.05;
     };
     window.addEventListener("wheel", onWheel, { passive: false });
     return () => {

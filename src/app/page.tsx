@@ -4,7 +4,7 @@ import { projects } from "@/lib/projects";
 
 export default function Home() {
   return (
-    <main className="relative h-dvh overflow-hidden">
+    <main className="relative h-dvh overflow-hidden" data-lenis-prevent>
       <HomeViews projects={projects} />
 
       <SiteHeader active="/" />
