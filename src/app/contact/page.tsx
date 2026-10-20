@@ -80,7 +80,7 @@ export default function ContactPage() {
           target="_blank"
           rel="noreferrer"
           aria-label="Appel vidéo WhatsApp"
-          className="relative mx-auto aspect-[9/16] w-full max-w-xs overflow-hidden rounded-2xl bg-muted lg:hidden"
+          className="relative mx-auto aspect-[9/16] w-full max-w-60 overflow-hidden rounded-2xl bg-muted lg:hidden"
         >
           <video
             src={asset("/contact/augustin-telephone.mp4")}
@@ -105,7 +105,7 @@ export default function ContactPage() {
         </a>
 
         {/* Ordinateur : format écran 16:9 (celui du GIF, sans recadrage), comme une fenêtre de visio. */}
-        <div className="group relative hidden aspect-video w-full self-start overflow-hidden rounded-sm bg-muted lg:block">
+        <div className="group relative hidden aspect-video w-full max-w-[30rem] self-start justify-self-end overflow-hidden rounded-sm bg-muted lg:block">
           <span className="pointer-events-none absolute left-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 text-sm font-semibold text-white backdrop-blur-sm">
             <span className="relative flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75" />
