@@ -13,7 +13,7 @@ const PHONE = { display: "07 49 32 47 31", href: "tel:+33749324731" };
 export default function ContactPage() {
   return (
     <main className="flex min-h-dvh flex-col px-4 pb-4 pt-4 sm:px-6 sm:pb-6">
-      <SiteHeader active="/contact" />
+      <SiteHeader active="/contact" wordmark={false} />
 
       <div className="grid flex-1 gap-10 pt-6 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:grid-cols-2">
         <div className="flex flex-col">
@@ -63,8 +63,8 @@ export default function ContactPage() {
 
         <div className="relative min-h-[60vw] lg:mt-[11.5rem] lg:min-h-0">
           <Image
-            src={asset("/projects/banc-tapis-petite-voiture/02.webp")}
-            alt="Banc tapis petite voiture, installé en extérieur"
+            src={asset("/contact/augustin.gif")}
+            alt="Augustin Marsollier, appuyé contre un arbre"
             fill
             priority
             sizes="(min-width: 1024px) 50vw, 100vw"
