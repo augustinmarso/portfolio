@@ -199,3 +199,17 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Indicateur de l'ambiance sonore d'un projet : barres qui ondulent doucement. */
+.ambience-bar {
+  height: 100%;
+  animation: ambience-bar 1.6s ease-in-out infinite;
+  transform-origin: bottom;
+}
+@keyframes ambience-bar {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambience-bar { animation: none; transform: scaleY(0.6); }
+}

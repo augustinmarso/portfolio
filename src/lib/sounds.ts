@@ -49,6 +49,11 @@ function pinkNoise(a: AudioContext) {
   return buf;
 }
 
+// Contexte audio partagé (créé à la première demande), pour les ambiances des projets.
+export function audioContext() {
+  return audio();
+}
+
 function audio() {
   if (typeof window === "undefined" || !soundOn()) return null;
   if (!ctx) {
