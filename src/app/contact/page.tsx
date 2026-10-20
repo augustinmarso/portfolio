@@ -91,6 +91,14 @@ export default function ContactPage() {
             playsInline
             className="size-full object-cover"
           />
+          {/* Indicateur « en ligne », comme dans une fenêtre d'appel vidéo */}
+          <span className="pointer-events-none absolute left-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 text-sm font-semibold text-white backdrop-blur-sm">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-green-500" />
+            </span>
+            en ligne
+          </span>
           <span className="absolute bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#25d366] px-5 py-2.5 text-base font-semibold text-white shadow-sm">
             appel whatsapp
           </span>
@@ -98,6 +106,13 @@ export default function ContactPage() {
 
         {/* Ordinateur : format écran 16:9 (celui du GIF, sans recadrage), comme une fenêtre de visio. */}
         <div className="group relative hidden aspect-video w-full self-start overflow-hidden rounded-sm bg-muted lg:block">
+          <span className="pointer-events-none absolute left-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 text-sm font-semibold text-white backdrop-blur-sm">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-green-500" />
+            </span>
+            en ligne
+          </span>
           {/* Un clic sur le GIF lance la visio Google Meet (sans lien Meet : demande de visio par mail). */}
           <a
             href={MEET_URL || `mailto:${EMAIL}?subject=${encodeURIComponent("Demande de visio")}`}
