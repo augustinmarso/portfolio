@@ -9,7 +9,8 @@ import { FadeImg } from "@/components/fade-img";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/lib/projects";
 
-export type PeopleMode = "auto" | "none" | "all";
+// false : objet seul au repos (personne au survol) ; true : personnes au repos (objet seul au survol).
+export type PeopleMode = boolean;
 
 // Rythme de clignotement propre à chaque carte (déterministe, pour un rendu serveur identique).
 function blinkTiming(slug: string, tx: number, ty: number): React.CSSProperties {
@@ -74,7 +75,7 @@ function layoutTile(projects: Project[], vw: number) {
 
 const wrap = (v: number, m: number) => ((v % m) + m) % m;
 
-export function InfiniteCanvas({ projects, people = "auto" }: { projects: Project[]; people?: PeopleMode }) {
+export function InfiniteCanvas({ projects, people = false }: { projects: Project[]; people?: PeopleMode }) {
   const router = useRouter();
   const viewport = useViewport();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -243,12 +244,13 @@ export function InfiniteCanvas({ projects, people = "auto" }: { projects: Projec
                         draggable={false}
                         className={cn(
                           "pointer-events-none absolute inset-0 size-full object-cover transition-opacity duration-300 ease-out",
-                          people === "all" && "opacity-100",
-                          people === "none" && "opacity-0",
-                          // automatique : au survol sur ordinateur, apparition lente et aléatoire sur écran tactile
-                          people === "auto" && "people-blink opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                          // le survol montre toujours l'autre image, quel que soit le mode
+                          people
+                            ? "opacity-100 group-hover:opacity-0 group-focus-visible:opacity-0"
+                            : // objet seul : la personne apparaît au survol, et doucement au hasard sur écran tactile
+                              "people-blink opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
                         )}
-                        style={people === "auto" ? blinkTiming(p.project.slug, tx, ty) : undefined}
+                        style={people ? undefined : blinkTiming(p.project.slug, tx, ty)}
                       />
                     )}
                   </div>

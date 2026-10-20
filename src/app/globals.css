@@ -182,10 +182,11 @@
     animation-timing-function: ease-in-out;
   }
 }
+/* La personne entre en scène, reste un moment, puis repart : le repos est l'objet seul. */
 @keyframes people-blink {
-  0%, 38% { opacity: 0; }
-  52%, 82% { opacity: 1; }
-  96%, 100% { opacity: 0; }
+  0%, 55% { opacity: 0; }
+  68%, 86% { opacity: 1; }
+  97%, 100% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .people-blink { animation: none; }

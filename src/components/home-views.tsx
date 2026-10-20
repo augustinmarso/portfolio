@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { InfiniteCanvas, type PeopleMode } from "@/components/infinite-canvas";
+import { PeopleSwitch } from "@/components/people-switch";
 
 // Vues secondaires chargées seulement quand on les ouvre (le canvas s'affiche seul au départ).
 const HoverExpand = dynamic(() => import("@/components/hover-expand").then((m) => m.HoverExpand), { ssr: false });
@@ -18,8 +19,8 @@ type View = (typeof VIEWS)[number];
 // l'anneau qui défile ou l'arborescence des thèmes.
 export function HomeViews({ projects }: { projects: Project[] }) {
   const [view, setView] = useState<View>("canvas");
-  // Vignettes en paire : « auto » (survol / clignotement sur téléphone), sans personne, ou avec les gens.
-  const [people, setPeople] = useState<PeopleMode>("auto");
+  // Vignettes en paire : objet seul (par défaut) ou avec les personnes ; le survol montre l'autre.
+  const [people, setPeople] = useState<PeopleMode>(false);
   // ?vue=arborescence (liens des thèmes) ouvre directement le bon mode. Lu après l'hydratation :
   // la page est exportée en statique, l'adresse n'est connue que dans le navigateur.
   useEffect(() => {
@@ -63,24 +64,8 @@ export function HomeViews({ projects }: { projects: Project[] }) {
         </p>
         <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-8">
           {view === "canvas" && (
-            <div className="flex gap-4 self-end text-sm sm:self-auto sm:text-base" role="group" aria-label="Personnes sur les vignettes">
-              {(
-                [
-                  ["none", "personne"],
-                  ["all", "les gens"],
-                ] as const
-              ).map(([mode, label]) => (
-                <button
-                  key={mode}
-                  type="button"
-                  // un second clic revient au mode automatique
-                  onClick={() => setPeople((cur) => (cur === mode ? "auto" : mode))}
-                  aria-pressed={people === mode}
-                  className={cn(people === mode ? "text-foreground underline underline-offset-4" : "text-muted-foreground hover:text-foreground")}
-                >
-                  {label}
-                </button>
-              ))}
+            <div className="self-end sm:self-auto">
+              <PeopleSwitch people={people} onChange={setPeople} />
             </div>
           )}
           <div className="flex justify-between gap-4 sm:justify-end">

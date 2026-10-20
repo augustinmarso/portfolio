@@ -30,6 +30,7 @@ const COVERS = {
   "le-choix-de-malo": "_covers",
   gorillachoc: "_covers",
   "recolteur-pomme-de-pin": "_covers",
+  "porte-cle-jeton-de-caddie": "_covers",
 };
 
 const slugify = (s) =>
