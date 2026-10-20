@@ -8,7 +8,8 @@ const SRC = path.resolve(process.argv[2] ?? "../behance");
 const OUT = path.resolve("public/projects");
 const DATA = path.resolve("src/data/projects.json");
 const FULL = 2000;
-const THUMB = 900;
+const SMALL = 1000; // variante légère des planches (téléphones, petits écrans)
+const THUMB = 560; // vignettes de l'index (cartes d'environ 240 px, nettes en Retina)
 const EXT = /\.(jpe?g|png|gif|webp)$/i;
 
 // Vignette de l'index : une vraie image (photo, rendu), jamais une planche de présentation.
@@ -60,7 +61,16 @@ for (const dir of (await fs.readdir(SRC, { withFileTypes: true })).filter((d) =>
       .resize({ width: FULL, height: FULL, fit: "inside", withoutEnlargement: true })
       .webp({ quality: 80 })
       .toFile(path.join(outDir, `${name}.webp`));
-    images.push({ src: `/projects/${slug}/${name}.webp`, width: full.width, height: animated ? full.pageHeight ?? full.height : full.height });
+    let sm;
+    if (!animated && full.width > SMALL * 1.2) {
+      await sharp(input, { limitInputPixels: false })
+        .rotate()
+        .resize({ width: SMALL, height: SMALL * 2, fit: "inside", withoutEnlargement: true })
+        .webp({ quality: 78 })
+        .toFile(path.join(outDir, `${name}-sm.webp`));
+      sm = `/projects/${slug}/${name}-sm.webp`;
+    }
+    images.push({ src: `/projects/${slug}/${name}.webp`, ...(sm && { sm }), width: full.width, height: animated ? full.pageHeight ?? full.height : full.height });
     const pick = COVERS[slug];
     const isCover = pick === "_covers" ? i === 0 : pick ? name === pick : i === 0;
     if (isCover) {

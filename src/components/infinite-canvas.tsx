@@ -1,12 +1,24 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { FadeImg } from "@/components/fade-img";
+import { cn } from "@/lib/utils";
 import type { Project } from "@/lib/projects";
+
+export type PeopleMode = "auto" | "none" | "all";
+
+// Rythme de clignotement propre à chaque carte (déterministe, pour un rendu serveur identique).
+function blinkTiming(slug: string, tx: number, ty: number): React.CSSProperties {
+  let h = tx * 7919 + ty * 104729;
+  for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  const dur = 9 + (h % 70) / 10; // 9 à 16 s
+  const delay = -((h >>> 7) % 1600) / 100; // départ décalé, jusqu'à 16 s
+  return { animationDuration: `${dur}s`, animationDelay: `${delay}s` };
+}
 
 gsap.registerPlugin(useGSAP);
 
@@ -62,7 +74,7 @@ function layoutTile(projects: Project[], vw: number) {
 
 const wrap = (v: number, m: number) => ((v % m) + m) % m;
 
-export function InfiniteCanvas({ projects }: { projects: Project[] }) {
+export function InfiniteCanvas({ projects, people = "auto" }: { projects: Project[]; people?: PeopleMode }) {
   const router = useRouter();
   const viewport = useViewport();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -219,23 +231,24 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
                   style={{ left: p.x, top: p.y, width: p.w, height: p.h }}
                 >
                   <div className="relative overflow-hidden" style={{ height: p.h - LABEL }}>
-                    <Image
-                      src={p.project.cover.src}
-                      alt={p.project.title}
-                      fill
-                      sizes={`${p.w}px`}
-                      draggable={false}
-                      className="pointer-events-none object-cover"
-                    />
+                    <FadeImg src={p.project.cover.src} alt={p.project.title} fill className="pointer-events-none object-cover" />
                     {/* Image de survol, au même cadrage : seule la personne apparaît (fondu court, sans zoom) */}
                     {p.project.hover && (
-                      <Image
+                      // eslint-disable-next-line @next/next/no-img-element -- image de survol, déjà au bon format
+                      <img
                         src={p.project.hover.src}
                         alt=""
-                        fill
-                        sizes={`${p.w * 2}px`}
+                        loading="lazy"
+                        decoding="async"
                         draggable={false}
-                        className="pointer-events-none object-cover opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100"
+                        className={cn(
+                          "pointer-events-none absolute inset-0 size-full object-cover transition-opacity duration-300 ease-out",
+                          people === "all" && "opacity-100",
+                          people === "none" && "opacity-0",
+                          // automatique : au survol sur ordinateur, apparition lente et aléatoire sur écran tactile
+                          people === "auto" && "people-blink opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                        )}
+                        style={people === "auto" ? blinkTiming(p.project.slug, tx, ty) : undefined}
                       />
                     )}
                   </div>

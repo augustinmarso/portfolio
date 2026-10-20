@@ -20,6 +20,13 @@ export function HoverExpand({ projects }: { projects: Project[] }) {
             key={p.slug}
             href={`/projets/${p.slug}`}
             onMouseEnter={() => setActive(i)}
+            // écran tactile : un premier appui ouvre le panneau, le second ouvre le projet
+            onClick={(e) => {
+              if (i !== active) {
+                e.preventDefault();
+                setActive(i);
+              }
+            }}
             onFocus={() => setActive(i)}
             className={cn(
               "group relative min-h-0 min-w-0 overflow-hidden outline-none",

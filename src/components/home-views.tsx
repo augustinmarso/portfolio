@@ -1,10 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { HoverExpand } from "@/components/hover-expand";
-import { InfiniteCanvas } from "@/components/infinite-canvas";
-import { MindMap } from "@/components/mind-map";
-import { ScrollRing } from "@/components/scroll-ring";
+import dynamic from "next/dynamic";
+import { InfiniteCanvas, type PeopleMode } from "@/components/infinite-canvas";
+
+// Vues secondaires chargées seulement quand on les ouvre (le canvas s'affiche seul au départ).
+const HoverExpand = dynamic(() => import("@/components/hover-expand").then((m) => m.HoverExpand), { ssr: false });
+const MindMap = dynamic(() => import("@/components/mind-map").then((m) => m.MindMap), { ssr: false });
+const ScrollRing = dynamic(() => import("@/components/scroll-ring").then((m) => m.ScrollRing), { ssr: false });
 import { cn } from "@/lib/utils";
 import type { Project } from "@/lib/projects";
 
@@ -15,6 +18,8 @@ type View = (typeof VIEWS)[number];
 // l'anneau qui défile ou l'arborescence des thèmes.
 export function HomeViews({ projects }: { projects: Project[] }) {
   const [view, setView] = useState<View>("canvas");
+  // Vignettes en paire : « auto » (survol / clignotement sur téléphone), sans personne, ou avec les gens.
+  const [people, setPeople] = useState<PeopleMode>("auto");
   // ?vue=arborescence (liens des thèmes) ouvre directement le bon mode. Lu après l'hydratation :
   // la page est exportée en statique, l'adresse n'est connue que dans le navigateur.
   useEffect(() => {
@@ -31,21 +36,23 @@ export function HomeViews({ projects }: { projects: Project[] }) {
   return (
     <>
       {view === "canvas" ? (
-        <InfiniteCanvas projects={projects} />
+        <InfiniteCanvas projects={projects} people={people} />
       ) : view === "scroll" ? (
         <ScrollRing projects={byDate} />
       ) : view === "arborescence" ? (
-        <div className="fixed inset-x-4 bottom-14 top-16 sm:inset-x-6">
+        <div className="fixed inset-x-4 bottom-24 top-16 sm:inset-x-6 sm:bottom-16">
           <MindMap projects={projects} className="h-full" />
         </div>
       ) : (
-        <div className="fixed inset-x-4 bottom-14 top-32 sm:inset-x-6 sm:top-36">
+        <div className="fixed inset-x-4 bottom-24 top-16 sm:inset-x-6 sm:bottom-16 sm:top-36">
           <HoverExpand projects={byDate} />
         </div>
       )}
 
-      <div className="fixed bottom-4 left-4 right-4 z-10 flex items-center justify-end sm:justify-between text-sm font-semibold sm:bottom-5 sm:left-6 sm:right-6">
-        <p className="pointer-events-none hidden rounded-sm bg-background/90 px-2.5 py-1 text-muted-foreground backdrop-blur sm:block">
+      {/* Barre du bas : bande blanche pleine largeur, calée en bas, rien ne passe dessous.
+          Téléphone : boutons « personne / les gens » au-dessus, les quatre vues réparties sur la largeur. */}
+      <div className="fixed inset-x-0 bottom-0 z-10 flex flex-col gap-1.5 bg-background px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-2 text-base font-semibold sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:pb-3">
+        <p className="pointer-events-none hidden text-sm text-muted-foreground sm:block">
           {view === "canvas"
             ? "glisser pour explorer, cliquer pour ouvrir"
             : view === "scroll"
@@ -54,18 +61,41 @@ export function HomeViews({ projects }: { projects: Project[] }) {
                 ? "cliquer un thème pour l'ouvrir, un projet pour le voir"
                 : "survoler pour ouvrir un panneau"}
         </p>
-        <div className="flex gap-4 rounded-sm bg-background/90 px-2.5 py-1 text-base backdrop-blur">
-          {VIEWS.map((v) => (
-            <button
-              key={v}
-              type="button"
-              onClick={() => setView(v)}
-              aria-pressed={view === v}
-              className={cn(view === v ? "text-foreground" : "text-muted-foreground hover:text-foreground")}
-            >
-              {v}
-            </button>
-          ))}
+        <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-8">
+          {view === "canvas" && (
+            <div className="flex gap-4 self-end text-sm sm:self-auto sm:text-base" role="group" aria-label="Personnes sur les vignettes">
+              {(
+                [
+                  ["none", "personne"],
+                  ["all", "les gens"],
+                ] as const
+              ).map(([mode, label]) => (
+                <button
+                  key={mode}
+                  type="button"
+                  // un second clic revient au mode automatique
+                  onClick={() => setPeople((cur) => (cur === mode ? "auto" : mode))}
+                  aria-pressed={people === mode}
+                  className={cn(people === mode ? "text-foreground underline underline-offset-4" : "text-muted-foreground hover:text-foreground")}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
+          <div className="flex justify-between gap-4 sm:justify-end">
+            {VIEWS.map((v) => (
+              <button
+                key={v}
+                type="button"
+                onClick={() => setView(v)}
+                aria-pressed={view === v}
+                className={cn(view === v ? "text-foreground" : "text-muted-foreground hover:text-foreground")}
+              >
+                {v}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </>

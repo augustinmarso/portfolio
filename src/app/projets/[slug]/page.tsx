@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
+import { FadeImg } from "@/components/fade-img";
 import { VideoPlayer } from "@/components/video-player";
 import { getProject, projects } from "@/lib/projects";
 import { absolute, excerpt, jsonLd, ogImage, PERSON } from "@/lib/site";
@@ -138,14 +139,14 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
             const caption = text?.captions[n];
             return (
               <figure key={img.src}>
-                <Image
+                <FadeImg
                   src={img.src}
+                  sm={img.sm}
                   alt={caption || `${project.title} — planche ${n + 1}`}
                   width={img.width}
                   height={img.height}
                   priority={n === 0 && !project.video}
-                  sizes="(min-width: 1024px) 66vw, 100vw"
-                  className="h-auto w-full"
+                  sizes="(min-width: 768px) 66vw, 100vw"
                 />
                 {caption && (
                   <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">{caption.toLowerCase()}</figcaption>

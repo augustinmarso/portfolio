@@ -4,52 +4,60 @@
     "title": "Banc tapis petite voiture",
     "cover": {
       "src": "/projects/banc-tapis-petite-voiture/thumb.webp",
-      "width": 900,
-      "height": 600
+      "width": 560,
+      "height": 373
     },
     "hover": {
       "src": "/projects/banc-tapis-petite-voiture/hover.webp",
-      "width": 900,
-      "height": 600
+      "width": 560,
+      "height": 373
     },
     "images": [
       {
         "src": "/projects/banc-tapis-petite-voiture/01.webp",
+        "sm": "/projects/banc-tapis-petite-voiture/01-sm.webp",
         "width": 1333,
         "height": 2000
       },
       {
         "src": "/projects/banc-tapis-petite-voiture/02.webp",
+        "sm": "/projects/banc-tapis-petite-voiture/02-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/banc-tapis-petite-voiture/03.webp",
+        "sm": "/projects/banc-tapis-petite-voiture/03-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/banc-tapis-petite-voiture/04.webp",
+        "sm": "/projects/banc-tapis-petite-voiture/04-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/banc-tapis-petite-voiture/05.webp",
+        "sm": "/projects/banc-tapis-petite-voiture/05-sm.webp",
         "width": 1333,
         "height": 2000
       },
       {
         "src": "/projects/banc-tapis-petite-voiture/06.webp",
+        "sm": "/projects/banc-tapis-petite-voiture/06-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/banc-tapis-petite-voiture/07.webp",
+        "sm": "/projects/banc-tapis-petite-voiture/07-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/banc-tapis-petite-voiture/08.webp",
+        "sm": "/projects/banc-tapis-petite-voiture/08-sm.webp",
         "width": 2000,
         "height": 1333
       }
@@ -60,8 +68,8 @@
     "title": "Cafetiere au beurre",
     "cover": {
       "src": "/projects/cafetiere-au-beurre/thumb.webp",
-      "width": 636,
-      "height": 900
+      "width": 396,
+      "height": 560
     },
     "images": [
       {
@@ -131,22 +139,25 @@
     "title": "Collection d'objets liturgiques",
     "cover": {
       "src": "/projects/collection-d-objets-liturgiques/thumb.webp",
-      "width": 900,
-      "height": 900
+      "width": 560,
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/collection-d-objets-liturgiques/01.webp",
+        "sm": "/projects/collection-d-objets-liturgiques/01-sm.webp",
         "width": 2000,
         "height": 2000
       },
       {
         "src": "/projects/collection-d-objets-liturgiques/02.webp",
+        "sm": "/projects/collection-d-objets-liturgiques/02-sm.webp",
         "width": 1414,
         "height": 2000
       },
       {
         "src": "/projects/collection-d-objets-liturgiques/03.webp",
+        "sm": "/projects/collection-d-objets-liturgiques/03-sm.webp",
         "width": 1429,
         "height": 2000
       }
@@ -157,12 +168,13 @@
     "title": "Cylinder chair",
     "cover": {
       "src": "/projects/cylinder-chair/thumb.webp",
-      "width": 900,
-      "height": 900
+      "width": 560,
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/cylinder-chair/01.webp",
+        "sm": "/projects/cylinder-chair/01-sm.webp",
         "width": 1570,
         "height": 2000
       },
@@ -173,16 +185,19 @@
       },
       {
         "src": "/projects/cylinder-chair/03.webp",
+        "sm": "/projects/cylinder-chair/03-sm.webp",
         "width": 2000,
         "height": 1998
       },
       {
         "src": "/projects/cylinder-chair/04.webp",
+        "sm": "/projects/cylinder-chair/04-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/cylinder-chair/05.webp",
+        "sm": "/projects/cylinder-chair/05-sm.webp",
         "width": 1654,
         "height": 2000
       }
@@ -193,152 +208,181 @@
     "title": "De passager a equipier",
     "cover": {
       "src": "/projects/de-passager-a-equipier/thumb.webp",
-      "width": 592,
-      "height": 750
+      "width": 442,
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/de-passager-a-equipier/01.webp",
+        "sm": "/projects/de-passager-a-equipier/01-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/02.webp",
+        "sm": "/projects/de-passager-a-equipier/02-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/03.webp",
+        "sm": "/projects/de-passager-a-equipier/03-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/04.webp",
+        "sm": "/projects/de-passager-a-equipier/04-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/05.webp",
+        "sm": "/projects/de-passager-a-equipier/05-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/06.webp",
+        "sm": "/projects/de-passager-a-equipier/06-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/07.webp",
+        "sm": "/projects/de-passager-a-equipier/07-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/08.webp",
+        "sm": "/projects/de-passager-a-equipier/08-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/09.webp",
+        "sm": "/projects/de-passager-a-equipier/09-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/10.webp",
+        "sm": "/projects/de-passager-a-equipier/10-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/11.webp",
+        "sm": "/projects/de-passager-a-equipier/11-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/12.webp",
+        "sm": "/projects/de-passager-a-equipier/12-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/13.webp",
+        "sm": "/projects/de-passager-a-equipier/13-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/14.webp",
+        "sm": "/projects/de-passager-a-equipier/14-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/15.webp",
+        "sm": "/projects/de-passager-a-equipier/15-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/16.webp",
+        "sm": "/projects/de-passager-a-equipier/16-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/17.webp",
+        "sm": "/projects/de-passager-a-equipier/17-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/18.webp",
+        "sm": "/projects/de-passager-a-equipier/18-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/19.webp",
+        "sm": "/projects/de-passager-a-equipier/19-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/20.webp",
+        "sm": "/projects/de-passager-a-equipier/20-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/21.webp",
+        "sm": "/projects/de-passager-a-equipier/21-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/22.webp",
+        "sm": "/projects/de-passager-a-equipier/22-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/23.webp",
+        "sm": "/projects/de-passager-a-equipier/23-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/24.webp",
+        "sm": "/projects/de-passager-a-equipier/24-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/25.webp",
+        "sm": "/projects/de-passager-a-equipier/25-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/26.webp",
+        "sm": "/projects/de-passager-a-equipier/26-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/27.webp",
+        "sm": "/projects/de-passager-a-equipier/27-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/28.webp",
+        "sm": "/projects/de-passager-a-equipier/28-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/de-passager-a-equipier/29.webp",
+        "sm": "/projects/de-passager-a-equipier/29-sm.webp",
         "width": 2000,
         "height": 1414
       }
@@ -349,102 +393,121 @@
     "title": "Echappee",
     "cover": {
       "src": "/projects/echappee/thumb.webp",
-      "width": 900,
-      "height": 600
+      "width": 560,
+      "height": 373
     },
     "images": [
       {
         "src": "/projects/echappee/01.webp",
+        "sm": "/projects/echappee/01-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/02.webp",
+        "sm": "/projects/echappee/02-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/03.webp",
+        "sm": "/projects/echappee/03-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/04.webp",
+        "sm": "/projects/echappee/04-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/05.webp",
+        "sm": "/projects/echappee/05-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/06.webp",
+        "sm": "/projects/echappee/06-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/07.webp",
+        "sm": "/projects/echappee/07-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/08.webp",
+        "sm": "/projects/echappee/08-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/09.webp",
+        "sm": "/projects/echappee/09-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/10.webp",
+        "sm": "/projects/echappee/10-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/11.webp",
+        "sm": "/projects/echappee/11-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/12.webp",
+        "sm": "/projects/echappee/12-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/13.webp",
+        "sm": "/projects/echappee/13-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/14.webp",
+        "sm": "/projects/echappee/14-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/15.webp",
+        "sm": "/projects/echappee/15-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/16.webp",
+        "sm": "/projects/echappee/16-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/17.webp",
+        "sm": "/projects/echappee/17-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/18.webp",
+        "sm": "/projects/echappee/18-sm.webp",
         "width": 2000,
         "height": 1413
       },
       {
         "src": "/projects/echappee/19.webp",
+        "sm": "/projects/echappee/19-sm.webp",
         "width": 2000,
         "height": 1413
       }
@@ -455,47 +518,55 @@
     "title": "Ephemeride",
     "cover": {
       "src": "/projects/ephemeride/thumb.webp",
-      "width": 900,
-      "height": 673
+      "width": 560,
+      "height": 419
     },
     "images": [
       {
         "src": "/projects/ephemeride/01.webp",
+        "sm": "/projects/ephemeride/01-sm.webp",
         "width": 2000,
         "height": 1496
       },
       {
         "src": "/projects/ephemeride/02.webp",
+        "sm": "/projects/ephemeride/02-sm.webp",
         "width": 2000,
         "height": 1289
       },
       {
         "src": "/projects/ephemeride/03.webp",
+        "sm": "/projects/ephemeride/03-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/ephemeride/04.webp",
+        "sm": "/projects/ephemeride/04-sm.webp",
         "width": 2000,
         "height": 1197
       },
       {
         "src": "/projects/ephemeride/05.webp",
+        "sm": "/projects/ephemeride/05-sm.webp",
         "width": 2000,
         "height": 1197
       },
       {
         "src": "/projects/ephemeride/06.webp",
+        "sm": "/projects/ephemeride/06-sm.webp",
         "width": 2000,
         "height": 1197
       },
       {
         "src": "/projects/ephemeride/07.webp",
+        "sm": "/projects/ephemeride/07-sm.webp",
         "width": 1211,
         "height": 544
       },
       {
         "src": "/projects/ephemeride/08.webp",
+        "sm": "/projects/ephemeride/08-sm.webp",
         "width": 2000,
         "height": 1420
       },
@@ -506,6 +577,7 @@
       },
       {
         "src": "/projects/ephemeride/10.webp",
+        "sm": "/projects/ephemeride/10-sm.webp",
         "width": 1496,
         "height": 2000
       },
@@ -521,6 +593,7 @@
       },
       {
         "src": "/projects/ephemeride/13.webp",
+        "sm": "/projects/ephemeride/13-sm.webp",
         "width": 2000,
         "height": 1496
       },
@@ -531,16 +604,19 @@
       },
       {
         "src": "/projects/ephemeride/15.webp",
+        "sm": "/projects/ephemeride/15-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/ephemeride/16.webp",
+        "sm": "/projects/ephemeride/16-sm.webp",
         "width": 1440,
         "height": 1092
       },
       {
         "src": "/projects/ephemeride/17.webp",
+        "sm": "/projects/ephemeride/17-sm.webp",
         "width": 2000,
         "height": 1214
       },
@@ -551,11 +627,13 @@
       },
       {
         "src": "/projects/ephemeride/19.webp",
+        "sm": "/projects/ephemeride/19-sm.webp",
         "width": 2000,
         "height": 1197
       },
       {
         "src": "/projects/ephemeride/20.webp",
+        "sm": "/projects/ephemeride/20-sm.webp",
         "width": 2000,
         "height": 1197
       },
@@ -581,6 +659,7 @@
       },
       {
         "src": "/projects/ephemeride/25.webp",
+        "sm": "/projects/ephemeride/25-sm.webp",
         "width": 2000,
         "height": 1197
       },
@@ -626,6 +705,7 @@
       },
       {
         "src": "/projects/ephemeride/34.webp",
+        "sm": "/projects/ephemeride/34-sm.webp",
         "width": 2000,
         "height": 997
       }
@@ -636,8 +716,8 @@
     "title": "FISH-EYE",
     "cover": {
       "src": "/projects/fish-eye/thumb.webp",
-      "width": 900,
-      "height": 900
+      "width": 560,
+      "height": 560
     },
     "images": [
       {
@@ -647,16 +727,19 @@
       },
       {
         "src": "/projects/fish-eye/02.webp",
+        "sm": "/projects/fish-eye/02-sm.webp",
         "width": 2000,
         "height": 1414
       },
       {
         "src": "/projects/fish-eye/03.webp",
+        "sm": "/projects/fish-eye/03-sm.webp",
         "width": 2000,
         "height": 1381
       },
       {
         "src": "/projects/fish-eye/04.webp",
+        "sm": "/projects/fish-eye/04-sm.webp",
         "width": 2000,
         "height": 1414
       },
@@ -667,16 +750,19 @@
       },
       {
         "src": "/projects/fish-eye/06.webp",
+        "sm": "/projects/fish-eye/06-sm.webp",
         "width": 2000,
         "height": 2000
       },
       {
         "src": "/projects/fish-eye/07.webp",
+        "sm": "/projects/fish-eye/07-sm.webp",
         "width": 1500,
         "height": 2000
       },
       {
         "src": "/projects/fish-eye/08.webp",
+        "sm": "/projects/fish-eye/08-sm.webp",
         "width": 1500,
         "height": 2000
       },
@@ -692,37 +778,42 @@
     "title": "Gorillachoc",
     "cover": {
       "src": "/projects/gorillachoc/thumb.webp",
-      "width": 604,
-      "height": 900
+      "width": 376,
+      "height": 560
     },
     "hover": {
       "src": "/projects/gorillachoc/hover.webp",
-      "width": 604,
-      "height": 900
+      "width": 376,
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/gorillachoc/01.webp",
+        "sm": "/projects/gorillachoc/01-sm.webp",
         "width": 1333,
         "height": 2000
       },
       {
         "src": "/projects/gorillachoc/02.webp",
+        "sm": "/projects/gorillachoc/02-sm.webp",
         "width": 1333,
         "height": 2000
       },
       {
         "src": "/projects/gorillachoc/03.webp",
+        "sm": "/projects/gorillachoc/03-sm.webp",
         "width": 1333,
         "height": 2000
       },
       {
         "src": "/projects/gorillachoc/04.webp",
+        "sm": "/projects/gorillachoc/04-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/05.webp",
+        "sm": "/projects/gorillachoc/05-sm.webp",
         "width": 2000,
         "height": 1306
       },
@@ -733,76 +824,91 @@
       },
       {
         "src": "/projects/gorillachoc/07.webp",
+        "sm": "/projects/gorillachoc/07-sm.webp",
         "width": 2000,
         "height": 1405
       },
       {
         "src": "/projects/gorillachoc/08.webp",
+        "sm": "/projects/gorillachoc/08-sm.webp",
         "width": 1333,
         "height": 2000
       },
       {
         "src": "/projects/gorillachoc/09.webp",
+        "sm": "/projects/gorillachoc/09-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/10.webp",
+        "sm": "/projects/gorillachoc/10-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/11.webp",
+        "sm": "/projects/gorillachoc/11-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/12.webp",
+        "sm": "/projects/gorillachoc/12-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/13.webp",
+        "sm": "/projects/gorillachoc/13-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/14.webp",
+        "sm": "/projects/gorillachoc/14-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/15.webp",
+        "sm": "/projects/gorillachoc/15-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/16.webp",
+        "sm": "/projects/gorillachoc/16-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/17.webp",
+        "sm": "/projects/gorillachoc/17-sm.webp",
         "width": 1333,
         "height": 2000
       },
       {
         "src": "/projects/gorillachoc/18.webp",
+        "sm": "/projects/gorillachoc/18-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/19.webp",
+        "sm": "/projects/gorillachoc/19-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/20.webp",
+        "sm": "/projects/gorillachoc/20-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/gorillachoc/21.webp",
+        "sm": "/projects/gorillachoc/21-sm.webp",
         "width": 2000,
         "height": 1333
       }
@@ -813,87 +919,103 @@
     "title": "KAI",
     "cover": {
       "src": "/projects/kai/thumb.webp",
-      "width": 900,
-      "height": 900
+      "width": 560,
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/kai/01.webp",
+        "sm": "/projects/kai/01-sm.webp",
         "width": 1493,
         "height": 2000
       },
       {
         "src": "/projects/kai/02.webp",
+        "sm": "/projects/kai/02-sm.webp",
         "width": 1500,
         "height": 2000
       },
       {
         "src": "/projects/kai/03.webp",
+        "sm": "/projects/kai/03-sm.webp",
         "width": 1576,
         "height": 2000
       },
       {
         "src": "/projects/kai/04.webp",
+        "sm": "/projects/kai/04-sm.webp",
         "width": 1414,
         "height": 2000
       },
       {
         "src": "/projects/kai/05.webp",
+        "sm": "/projects/kai/05-sm.webp",
         "width": 2000,
         "height": 2000
       },
       {
         "src": "/projects/kai/06.webp",
+        "sm": "/projects/kai/06-sm.webp",
         "width": 2000,
         "height": 2000
       },
       {
         "src": "/projects/kai/07.webp",
+        "sm": "/projects/kai/07-sm.webp",
         "width": 1602,
         "height": 2000
       },
       {
         "src": "/projects/kai/08.webp",
+        "sm": "/projects/kai/08-sm.webp",
         "width": 1369,
         "height": 959
       },
       {
         "src": "/projects/kai/09.webp",
+        "sm": "/projects/kai/09-sm.webp",
         "width": 2000,
         "height": 1116
       },
       {
         "src": "/projects/kai/10.webp",
+        "sm": "/projects/kai/10-sm.webp",
         "width": 2000,
         "height": 1625
       },
       {
         "src": "/projects/kai/11.webp",
+        "sm": "/projects/kai/11-sm.webp",
         "width": 1243,
         "height": 2000
       },
       {
         "src": "/projects/kai/12.webp",
+        "sm": "/projects/kai/12-sm.webp",
         "width": 2000,
         "height": 1732
       },
       {
         "src": "/projects/kai/13.webp",
+        "sm": "/projects/kai/13-sm.webp",
         "width": 1226,
         "height": 2000
       },
       {
         "src": "/projects/kai/14.webp",
+        "sm": "/projects/kai/14-sm.webp",
         "width": 1536,
         "height": 1024
       },
       {
         "src": "/projects/kai/15.webp",
+        "sm": "/projects/kai/15-sm.webp",
         "width": 1938,
         "height": 2000
       },
       {
         "src": "/projects/kai/16.webp",
+        "sm": "/projects/kai/16-sm.webp",
         "width": 2000,
         "height": 2000
       }
@@ -904,97 +1026,114 @@
     "title": "La societe de jeux",
     "cover": {
       "src": "/projects/la-societe-de-jeux/thumb.webp",
-      "width": 672,
-      "height": 900
+      "width": 418,
+      "height": 560
     },
     "hover": {
       "src": "/projects/la-societe-de-jeux/hover.webp",
-      "width": 672,
-      "height": 900
+      "width": 418,
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/la-societe-de-jeux/01.webp",
+        "sm": "/projects/la-societe-de-jeux/01-sm.webp",
         "width": 1410,
         "height": 2000
       },
       {
         "src": "/projects/la-societe-de-jeux/02.webp",
+        "sm": "/projects/la-societe-de-jeux/02-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/03.webp",
+        "sm": "/projects/la-societe-de-jeux/03-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/04.webp",
+        "sm": "/projects/la-societe-de-jeux/04-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/05.webp",
+        "sm": "/projects/la-societe-de-jeux/05-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/06.webp",
+        "sm": "/projects/la-societe-de-jeux/06-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/07.webp",
+        "sm": "/projects/la-societe-de-jeux/07-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/08.webp",
+        "sm": "/projects/la-societe-de-jeux/08-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/09.webp",
+        "sm": "/projects/la-societe-de-jeux/09-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/10.webp",
+        "sm": "/projects/la-societe-de-jeux/10-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/11.webp",
+        "sm": "/projects/la-societe-de-jeux/11-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/12.webp",
+        "sm": "/projects/la-societe-de-jeux/12-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/13.webp",
+        "sm": "/projects/la-societe-de-jeux/13-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/14.webp",
+        "sm": "/projects/la-societe-de-jeux/14-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/15.webp",
+        "sm": "/projects/la-societe-de-jeux/15-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/16.webp",
+        "sm": "/projects/la-societe-de-jeux/16-sm.webp",
         "width": 2000,
         "height": 1419
       },
       {
         "src": "/projects/la-societe-de-jeux/17.webp",
+        "sm": "/projects/la-societe-de-jeux/17-sm.webp",
         "width": 2000,
         "height": 1419
       },
@@ -1005,6 +1144,7 @@
       },
       {
         "src": "/projects/la-societe-de-jeux/19.webp",
+        "sm": "/projects/la-societe-de-jeux/19-sm.webp",
         "width": 1536,
         "height": 1024
       },
@@ -1020,42 +1160,48 @@
     "title": "Le choix de Malo",
     "cover": {
       "src": "/projects/le-choix-de-malo/thumb.webp",
-      "width": 899,
-      "height": 900
+      "width": 559,
+      "height": 560
     },
     "hover": {
       "src": "/projects/le-choix-de-malo/hover.webp",
-      "width": 899,
-      "height": 900
+      "width": 559,
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/le-choix-de-malo/01.webp",
+        "sm": "/projects/le-choix-de-malo/01-sm.webp",
         "width": 1997,
         "height": 2000
       },
       {
         "src": "/projects/le-choix-de-malo/02.webp",
+        "sm": "/projects/le-choix-de-malo/02-sm.webp",
         "width": 1333,
         "height": 2000
       },
       {
         "src": "/projects/le-choix-de-malo/03.webp",
+        "sm": "/projects/le-choix-de-malo/03-sm.webp",
         "width": 1612,
         "height": 2000
       },
       {
         "src": "/projects/le-choix-de-malo/04.webp",
+        "sm": "/projects/le-choix-de-malo/04-sm.webp",
         "width": 2000,
         "height": 2000
       },
       {
         "src": "/projects/le-choix-de-malo/05.webp",
+        "sm": "/projects/le-choix-de-malo/05-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/le-choix-de-malo/06.webp",
+        "sm": "/projects/le-choix-de-malo/06-sm.webp",
         "width": 2000,
         "height": 1333
       },
@@ -1071,26 +1217,31 @@
       },
       {
         "src": "/projects/le-choix-de-malo/09.webp",
+        "sm": "/projects/le-choix-de-malo/09-sm.webp",
         "width": 2000,
         "height": 1020
       },
       {
         "src": "/projects/le-choix-de-malo/10.webp",
+        "sm": "/projects/le-choix-de-malo/10-sm.webp",
         "width": 2000,
         "height": 1163
       },
       {
         "src": "/projects/le-choix-de-malo/11.webp",
+        "sm": "/projects/le-choix-de-malo/11-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/le-choix-de-malo/12.webp",
+        "sm": "/projects/le-choix-de-malo/12-sm.webp",
         "width": 2000,
         "height": 692
       },
       {
         "src": "/projects/le-choix-de-malo/13.webp",
+        "sm": "/projects/le-choix-de-malo/13-sm.webp",
         "width": 2000,
         "height": 1321
       }
@@ -1101,12 +1252,13 @@
     "title": "Le Jeu de la Grenouille",
     "cover": {
       "src": "/projects/le-jeu-de-la-grenouille/thumb.webp",
-      "width": 900,
-      "height": 699
+      "width": 560,
+      "height": 435
     },
     "images": [
       {
         "src": "/projects/le-jeu-de-la-grenouille/01.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/01-sm.webp",
         "width": 1514,
         "height": 2000
       },
@@ -1142,26 +1294,31 @@
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/08.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/08-sm.webp",
         "width": 2000,
         "height": 1500
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/09.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/09-sm.webp",
         "width": 1500,
         "height": 2000
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/10.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/10-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/11.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/11-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/12.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/12-sm.webp",
         "width": 2000,
         "height": 1500
       },
@@ -1172,6 +1329,7 @@
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/14.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/14-sm.webp",
         "width": 2000,
         "height": 1333
       },
@@ -1187,26 +1345,31 @@
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/17.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/17-sm.webp",
         "width": 1500,
         "height": 2000
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/18.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/18-sm.webp",
         "width": 1496,
         "height": 1051
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/19.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/19-sm.webp",
         "width": 1446,
         "height": 1088
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/20.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/20-sm.webp",
         "width": 1500,
         "height": 2000
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/21.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/21-sm.webp",
         "width": 1981,
         "height": 2000
       },
@@ -1222,167 +1385,199 @@
     "title": "Ludilove",
     "cover": {
       "src": "/projects/ludilove/thumb.webp",
-      "width": 450,
-      "height": 900
+      "width": 280,
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/ludilove/01.webp",
+        "sm": "/projects/ludilove/01-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/02.webp",
+        "sm": "/projects/ludilove/02-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/03.webp",
+        "sm": "/projects/ludilove/03-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/04.webp",
+        "sm": "/projects/ludilove/04-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/05.webp",
+        "sm": "/projects/ludilove/05-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/06.webp",
+        "sm": "/projects/ludilove/06-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/07.webp",
+        "sm": "/projects/ludilove/07-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/08.webp",
+        "sm": "/projects/ludilove/08-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/09.webp",
+        "sm": "/projects/ludilove/09-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/10.webp",
+        "sm": "/projects/ludilove/10-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/11.webp",
+        "sm": "/projects/ludilove/11-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/12.webp",
+        "sm": "/projects/ludilove/12-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/13.webp",
+        "sm": "/projects/ludilove/13-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/14.webp",
+        "sm": "/projects/ludilove/14-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/15.webp",
+        "sm": "/projects/ludilove/15-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/16.webp",
+        "sm": "/projects/ludilove/16-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/17.webp",
+        "sm": "/projects/ludilove/17-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/18.webp",
+        "sm": "/projects/ludilove/18-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/19.webp",
+        "sm": "/projects/ludilove/19-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/20.webp",
+        "sm": "/projects/ludilove/20-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/21.webp",
+        "sm": "/projects/ludilove/21-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/22.webp",
+        "sm": "/projects/ludilove/22-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/23.webp",
+        "sm": "/projects/ludilove/23-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/24.webp",
+        "sm": "/projects/ludilove/24-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/25.webp",
+        "sm": "/projects/ludilove/25-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/26.webp",
+        "sm": "/projects/ludilove/26-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/27.webp",
+        "sm": "/projects/ludilove/27-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/28.webp",
+        "sm": "/projects/ludilove/28-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/29.webp",
+        "sm": "/projects/ludilove/29-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/30.webp",
+        "sm": "/projects/ludilove/30-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/31.webp",
+        "sm": "/projects/ludilove/31-sm.webp",
         "width": 2000,
         "height": 1125
       },
       {
         "src": "/projects/ludilove/32.webp",
+        "sm": "/projects/ludilove/32-sm.webp",
         "width": 2000,
         "height": 1125
       }
@@ -1393,77 +1588,90 @@
     "title": "Open Mind",
     "cover": {
       "src": "/projects/open-mind/thumb.webp",
-      "width": 900,
-      "height": 504
+      "width": 560,
+      "height": 314
     },
     "hover": {
       "src": "/projects/open-mind/hover.webp",
-      "width": 900,
-      "height": 504
+      "width": 560,
+      "height": 314
     },
     "images": [
       {
         "src": "/projects/open-mind/01.webp",
+        "sm": "/projects/open-mind/01-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/02.webp",
+        "sm": "/projects/open-mind/02-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/03.webp",
+        "sm": "/projects/open-mind/03-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/04.webp",
+        "sm": "/projects/open-mind/04-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/05.webp",
+        "sm": "/projects/open-mind/05-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/06.webp",
+        "sm": "/projects/open-mind/06-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/07.webp",
+        "sm": "/projects/open-mind/07-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/08.webp",
+        "sm": "/projects/open-mind/08-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/09.webp",
+        "sm": "/projects/open-mind/09-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/10.webp",
+        "sm": "/projects/open-mind/10-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/11.webp",
+        "sm": "/projects/open-mind/11-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/12.webp",
+        "sm": "/projects/open-mind/12-sm.webp",
         "width": 2000,
         "height": 1124
       },
       {
         "src": "/projects/open-mind/13.webp",
+        "sm": "/projects/open-mind/13-sm.webp",
         "width": 2000,
         "height": 1124
       }
@@ -1474,27 +1682,31 @@
     "title": "Porte-cle jeton de caddie",
     "cover": {
       "src": "/projects/porte-cle-jeton-de-caddie/thumb.webp",
-      "width": 900,
-      "height": 502
+      "width": 560,
+      "height": 313
     },
     "images": [
       {
         "src": "/projects/porte-cle-jeton-de-caddie/01.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/01-sm.webp",
         "width": 1376,
         "height": 768
       },
       {
         "src": "/projects/porte-cle-jeton-de-caddie/02.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/02-sm.webp",
         "width": 2000,
         "height": 898
       },
       {
         "src": "/projects/porte-cle-jeton-de-caddie/03.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/03-sm.webp",
         "width": 2000,
         "height": 1333
       },
       {
         "src": "/projects/porte-cle-jeton-de-caddie/04.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/04-sm.webp",
         "width": 2000,
         "height": 1116
       },
@@ -1505,11 +1717,13 @@
       },
       {
         "src": "/projects/porte-cle-jeton-de-caddie/06.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/06-sm.webp",
         "width": 1500,
         "height": 1500
       },
       {
         "src": "/projects/porte-cle-jeton-de-caddie/07.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/07-sm.webp",
         "width": 2000,
         "height": 1742
       }
@@ -1520,37 +1734,43 @@
     "title": "RATP",
     "cover": {
       "src": "/projects/ratp/thumb.webp",
-      "width": 900,
-      "height": 900
+      "width": 560,
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/ratp/01.webp",
+        "sm": "/projects/ratp/01-sm.webp",
         "width": 1920,
         "height": 1080
       },
       {
         "src": "/projects/ratp/02.webp",
+        "sm": "/projects/ratp/02-sm.webp",
         "width": 1254,
         "height": 1254
       },
       {
         "src": "/projects/ratp/03.webp",
+        "sm": "/projects/ratp/03-sm.webp",
         "width": 2000,
         "height": 1420
       },
       {
         "src": "/projects/ratp/04.webp",
+        "sm": "/projects/ratp/04-sm.webp",
         "width": 2000,
         "height": 1069
       },
       {
         "src": "/projects/ratp/05.webp",
+        "sm": "/projects/ratp/05-sm.webp",
         "width": 1475,
         "height": 1066
       },
       {
         "src": "/projects/ratp/06.webp",
+        "sm": "/projects/ratp/06-sm.webp",
         "width": 1462,
         "height": 2000
       },
@@ -1561,6 +1781,7 @@
       },
       {
         "src": "/projects/ratp/08.webp",
+        "sm": "/projects/ratp/08-sm.webp",
         "width": 2000,
         "height": 1420
       },
@@ -1626,6 +1847,7 @@
       },
       {
         "src": "/projects/ratp/21.webp",
+        "sm": "/projects/ratp/21-sm.webp",
         "width": 1254,
         "height": 1254
       },
@@ -1641,22 +1863,24 @@
     "title": "Recolteur pomme de pin",
     "cover": {
       "src": "/projects/recolteur-pomme-de-pin/thumb.webp",
-      "width": 900,
-      "height": 900
+      "width": 560,
+      "height": 560
     },
     "hover": {
       "src": "/projects/recolteur-pomme-de-pin/hover.webp",
-      "width": 900,
-      "height": 900
+      "width": 560,
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/recolteur-pomme-de-pin/01.webp",
+        "sm": "/projects/recolteur-pomme-de-pin/01-sm.webp",
         "width": 1333,
         "height": 2000
       },
       {
         "src": "/projects/recolteur-pomme-de-pin/02.webp",
+        "sm": "/projects/recolteur-pomme-de-pin/02-sm.webp",
         "width": 1536,
         "height": 914
       },
@@ -1667,11 +1891,13 @@
       },
       {
         "src": "/projects/recolteur-pomme-de-pin/04.webp",
+        "sm": "/projects/recolteur-pomme-de-pin/04-sm.webp",
         "width": 1500,
         "height": 1500
       },
       {
         "src": "/projects/recolteur-pomme-de-pin/05.webp",
+        "sm": "/projects/recolteur-pomme-de-pin/05-sm.webp",
         "width": 2000,
         "height": 1503
       },
@@ -1687,6 +1913,7 @@
       },
       {
         "src": "/projects/recolteur-pomme-de-pin/08.webp",
+        "sm": "/projects/recolteur-pomme-de-pin/08-sm.webp",
         "width": 1920,
         "height": 1006
       }

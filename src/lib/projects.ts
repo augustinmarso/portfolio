@@ -1,7 +1,7 @@
 import raw from "@/data/projects.json";
 import { texts } from "@/data/texts";
 
-export type ProjectImage = { src: string; width: number; height: number };
+export type ProjectImage = { src: string; sm?: string; width: number; height: number };
 export type ProjectText = {
   year: string | null;
   context: string | null;
@@ -56,7 +56,7 @@ export const THEMES = [
 
 // next/image n'ajoute pas le basePath aux images non optimisées : on le préfixe ici.
 export const asset = (src: string) => (process.env.NEXT_PUBLIC_BASE_PATH ?? "") + src;
-const withBase = (img: ProjectImage) => ({ ...img, src: asset(img.src) });
+const withBase = (img: ProjectImage) => ({ ...img, src: asset(img.src), sm: img.sm && asset(img.sm) });
 
 export const projects: Project[] = (raw as Project[]).map((p) => ({
   ...p,

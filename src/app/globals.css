@@ -172,3 +172,21 @@
 @media (prefers-reduced-motion: reduce) {
   .meet-blink { animation: none; }
 }
+
+/* Index sur écran tactile (pas de survol) : la personne apparaît et disparaît très doucement,
+   chaque carte à son propre rythme (durée et décalage fixés dans le composant). */
+@media (hover: none) {
+  .people-blink {
+    animation-name: people-blink;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+}
+@keyframes people-blink {
+  0%, 38% { opacity: 0; }
+  52%, 82% { opacity: 1; }
+  96%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .people-blink { animation: none; }
+}
