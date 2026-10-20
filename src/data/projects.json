@@ -51,6 +51,77 @@
     ]
   },
   {
+    "slug": "cafetiere-au-beurre",
+    "title": "Cafetiere au beurre",
+    "cover": {
+      "src": "/projects/cafetiere-au-beurre/thumb.webp",
+      "width": 346,
+      "height": 520
+    },
+    "images": [
+      {
+        "src": "/projects/cafetiere-au-beurre/01.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/02.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/03.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/04.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/05.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/06.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/07.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/08.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/09.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/10.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/11.webp",
+        "width": 420,
+        "height": 594
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/12.webp",
+        "width": 420,
+        "height": 594
+      }
+    ]
+  },
+  {
     "slug": "collection-d-objets-liturgiques",
     "title": "Collection d'objets liturgiques",
     "cover": {

@@ -31,6 +31,7 @@ const TITLES: Record<string, string> = {
   ratp: "Du bout des doigts · RATP",
   "de-passager-a-equipier": "De passager à équipier · Bénéteau",
   ludilove: "LudiLove",
+  "cafetiere-au-beurre": "Cafetière au beurre",
 };
 
 // Projets présentés d'abord par une vidéo (public/videos/<slug>.mp4 + .jpg).

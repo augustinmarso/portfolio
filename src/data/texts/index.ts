@@ -1,5 +1,6 @@
 // Textes des projets (un fichier JSON par projet, même slug que les images).
 import type { ProjectText } from "@/lib/projects";
+import cafetiere_au_beurre from "./cafetiere-au-beurre.json";
 import banc_tapis_petite_voiture from "./banc-tapis-petite-voiture.json";
 import collection_d_objets_liturgiques from "./collection-d-objets-liturgiques.json";
 import cylinder_chair from "./cylinder-chair.json";
@@ -19,6 +20,7 @@ import ratp from "./ratp.json";
 import recolteur_pomme_de_pin from "./recolteur-pomme-de-pin.json";
 
 export const texts: Record<string, ProjectText> = {
+  "cafetiere-au-beurre": cafetiere_au_beurre,
   "banc-tapis-petite-voiture": banc_tapis_petite_voiture,
   "collection-d-objets-liturgiques": collection_d_objets_liturgiques,
   "cylinder-chair": cylinder_chair,

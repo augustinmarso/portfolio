@@ -25,6 +25,7 @@ const COVERS = {
   ratp: "_covers",
   "de-passager-a-equipier": "_covers",
   ludilove: "_covers",
+  "cafetiere-au-beurre": "_covers",
 };
 
 const slugify = (s) =>
