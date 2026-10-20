@@ -61,7 +61,13 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
       <section className="grid gap-10 pt-6 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:pt-4">
         {/* Texte figé : collé à sa position de départ (barre 52 px + marges 16 + 16), il ne bouge jamais ;
             plus haut que la place (écran − 84 px en haut − 64 px de marge basse), il défile dans sa propre colonne. */}
-        <div className="md:sticky md:top-[84px] md:max-h-[calc(100dvh-164px)] md:self-start md:overflow-y-auto md:pb-4">
+        <div
+          className={
+            project.video
+              ? "md:pb-4" // projets avec téléphone : le texte défile, le téléphone se fige ensuite (plus bas)
+              : "md:sticky md:top-[84px] md:max-h-[calc(100dvh-164px)] md:self-start md:overflow-y-auto md:pb-4"
+          }
+        >
           <h1 className="text-4xl font-bold lowercase leading-[0.95] tracking-tight sm:text-5xl">{project.title}</h1>
 
           <dl className="mt-8 grid gap-1 text-lg font-semibold leading-snug tracking-tight">
@@ -118,15 +124,16 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
           </dl>
 
           {text?.intro && <p className="mt-8 max-w-prose text-lg leading-relaxed">{text.intro}</p>}
+
+          {/* Exception : le téléphone sous le texte ; une fois apparu, il reste fixe pendant le défilement. */}
+          {project.video && (
+            <figure className="mt-12 md:sticky md:top-[84px]">
+              <VideoPlayer src={project.video.src} poster={project.video.poster} label={`Vidéo de présentation — ${project.title}`} />
+            </figure>
+          )}
         </div>
 
         <div className="grid gap-12">
-          {project.video && (
-            <figure>
-              <VideoPlayer src={project.video.src} poster={project.video.poster} label={`Vidéo de présentation — ${project.title}`} />
-              <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">vidéo de présentation</figcaption>
-            </figure>
-          )}
           {project.images.map((img, n) => {
             const caption = text?.captions[n];
             return (

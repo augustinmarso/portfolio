@@ -32,7 +32,7 @@ export function VideoPlayer({ src, poster, label }: { src: string; poster: strin
         onClick={toggle}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
-        className="mx-auto block max-h-[80vh] w-auto cursor-pointer"
+        className="mx-auto block max-h-[calc(100dvh-120px)] w-auto cursor-pointer"
       />
       <button
         type="button"
