@@ -15,7 +15,7 @@ const EXT = /\.(jpe?g|png|gif|webp)$/i;
 // Numéro d'image du projet, ou fichier dans <source>/_covers/<slug>.*
 const COVERS = {
   kai: "05",
-  "la-societe-de-jeux": "01",
+  "la-societe-de-jeux": "_covers",
   "recolteur-pomme-de-pin": "07",
   "le-jeu-de-la-grenouille": "_covers",
   ephemeride: "01",
@@ -26,6 +26,8 @@ const COVERS = {
   "de-passager-a-equipier": "_covers",
   ludilove: "_covers",
   "cafetiere-au-beurre": "_covers",
+  "banc-tapis-petite-voiture": "_covers",
+  "le-choix-de-malo": "_covers",
 };
 
 const slugify = (s) =>

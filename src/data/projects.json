@@ -4,8 +4,8 @@
     "title": "Banc tapis petite voiture",
     "cover": {
       "src": "/projects/banc-tapis-petite-voiture/thumb.webp",
-      "width": 600,
-      "height": 900
+      "width": 900,
+      "height": 600
     },
     "hover": {
       "src": "/projects/banc-tapis-petite-voiture/hover.webp",
@@ -899,13 +899,13 @@
     "title": "La societe de jeux",
     "cover": {
       "src": "/projects/la-societe-de-jeux/thumb.webp",
-      "width": 634,
+      "width": 672,
       "height": 900
     },
     "hover": {
       "src": "/projects/la-societe-de-jeux/hover.webp",
-      "width": 900,
-      "height": 401
+      "width": 634,
+      "height": 900
     },
     "images": [
       {
@@ -1015,6 +1015,11 @@
     "title": "Le choix de Malo",
     "cover": {
       "src": "/projects/le-choix-de-malo/thumb.webp",
+      "width": 900,
+      "height": 900
+    },
+    "hover": {
+      "src": "/projects/le-choix-de-malo/hover.webp",
       "width": 899,
       "height": 900
     },
@@ -1383,8 +1388,8 @@
     "title": "Open Mind",
     "cover": {
       "src": "/projects/open-mind/thumb.webp",
-      "width": 567,
-      "height": 900
+      "width": 900,
+      "height": 504
     },
     "hover": {
       "src": "/projects/open-mind/hover.webp",
