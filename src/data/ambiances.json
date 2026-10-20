@@ -1,126 +1,126 @@
 {
   "banc-tapis-petite-voiture": {
     "file": "/ambiances/banc-tapis-petite-voiture.mp3",
-    "titre": "aire de jeux d'un square, Berlin",
+    "titre": "le square où les enfants jouent",
     "source": "https://commons.wikimedia.org/wiki/File:209901_foongaz_city-playground-boxhagenerplatz-berlin.wav",
     "auteur": "foongaz (freesound.org)",
     "licence": "CC0"
   },
   "cylinder-chair": {
     "file": "/ambiances/cylinder-chair.mp3",
-    "titre": "enfants qui jouent au loin",
+    "titre": "la cour de l'école primaire",
     "source": "https://commons.wikimedia.org/wiki/File:Kids_next_door.ogg",
     "auteur": "ezwa (pdsounds.org)",
     "licence": "domaine public"
   },
   "de-passager-a-equipier": {
     "file": "/ambiances/de-passager-a-equipier.mp3",
-    "titre": "bateau à quai, clapotis",
+    "titre": "le voilier à quai, avant d'embarquer",
     "source": "https://commons.wikimedia.org/wiki/File:Boat_by_a_wharf_2.ogg",
     "auteur": "ezwa (pdsounds.org)",
     "licence": "domaine public"
   },
   "echappee": {
     "file": "/ambiances/echappee.mp3",
-    "titre": "intérieur de voiture isolé, sur la route",
+    "titre": "l'habitacle, sur la route",
     "source": "synthèse originale (ffmpeg)",
     "auteur": "Augustin Marsollier",
     "licence": "création originale"
   },
   "fish-eye": {
     "file": "/ambiances/fish-eye.mp3",
-    "titre": "vagues sur une plage",
+    "titre": "le bord de mer",
     "source": "https://commons.wikimedia.org/wiki/File:Beach_sounds_South_Carolina.ogg",
     "auteur": "Anthropic42 (en.wikipedia)",
     "licence": "domaine public"
   },
   "ludilove": {
     "file": "/ambiances/ludilove.mp3",
-    "titre": "groupe réuni autour d'une table, voix étouffées",
+    "titre": "une soirée jeux entre amis",
     "source": "https://commons.wikimedia.org/wiki/File:Group_discussion_3.ogg",
     "auteur": "ezwa (pdsounds.org)",
     "licence": "domaine public"
   },
   "porte-cle-jeton-de-caddie": {
     "file": "/ambiances/porte-cle-jeton-de-caddie.mp3",
-    "titre": "ruisseau en sous-bois",
+    "titre": "un ruisseau dans les bois du Doubs",
     "source": "https://commons.wikimedia.org/wiki/File:Forest_lawn_creek.ogg",
     "auteur": "Dsw4",
     "licence": "domaine public"
   },
   "cafetiere-au-beurre": {
     "file": "/ambiances/cafetiere-au-beurre.mp3",
-    "titre": "cuisine calme, vaisselle légère",
+    "titre": "la cuisine, au moment du café",
     "source": "https://commons.wikimedia.org/wiki/File:Ambient_Kitchen_Sounds.wav",
     "auteur": "Wilfredor",
     "licence": "CC0"
   },
   "gorillachoc": {
     "file": "/ambiances/gorillachoc.mp3",
-    "titre": "forêt tropicale humide",
+    "titre": "la forêt tropicale, pays du cacao",
     "source": "https://commons.wikimedia.org/wiki/File:Walk_in_the_rainforest.ogg",
     "auteur": "ezwa (pdsounds.org)",
     "licence": "domaine public"
   },
   "open-mind": {
     "file": "/ambiances/open-mind.mp3",
-    "titre": "cour de maison calme, oiseaux, été",
+    "titre": "le seuil de la maison, ouvert sur le jardin",
     "source": "https://commons.wikimedia.org/wiki/File:Vojníkov,_dvorek_čp._21,_25_stupňů.ogg",
     "auteur": "Juandev",
     "licence": "domaine public"
   },
   "le-choix-de-malo": {
     "file": "/ambiances/le-choix-de-malo.mp3",
-    "titre": "campagne en été, oiseaux",
+    "titre": "l'herbe en été",
     "source": "https://commons.wikimedia.org/wiki/File:Vojníkov,_lavička_před_pomníkem,_čtvrtek,_25_stupňů.ogg",
     "auteur": "Juandev",
     "licence": "domaine public"
   },
   "recolteur-pomme-de-pin": {
     "file": "/ambiances/recolteur-pomme-de-pin.mp3",
-    "titre": "vent de Finisterre",
+    "titre": "le vent sur la terre sèche",
     "source": "https://commons.wikimedia.org/wiki/File:Vento_fisterra.ogg",
     "auteur": "Escoitar.org",
     "licence": "domaine public"
   },
   "kai": {
     "file": "/ambiances/kai.mp3",
-    "titre": "troupeau de vaches en alpage",
+    "titre": "l'alpage, d'où vient le lait",
     "source": "https://commons.wikimedia.org/wiki/File:457569_florianreichelt_peaceful-sound-of-a-herd-of-cows-in-the-swiss-alps.wav",
     "auteur": "florianreichelt (freesound.org)",
     "licence": "CC0"
   },
   "ratp": {
     "file": "/ambiances/ratp.mp3",
-    "titre": "rame de train de banlieue en marche, Tokyo",
+    "titre": "le roulement de la rame",
     "source": "https://commons.wikimedia.org/wiki/File:Sound_of_a_MoHa_201_series_electric_multiple_unit_train_on_the_Chūō_Main_Line_(Ochanomizu–Yotsuya),_Tokyo,_Japan_-_20101010.ogg",
     "auteur": "Toshinori baba",
     "licence": "domaine public"
   },
   "ephemeride": {
     "file": "/ambiances/ephemeride.mp3",
-    "titre": "horloge murale qui fait tic-tac",
+    "titre": "l'horloge de la salle commune",
     "source": "https://commons.wikimedia.org/wiki/File:LA2_kitchen_clock.ogg",
     "auteur": "LA2",
     "licence": "domaine public"
   },
   "le-jeu-de-la-grenouille": {
     "file": "/ambiances/le-jeu-de-la-grenouille.mp3",
-    "titre": "chœur de rainettes au bord d'une mare, la nuit",
+    "titre": "la mare, à la tombée de la nuit",
     "source": "https://commons.wikimedia.org/wiki/File:Spring_Peeper_Frogs_(Pseudacris_crucifer)_singing_on_night_of_April_21_of_2019_in_North_Pittston_PA.ogg",
     "auteur": "JohnDziak",
     "licence": "CC0"
   },
   "la-societe-de-jeux": {
     "file": "/ambiances/la-societe-de-jeux.mp3",
-    "titre": "pluie contre la vitre, pages qu'on tourne",
+    "titre": "lire au calme, la pluie contre la vitre",
     "source": "https://commons.wikimedia.org/wiki/File:Rain_against_the_window.ogg ; https://commons.wikimedia.org/wiki/File:Turning_a_page.ogg",
     "auteur": "cori ; planish",
     "licence": "domaine public"
   },
   "collection-d-objets-liturgiques": {
     "file": "/ambiances/collection-d-objets-liturgiques.mp3",
-    "titre": "chant grégorien, Veni Sancte Spiritus",
+    "titre": "chant grégorien sous la voûte",
     "source": "https://commons.wikimedia.org/wiki/File:Veni.sancte.spiritus.ogg",
     "auteur": "Membeth",
     "licence": "domaine public"
