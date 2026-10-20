@@ -89,7 +89,7 @@ export default function ContactPage() {
             muted
             loop
             playsInline
-            className="size-full object-cover"
+            className="size-full scale-110 object-cover blur-md"
           />
           {/* Indicateur « en ligne », comme dans une fenêtre d'appel vidéo */}
           <span className="pointer-events-none absolute left-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 text-sm font-semibold text-white backdrop-blur-sm">
@@ -142,7 +142,7 @@ export default function ContactPage() {
             fill
             priority
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
+            className="scale-110 object-cover blur-md"
           />
         </div>
       </div>
