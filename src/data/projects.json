@@ -938,84 +938,54 @@
       {
         "src": "/projects/kai/03.webp",
         "sm": "/projects/kai/03-sm.webp",
-        "width": 1576,
+        "width": 1414,
         "height": 2000
       },
       {
         "src": "/projects/kai/04.webp",
         "sm": "/projects/kai/04-sm.webp",
-        "width": 1414,
+        "width": 1602,
         "height": 2000
       },
       {
         "src": "/projects/kai/05.webp",
         "sm": "/projects/kai/05-sm.webp",
         "width": 2000,
-        "height": 2000
+        "height": 1625
       },
       {
         "src": "/projects/kai/06.webp",
         "sm": "/projects/kai/06-sm.webp",
-        "width": 2000,
+        "width": 1243,
         "height": 2000
       },
       {
         "src": "/projects/kai/07.webp",
         "sm": "/projects/kai/07-sm.webp",
-        "width": 1602,
-        "height": 2000
-      },
-      {
-        "src": "/projects/kai/08.webp",
-        "sm": "/projects/kai/08-sm.webp",
-        "width": 1369,
-        "height": 959
-      },
-      {
-        "src": "/projects/kai/09.webp",
-        "sm": "/projects/kai/09-sm.webp",
-        "width": 2000,
-        "height": 1116
-      },
-      {
-        "src": "/projects/kai/10.webp",
-        "sm": "/projects/kai/10-sm.webp",
-        "width": 2000,
-        "height": 1625
-      },
-      {
-        "src": "/projects/kai/11.webp",
-        "sm": "/projects/kai/11-sm.webp",
-        "width": 1243,
-        "height": 2000
-      },
-      {
-        "src": "/projects/kai/12.webp",
-        "sm": "/projects/kai/12-sm.webp",
         "width": 2000,
         "height": 1732
       },
       {
-        "src": "/projects/kai/13.webp",
-        "sm": "/projects/kai/13-sm.webp",
+        "src": "/projects/kai/08.webp",
+        "sm": "/projects/kai/08-sm.webp",
         "width": 1226,
         "height": 2000
       },
       {
-        "src": "/projects/kai/14.webp",
-        "sm": "/projects/kai/14-sm.webp",
+        "src": "/projects/kai/09.webp",
+        "sm": "/projects/kai/09-sm.webp",
         "width": 1536,
         "height": 1024
       },
       {
-        "src": "/projects/kai/15.webp",
-        "sm": "/projects/kai/15-sm.webp",
+        "src": "/projects/kai/10.webp",
+        "sm": "/projects/kai/10-sm.webp",
         "width": 1938,
         "height": 2000
       },
       {
-        "src": "/projects/kai/16.webp",
-        "sm": "/projects/kai/16-sm.webp",
+        "src": "/projects/kai/11.webp",
+        "sm": "/projects/kai/11-sm.webp",
         "width": 2000,
         "height": 2000
       }
