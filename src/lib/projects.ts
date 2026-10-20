@@ -18,8 +18,8 @@ const TITLES: Record<string, string> = {
 };
 
 // next/image n'ajoute pas le basePath aux images non optimisées : on le préfixe ici.
-const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const withBase = (img: ProjectImage) => ({ ...img, src: base + img.src });
+export const asset = (src: string) => (process.env.NEXT_PUBLIC_BASE_PATH ?? "") + src;
+const withBase = (img: ProjectImage) => ({ ...img, src: asset(img.src) });
 
 export const projects: Project[] = (raw as Project[]).map((p) => ({
   ...p,
