@@ -191,6 +191,13 @@ export const sounds = {
     note(pick(root), { ...opts, dur: rnd(0.8, 1.3), gain: 0.016 });
     note(pick(root + interval), { ...opts, at: rnd(0.01, 0.05), dur: rnd(0.8, 1.2), gain: 0.011 });
   },
+  // barres de menu (haut et bas) : note grave et mate, à la quinte inférieure, sur la pulsation
+  bar: (x?: number) => {
+    const root = any([0, 1, 2]);
+    sub(0, rnd(0.04, 0.055));
+    note(pick(root) / 2, { dur: rnd(0.6, 0.9), gain: 0.03, pan: panAt(x), attack: rnd(0.02, 0.04), wave: any(["sine", "triangle"] as const), bright: rnd(0.4, 0.6), rasp: rnd(0.2, 0.5), breath: rnd(0.2, 0.6) });
+    note((pick(root) / 2) * 1.5, { at: rnd(0.02, 0.05), dur: rnd(0.5, 0.8), gain: 0.014, pan: panAt(x), attack: 0.04, bright: 0.45 });
+  },
   // interrupteur : note qui gonfle et glisse vers l'aigu (personnes) ou le grave (objet), avec souffle
   toggle: (on: boolean, x?: number) => {
     const lo = any([2, 3, 4]);

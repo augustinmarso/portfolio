@@ -25,6 +25,7 @@ export function UiSounds() {
       if (!el || el.getAttribute("role") === "switch") return; // l'interrupteur a son propre son
       const href = el.getAttribute("href") ?? "";
       if (href.includes("/projets/")) sounds.open(e.clientX);
+      else if (el.closest("[data-sound='barre']")) sounds.bar(e.clientX); // menus : son plus grave
       else sounds.click(e.clientX);
     };
     document.addEventListener("pointerover", over);
