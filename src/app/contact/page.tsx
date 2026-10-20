@@ -15,7 +15,7 @@ const WHATSAPP = "https://wa.me/33749324731";
 // À renseigner : identifiant du formulaire Formspree (formspree.io/f/<id>) et lien Google Meet personnel.
 // Tant qu'ils sont vides, le formulaire ouvre la messagerie du visiteur et le bouton du GIF propose une visio par mail.
 const FORMSPREE_ID = "";
-const MEET_URL = "";
+const MEET_URL = MEET;
 
 export default function ContactPage() {
   return (
@@ -106,8 +106,19 @@ export default function ContactPage() {
             aria-label="Lancer le Google Meet"
             className="absolute inset-0 z-10"
           >
-            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-background px-5 py-2.5 text-base font-semibold shadow-sm transition-colors group-hover:bg-foreground group-hover:text-background">
-              lancer le google meet
+            {/* Logo Google Meet au centre de la vidéo, qui clignote en transparence */}
+            <span className="absolute bottom-6 left-1/2 grid -translate-x-1/2 place-items-center">
+              <svg viewBox="0 0 87.5 72" className="meet-blink w-24 drop-shadow-[0_2px_12px_rgb(0_0_0/0.35)] transition-transform duration-300 group-hover:scale-110" aria-hidden>
+                <path fill="#00832d" d="M49.5 36l8.53 9.75 11.47 7.33 2-17.02-2-16.64-11.69 6.44z" />
+                <path fill="#0066da" d="M0 51.5V66c0 3.315 2.685 6 6 6h14.5l3-10.96-3-9.54-9.95-3z" />
+                <path fill="#e94235" d="M20.5 0L0 20.5l10.55 3 9.95-3 2.95-9.41z" />
+                <path fill="#2684fc" d="M20.5 20.5H0v31h20.5z" />
+                <path fill="#00ac47" d="M82.6 8.68L69.5 19.42v33.66l13.16 10.79c1.97 1.54 4.85.135 4.85-2.37V11c0-2.535-2.945-3.925-4.91-2.32zM49.5 36v15.5h-29V72h43c3.315 0 6-2.685 6-6V53.08z" />
+                <path fill="#ffba00" d="M63.5 0h-43v20.5h29V36l20-16.57V6c0-3.315-2.685-6-6-6z" />
+              </svg>
+              <span className="mt-2 rounded-full bg-background/90 px-3 py-1 text-sm font-semibold opacity-0 transition-opacity group-hover:opacity-100">
+                lancer le google meet
+              </span>
             </span>
           </a>
           <Image
