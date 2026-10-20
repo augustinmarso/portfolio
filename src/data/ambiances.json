@@ -22,10 +22,10 @@
   },
   "echappee": {
     "file": "/ambiances/echappee.mp3",
-    "titre": "l'habitacle, sur la route",
-    "source": "synthèse originale (ffmpeg)",
-    "auteur": "Augustin Marsollier",
-    "licence": "création originale"
+    "titre": "l'habitacle sous l'orage",
+    "source": "synthèse originale (habitacle) ; https://commons.wikimedia.org/wiki/File:Thunderstorm_after_hot_summer_day_17_minutes_01_of_04.ogg",
+    "auteur": "Augustin Marsollier ; stephan",
+    "licence": "création originale ; domaine public"
   },
   "fish-eye": {
     "file": "/ambiances/fish-eye.mp3",
@@ -113,9 +113,9 @@
   },
   "la-societe-de-jeux": {
     "file": "/ambiances/la-societe-de-jeux.mp3",
-    "titre": "lire au calme, la pluie contre la vitre",
-    "source": "https://commons.wikimedia.org/wiki/File:Rain_against_the_window.ogg ; https://commons.wikimedia.org/wiki/File:Turning_a_page.ogg",
-    "auteur": "cori ; planish",
+    "titre": "lire au coin du feu",
+    "source": "https://commons.wikimedia.org/wiki/File:Dry_grass_burning_in_open_fireplace.ogg ; https://commons.wikimedia.org/wiki/File:Turning_a_page.ogg",
+    "auteur": "ezwa ; planish",
     "licence": "domaine public"
   },
   "collection-d-objets-liturgiques": {
