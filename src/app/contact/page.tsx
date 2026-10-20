@@ -13,7 +13,7 @@ const PHONE = { display: "07 49 32 47 31", href: "tel:+33749324731" };
 export default function ContactPage() {
   return (
     <main className="flex min-h-dvh flex-col px-4 pb-4 pt-4 sm:px-6 sm:pb-6">
-      <SiteHeader active="/contact" wordmark={false} />
+      <SiteHeader active="/contact" />
 
       <div className="grid flex-1 gap-10 pt-6 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:grid-cols-2">
         <div className="flex flex-col">

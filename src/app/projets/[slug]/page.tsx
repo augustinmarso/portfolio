@@ -29,7 +29,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
 
   return (
     <main className="w-full px-4 pb-16 pt-4 sm:px-6">
-      <SiteHeader active={null} size="md" wordmark={false} />
+      <SiteHeader active={null} />
 
       <section className="grid gap-10 pt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:pt-16">
         <div className="lg:sticky lg:top-6 lg:self-start">

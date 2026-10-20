@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Arborescence — Augustin Marsollier
 export default function ArborescencePage() {
   return (
     <main className="min-h-dvh px-4 pb-6 pt-4 sm:px-6">
-      <SiteHeader active="/arborescence" size="md" />
+      <SiteHeader active="/arborescence" />
       <div className="pt-2">
         <MindMap projects={projects} />
       </div>
