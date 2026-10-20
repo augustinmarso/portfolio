@@ -8,6 +8,7 @@ import {
   forceCollide,
   forceLink,
   forceManyBody,
+  forceRadial,
   forceSimulation,
   type Simulation,
   type SimulationLinkDatum,
@@ -46,6 +47,8 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
     links: { d: string; key: string; ends: readonly [string, string]; secondary: boolean; cross?: "theme" | "project"; weight: number }[];
   }>({ nodes: [], links: [] });
   const simRef = useRef<Simulation<N, L> | null>(null);
+  // Positions affichées : elles rejoignent en douceur celles de la simulation (pas d'à-coups).
+  const shownPos = useRef<Map<string, { x: number; y: number }>>(new Map());
   const nodesRef = useRef<Map<string, N>>(new Map());
   const drag = useRef<{ id: string; moved: number } | null>(null);
 
@@ -133,41 +136,74 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
       })
     );
 
-    const snapshot = () => {
+    const clamp = () =>
       nodes.forEach((n) => {
         // Marge au bord : la place de l'image ronde d'un projet (et de son nom centré dessous sur mobile).
         const side = n.kind === "project" ? (size.w < 600 ? 58 : Math.max(n.r, 36)) : n.r;
         n.x = Math.max(side, Math.min(size.w - side, n.x!));
-        // Sur mobile, le nom d'un projet est sous sa bulle : on lui garde la place en bas.
         const below = n.kind === "project" && size.w < 600 ? 34 : 0;
         const edge = n.kind === "project" ? Math.max(n.r, 36) : n.r;
         // En haut, on laisse aussi la place de la rangée des catégories.
         n.y = Math.max(edge + 60, Math.min(size.h - edge - below, n.y!));
       });
+    const cx = size.w / 2;
+    const cy = size.h / 2;
+    let raf = 0;
+    const loop = (time: number) => {
+      const disp = shownPos.current;
+      nodes.forEach((n, i) => {
+        // flottement lent et propre à chaque point (respiration), au lieu de secousses
+        const fx = n.kind === "root" ? 0 : Math.sin(time / 2600 + i * 1.7) * 2.2;
+        const fy = n.kind === "root" ? 0 : Math.cos(time / 3100 + i * 2.3) * 2.2;
+        const tx = n.x! + fx;
+        const ty = n.y! + fy;
+        const d = disp.get(n.id) ?? { x: tx, y: ty };
+        d.x += (tx - d.x) * 0.12;
+        d.y += (ty - d.y) * 0.12;
+        disp.set(n.id, d);
+      });
+      const at = (n: N) => disp.get(n.id)!;
       setFrame({
-        nodes: nodes.map(({ id, kind, label, r, x, y, theme, project }) => {
-          // Nom d'un point : à droite, sauf projet tourné vers la gauche ou nom qui sortirait du cadre.
-          let side: 1 | -1 = kind === "project" && x! < (map.get(`t:${theme}`)?.x ?? size.w / 2) ? -1 : 1;
-          if (kind !== "root" && x! + 150 > size.w) side = -1;
-          if (x! - 150 < 0) side = 1;
+        nodes: nodes.map((n) => {
+          const { id, kind, label, r, theme, project } = n;
+          const { x, y } = at(n);
+          // Nom tourné vers l'extérieur (à l'opposé du centre), sauf s'il sortirait du cadre.
+          let side: 1 | -1 = x < cx ? -1 : 1;
+          if (kind === "root") side = 1;
+          if (kind !== "root" && x + 150 > size.w) side = -1;
+          if (x - 150 < 0) side = 1;
           const links =
             kind === "root"
               ? groups.length
               : kind === "theme"
                 ? 1 + projects.filter((p) => p.text?.themes.includes(theme!)).length
                 : Math.max(1, project!.text?.themes.length ?? 1);
-          return { id, kind, label, r, dot: dotRadius(kind, links), x: x!, y: y!, theme, project, side };
+          return { id, kind, label, r, dot: dotRadius(kind, links), x, y, theme, project, side };
         }),
-        links: links.map((l) => ({
-          key: `${l.source.id}-${l.target.id}`,
-          ends: [l.source.id, l.target.id] as const,
-          secondary: !!l.secondary,
-          cross: l.cross,
-          weight: l.weight ?? 1,
-          d: `M${l.source.x} ${l.source.y} L${l.target.x} ${l.target.y}`,
-        })),
+        links: links.map((l) => {
+          const a = at(l.source);
+          const b = at(l.target);
+          // courbe douce : le milieu est poussé vers l'extérieur (loin du centre)
+          const mx = (a.x + b.x) / 2;
+          const my = (a.y + b.y) / 2;
+          const ox = mx - cx;
+          const oy = my - cy;
+          const len = Math.hypot(ox, oy) || 1;
+          const bend = Math.min(40, Math.hypot(b.x - a.x, b.y - a.y) * 0.12);
+          return {
+            key: `${l.source.id}-${l.target.id}`,
+            ends: [l.source.id, l.target.id] as const,
+            secondary: !!l.secondary,
+            cross: l.cross,
+            weight: l.weight ?? 1,
+            d: `M${a.x} ${a.y} Q${mx + (ox / len) * bend} ${my + (oy / len) * bend} ${b.x} ${b.y}`,
+          };
+        }),
       });
+      raf = requestAnimationFrame(loop);
     };
+    raf = requestAnimationFrame(loop);
+
     const sim = simRef.current ?? forceSimulation<N, L>();
     simRef.current = sim;
     sim
@@ -185,16 +221,31 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
           // Les liens entre thèmes sont seulement dessinés ; ceux entre projets rapprochent à peine.
           .strength((l) => (l.cross === "theme" ? 0 : l.cross === "project" ? 0.02 : l.secondary ? 0.05 : 0.7))
       )
-      .force("charge", forceManyBody<N>().strength((n) => (n.kind === "root" ? -1800 : n.kind === "theme" ? -1150 : -560) * k))
+      .force("charge", forceManyBody<N>().strength((n) => (n.kind === "root" ? -1200 : n.kind === "theme" ? -700 : -380) * k))
+      // Anneaux concentriques : les thèmes autour du nom, les projets à l'extérieur.
+      .force(
+        "radial",
+        forceRadial<N>(
+          (n) => (n.kind === "root" ? 0 : n.kind === "theme" ? Math.min(size.w, size.h) * 0.24 : Math.min(size.w, size.h) * 0.43),
+          size.w / 2,
+          size.h / 2
+        ).strength((n) => (n.kind === "theme" ? 0.35 : n.kind === "project" ? 0.25 : 0))
+      )
       // Les projets réservent la place de leur nom (à côté sur ordinateur, dessous sur mobile).
-      .force("collide", forceCollide<N>((n) => n.r + (n.kind === "project" ? (size.w < 600 ? 34 : 58) : 26) * k).strength(1))
-      .velocityDecay(0.28)
-      .on("tick", snapshot)
-      .alpha(0.9)
-      .alphaTarget(0.004) // légère respiration permanente
+      .force(
+        "collide",
+        // un projet réserve aussi la place de son nom (≈ 6,5 px par lettre sur ordinateur)
+        forceCollide<N>((n) => (n.kind === "project" ? n.r + (size.w < 600 ? 34 : Math.min(110, 18 + n.label.length * 3.4)) * k : n.r + 26 * k)).strength(1)
+      )
+      .velocityDecay(0.55) // mouvements amortis, sans rebonds
+      .on("tick", clamp)
+      .alpha(0.8)
+      .alphaDecay(0.015)
+      .alphaTarget(0)
       .restart();
     return () => {
       sim.stop();
+      cancelAnimationFrame(raf);
     };
   }, [projects, groups, shown, focus, k, size.w, size.h]);
 
@@ -250,7 +301,7 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
         d.moved += Math.abs(p.x - (n.fx ?? p.x)) + Math.abs(p.y - (n.fy ?? p.y));
         n.fx = p.x;
         n.fy = p.y;
-        simRef.current?.alphaTarget(0.3).restart();
+        simRef.current?.alphaTarget(0.12).restart();
       }}
       onPointerUp={() => {
         const d = drag.current;
@@ -261,7 +312,7 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
           n.fx = null;
           n.fy = null;
         }
-        simRef.current?.alphaTarget(0.004);
+        simRef.current?.alphaTarget(0);
         const v = frame.nodes.find((x) => x.id === d.id);
         if (d.moved < 6 && v) activate(v);
       }}
@@ -271,14 +322,21 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
         <g stroke="currentColor" strokeWidth={1} fill="none">
           {frame.links.map((l) => {
             const accent = !!focus && l.ends.includes(`t:${focus}`);
+            // au survol d'un point, toutes ses connexions se révèlent
+            const near = !!hover && l.ends.includes(hover);
             return (
               <path
                 key={l.key}
                 d={l.d}
                 stroke={accent ? ACCENT : undefined}
+                className="transition-[opacity,stroke-width] duration-500"
                 // Thèmes croisés : tirets, plus épais quand plusieurs projets les réunissent.
-                strokeWidth={(l.cross ? 0.5 + 0.6 * l.weight : 1) * (accent ? 1.6 : 1)}
-                opacity={accent ? 0.9 : (l.cross ? 0.35 : l.secondary ? 0.3 : 0.45) * Math.min(dim(l.ends[0]), dim(l.ends[1]))}
+                strokeWidth={(l.cross ? 0.5 + 0.4 * l.weight : 1) * (accent || near ? 1.5 : 1)}
+                opacity={
+                  accent || near
+                    ? 0.85
+                    : (l.cross ? 0.07 : l.secondary ? 0.06 : 0.32) * Math.min(dim(l.ends[0]), dim(l.ends[1])) * (hover ? 0.6 : 1)
+                }
                 strokeDasharray={l.cross === "theme" ? "4 4" : l.secondary ? "1 5" : undefined}
                 strokeLinecap="round"
               />
