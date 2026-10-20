@@ -141,3 +141,22 @@
 @media (prefers-reduced-motion: reduce) {
   .tree-grow { animation: none; stroke-dashoffset: 0; }
 }
+
+/* CV imprimé : une page A4, marges sobres, noir sur blanc. */
+@page {
+  size: A4;
+  margin: 14mm 14mm 12mm;
+}
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    color: #000;
+  }
+  .cv-print {
+    padding: 0 !important;
+  }
+  .cv-print dl > div {
+    break-inside: avoid;
+  }
+}

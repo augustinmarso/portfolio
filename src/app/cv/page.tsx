@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PrintButton } from "@/components/print-button";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = { title: "CV — Augustin Marsollier" };
@@ -41,37 +42,55 @@ const SECTIONS: { title: string; items: { when: string; what: string; detail?: s
   {
     title: "compétences",
     items: [
-      { when: "3d", what: "Rhino 3D et Grasshopper, Blender" },
-      { when: "prototypage", what: "Impression 3D (TPU, PLA), gravure et découpe laser" },
+      { when: "3d", what: "Rhino 3D et Grasshopper, Fusion 360, Blender" },
+      { when: "rendu", what: "Blender (Cycles), KeyShot, mises en situation photoréalistes" },
+      { when: "prototypage", what: "Impression 3D (TPU, PLA), gravure et découpe laser, maquettes" },
       { when: "matériaux", what: "Papier, carton, silicone, bois" },
-      { when: "main", what: "Dessin en volume, maquettes" },
-      { when: "logiciels", what: "InDesign, Photoshop, Illustrator, Premiere Pro" },
-      { when: "ia", what: "Prompt engineering (ChatGPT, Nano Banana), automatisation avec n8n" },
+      { when: "main", what: "Dessin en volume, croquis de recherche" },
+      { when: "graphisme", what: "InDesign, Photoshop, Illustrator, Figma" },
+      { when: "vidéo", what: "Premiere Pro, montages de présentation" },
+      { when: "numérique", what: "Prototypes d'applications et de sites web avec l'IA (Claude Code), automatisation avec n8n" },
+      { when: "ia", what: "Prompt engineering (ChatGPT, Nano Banana), images et vidéos génératives" },
     ],
   },
 ];
 
 export default function CvPage() {
   return (
-    <main className="px-4 pb-16 pt-4 sm:px-6">
-      <SiteHeader active="/cv" />
+    <main className="cv-print px-4 pb-16 pt-4 sm:px-6">
+      <SiteHeader active="/cv" className="print:hidden" />
+      <p className="hidden text-5xl font-bold tracking-[-0.05em] print:block">augustin marsollier</p>
 
-      <div className="grid gap-x-10 gap-y-16 pt-10 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-        <p>
-          augustin marsollier,
-          <br />
-          designer produit,
-          <br />
-          dsaa design produit — ensaama, paris
-        </p>
+      <div className="grid gap-x-10 gap-y-16 pt-10 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] print:grid-cols-[minmax(0,1fr)_minmax(0,2.2fr)] print:gap-y-6 print:pt-6 print:text-[10.5pt]">
+        <div className="grid content-start gap-8 print:gap-4">
+          <p>
+            <span className="print:hidden">
+              augustin marsollier,
+              <br />
+            </span>
+            designer produit,
+            <br />
+            dsaa design produit — ensaama, paris
+          </p>
+          <p className="font-normal">
+            marsollier.augustin@gmail.com
+            <br />
+            07 49 32 47 31
+            <br />
+            augustinmarso.github.io/portfolio
+          </p>
+          <div>
+            <PrintButton />
+          </div>
+        </div>
 
-        <div className="grid gap-14">
+        <div className="grid gap-14 print:gap-5">
           {SECTIONS.map((s) => (
             <section key={s.title}>
-              <h2 className="text-2xl sm:text-3xl">{s.title}</h2>
-              <dl className="mt-6 grid gap-4">
+              <h2 className="text-2xl sm:text-3xl print:text-[15pt]">{s.title}</h2>
+              <dl className="mt-6 grid gap-4 print:mt-2 print:gap-1.5">
                 {s.items.map((it) => (
-                  <div key={it.what} className="grid gap-1 sm:grid-cols-[11rem_1fr] sm:gap-6">
+                  <div key={it.what} className="grid gap-1 sm:grid-cols-[11rem_1fr] sm:gap-6 print:grid-cols-[7.5rem_1fr] print:gap-4">
                     <dt className="text-muted-foreground">{it.when}</dt>
                     <dd>
                       {it.what}
