@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ReaderModeToggle } from "@/components/reader-mode";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -28,7 +27,6 @@ export function SiteNav({ active }: { active: NavHref }) {
           {l.label}
         </Link>
       ))}
-      <ReaderModeToggle />
     </nav>
   );
 }

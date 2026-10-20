@@ -128,37 +128,17 @@
     @apply font-sans;
   }
 }
-/* Mode liseuse : rendu « écran à encre » (papier, encre, niveaux de gris, pas d'animation). */
-html[data-mode="liseuse"] {
-  --background: #e8e6e0;
-  --foreground: #161616;
-  --muted: #d9d6ce;
-  --muted-foreground: #5c5b57;
-  --border: #b9b6ad;
-  --card: #e8e6e0;
-  --popover: #e8e6e0;
-}
-html[data-mode="liseuse"] img,
-html[data-mode="liseuse"] video {
-  filter: grayscale(1) contrast(1.12) brightness(1.02);
-}
-html[data-mode="liseuse"] *,
-html[data-mode="liseuse"] *::before,
-html[data-mode="liseuse"] *::after {
-  transition: none !important;
-  animation: none !important;
-  scroll-behavior: auto !important;
-}
-/* Rafraîchissement d'écran à encre : un bref flash noir puis blanc au changement de page. */
+/* Rafraîchissement d'écran à encre : flash noir puis blanc au changement de page. */
 .eink-flash {
   position: fixed;
   inset: 0;
   z-index: 100;
   pointer-events: none;
-  animation: eink-flash 260ms steps(1, end) forwards !important;
+  animation: eink-flash 340ms steps(1, end) forwards;
 }
 @keyframes eink-flash {
-  0% { background: #161616; }
-  40% { background: #f4f3ef; }
+  0% { background: #111; }
+  30% { background: #fff; }
+  55% { background: rgb(255 255 255 / 0.6); }
   100% { background: transparent; }
 }

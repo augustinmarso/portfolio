@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EinkFlash, READER_MODE_SCRIPT } from "@/components/reader-mode";
+import { EinkFlash } from "@/components/eink-flash";
 import "./globals.css";
 
 // Scoutie Sans (Google Fonts, août 2026) n'est pas encore dans la liste de next/font :
@@ -14,9 +14,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr" className="h-full antialiased" suppressHydrationWarning>
+    <html lang="fr" className="h-full antialiased">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: READER_MODE_SCRIPT }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="stylesheet" href={FONT_CSS} />
