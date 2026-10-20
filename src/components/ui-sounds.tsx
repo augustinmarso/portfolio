@@ -12,13 +12,18 @@ export function UiSounds() {
     let lastAt = 0;
     const over = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
-      const card = (e.target as Element).closest?.("a[data-slug], a[href*='/projets/']");
-      if (!card || card === lastHover) return;
-      lastHover = card;
+      const target = e.target as Element;
+      // boutons et liens des barres de menu : son grave et feutré
+      const barItem = target.closest?.("[data-sound='barre'] a, [data-sound='barre'] button");
+      const card = barItem ? null : target.closest?.("a[data-slug], a[href*='/projets/']");
+      const el = barItem ?? card;
+      if (!el || el === lastHover) return;
+      lastHover = el;
       const now = performance.now();
       if (now - lastAt < 110) return; // pas de crépitement en balayant vite
       lastAt = now;
-      sounds.hover(e.clientX, e.clientY);
+      if (barItem) sounds.barHover(e.clientX);
+      else sounds.hover(e.clientX, e.clientY);
     };
     const click = (e: MouseEvent) => {
       const el = (e.target as Element).closest?.("a, button");

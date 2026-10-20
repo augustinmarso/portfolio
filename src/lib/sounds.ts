@@ -191,6 +191,9 @@ export const sounds = {
     note(pick(root), { ...opts, dur: rnd(0.8, 1.3), gain: 0.016 });
     note(pick(root + interval), { ...opts, at: rnd(0.01, 0.05), dur: rnd(0.8, 1.2), gain: 0.011 });
   },
+  // survol d'un bouton de menu : petit son grave et feutré
+  barHover: (x?: number) =>
+    note(pick(any([0, 1, 2, 3])) / 2, { dur: rnd(0.3, 0.5), gain: 0.014, pan: panAt(x), attack: 0.012, wave: "triangle", bright: 0.45, rasp: rnd(0.1, 0.4), breath: rnd(0, 0.5) }),
   // barres de menu (haut et bas) : note grave et mate, à la quinte inférieure, sur la pulsation
   bar: (x?: number) => {
     const root = any([0, 1, 2]);
