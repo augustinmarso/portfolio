@@ -81,7 +81,7 @@
     "title": "Cylinder chair",
     "cover": {
       "src": "/projects/cylinder-chair/thumb.webp",
-      "width": 707,
+      "width": 900,
       "height": 900
     },
     "images": [
@@ -117,8 +117,8 @@
     "title": "De passager a equipier",
     "cover": {
       "src": "/projects/de-passager-a-equipier/thumb.webp",
-      "width": 900,
-      "height": 636
+      "width": 635,
+      "height": 900
     },
     "images": [
       {
@@ -205,6 +205,66 @@
         "src": "/projects/de-passager-a-equipier/17.webp",
         "width": 2000,
         "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/18.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/19.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/20.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/21.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/22.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/23.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/24.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/25.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/26.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/27.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/28.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/29.webp",
+        "width": 2000,
+        "height": 1414
       }
     ]
   },
@@ -214,7 +274,7 @@
     "cover": {
       "src": "/projects/echappee/thumb.webp",
       "width": 900,
-      "height": 636
+      "height": 600
     },
     "images": [
       {
@@ -320,7 +380,7 @@
     "cover": {
       "src": "/projects/ephemeride/thumb.webp",
       "width": 900,
-      "height": 673
+      "height": 639
     },
     "images": [
       {
@@ -552,7 +612,7 @@
     "title": "KAI",
     "cover": {
       "src": "/projects/kai/thumb.webp",
-      "width": 672,
+      "width": 900,
       "height": 900
     },
     "images": [
@@ -608,8 +668,8 @@
     "title": "La societe de jeux",
     "cover": {
       "src": "/projects/la-societe-de-jeux/thumb.webp",
-      "width": 634,
-      "height": 900
+      "width": 900,
+      "height": 638
     },
     "images": [
       {
@@ -780,7 +840,7 @@
     "title": "Le Jeu de la Grenouille",
     "cover": {
       "src": "/projects/le-jeu-de-la-grenouille/thumb.webp",
-      "width": 681,
+      "width": 657,
       "height": 900
     },
     "images": [
@@ -861,8 +921,8 @@
     "title": "Ludilove",
     "cover": {
       "src": "/projects/ludilove/thumb.webp",
-      "width": 900,
-      "height": 506
+      "width": 450,
+      "height": 900
     },
     "images": [
       {
@@ -1033,7 +1093,7 @@
     "cover": {
       "src": "/projects/open-mind/thumb.webp",
       "width": 900,
-      "height": 506
+      "height": 504
     },
     "images": [
       {
@@ -1155,7 +1215,7 @@
     "cover": {
       "src": "/projects/ratp/thumb.webp",
       "width": 900,
-      "height": 506
+      "height": 900
     },
     "images": [
       {
@@ -1180,7 +1240,7 @@
     "title": "Recolteur pomme de pin",
     "cover": {
       "src": "/projects/recolteur-pomme-de-pin/thumb.webp",
-      "width": 600,
+      "width": 609,
       "height": 900
     },
     "images": [

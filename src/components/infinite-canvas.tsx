@@ -83,7 +83,7 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
   useGSAP(
     () => {
       leaving.current = false;
-      gsap.set(".canvas-card", { clearProps: "opacity,transform,filter" });
+      gsap.set(".canvas-card", { clearProps: "opacity,transform" });
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const ease = reduce ? 1 : 0.085;
       const tick = () => {
@@ -98,16 +98,12 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
       gsap.ticker.add(tick);
 
       if (!reduce) {
-        // Apparition par paquets, en négatif puis rafraîchie, comme un écran à encre.
-        const cards = gsap.utils.toArray<HTMLElement>(".canvas-card");
-        gsap.set(cards, { opacity: 0 });
-        cards.forEach((card) => {
-          const at = Math.round(Math.random() * 4) * 0.12;
-          gsap
-            .timeline({ delay: at })
-            .set(card, { opacity: 1, filter: "invert(1) grayscale(1)" })
-            .set(card, { filter: "grayscale(1)" }, 0.1)
-            .set(card, { clearProps: "filter" }, 0.2);
+        gsap.from(".canvas-card", {
+          opacity: 0,
+          scale: 0.6,
+          duration: 1.1,
+          ease: "expo.out",
+          stagger: { amount: 0.9, from: "center", grid: "auto" },
         });
       }
       return () => gsap.ticker.remove(tick);
@@ -180,13 +176,10 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
     leaving.current = true;
     const slug = card.dataset.slug;
     const others = rootRef.current?.querySelectorAll(".canvas-card") ?? [];
-    // Rafraîchissement façon écran à encre : la carte passe en négatif, les autres s'effacent d'un coup.
     gsap
       .timeline({ onComplete: () => router.push(`/projets/${slug}`) })
-      .set(card, { filter: "invert(1) grayscale(1)" }, 0)
-      .set([...others].filter((c) => c !== card), { opacity: 0 }, 0.12)
-      .set(card, { filter: "grayscale(1)" }, 0.22)
-      .set(card, { filter: "none" }, 0.3);
+      .to([...others].filter((c) => c !== card), { opacity: 0, scale: 0.9, duration: 0.45, ease: "power2.in" }, 0)
+      .to(card, { scale: 1.08, duration: 0.5, ease: "power3.inOut" }, 0);
   };
 
   return (

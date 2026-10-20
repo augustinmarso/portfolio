@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { EinkFlash } from "@/components/eink-flash";
 import "./globals.css";
 
 // Scoutie Sans (Google Fonts, août 2026) n'est pas encore dans la liste de next/font :
@@ -20,10 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="stylesheet" href={FONT_CSS} />
       </head>
-      <body className="min-h-full flex flex-col">
-        {children}
-        <EinkFlash />
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

@@ -1,196 +1,357 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ChevronRight, FileText, Folder, FolderOpen } from "lucide-react";
-import {
-  forceCenter,
-  forceCollide,
-  forceLink,
-  forceManyBody,
-  forceSimulation,
-  type SimulationLinkDatum,
-  type SimulationNodeDatum,
-} from "d3-force";
+import { useSearchParams } from "next/navigation";
+import { ArrowLeft, ArrowUpRight, ArrowLeftRight, LayoutList, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { THEMES, type Project } from "@/lib/projects";
 
-type Node = SimulationNodeDatum & { id: string; label: string; kind: "theme" | "project"; slug?: string };
-type Edge = SimulationLinkDatum<Node> & { source: Node; target: Node };
+type Focus = { kind: "root" } | { kind: "theme"; theme: string };
+type Pos = { x: number; y: number; o: number; s: number };
 
-// Disposition calculée une fois (simulation figée), comme la vue graphe d'Obsidian.
-function useGraph(projects: Project[]) {
-  return useMemo(() => {
-    const used = THEMES.filter((t) => projects.some((p) => p.text?.themes.includes(t)));
-    const nodes: Node[] = [
-      ...used.map((t) => ({ id: `t:${t}`, label: t, kind: "theme" as const })),
-      ...projects.map((p) => ({ id: `p:${p.slug}`, label: p.title, kind: "project" as const, slug: p.slug })),
-    ];
-    const byId = new Map(nodes.map((n) => [n.id, n]));
-    const links = projects.flatMap((p) =>
-      (p.text?.themes ?? []).map((t) => ({ source: byId.get(`p:${p.slug}`)!, target: byId.get(`t:${t}`)! }))
-    ) as Edge[];
-    const sim = forceSimulation(nodes)
-      .force("link", forceLink<Node, Edge>(links).distance(70).strength(0.6))
-      .force("charge", forceManyBody<Node>().strength((n) => (n.kind === "theme" ? -420 : -160)))
-      .force("collide", forceCollide<Node>((n) => (n.kind === "theme" ? 34 : 22)))
-      .force("center", forceCenter(0, 0))
-      .stop();
-    for (let i = 0; i < 400; i++) sim.tick();
-    const xs = nodes.map((n) => n.x!);
-    const ys = nodes.map((n) => n.y!);
-    const pad = 70;
-    const box = {
-      x: Math.min(...xs) - pad,
-      y: Math.min(...ys) - pad,
-      w: Math.max(...xs) - Math.min(...xs) + pad * 2,
-      h: Math.max(...ys) - Math.min(...ys) + pad * 2,
-    };
-    return { nodes, links, themes: used, box };
-  }, [projects]);
+const DURATION = 750;
+const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+// Symbole géométrique propre à chaque thème (comme les puces de la référence).
+function ThemeGlyph({ theme, count, active }: { theme: string; count: number; active: boolean }) {
+  const i = THEMES.indexOf(theme as (typeof THEMES)[number]);
+  const stroke = active ? "currentColor" : "currentColor";
+  const common = { fill: active ? "var(--background)" : "none", stroke, strokeWidth: 1.4 };
+  const shapes = [
+    <circle key="c" cx="14" cy="14" r="10" {...common} />,
+    <rect key="s" x="4" y="4" width="20" height="20" {...common} />,
+    <path key="t" d="M14 3 L25 24 H3 Z" {...common} />,
+    <path key="h" d="M14 3 L24 8.5 V19.5 L14 25 L4 19.5 V8.5 Z" {...common} />,
+    <path key="d" d="M14 3 L25 14 L14 25 L3 14 Z" {...common} />,
+  ];
+  const withDot = i >= 5;
+  return (
+    <svg viewBox="0 0 28 28" className="size-7 overflow-visible">
+      {shapes[i % shapes.length]}
+      {withDot ? (
+        <circle cx="14" cy="15" r="2" fill="currentColor" />
+      ) : (
+        <text x="14" y="18.5" textAnchor="middle" className="fill-current text-[9px] font-semibold">
+          {count}
+        </text>
+      )}
+    </svg>
+  );
+}
+
+function Asterisk() {
+  return (
+    <svg viewBox="0 0 28 28" className="size-7">
+      {[0, 30, 60, 90, 120, 150].map((a) => (
+        <rect key={a} x="12.5" y="3" width="3" height="22" rx="1.5" fill="currentColor" transform={`rotate(${a} 14 14)`} />
+      ))}
+    </svg>
+  );
 }
 
 export function ProjectGraph({ projects }: { projects: Project[] }) {
-  const router = useRouter();
   const params = useSearchParams();
-  const { nodes, links, themes, box } = useGraph(projects);
-  const [focus, setFocus] = useState<string | null>(params.get("theme") ? `t:${params.get("theme")}` : null);
-  const [open, setOpen] = useState<Set<string>>(() => new Set(params.get("theme") ? [params.get("theme")!] : []));
-  const [view, setView] = useState({ x: 0, y: 0, k: 1 });
-  const pan = useRef<{ x: number; y: number } | null>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState({ w: 900, h: 640 });
+  const initialTheme = params.get("theme");
+  const [focus, setFocus] = useState<Focus>(initialTheme ? { kind: "theme", theme: initialTheme } : { kind: "root" });
+  const [selected, setSelected] = useState<string | null>(null);
+  const [hover, setHover] = useState<string | null>(null);
 
-  const neighbours = useMemo(() => {
-    if (!focus) return null;
-    const set = new Set([focus]);
-    links.forEach((l) => {
-      if (l.source.id === focus) set.add(l.target.id);
-      if (l.target.id === focus) set.add(l.source.id);
-    });
-    return set;
-  }, [focus, links]);
-
+  const themes = useMemo(() => THEMES.filter((t) => projects.some((p) => p.text?.themes.includes(t))), [projects]);
   const projectsOf = (t: string) => projects.filter((p) => p.text?.themes.includes(t));
-  const toggleFolder = (t: string) =>
-    setOpen((s) => {
-      const n = new Set(s);
-      if (n.has(t)) n.delete(t);
-      else n.add(t);
-      return n;
+
+  useEffect(() => {
+    const el = boxRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([e]) => setSize({ w: e.contentRect.width, h: e.contentRect.height }));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // Disposition cible selon le nœud au centre.
+  const target = useMemo(() => {
+    const out = new Map<string, Pos>();
+    const cx = size.w / 2;
+    const cy = size.h / 2;
+    const R = Math.min(size.w, size.h) * 0.36;
+    const ring = (n: number, k: number, r: number, offset = -Math.PI / 2) => {
+      const a = offset + (k / n) * Math.PI * 2;
+      const wobble = k % 2 ? 0.86 : 1; // rayons alternés, plus organique
+      return { x: cx + Math.cos(a) * r * wobble, y: cy + Math.sin(a) * r * wobble };
+    };
+    if (focus.kind === "root") {
+      out.set("root", { x: cx, y: cy, o: 1, s: 1 });
+      themes.forEach((t, k) => out.set(`t:${t}`, { ...ring(themes.length, k, R), o: 1, s: 1 }));
+      projects.forEach((p) => {
+        const home = out.get(`t:${p.text?.themes[0]}`) ?? { x: cx, y: cy };
+        out.set(`p:${p.slug}`, { x: home.x, y: home.y, o: 0, s: 0.3 });
+      });
+    } else {
+      const inside = projectsOf(focus.theme);
+      out.set(`t:${focus.theme}`, { x: cx, y: cy, o: 1, s: 1 });
+      const others = themes.filter((t) => t !== focus.theme);
+      others.forEach((t, k) => out.set(`t:${t}`, { ...ring(others.length, k, R * 1.22, -Math.PI / 2 + 0.3), o: 0.35, s: 0.8 }));
+      out.set("root", { x: cx - R * 0.62, y: cy + R * 0.98, o: 1, s: 1 });
+      inside.forEach((p, k) => out.set(`p:${p.slug}`, { ...ring(inside.length, k, R * 0.82, -Math.PI / 2 + 0.4), o: 1, s: 1 }));
+      projects.forEach((p) => {
+        if (!out.has(`p:${p.slug}`)) out.set(`p:${p.slug}`, { x: cx, y: cy, o: 0, s: 0.3 });
+      });
+    }
+    // Garde tout dans le cadre (marge pour les étiquettes).
+    out.forEach((v) => {
+      v.x = Math.min(size.w - 70, Math.max(70, v.x));
+      v.y = Math.min(size.h - 50, Math.max(30, v.y));
     });
+    return out;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focus, size, themes, projects]);
+
+  // Interpolation fluide de l'ancienne disposition vers la nouvelle.
+  const current = useRef<Map<string, Pos>>(new Map());
+  const [frame, setFrame] = useState<Map<string, Pos>>(target);
+  useEffect(() => {
+    const from = new Map(current.current.size ? current.current : target);
+    const start = performance.now();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let raf = 0;
+    const step = (now: number) => {
+      const t = reduce ? 1 : easeOut(Math.min(1, (now - start) / DURATION));
+      const next = new Map<string, Pos>();
+      target.forEach((to, id) => {
+        const a = from.get(id) ?? to;
+        next.set(id, {
+          x: a.x + (to.x - a.x) * t,
+          y: a.y + (to.y - a.y) * t,
+          o: a.o + (to.o - a.o) * t,
+          s: a.s + (to.s - a.s) * t,
+        });
+      });
+      current.current = next;
+      setFrame(next);
+      if (t < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target]);
+
+  const at = (id: string) => frame.get(id) ?? { x: 0, y: 0, o: 0, s: 0 };
+
+  // Liens : centre → thèmes (pointillés), thème → projets (tirets), thème → racine (trait plein).
+  const edges: { a: string; b: string; kind: "dot" | "dash" | "solid" }[] = [];
+  if (focus.kind === "root") themes.forEach((t) => edges.push({ a: "root", b: `t:${t}`, kind: "dot" }));
+  else {
+    edges.push({ a: `t:${focus.theme}`, b: "root", kind: "solid" });
+    themes.filter((t) => t !== focus.theme).forEach((t) => edges.push({ a: `t:${focus.theme}`, b: `t:${t}`, kind: "dot" }));
+    projectsOf(focus.theme).forEach((p) => edges.push({ a: `t:${focus.theme}`, b: `p:${p.slug}`, kind: "dash" }));
+  }
+
+  const goTheme = (t: string) => {
+    setSelected(null);
+    setFocus({ kind: "theme", theme: t });
+  };
+  const goRoot = () => {
+    setSelected(null);
+    setFocus({ kind: "root" });
+  };
+
+  const sel = selected ? projects.find((p) => p.slug === selected) : null;
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[18rem_minmax(0,1fr)]">
-      {/* Explorateur de fichiers */}
-      <nav aria-label="Projets par thème" className="text-base font-semibold">
-        <p className="mb-3 text-muted-foreground">projets / {projects.length}</p>
-        <ul>
-          {themes.map((t) => {
-            const isOpen = open.has(t);
+    <div className="relative grid gap-6 lg:block">
+      <div ref={boxRef} className="relative h-[68vh] overflow-hidden lg:h-[calc(100dvh-9rem)] lg:w-[60%]">
+        <svg className="pointer-events-none absolute inset-0 size-full">
+          {edges.map((e) => {
+            const a = at(e.a);
+            const b = at(e.b);
+            const lit = hover && (hover === e.a || hover === e.b);
             return (
-              <li key={t}>
-                <button
-                  type="button"
-                  onClick={() => toggleFolder(t)}
-                  onMouseEnter={() => setFocus(`t:${t}`)}
-                  aria-expanded={isOpen}
-                  className={cn(
-                    "flex w-full items-center gap-1.5 rounded px-1.5 py-1 text-left hover:bg-muted",
-                    focus === `t:${t}` && "bg-muted"
-                  )}
-                >
-                  <ChevronRight className={cn("size-4 shrink-0 text-muted-foreground transition-transform", isOpen && "rotate-90")} />
-                  {isOpen ? <FolderOpen className="size-4 shrink-0" /> : <Folder className="size-4 shrink-0" />}
-                  <span className="flex-1">{t}</span>
-                  <span className="text-sm text-muted-foreground">{projectsOf(t).length}</span>
-                </button>
-                {isOpen && (
-                  <ul className="ml-[0.95rem] border-l pl-2">
-                    {projectsOf(t).map((p) => (
-                      <li key={p.slug}>
-                        <Link
-                          href={`/projets/${p.slug}`}
-                          onMouseEnter={() => setFocus(`p:${p.slug}`)}
-                          className="flex items-center gap-1.5 rounded px-1.5 py-1 font-normal hover:bg-muted"
-                        >
-                          <FileText className="size-4 shrink-0 text-muted-foreground" />
-                          <span className="truncate lowercase">{p.title}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
+              <line
+                key={`${e.a}-${e.b}`}
+                x1={a.x}
+                y1={a.y}
+                x2={b.x}
+                y2={b.y}
+                stroke="currentColor"
+                strokeWidth={e.kind === "solid" ? 1.2 : 1.3}
+                strokeDasharray={e.kind === "dot" ? "1.5 6" : e.kind === "dash" ? "5 4" : undefined}
+                strokeLinecap="round"
+                opacity={Math.min(a.o, b.o) * (lit ? 0.9 : 0.5)}
+              />
             );
           })}
-        </ul>
-      </nav>
-
-      {/* Vue graphe */}
-      <div className="relative h-[70vh] overflow-hidden rounded-sm border bg-muted/40 lg:h-[calc(100dvh-12rem)]">
-        <svg
-          viewBox={`${box.x} ${box.y} ${box.w} ${box.h}`}
-          className="size-full cursor-grab touch-none select-none active:cursor-grabbing"
-          onPointerDown={(e) => {
-            pan.current = { x: e.clientX, y: e.clientY };
-            (e.currentTarget as SVGSVGElement).setPointerCapture(e.pointerId);
-          }}
-          onPointerMove={(e) => {
-            if (!pan.current) return;
-            const scale = box.w / e.currentTarget.clientWidth / view.k;
-            const dx = (e.clientX - pan.current.x) * scale;
-            const dy = (e.clientY - pan.current.y) * scale;
-            pan.current = { x: e.clientX, y: e.clientY };
-            setView((v) => ({ ...v, x: v.x + dx, y: v.y + dy }));
-          }}
-          onPointerUp={() => (pan.current = null)}
-          onWheel={(e) => setView((v) => ({ ...v, k: Math.min(3, Math.max(0.5, v.k * (e.deltaY > 0 ? 0.9 : 1.1))) }))}
-          onPointerLeave={() => setFocus(null)}
-        >
-          <g transform={`translate(${view.x} ${view.y}) scale(${view.k})`}>
-            {links.map((l, i) => {
-              const lit = neighbours?.has(l.source.id) && neighbours?.has(l.target.id) && (l.source.id === focus || l.target.id === focus);
-              return (
-                <line
-                  key={i}
-                  x1={l.source.x}
-                  y1={l.source.y}
-                  x2={l.target.x}
-                  y2={l.target.y}
-                  className={cn("stroke-foreground", lit ? "opacity-80" : neighbours ? "opacity-10" : "opacity-25")}
-                  strokeWidth={lit ? 1.6 : 1}
-                />
-              );
-            })}
-            {nodes.map((n) => {
-              const dim = neighbours && !neighbours.has(n.id);
-              const r = n.kind === "theme" ? 9 : 5;
-              return (
-                <g
-                  key={n.id}
-                  transform={`translate(${n.x} ${n.y})`}
-                  className={cn("cursor-pointer", dim && "opacity-20")}
-                  onPointerEnter={() => setFocus(n.id)}
-                  onPointerDown={(e) => e.stopPropagation()}
-                  onClick={() => (n.slug ? router.push(`/projets/${n.slug}`) : toggleFolder(n.label))}
-                >
-                  <circle r={r} className={n.kind === "theme" ? "fill-foreground" : "fill-muted-foreground"} />
-                  <text
-                    y={r + 14}
-                    textAnchor="middle"
-                    className={cn("fill-foreground lowercase", n.kind === "theme" ? "text-[13px] font-bold" : "text-[10px] font-semibold")}
-                  >
-                    {n.label}
-                  </text>
-                </g>
-              );
-            })}
-          </g>
         </svg>
-        <p className="pointer-events-none absolute bottom-3 left-3 text-sm font-semibold text-muted-foreground">
-          survoler pour relier, cliquer pour ouvrir, molette pour zoomer
-        </p>
+
+        {/* Racine */}
+        <button
+          type="button"
+          onClick={goRoot}
+          onMouseEnter={() => setHover("root")}
+          onMouseLeave={() => setHover(null)}
+          className="absolute flex flex-col items-center text-center"
+          style={{ left: at("root").x, top: at("root").y, opacity: at("root").o, transform: "translate(-50%,-14px)" }}
+        >
+          <Asterisk />
+          <span className="mt-1 whitespace-nowrap text-base font-semibold">augustin marsollier</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">designer produit</span>
+        </button>
+
+        {/* Thèmes */}
+        {themes.map((t) => {
+          const p = at(`t:${t}`);
+          const active = focus.kind === "theme" && focus.theme === t;
+          return (
+            <button
+              key={t}
+              type="button"
+              onClick={() => goTheme(t)}
+              onMouseEnter={() => setHover(`t:${t}`)}
+              onMouseLeave={() => setHover(null)}
+              className={cn(
+                "absolute flex flex-col items-center text-center transition-colors",
+                active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              )}
+              style={{ left: p.x, top: p.y, opacity: Math.max(p.o, 0.15), transform: `translate(-50%,-14px) scale(${p.s})`, transformOrigin: "50% 14px" }}
+            >
+              <ThemeGlyph theme={t} count={projectsOf(t).length} active={active} />
+              <span className={cn("mt-1 whitespace-nowrap text-base", active ? "font-bold" : "font-semibold")}>{t}</span>
+            </button>
+          );
+        })}
+
+        {/* Projets : la puce est une image */}
+        {projects.map((proj) => {
+          const p = at(`p:${proj.slug}`);
+          if (p.o < 0.02) return null;
+          const isSel = selected === proj.slug;
+          return (
+            <button
+              key={proj.slug}
+              type="button"
+              onClick={() => setSelected(proj.slug)}
+              onMouseEnter={() => setHover(`p:${proj.slug}`)}
+              onMouseLeave={() => setHover(null)}
+              className="group absolute flex flex-col items-center text-center"
+              style={{ left: p.x, top: p.y, opacity: p.o, transform: `translate(-50%,-24px) scale(${p.s})`, transformOrigin: "50% 24px" }}
+            >
+              <span
+                className={cn(
+                  "relative block size-12 overflow-hidden rounded-full bg-muted ring-1 ring-foreground/20 transition-[box-shadow,transform] duration-300 group-hover:scale-110",
+                  isSel && "ring-2 ring-foreground"
+                )}
+              >
+                <Image src={proj.cover.src} alt="" fill sizes="48px" className="object-cover" />
+              </span>
+              <span className={cn("mt-1.5 max-w-[10rem] text-sm leading-tight lowercase", isSel ? "font-bold" : "font-semibold text-muted-foreground group-hover:text-foreground")}>
+                {proj.title}
+              </span>
+            </button>
+          );
+        })}
       </div>
+
+      {/* Fiche, façon référence : carte + images flottantes */}
+      <aside className="relative lg:absolute lg:right-0 lg:top-0 lg:w-[38%]">
+        {sel && (
+          <div className="relative mb-4 hidden aspect-[4/5] w-1/2 overflow-hidden bg-muted lg:block">
+            <Image src={sel.cover.src} alt="" fill sizes="20vw" className="object-cover" />
+            <Link
+              href={`/projets/${sel.slug}`}
+              className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-sm bg-background/90 px-2 py-1 text-xs font-semibold"
+            >
+              voir <ArrowUpRight className="size-3" />
+            </Link>
+          </div>
+        )}
+
+        <div className={cn("relative z-10 grid gap-2 text-sm", sel && "lg:-mt-40 lg:ml-[18%]")}>
+          <div className="flex items-center justify-between rounded-md bg-background px-4 py-3 shadow-sm ring-1 ring-foreground/10">
+            <span className="flex items-center gap-2 font-semibold uppercase tracking-wider">
+              <Asterisk />
+              index
+            </span>
+            <button type="button" onClick={goRoot} aria-label="Revenir au centre">
+              <ArrowLeft className="size-4" />
+            </button>
+          </div>
+
+          <div className="rounded-md bg-background px-4 py-4 shadow-sm ring-1 ring-foreground/10">
+            {sel ? (
+              <>
+                <div className="flex items-center justify-between font-semibold uppercase tracking-wider">
+                  <span>▲ projet</span>
+                  <button type="button" onClick={() => setSelected(null)} aria-label="Fermer la fiche">
+                    <X className="size-4" />
+                  </button>
+                </div>
+                <div className="mt-4 pl-5">
+                  <p className="text-lg font-semibold lowercase leading-tight">{sel.title}</p>
+                  {sel.text?.context && <p className="mt-1 text-muted-foreground">{sel.text.context}</p>}
+                  {sel.text?.year && <p className="mt-1 uppercase tracking-wider text-muted-foreground">{sel.text.year}</p>}
+                  {sel.text?.intro && <p className="mt-4 text-base leading-relaxed indent-6">{sel.text.intro}</p>}
+                </div>
+                <div className="mt-5 divide-y divide-dashed divide-foreground/30 border-t border-dashed border-foreground/30 font-semibold uppercase tracking-wider">
+                  <p className="flex items-center gap-2 py-2.5">
+                    <LayoutList className="size-4" /> planches <span className="ml-auto">{sel.images.length}</span>
+                  </p>
+                  <Link href={`/projets/${sel.slug}`} className="flex items-center gap-2 py-2.5 hover:underline">
+                    <ArrowUpRight className="size-4" /> ouvrir le projet
+                  </Link>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2.5">
+                    <ArrowLeftRight className="size-4" /> connexions
+                    {sel.text?.themes.map((t) => (
+                      <button key={t} type="button" onClick={() => goTheme(t)} className="normal-case tracking-normal text-muted-foreground hover:text-foreground">
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : focus.kind === "theme" ? (
+              <>
+                <div className="flex items-center justify-between font-semibold uppercase tracking-wider">
+                  <span>● thème</span>
+                  <button type="button" onClick={goRoot} aria-label="Fermer">
+                    <X className="size-4" />
+                  </button>
+                </div>
+                <div className="mt-4 pl-5">
+                  <p className="text-lg font-semibold">{focus.theme}</p>
+                  <p className="mt-1 uppercase tracking-wider text-muted-foreground">{projectsOf(focus.theme).length} projets</p>
+                </div>
+                <ul className="mt-4 divide-y divide-dashed divide-foreground/30 border-t border-dashed border-foreground/30">
+                  {projectsOf(focus.theme).map((p) => (
+                    <li key={p.slug}>
+                      <button type="button" onClick={() => setSelected(p.slug)} className="w-full py-2 text-left font-semibold lowercase hover:underline">
+                        {p.title}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <>
+                <p className="font-semibold uppercase tracking-wider">● portfolio</p>
+                <div className="mt-4 pl-5">
+                  <p className="text-lg font-semibold">augustin marsollier</p>
+                  <p className="mt-1 text-muted-foreground">designer produit, dsaa design produit — ensaama, paris</p>
+                  <p className="mt-4 text-base leading-relaxed indent-6">
+                    {projects.length} projets classés par thèmes. Choisir un thème pour l&apos;amener au centre, puis un projet pour lire sa fiche.
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        {sel?.images[1] && (
+          <div className="relative -mt-10 ml-auto hidden aspect-square w-[45%] overflow-hidden bg-black lg:block">
+            <Image src={sel.images[1].src} alt="" fill sizes="18vw" className="object-cover" />
+          </div>
+        )}
+      </aside>
     </div>
   );
 }

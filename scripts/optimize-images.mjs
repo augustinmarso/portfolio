@@ -11,6 +11,22 @@ const FULL = 2000;
 const THUMB = 900;
 const EXT = /\.(jpe?g|png|gif|webp)$/i;
 
+// Vignette de l'index : une vraie image (photo, rendu), jamais une planche de présentation.
+// Numéro d'image du projet, ou fichier dans <source>/_covers/<slug>.*
+const COVERS = {
+  kai: "05",
+  "la-societe-de-jeux": "05",
+  "recolteur-pomme-de-pin": "07",
+  "le-jeu-de-la-grenouille": "14",
+  ephemeride: "08",
+  "cylinder-chair": "02",
+  echappee: "_covers",
+  "open-mind": "_covers",
+  ratp: "_covers",
+  "de-passager-a-equipier": "_covers",
+  ludilove: "_covers",
+};
+
 const slugify = (s) =>
   s
     .normalize("NFD")
@@ -20,7 +36,8 @@ const slugify = (s) =>
     .replace(/^-|-$/g, "");
 
 const projects = [];
-for (const dir of (await fs.readdir(SRC, { withFileTypes: true })).filter((d) => d.isDirectory())) {
+const coverFiles = await fs.readdir(path.join(SRC, "_covers")).catch(() => []);
+for (const dir of (await fs.readdir(SRC, { withFileTypes: true })).filter((d) => d.isDirectory() && !d.name.startsWith("_"))) {
   const title = dir.name;
   const slug = slugify(title);
   const outDir = path.join(OUT, slug);
@@ -38,8 +55,11 @@ for (const dir of (await fs.readdir(SRC, { withFileTypes: true })).filter((d) =>
       .webp({ quality: 80 })
       .toFile(path.join(outDir, `${name}.webp`));
     images.push({ src: `/projects/${slug}/${name}.webp`, width: full.width, height: animated ? full.pageHeight ?? full.height : full.height });
-    if (i === 0) {
-      const t = await sharp(input, { limitInputPixels: false })
+    const pick = COVERS[slug];
+    const isCover = pick === "_covers" ? i === 0 : pick ? name === pick : i === 0;
+    if (isCover) {
+      const own = pick === "_covers" && coverFiles.find((f) => f.startsWith(`${slug}.`));
+      const t = await sharp(own ? path.join(SRC, "_covers", own) : input, { limitInputPixels: false })
         .rotate()
         .resize({ width: THUMB, height: THUMB, fit: "inside", withoutEnlargement: true })
         .webp({ quality: 78 })
