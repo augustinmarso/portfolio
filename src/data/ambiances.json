@@ -3,7 +3,56 @@
     "file": "/ambiances/banc-tapis-petite-voiture.mp3",
     "titre": "aire de jeux d'un square, Berlin",
     "source": "https://commons.wikimedia.org/wiki/File:209901_foongaz_city-playground-boxhagenerplatz-berlin.wav",
-    "auteur": "foongaz",
+    "auteur": "foongaz (freesound.org)",
+    "licence": "CC0"
+  },
+  "cylinder-chair": {
+    "file": "/ambiances/cylinder-chair.mp3",
+    "titre": "enfants qui jouent au loin",
+    "source": "https://commons.wikimedia.org/wiki/File:Kids_next_door.ogg",
+    "auteur": "ezwa (pdsounds.org)",
+    "licence": "domaine public"
+  },
+  "de-passager-a-equipier": {
+    "file": "/ambiances/de-passager-a-equipier.mp3",
+    "titre": "bateau à quai, clapotis",
+    "source": "https://commons.wikimedia.org/wiki/File:Boat_by_a_wharf_2.ogg",
+    "auteur": "ezwa (pdsounds.org)",
+    "licence": "domaine public"
+  },
+  "echappee": {
+    "file": "/ambiances/echappee.mp3",
+    "titre": "rue sous la pluie, circulation lointaine",
+    "source": "https://commons.wikimedia.org/wiki/File:Urban_Street_on_a_Rainy_Afternoon.flac",
+    "auteur": "Extemporalist",
+    "licence": "CC0"
+  },
+  "fish-eye": {
+    "file": "/ambiances/fish-eye.mp3",
+    "titre": "vagues sur une plage",
+    "source": "https://commons.wikimedia.org/wiki/File:Beach_sounds_South_Carolina.ogg",
+    "auteur": "Anthropic42 (en.wikipedia)",
+    "licence": "domaine public"
+  },
+  "ludilove": {
+    "file": "/ambiances/ludilove.mp3",
+    "titre": "salle de restaurant, conversations lointaines",
+    "source": "https://commons.wikimedia.org/wiki/File:Restaurant_ambience.ogg",
+    "auteur": "stephan (pdsounds.org)",
+    "licence": "domaine public"
+  },
+  "porte-cle-jeton-de-caddie": {
+    "file": "/ambiances/porte-cle-jeton-de-caddie.mp3",
+    "titre": "ruisseau en sous-bois",
+    "source": "https://commons.wikimedia.org/wiki/File:Forest_lawn_creek.ogg",
+    "auteur": "Dsw4",
+    "licence": "domaine public"
+  },
+  "cafetiere-au-beurre": {
+    "file": "/ambiances/cafetiere-au-beurre.mp3",
+    "titre": "cuisine calme, vaisselle légère",
+    "source": "https://commons.wikimedia.org/wiki/File:Ambient_Kitchen_Sounds.wav",
+    "auteur": "Wilfredor",
     "licence": "CC0"
   }
 }
