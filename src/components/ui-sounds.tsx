@@ -48,7 +48,6 @@ export function UiSounds() {
 export function SoundToggle({ className }: { className?: string }) {
   const [on, setOn] = useState(true);
   const [vol, setVol] = useState(0.7);
-  const [dragging, setDragging] = useState(false);
   const drag = useRef<{ x: number; start: number; moved: boolean } | null>(null);
 
   useEffect(() => {
@@ -83,7 +82,6 @@ export function SoundToggle({ className }: { className?: string }) {
         const dx = e.clientX - d.x;
         if (!d.moved && Math.abs(dx) < 4) return;
         d.moved = true;
-        setDragging(true);
         const v = Math.min(1, Math.max(0, d.start + dx / 90)); // 90 px = tout le réglage
         setVolume(v);
         if (v === 0 && on) setSoundOn(false);
@@ -92,7 +90,6 @@ export function SoundToggle({ className }: { className?: string }) {
       onPointerUp={() => {
         const d = drag.current;
         drag.current = null;
-        setDragging(false);
         if (d && !d.moved) {
           // clic simple : coupe, ou rétablit (avec un volume audible si on était à zéro)
           if (on) setSoundOn(false);
@@ -104,14 +101,13 @@ export function SoundToggle({ className }: { className?: string }) {
       }}
       onPointerCancel={() => {
         drag.current = null;
-        setDragging(false);
       }}
       onKeyDown={(e) => {
         if (e.key === "ArrowRight" || e.key === "ArrowUp") setVolume(vol + 0.1);
         if (e.key === "ArrowLeft" || e.key === "ArrowDown") setVolume(vol - 0.1);
       }}
       className={cn(
-        "relative grid size-6 cursor-ew-resize touch-none select-none place-items-center sm:size-7",
+        "relative grid size-6 touch-none select-none place-items-center sm:size-7",
         on ? "text-foreground" : "text-muted-foreground",
         className
       )}
@@ -135,12 +131,6 @@ export function SoundToggle({ className }: { className?: string }) {
           ))
         )}
       </svg>
-      {/* pourcentage pendant le réglage */}
-      {dragging && (
-        <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-sm bg-foreground px-1.5 py-0.5 text-[11px] font-semibold tabular-nums text-background">
-          {Math.round(level * 100)} %
-        </span>
-      )}
     </button>
   );
 }
