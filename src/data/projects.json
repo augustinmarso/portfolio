@@ -1020,12 +1020,12 @@
     "title": "Le choix de Malo",
     "cover": {
       "src": "/projects/le-choix-de-malo/thumb.webp",
-      "width": 900,
+      "width": 899,
       "height": 900
     },
     "hover": {
       "src": "/projects/le-choix-de-malo/hover.webp",
-      "width": 900,
+      "width": 899,
       "height": 900
     },
     "images": [
