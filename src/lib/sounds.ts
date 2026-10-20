@@ -1,10 +1,11 @@
 "use client";
 
 // Sons d'interface synthétisés à la volée (Web Audio), sans fichier à charger : compositions
-// originales dans l'esprit des vidéos de lancement produit (sons purs, attaques douces,
-// quintes, longues traînes), spatialisés selon l'endroit de l'écran.
+// originales, mates et effacées, avec un léger grain rauque ; chaque son tire au hasard
+// une variante (notes, timbre, texture) et se place dans l'espace selon l'endroit de l'écran.
 let ctx: AudioContext | null = null;
 let bus: { dry: GainNode; wet: GainNode } | null = null;
+let noise: AudioBuffer | null = null;
 const KEY = "portfolio:son";
 
 export const soundOn = () => {
@@ -31,6 +32,23 @@ function impulse(a: AudioContext, seconds = 2.6) {
   return buf;
 }
 
+// Bruit rose approximatif (1 s), réutilisé pour le grain rauque.
+function pinkNoise(a: AudioContext) {
+  const buf = a.createBuffer(1, a.sampleRate, a.sampleRate);
+  const d = buf.getChannelData(0);
+  let b0 = 0,
+    b1 = 0,
+    b2 = 0;
+  for (let i = 0; i < d.length; i++) {
+    const w = Math.random() * 2 - 1;
+    b0 = 0.997 * b0 + 0.029591 * w;
+    b1 = 0.985 * b1 + 0.032534 * w;
+    b2 = 0.95 * b2 + 0.048056 * w;
+    d[i] = (b0 + b1 + b2 + w * 0.05) * 1.6;
+  }
+  return buf;
+}
+
 function audio() {
   if (typeof window === "undefined" || !soundOn()) return null;
   if (!ctx) {
@@ -40,32 +58,57 @@ function audio() {
     const comp = ctx.createDynamicsCompressor(); // évite les pics quand plusieurs sons se superposent
     master.connect(comp).connect(ctx.destination);
     const dry = ctx.createGain();
-    dry.gain.value = 0.55;
+    dry.gain.value = 0.5;
     const wet = ctx.createGain();
-    wet.gain.value = 0.7;
+    wet.gain.value = 0.55;
     const verb = ctx.createConvolver();
     verb.buffer = impulse(ctx);
-    const tone = ctx.createBiquadFilter(); // réverbération feutrée, sans aigus durs
+    const tone = ctx.createBiquadFilter(); // traîne mate, sans aigus
     tone.type = "lowpass";
-    tone.frequency.value = 3200;
+    tone.frequency.value = 2000;
     dry.connect(master);
     wet.connect(verb).connect(tone).connect(master);
     bus = { dry, wet };
+    noise = pinkNoise(ctx);
   }
   if (ctx.state === "suspended") void ctx.resume();
   return ctx;
 }
 
-// Gamme pentatonique de sol dièse (sons purs, souvent à la quinte) : graves chauds,
-// médiums ronds et tintements clairs dans l'aigu.
+// Gamme pentatonique de sol dièse : graves chauds, médiums ronds, tintements dans l'aigu.
 const SCALE = [207.65, 233.08, 261.63, 311.13, 349.23, 415.3, 466.16, 523.25, 622.25, 698.46, 830.61, 932.33, 1046.5, 1244.51, 1396.91];
 const pick = (i: number) => SCALE[Math.max(0, Math.min(SCALE.length - 1, i))];
+const rnd = (a: number, b: number) => a + Math.random() * (b - a);
+const any = <T,>(xs: readonly T[]): T => xs[Math.floor(Math.random() * xs.length)];
 
-// Son pur (sinus) qui « gonfle » puis s'éteint lentement dans la réverbération,
-// placé dans l'espace stéréo (pan -1 gauche → 1 droite).
-function note(freq: number, { at = 0, dur = 1.6, gain = 0.03, pan = 0, attack = 0.09, glide }: { at?: number; dur?: number; gain?: number; pan?: number; attack?: number; glide?: number } = {}) {
+// Courbe de saturation douce : arrondit et « râpe » légèrement le son.
+let curve: Float32Array<ArrayBuffer> | null = null;
+function clipCurve() {
+  curve ??= Float32Array.from({ length: 1024 }, (_, i) => {
+    const x = (i / 1023) * 2 - 1;
+    return Math.tanh(x * 2.2) / Math.tanh(2.2);
+  });
+  return curve;
+}
+
+type NoteOpts = {
+  at?: number;
+  dur?: number;
+  gain?: number;
+  pan?: number;
+  attack?: number;
+  glide?: number;
+  bright?: number; // ouverture du filtre (1 = clair, 0,5 = mat)
+  rasp?: number; // saturation (0 → 1)
+  breath?: number; // souffle rauque autour de la note (0 → 1,5)
+  wave?: OscillatorType;
+};
+
+// Une note mate : oscillateur passé dans un passe-bas qui se referme, un peu saturé (rasp),
+// avec un souffle filtré autour de la note (breath) pour le grain rauque.
+function note(freq: number, { at = 0, dur = 1.4, gain = 0.03, pan = 0, attack = 0.09, glide, bright = 1, rasp = 0, breath = 0, wave = "sine" }: NoteOpts = {}) {
   const a = audio();
-  if (!a || !bus) return;
+  if (!a || !bus || !noise) return;
   const t = a.currentTime + at;
   const out = a.createGain();
   out.gain.setValueAtTime(0.0001, t);
@@ -76,43 +119,102 @@ function note(freq: number, { at = 0, dur = 1.6, gain = 0.03, pan = 0, attack = 
   out.connect(p);
   p.connect(bus.dry);
   p.connect(bus.wet);
+
+  const lp = a.createBiquadFilter();
+  lp.type = "lowpass";
+  lp.Q.value = 0.3;
+  lp.frequency.setValueAtTime(Math.min(freq * 3.2 * bright, 5000), t);
+  lp.frequency.exponentialRampToValueAtTime(Math.max(freq * 1.2, 180), t + dur * 0.7);
+  const pre = a.createGain();
+  pre.gain.value = 1 + rasp * 3;
+  const post = a.createGain();
+  post.gain.value = 1 / (1 + rasp * 1.5);
+  if (rasp > 0) {
+    const shaper = a.createWaveShaper();
+    shaper.curve = clipCurve();
+    pre.connect(shaper).connect(post);
+  } else pre.connect(post);
+  post.connect(lp).connect(out);
+
   const o = a.createOscillator();
-  o.type = "sine";
+  o.type = wave;
   o.frequency.setValueAtTime(freq, t);
+  o.detune.value = rnd(-7, 7);
   if (glide) o.frequency.exponentialRampToValueAtTime(glide, t + Math.min(dur * 0.5, 0.4));
-  o.connect(out);
+  o.connect(pre);
   o.start(t);
   o.stop(t + dur + 0.05);
+
+  if (breath > 0) {
+    const n = a.createBufferSource();
+    n.buffer = noise;
+    n.playbackRate.value = rnd(0.8, 1.2);
+    const bp = a.createBiquadFilter();
+    bp.type = "bandpass";
+    bp.frequency.value = Math.min(freq * rnd(1.5, 2.5), 3500);
+    bp.Q.value = rnd(1.2, 3);
+    const g = a.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(gain * breath, t + attack * 0.6);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + Math.min(dur * 0.45, 0.6));
+    n.connect(bp).connect(g).connect(out);
+    n.start(t, rnd(0, 0.4));
+    n.stop(t + dur);
+  }
 }
 
-// Pulsation grave, à peine perceptible : donne du corps sans « boum ».
-function sub(at = 0, gain = 0.05) {
-  note(61.7, { at, dur: 0.55, gain, attack: 0.03 });
+// Pulsation grave, mate et brève.
+function sub(at = 0, gain = 0.04) {
+  note(any([55, 61.74, 69.3]), { at, dur: rnd(0.35, 0.6), gain, attack: 0.025, bright: 0.6, rasp: rnd(0.2, 0.6) });
 }
 
 // Position horizontale convertie en placement stéréo.
 const panAt = (x?: number) => (typeof window === "undefined" || x === undefined ? 0 : (x / window.innerWidth) * 1.6 - 0.8);
-// Tintement aigu : plus haut en haut de l'écran.
-const highAt = (y?: number) => (typeof window === "undefined" || y === undefined ? 12 : 14 - Math.round((y / window.innerHeight) * 4));
+// Registre selon la hauteur à l'écran : plus aigu en haut.
+const highAt = (y?: number) => (typeof window === "undefined" || y === undefined ? 11 : 13 - Math.round((y / window.innerHeight) * 5));
 
 export const sounds = {
-  // survol d'une carte : tintement clair, pur, presque murmuré
-  hover: (x?: number, y?: number) => note(pick(highAt(y)), { dur: 1.2, gain: 0.01, pan: panAt(x), attack: 0.03 }),
-  // clic : quinte ronde dans le médium, posée sur une pulsation grave
-  click: (x?: number) => {
-    sub(0, 0.035);
-    note(pick(5), { dur: 1.4, gain: 0.018, pan: panAt(x), attack: 0.06 });
-    note(pick(8), { at: 0.02, dur: 1.4, gain: 0.012, pan: panAt(x), attack: 0.07 });
+  // survol d'une carte : petit son effacé, l'une de trois couleurs (verre, bois, souffle)
+  hover: (x?: number, y?: number) => {
+    const deg = highAt(y) + any([-1, 0, 0, 1]);
+    const v = any(["verre", "bois", "souffle"] as const);
+    if (v === "verre") note(pick(deg), { dur: rnd(0.6, 0.9), gain: 0.008, pan: panAt(x) + rnd(-0.1, 0.1), attack: 0.02, bright: 0.7 });
+    if (v === "bois") note(pick(deg - 5), { dur: rnd(0.25, 0.4), gain: 0.011, pan: panAt(x), attack: 0.008, wave: "triangle", bright: 0.5, rasp: 0.3 });
+    if (v === "souffle") note(pick(deg - 2), { dur: rnd(0.4, 0.6), gain: 0.007, pan: panAt(x), attack: 0.03, bright: 0.5, breath: 1.4 });
   },
-  // interrupteur : une note qui gonfle et glisse d'une quinte, vers l'aigu (personnes) ou le grave (objet)
-  toggle: (on: boolean, x?: number) =>
-    note(on ? pick(3) : pick(7), { glide: on ? pick(7) : pick(3), dur: 1.8, gain: 0.024, pan: panAt(x), attack: 0.12 }),
-  // ouverture d'un projet : pulsation, quinte grave qui s'ouvre, puis un tintement lointain
+  // clic : accord mat (quinte, quarte ou tierce), posé sur une pulsation, parfois rauque
+  click: (x?: number) => {
+    const root = any([3, 4, 5, 6]);
+    const interval = any([2, 3, 3, 4]);
+    const opts: NoteOpts = { pan: panAt(x), attack: rnd(0.03, 0.07), bright: rnd(0.45, 0.8), rasp: rnd(0, 0.5), breath: rnd(0, 0.9), wave: any(["sine", "triangle"] as const) };
+    sub(0, rnd(0.025, 0.04));
+    note(pick(root), { ...opts, dur: rnd(0.8, 1.3), gain: 0.016 });
+    note(pick(root + interval), { ...opts, at: rnd(0.01, 0.05), dur: rnd(0.8, 1.2), gain: 0.011 });
+  },
+  // interrupteur : note qui gonfle et glisse vers l'aigu (personnes) ou le grave (objet), avec souffle
+  toggle: (on: boolean, x?: number) => {
+    const lo = any([2, 3, 4]);
+    const hi = lo + any([3, 4]);
+    note(on ? pick(lo) : pick(hi), { glide: on ? pick(hi) : pick(lo), dur: rnd(1.2, 1.7), gain: 0.022, pan: panAt(x), attack: 0.1, bright: 0.6, rasp: rnd(0.2, 0.6), breath: rnd(0.4, 1) });
+  },
+  // ouverture d'un projet : pulsation, accord grave qui s'élargit, parfois un tintement lointain
   open: (x?: number) => {
     const base = panAt(x);
-    sub(0, 0.05);
-    note(pick(0), { dur: 3.2, gain: 0.022, pan: base - 0.35, attack: 0.15 });
-    note(pick(3), { at: 0.05, dur: 3.2, gain: 0.018, pan: base + 0.35, attack: 0.15 });
-    note(pick(13), { at: 0.32, dur: 2.4, gain: 0.008, pan: base, attack: 0.04 });
+    const root = any([0, 1, 2]);
+    const chord = any([[0, 3], [0, 2, 4], [0, 3, 5], [0, 4]] as const);
+    sub(0, 0.045);
+    chord.forEach((d, i) =>
+      note(pick(root + d), {
+        at: i * rnd(0.03, 0.07),
+        dur: rnd(2.2, 3),
+        gain: 0.018 - i * 0.003,
+        pan: base - 0.4 + (0.8 * i) / Math.max(1, chord.length - 1),
+        attack: 0.14,
+        bright: rnd(0.45, 0.7),
+        rasp: rnd(0.1, 0.5),
+        breath: rnd(0.2, 0.8),
+      })
+    );
+    if (Math.random() < 0.6) note(pick(any([11, 12, 13])), { at: rnd(0.25, 0.45), dur: 1.8, gain: 0.006, pan: base + rnd(-0.3, 0.3), attack: 0.04, bright: 0.6 });
   },
 };
