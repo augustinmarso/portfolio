@@ -1,8 +1,8 @@
 "use client";
 
-// Sons d'interface synthétisés à la volée (Web Audio), sans fichier à charger.
-// Ambiants et spatialisés : attaques douces, longues traînes dans une réverbération
-// « grande pièce claire », et chaque son placé à gauche ou à droite selon l'endroit de l'écran.
+// Sons d'interface synthétisés à la volée (Web Audio), sans fichier à charger : compositions
+// originales dans l'esprit des vidéos de lancement produit (sons purs, attaques douces,
+// quintes, longues traînes), spatialisés selon l'endroit de l'écran.
 let ctx: AudioContext | null = null;
 let bus: { dry: GainNode; wet: GainNode } | null = null;
 const KEY = "portfolio:son";
@@ -56,13 +56,14 @@ function audio() {
   return ctx;
 }
 
-// Gamme pentatonique (do majeur) : les sons s'accordent toujours entre eux.
-const SCALE = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51];
+// Gamme pentatonique de sol dièse (sons purs, souvent à la quinte) : graves chauds,
+// médiums ronds et tintements clairs dans l'aigu.
+const SCALE = [207.65, 233.08, 261.63, 311.13, 349.23, 415.3, 466.16, 523.25, 622.25, 698.46, 830.61, 932.33, 1046.5, 1244.51, 1396.91];
 const pick = (i: number) => SCALE[Math.max(0, Math.min(SCALE.length - 1, i))];
 
-// Une note : deux sinus très légèrement désaccordés (chorus), attaque douce, longue traîne,
-// placée dans l'espace stéréo (pan -1 gauche → 1 droite).
-function note(freq: number, { at = 0, dur = 0.9, gain = 0.03, pan = 0, attack = 0.025, glide }: { at?: number; dur?: number; gain?: number; pan?: number; attack?: number; glide?: number } = {}) {
+// Son pur (sinus) qui « gonfle » puis s'éteint lentement dans la réverbération,
+// placé dans l'espace stéréo (pan -1 gauche → 1 droite).
+function note(freq: number, { at = 0, dur = 1.6, gain = 0.03, pan = 0, attack = 0.09, glide }: { at?: number; dur?: number; gain?: number; pan?: number; attack?: number; glide?: number } = {}) {
   const a = audio();
   if (!a || !bus) return;
   const t = a.currentTime + at;
@@ -75,36 +76,43 @@ function note(freq: number, { at = 0, dur = 0.9, gain = 0.03, pan = 0, attack = 
   out.connect(p);
   p.connect(bus.dry);
   p.connect(bus.wet);
-  for (const detune of [-5, 6]) {
-    const o = a.createOscillator();
-    o.type = "sine";
-    o.frequency.setValueAtTime(freq, t);
-    if (glide) o.frequency.exponentialRampToValueAtTime(glide, t + Math.min(dur, 0.35));
-    o.detune.value = detune;
-    o.connect(out);
-    o.start(t);
-    o.stop(t + dur + 0.05);
-  }
+  const o = a.createOscillator();
+  o.type = "sine";
+  o.frequency.setValueAtTime(freq, t);
+  if (glide) o.frequency.exponentialRampToValueAtTime(glide, t + Math.min(dur * 0.5, 0.4));
+  o.connect(out);
+  o.start(t);
+  o.stop(t + dur + 0.05);
 }
 
-// Position horizontale (0 → 1) convertie en placement stéréo.
+// Pulsation grave, à peine perceptible : donne du corps sans « boum ».
+function sub(at = 0, gain = 0.05) {
+  note(61.7, { at, dur: 0.55, gain, attack: 0.03 });
+}
+
+// Position horizontale convertie en placement stéréo.
 const panAt = (x?: number) => (typeof window === "undefined" || x === undefined ? 0 : (x / window.innerWidth) * 1.6 - 0.8);
-// Hauteur selon la position : plus aigu en haut de l'écran.
-const degreeAt = (y?: number) => (typeof window === "undefined" || y === undefined ? 4 : 7 - Math.round((y / window.innerHeight) * 5));
+// Tintement aigu : plus haut en haut de l'écran.
+const highAt = (y?: number) => (typeof window === "undefined" || y === undefined ? 12 : 14 - Math.round((y / window.innerHeight) * 4));
 
 export const sounds = {
-  // survol d'une carte : goutte cristalline, presque murmurée
-  hover: (x?: number, y?: number) => note(pick(degreeAt(y)), { dur: 0.7, gain: 0.012, pan: panAt(x), attack: 0.015 }),
-  // clic : deux notes posées, comme un souffle
+  // survol d'une carte : tintement clair, pur, presque murmuré
+  hover: (x?: number, y?: number) => note(pick(highAt(y)), { dur: 1.2, gain: 0.01, pan: panAt(x), attack: 0.03 }),
+  // clic : quinte ronde dans le médium, posée sur une pulsation grave
   click: (x?: number) => {
-    note(pick(2), { dur: 0.6, gain: 0.022, pan: panAt(x) });
-    note(pick(4), { at: 0.06, dur: 0.8, gain: 0.016, pan: panAt(x) });
+    sub(0, 0.035);
+    note(pick(5), { dur: 1.4, gain: 0.018, pan: panAt(x), attack: 0.06 });
+    note(pick(8), { at: 0.02, dur: 1.4, gain: 0.012, pan: panAt(x), attack: 0.07 });
   },
-  // interrupteur : glissé vers l'aigu (personnes) ou le grave (objet)
-  toggle: (on: boolean, x?: number) => note(on ? pick(1) : pick(5), { glide: on ? pick(5) : pick(1), dur: 1.1, gain: 0.026, pan: panAt(x), attack: 0.04 }),
-  // ouverture d'un projet : accord qui s'ouvre de gauche à droite
+  // interrupteur : une note qui gonfle et glisse d'une quinte, vers l'aigu (personnes) ou le grave (objet)
+  toggle: (on: boolean, x?: number) =>
+    note(on ? pick(3) : pick(7), { glide: on ? pick(7) : pick(3), dur: 1.8, gain: 0.024, pan: panAt(x), attack: 0.12 }),
+  // ouverture d'un projet : pulsation, quinte grave qui s'ouvre, puis un tintement lointain
   open: (x?: number) => {
     const base = panAt(x);
-    [0, 2, 4, 7].forEach((d, i) => note(pick(d), { at: i * 0.07, dur: 1.8, gain: 0.02, pan: base - 0.45 + i * 0.3, attack: 0.06 }));
+    sub(0, 0.05);
+    note(pick(0), { dur: 3.2, gain: 0.022, pan: base - 0.35, attack: 0.15 });
+    note(pick(3), { at: 0.05, dur: 3.2, gain: 0.018, pan: base + 0.35, attack: 0.15 });
+    note(pick(13), { at: 0.32, dur: 2.4, gain: 0.008, pan: base, attack: 0.04 });
   },
 };
