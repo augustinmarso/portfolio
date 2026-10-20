@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
@@ -19,21 +19,19 @@ const BLUE = "#1d1bff";
 type Kind = "root" | "theme" | "project";
 type N = SimulationNodeDatum & { id: string; kind: Kind; label: string; r: number; theme?: string; project?: Project };
 type L = SimulationLinkDatum<N> & { source: N; target: N; secondary?: boolean };
-type View = { id: string; kind: Kind; label: string; r: number; x: number; y: number; theme?: string; project?: Project };
+type View = { id: string; kind: Kind; label: string; r: number; x: number; y: number; theme?: string; project?: Project; side?: 1 | -1 };
 
 // Branche effilée entre deux bulles : large aux extrémités, fine au milieu.
 // Le filtre « goo » fond ensuite bulles et branches en une seule matière.
-// Les liens secondaires (projet ↔ ses autres thèmes) sont plus fins.
-function branch(a: N, b: N, secondary = false) {
+function branch(a: N, b: N) {
   const dx = b.x! - a.x!;
   const dy = b.y! - a.y!;
   const len = Math.hypot(dx, dy) || 1;
   const nx = -dy / len;
   const ny = dx / len;
-  const f = secondary ? 0.15 : 0.42;
-  const wa = a.r * f;
-  const wb = b.r * f;
-  const wm = secondary ? 1.4 : Math.max(4, Math.min(a.r, b.r) * 0.1);
+  const wa = a.r * 0.42;
+  const wb = b.r * 0.42;
+  const wm = Math.max(4, Math.min(a.r, b.r) * 0.1);
   const mx = (a.x! + b.x!) / 2;
   const my = (a.y! + b.y!) / 2;
   return `M${a.x! + nx * wa} ${a.y! + ny * wa} Q${mx + nx * wm} ${my + ny * wm} ${b.x! + nx * wb} ${b.y! + ny * wb} L${b.x! - nx * wb} ${b.y! - ny * wb} Q${mx - nx * wm} ${my - ny * wm} ${a.x! - nx * wa} ${a.y! - ny * wa} Z`;
@@ -48,7 +46,7 @@ export function MindMap({ projects }: { projects: Project[] }) {
     typeof window !== "undefined" && window.innerWidth < 900 ? new Set() : new Set(THEMES)
   );
   const [hover, setHover] = useState<string | null>(null);
-  const [frame, setFrame] = useState<{ nodes: View[]; links: { d: string; key: string }[] }>({ nodes: [], links: [] });
+  const [frame, setFrame] = useState<{ nodes: View[]; links: { d: string; key: string; secondary: boolean }[] }>({ nodes: [], links: [] });
   const simRef = useRef<Simulation<N, L> | null>(null);
   const nodesRef = useRef<Map<string, N>>(new Map());
   const drag = useRef<{ id: string; moved: number } | null>(null);
@@ -98,7 +96,7 @@ export function MindMap({ projects }: { projects: Project[] }) {
       links.push({ source: root, target: t });
       if (open.has(g.theme))
         g.projects.forEach((p) => {
-          const pn = get(`p:${p.slug}`, { kind: "project", label: p.title.split(" · ")[0], r: 37 * k, project: p, theme: g.theme }, t);
+          const pn = get(`p:${p.slug}`, { kind: "project", label: p.title.split(" · ")[0], r: 30 * k, project: p, theme: g.theme }, t);
           nodes.push(pn);
           links.push({ source: t, target: pn });
         });
@@ -115,12 +113,28 @@ export function MindMap({ projects }: { projects: Project[] }) {
 
     const snapshot = () => {
       nodes.forEach((n) => {
-        n.x = Math.max(n.r, Math.min(size.w - n.r, n.x!));
-        n.y = Math.max(n.r, Math.min(size.h - n.r, n.y!));
+        const side = n.kind === "project" && size.w < 600 ? 58 : n.r; // nom centré sous la bulle
+        n.x = Math.max(side, Math.min(size.w - side, n.x!));
+        // Sur mobile, le nom d'un projet est sous sa bulle : on lui garde la place en bas.
+        const below = n.kind === "project" && size.w < 600 ? 34 : 0;
+        n.y = Math.max(n.r, Math.min(size.h - n.r - below, n.y!));
       });
       setFrame({
-        nodes: nodes.map(({ id, kind, label, r, x, y, theme, project }) => ({ id, kind, label, r, x: x!, y: y!, theme, project })),
-        links: links.map((l) => ({ key: `${l.source.id}-${l.target.id}`, d: branch(l.source, l.target, l.secondary) })),
+        nodes: nodes.map(({ id, kind, label, r, x, y, theme, project }) => {
+          // Nom d'un projet : du côté opposé à son thème, sauf s'il sortirait du cadre.
+          let side: 1 | -1 | undefined;
+          if (kind === "project") {
+            side = x! >= (map.get(`t:${theme}`)?.x ?? size.w / 2) ? 1 : -1;
+            if (x! + r + 140 > size.w) side = -1;
+            if (x! - r - 140 < 0) side = 1;
+          }
+          return { id, kind, label, r, x: x!, y: y!, theme, project, side };
+        }),
+        links: links.map((l) => ({
+          key: `${l.source.id}-${l.target.id}`,
+          secondary: !!l.secondary,
+          d: l.secondary ? `M${l.source.x} ${l.source.y} L${l.target.x} ${l.target.y}` : branch(l.source, l.target),
+        })),
       });
     };
     const sim = simRef.current ?? forceSimulation<N, L>();
@@ -135,12 +149,13 @@ export function MindMap({ projects }: { projects: Project[] }) {
             (l) =>
               l.source.r +
               l.target.r +
-              (l.secondary ? 190 : l.target.kind === "theme" && open.has(l.target.theme!) ? 130 : l.target.kind === "project" ? 50 : 70) * k
+              (l.secondary ? 230 : l.target.kind === "theme" && open.has(l.target.theme!) ? 130 : l.target.kind === "project" ? 50 : 70) * k
           )
-          .strength((l) => (l.secondary ? 0.12 : 0.7))
+          .strength((l) => (l.secondary ? 0.05 : 0.7))
       )
       .force("charge", forceManyBody<N>().strength((n) => (n.kind === "root" ? -1800 : n.kind === "theme" ? -1150 : -560) * k))
-      .force("collide", forceCollide<N>((n) => n.r + 26 * k).strength(1))
+      // Les projets réservent la place de leur nom (à côté sur ordinateur, dessous sur mobile).
+      .force("collide", forceCollide<N>((n) => n.r + (n.kind === "project" ? (size.w < 600 ? 34 : 58) : 26) * k).strength(1))
       .velocityDecay(0.28)
       .on("tick", snapshot)
       .alpha(0.9)
@@ -206,10 +221,20 @@ export function MindMap({ projects }: { projects: Project[] }) {
             <feComposite in="SourceGraphic" in2="goo" operator="atop" />
           </filter>
         </defs>
+        {/* Liens secondaires : traits fins hors de l'effet liquide, pour ne pas épaissir le centre. */}
+        <g stroke={BLUE} strokeWidth={1.4} strokeDasharray="2 5" strokeLinecap="round" opacity={0.55}>
+          {frame.links
+            .filter((l) => l.secondary)
+            .map((l) => (
+              <path key={l.key} d={l.d} />
+            ))}
+        </g>
         <g filter="url(#goo)" fill={BLUE}>
-          {frame.links.map((l) => (
-            <path key={l.key} d={l.d} />
-          ))}
+          {frame.links
+            .filter((l) => !l.secondary)
+            .map((l) => (
+              <path key={l.key} d={l.d} />
+            ))}
           {frame.nodes.map((n) => (
             <circle key={n.id} cx={n.x} cy={n.y} r={n.r} />
           ))}
@@ -218,8 +243,8 @@ export function MindMap({ projects }: { projects: Project[] }) {
 
       {/* Contenus des bulles (hors filtre, nets) */}
       {frame.nodes.map((n) => (
+        <Fragment key={n.id}>
         <div
-          key={n.id}
           role="button"
           tabIndex={0}
           aria-label={n.kind === "project" ? `Ouvrir ${n.label}` : n.kind === "theme" ? `Déplier ${n.label}` : n.label}
@@ -244,24 +269,41 @@ export function MindMap({ projects }: { projects: Project[] }) {
               <Image src={n.project!.cover.src} alt="" fill sizes="90px" className="object-cover" />
             </span>
           )}
-          <span
-            className={`relative px-1 leading-tight transition-opacity duration-300 ${n.kind === "project" && hover === n.id ? "opacity-0" : "opacity-100"}`}
-            style={{ fontSize: (n.kind === "root" ? 20 : n.kind === "theme" ? 15 : 12) * Math.max(k, 0.82) }}
-          >
-            {n.kind === "root" ? (
-              <>
-                augustin
-                <br />
-                marsollier
-              </>
-            ) : (
-              <span className={n.kind === "theme" ? "font-semibold" : "lowercase"}>{n.label}</span>
-            )}
-          </span>
+          {n.kind !== "project" && (
+            <span className="relative px-1 leading-tight" style={{ fontSize: (n.kind === "root" ? 20 : 15) * Math.max(k, 0.82) }}>
+              {n.kind === "root" ? (
+                <>
+                  augustin
+                  <br />
+                  marsollier
+                </>
+              ) : (
+                <span className="font-semibold">{n.label}</span>
+              )}
+            </span>
+          )}
         </div>
+        {/* Nom du projet à côté de sa bulle */}
+        {n.kind === "project" && (
+          <span
+            className={`pointer-events-none absolute rounded-sm bg-background/85 px-1 font-semibold lowercase leading-tight text-foreground ${size.w < 600 ? "max-w-28 text-center text-xs" : "whitespace-nowrap text-sm"} ${hover === n.id ? "underline" : ""}`}
+            style={
+              size.w < 600
+                ? { left: n.x, top: n.y + n.r + 3, transform: "translateX(-50%)" }
+                : {
+                    left: n.x + (n.side === -1 ? -(n.r + 6) : n.r + 6),
+                    top: n.y,
+                    transform: `translate(${n.side === -1 ? "-100%" : "0"}, -50%)`,
+                  }
+            }
+          >
+            {n.label}
+          </span>
+        )}
+        </Fragment>
       ))}
 
-      <p className="pointer-events-none absolute bottom-2 left-0 text-sm font-semibold text-muted-foreground">
+      <p className="pointer-events-none absolute bottom-2 left-0 hidden text-sm font-semibold text-muted-foreground sm:block">
         cliquer un thème pour l&apos;ouvrir, un projet pour le voir — les bulles se déplacent
       </p>
     </div>
