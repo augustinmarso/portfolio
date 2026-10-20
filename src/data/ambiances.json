@@ -1,1 +1,9 @@
-{}
+{
+  "banc-tapis-petite-voiture": {
+    "file": "/ambiances/banc-tapis-petite-voiture.mp3",
+    "titre": "aire de jeux d'un square, Berlin",
+    "source": "https://commons.wikimedia.org/wiki/File:209901_foongaz_city-playground-boxhagenerplatz-berlin.wav",
+    "auteur": "foongaz",
+    "licence": "CC0"
+  }
+}
