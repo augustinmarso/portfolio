@@ -1,7 +1,9 @@
 {
   "slug": "ratp",
   "year": "2025",
-  "context": "DN MADE Objet, ENSAAMA — projet CAREFUL, en binôme avec Jesse Desuraume-Rajol",
+  "context": "DN MADE Objet, ENSAAMA — projet CAREFUL",
+  "team": "Jesse Desuraume-Rajol et Augustin",
+  "ensaama": "https://ensaama.net/site/home/formations/dnmade/objet-design-de-produits-et-services",
   "themes": [
     "objet",
     "espace public",

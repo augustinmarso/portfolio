@@ -55,8 +55,8 @@
     "title": "Cafetiere au beurre",
     "cover": {
       "src": "/projects/cafetiere-au-beurre/thumb.webp",
-      "width": 346,
-      "height": 520
+      "width": 636,
+      "height": 900
     },
     "images": [
       {
@@ -188,8 +188,8 @@
     "title": "De passager a equipier",
     "cover": {
       "src": "/projects/de-passager-a-equipier/thumb.webp",
-      "width": 635,
-      "height": 900
+      "width": 592,
+      "height": 750
     },
     "images": [
       {
@@ -451,7 +451,7 @@
     "cover": {
       "src": "/projects/ephemeride/thumb.webp",
       "width": 900,
-      "height": 639
+      "height": 673
     },
     "images": [
       {
@@ -911,8 +911,8 @@
     "title": "Le Jeu de la Grenouille",
     "cover": {
       "src": "/projects/le-jeu-de-la-grenouille/thumb.webp",
-      "width": 657,
-      "height": 900
+      "width": 900,
+      "height": 699
     },
     "images": [
       {

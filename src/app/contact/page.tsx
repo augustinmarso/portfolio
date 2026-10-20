@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ContactForm } from "@/components/contact-form";
 import { SiteHeader } from "@/components/site-header";
 import { asset } from "@/lib/projects";
 import { SOCIALS } from "@/lib/socials";
@@ -9,6 +10,10 @@ export const metadata: Metadata = { title: "Contact — Augustin Marsollier" };
 
 const EMAIL = "marsollier.augustin@gmail.com";
 const PHONE = { display: "07 49 32 47 31", href: "tel:+33749324731" };
+// À renseigner : identifiant du formulaire Formspree (formspree.io/f/<id>) et lien Google Meet personnel.
+// Tant qu'ils sont vides, le formulaire ouvre la messagerie du visiteur et le GIF n'est pas cliquable.
+const FORMSPREE_ID = "";
+const MEET_URL = "";
 
 export default function ContactPage() {
   return (
@@ -36,6 +41,7 @@ export default function ContactPage() {
             <a href={`mailto:${EMAIL}`} className="mt-6 block hover:underline">
               {EMAIL}
             </a>
+            <ContactForm email={EMAIL} formspreeId={FORMSPREE_ID || undefined} />
           </section>
 
           <section className="mt-12">
@@ -61,7 +67,15 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="relative min-h-[60vw] lg:mt-[11.5rem] lg:min-h-0">
+        <div className="group relative min-h-[60vw] lg:mt-[11.5rem] lg:min-h-0">
+          {/* Un clic sur le GIF lance la visio (lien Google Meet). */}
+          {MEET_URL && (
+            <a href={MEET_URL} target="_blank" rel="noreferrer" aria-label="Démarrer une visio" className="absolute inset-0 z-10">
+              <span className="absolute bottom-3 left-3 rounded-sm bg-background px-2.5 py-1 text-base font-semibold transition-colors group-hover:bg-foreground group-hover:text-background">
+                démarrer la visio
+              </span>
+            </a>
+          )}
           <Image
             src={asset("/contact/augustin.gif")}
             alt="Augustin Marsollier, appuyé contre un arbre"

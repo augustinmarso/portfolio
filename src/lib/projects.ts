@@ -5,6 +5,8 @@ export type ProjectImage = { src: string; width: number; height: number };
 export type ProjectText = {
   year: string | null;
   context: string | null;
+  team?: string; // projet d'équipe : les membres, affichés à part pour garder le contexte court
+  ensaama?: string; // page du site de l'ENSAAMA sur ce projet (ou sa formation) : lien sur « ensaama »
   themes: string[];
   intro: string;
   captions: string[];

@@ -47,7 +47,26 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
             {text?.context && (
               <div className="flex gap-2">
                 <dt className="shrink-0 text-muted-foreground">contexte</dt>
-                <dd className="lowercase">{text.context}</dd>
+                <dd className="lowercase">
+                  {/* « ensaama » mène à la page de l'école sur ce projet (ou sa formation). */}
+                  {text.ensaama
+                    ? text.context.split(/(ENSAAMA)/).map((part, n) =>
+                        part === "ENSAAMA" ? (
+                          <a key={n} href={text.ensaama} target="_blank" rel="noreferrer" className="underline decoration-1 underline-offset-4 hover:text-muted-foreground">
+                            {part}
+                          </a>
+                        ) : (
+                          part
+                        )
+                      )
+                    : text.context}
+                </dd>
+              </div>
+            )}
+            {text?.team && (
+              <div className="flex gap-2">
+                <dt className="shrink-0 text-muted-foreground">équipe</dt>
+                <dd className="lowercase">{text.team}</dd>
               </div>
             )}
             {text?.themes.length ? (
