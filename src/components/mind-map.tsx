@@ -1,8 +1,9 @@
 "use client";
 
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 import {
   forceCollide,
   forceLink,
@@ -14,30 +15,18 @@ import {
 } from "d3-force";
 import { THEMES, type Project } from "@/lib/projects";
 
-const BLUE = "#1d1bff";
+// Rayon d'un point selon son nombre de connexions : plus il est relié, plus il est gros.
+// Noir pour la racine et les thèmes, image ronde pour un projet (connexions = ses thèmes).
+// Les rayons de la simulation, eux, réservent la place des noms.
+const dotRadius = (kind: Kind, links: number) =>
+  kind === "project" ? 12 + 7 * (links - 1) : 2.5 + 2 * Math.sqrt(links);
 
 type Kind = "root" | "theme" | "project";
 type N = SimulationNodeDatum & { id: string; kind: Kind; label: string; r: number; theme?: string; project?: Project };
 type L = SimulationLinkDatum<N> & { source: N; target: N; secondary?: boolean };
-type View = { id: string; kind: Kind; label: string; r: number; x: number; y: number; theme?: string; project?: Project; side?: 1 | -1 };
+type View = { id: string; kind: Kind; label: string; r: number; dot: number; x: number; y: number; theme?: string; project?: Project; side?: 1 | -1 };
 
-// Branche effilée entre deux bulles : large aux extrémités, fine au milieu.
-// Le filtre « goo » fond ensuite bulles et branches en une seule matière.
-function branch(a: N, b: N) {
-  const dx = b.x! - a.x!;
-  const dy = b.y! - a.y!;
-  const len = Math.hypot(dx, dy) || 1;
-  const nx = -dy / len;
-  const ny = dx / len;
-  const wa = a.r * 0.42;
-  const wb = b.r * 0.42;
-  const wm = Math.max(4, Math.min(a.r, b.r) * 0.1);
-  const mx = (a.x! + b.x!) / 2;
-  const my = (a.y! + b.y!) / 2;
-  return `M${a.x! + nx * wa} ${a.y! + ny * wa} Q${mx + nx * wm} ${my + ny * wm} ${b.x! + nx * wb} ${b.y! + ny * wb} L${b.x! - nx * wb} ${b.y! - ny * wb} Q${mx - nx * wm} ${my - ny * wm} ${a.x! - nx * wa} ${a.y! - ny * wa} Z`;
-}
-
-export function MindMap({ projects }: { projects: Project[] }) {
+export function MindMap({ projects, className }: { projects: Project[]; className?: string }) {
   const router = useRouter();
   const boxRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 1100, h: 760 });
@@ -121,19 +110,22 @@ export function MindMap({ projects }: { projects: Project[] }) {
       });
       setFrame({
         nodes: nodes.map(({ id, kind, label, r, x, y, theme, project }) => {
-          // Nom d'un projet : du côté opposé à son thème, sauf s'il sortirait du cadre.
-          let side: 1 | -1 | undefined;
-          if (kind === "project") {
-            side = x! >= (map.get(`t:${theme}`)?.x ?? size.w / 2) ? 1 : -1;
-            if (x! + r + 140 > size.w) side = -1;
-            if (x! - r - 140 < 0) side = 1;
-          }
-          return { id, kind, label, r, x: x!, y: y!, theme, project, side };
+          // Nom d'un point : à droite, sauf projet tourné vers la gauche ou nom qui sortirait du cadre.
+          let side: 1 | -1 = kind === "project" && x! < (map.get(`t:${theme}`)?.x ?? size.w / 2) ? -1 : 1;
+          if (kind !== "root" && x! + 150 > size.w) side = -1;
+          if (x! - 150 < 0) side = 1;
+          const links =
+            kind === "root"
+              ? groups.length
+              : kind === "theme"
+                ? 1 + projects.filter((p) => p.text?.themes.includes(theme!)).length
+                : Math.max(1, project!.text?.themes.length ?? 1);
+          return { id, kind, label, r, dot: dotRadius(kind, links), x: x!, y: y!, theme, project, side };
         }),
         links: links.map((l) => ({
           key: `${l.source.id}-${l.target.id}`,
           secondary: !!l.secondary,
-          d: l.secondary ? `M${l.source.x} ${l.source.y} L${l.target.x} ${l.target.y}` : branch(l.source, l.target),
+          d: `M${l.source.x} ${l.source.y} L${l.target.x} ${l.target.y}`,
         })),
       });
     };
@@ -164,7 +156,7 @@ export function MindMap({ projects }: { projects: Project[] }) {
     return () => {
       sim.stop();
     };
-  }, [groups, open, k, size.w, size.h]);
+  }, [projects, groups, open, k, size.w, size.h]);
 
   const toggle = (theme: string) =>
     setOpen((s) => {
@@ -188,7 +180,7 @@ export function MindMap({ projects }: { projects: Project[] }) {
   return (
     <div
       ref={boxRef}
-      className="relative h-[78vh] touch-none select-none overflow-hidden lg:h-[calc(100dvh-8rem)]"
+      className={cn("relative h-[78vh] touch-none select-none overflow-hidden lg:h-[calc(100dvh-8rem)]", className)}
       onPointerMove={(e) => {
         const d = drag.current;
         const n = d && nodesRef.current.get(d.id);
@@ -213,99 +205,67 @@ export function MindMap({ projects }: { projects: Project[] }) {
         if (d.moved < 6 && v) activate(v);
       }}
     >
-      <svg className="absolute inset-0 size-full" aria-hidden>
-        <defs>
-          <filter id="goo" filterUnits="userSpaceOnUse" x={0} y={0} width={size.w} height={size.h}>
-            <feGaussianBlur in="SourceGraphic" stdDeviation={6 * k + 2} result="blur" />
-            <feColorMatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
-            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-          </filter>
-        </defs>
-        {/* Liens secondaires : traits fins hors de l'effet liquide, pour ne pas épaissir le centre. */}
-        <g stroke={BLUE} strokeWidth={1.4} strokeDasharray="2 5" strokeLinecap="round" opacity={0.55}>
-          {frame.links
-            .filter((l) => l.secondary)
-            .map((l) => (
-              <path key={l.key} d={l.d} />
-            ))}
-        </g>
-        <g filter="url(#goo)" fill={BLUE}>
-          {frame.links
-            .filter((l) => !l.secondary)
-            .map((l) => (
-              <path key={l.key} d={l.d} />
-            ))}
-          {frame.nodes.map((n) => (
-            <circle key={n.id} cx={n.x} cy={n.y} r={n.r} />
+      {/* Rien que des points et des traits fins : liens principaux pleins, liens secondaires pointillés. */}
+      <svg className="absolute inset-0 size-full text-foreground" aria-hidden>
+        <g stroke="currentColor" strokeWidth={1} fill="none">
+          {frame.links.map((l) => (
+            <path key={l.key} d={l.d} opacity={l.secondary ? 0.3 : 0.45} strokeDasharray={l.secondary ? "1 5" : undefined} strokeLinecap="round" />
           ))}
+        </g>
+        <g fill="currentColor">
+          {frame.nodes
+            .filter((n) => n.kind !== "project")
+            .map((n) => (
+              <circle key={n.id} cx={n.x} cy={n.y} r={n.dot * (hover === n.id ? 1.4 : 1)} />
+            ))}
         </g>
       </svg>
 
-      {/* Contenus des bulles (hors filtre, nets) */}
-      {frame.nodes.map((n) => (
-        <Fragment key={n.id}>
-        <div
-          role="button"
-          tabIndex={0}
-          aria-label={n.kind === "project" ? `Ouvrir ${n.label}` : n.kind === "theme" ? `Déplier ${n.label}` : n.label}
-          onKeyDown={(e) => e.key === "Enter" && activate(n)}
-          onPointerDown={(e) => {
-            e.preventDefault();
-            drag.current = { id: n.id, moved: 0 };
-            const node = nodesRef.current.get(n.id);
-            const p = local(e);
-            if (node) {
-              node.fx = p.x;
-              node.fy = p.y;
-            }
-          }}
-          onPointerEnter={() => setHover(n.id)}
-          onPointerLeave={() => setHover(null)}
-          className="absolute grid cursor-grab place-items-center overflow-hidden rounded-full text-center text-white outline-none active:cursor-grabbing"
-          style={{ left: n.x - n.r, top: n.y - n.r, width: n.r * 2, height: n.r * 2 }}
-        >
-          {n.kind === "project" && (
-            <span className={`absolute inset-[6%] overflow-hidden rounded-full transition-opacity duration-500 ${hover === n.id ? "opacity-100" : "opacity-0"}`}>
-              <Image src={n.project!.cover.src} alt="" fill sizes="90px" className="object-cover" />
-            </span>
-          )}
-          {n.kind !== "project" && (
-            <span className="relative px-1 leading-tight" style={{ fontSize: (n.kind === "root" ? 20 : 15) * Math.max(k, 0.82) }}>
-              {n.kind === "root" ? (
-                <>
-                  augustin
-                  <br />
-                  marsollier
-                </>
-              ) : (
-                <span className="font-semibold">{n.label}</span>
-              )}
-            </span>
-          )}
-        </div>
-        {/* Nom du projet à côté de sa bulle */}
-        {n.kind === "project" && (
-          <span
-            className={`pointer-events-none absolute rounded-sm bg-background/85 px-1 font-semibold lowercase leading-tight text-foreground ${size.w < 600 ? "max-w-28 text-center text-xs" : "whitespace-nowrap text-sm"} ${hover === n.id ? "underline" : ""}`}
-            style={
-              size.w < 600
-                ? { left: n.x, top: n.y + n.r + 3, transform: "translateX(-50%)" }
-                : {
-                    left: n.x + (n.side === -1 ? -(n.r + 6) : n.r + 6),
-                    top: n.y,
-                    transform: `translate(${n.side === -1 ? "-100%" : "0"}, -50%)`,
-                  }
-            }
+      {frame.nodes.map((n) => {
+        const right = n.side !== -1;
+        const half = n.kind === "project" ? n.dot : 10;
+        return (
+          <div
+            key={n.id}
+            role="button"
+            tabIndex={0}
+            aria-label={n.kind === "project" ? `Ouvrir ${n.label}` : n.kind === "theme" ? `Déplier ${n.label}` : n.label}
+            onKeyDown={(e) => e.key === "Enter" && activate(n)}
+            onPointerDown={(e) => {
+              e.preventDefault();
+              drag.current = { id: n.id, moved: 0 };
+              const node = nodesRef.current.get(n.id);
+              const p = local(e);
+              if (node) {
+                node.fx = p.x;
+                node.fy = p.y;
+              }
+            }}
+            onPointerEnter={() => setHover(n.id)}
+            onPointerLeave={() => setHover(null)}
+            className={cn(
+              "absolute flex cursor-grab items-center gap-2 whitespace-nowrap py-1 leading-none outline-none active:cursor-grabbing",
+              right ? "flex-row" : "flex-row-reverse",
+              n.kind === "root" ? "text-base font-bold" : n.kind === "theme" ? "text-sm font-semibold" : "text-sm font-medium text-muted-foreground",
+              hover === n.id && "text-foreground underline underline-offset-4"
+            )}
+            // Le point (vide, ou l'image ronde d'un projet) est centré sur sa position : le nom part à droite ou à gauche.
+            style={{ left: n.x, top: n.y, transform: right ? `translate(-${half}px, -50%)` : `translate(calc(-100% + ${half}px), -50%)` }}
           >
-            {n.label}
-          </span>
-        )}
-        </Fragment>
-      ))}
-
-      <p className="pointer-events-none absolute bottom-2 left-0 hidden text-sm font-semibold text-muted-foreground sm:block">
-        cliquer un thème pour l&apos;ouvrir, un projet pour le voir — les bulles se déplacent
-      </p>
+            {n.kind === "project" ? (
+              <span
+                className={cn("relative shrink-0 overflow-hidden rounded-full bg-muted transition-transform duration-300", hover === n.id && "scale-125")}
+                style={{ width: half * 2, height: half * 2 }}
+              >
+                <Image src={n.project!.cover.src} alt="" fill sizes="64px" className="object-cover" />
+              </span>
+            ) : (
+              <span className="size-5 shrink-0" />
+            )}
+            <span className="lowercase">{n.label}</span>
+          </div>
+        );
+      })}
     </div>
   );
 }

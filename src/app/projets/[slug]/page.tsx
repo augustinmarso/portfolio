@@ -32,7 +32,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
       <SiteHeader active={null} />
 
       <section className="grid gap-10 pt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:pt-16">
-        <div className="lg:sticky lg:top-6 lg:self-start">
+        <div className="lg:sticky lg:top-20 lg:self-start">
           <h1 className="text-4xl font-bold lowercase leading-[0.95] tracking-tight sm:text-5xl">{project.title}</h1>
 
           <dl className="mt-8 grid gap-1 text-lg font-semibold leading-snug tracking-tight">
@@ -54,7 +54,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
                 <dd>
                   {text.themes.map((t, n) => (
                     <span key={t}>
-                      <Link href="/arborescence" className="underline-offset-4 hover:underline">
+                      <Link href="/?vue=arborescence" className="underline-offset-4 hover:underline">
                         {t}
                       </Link>
                       {n < text.themes.length - 1 && ", "}

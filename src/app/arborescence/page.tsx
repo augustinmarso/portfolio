@@ -1,17 +1,11 @@
-import type { Metadata } from "next";
-import { MindMap } from "@/components/mind-map";
-import { SiteHeader } from "@/components/site-header";
-import { projects } from "@/lib/projects";
+"use client";
 
-export const metadata: Metadata = { title: "Arborescence — Augustin Marsollier" };
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
+// L'arborescence est devenue un mode de l'index : l'ancienne adresse y renvoie.
 export default function ArborescencePage() {
-  return (
-    <main className="min-h-dvh px-4 pb-6 pt-4 sm:px-6">
-      <SiteHeader active="/arborescence" />
-      <div className="pt-2">
-        <MindMap projects={projects} />
-      </div>
-    </main>
-  );
+  const router = useRouter();
+  useEffect(() => router.replace("/?vue=arborescence"), [router]);
+  return null;
 }

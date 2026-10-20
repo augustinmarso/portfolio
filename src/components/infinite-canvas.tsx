@@ -32,7 +32,7 @@ function useViewport() {
 // dans la colonne la plus courte, et le reste de hauteur est réparti dans les écarts.
 function layoutTile(projects: Project[], vw: number) {
   const cardW = vw < 640 ? 150 : vw < 1024 ? 200 : 240;
-  const gap = vw < 640 ? 14 : 24;
+  const gap = vw < 640 ? 40 : 96;
   const natural = (p: Project) => Math.round(cardW * (p.cover.height / p.cover.width));
 
   const columns: Project[][] = Array.from({ length: COLS }, () => []);

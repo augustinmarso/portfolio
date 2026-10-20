@@ -55,7 +55,7 @@ export default function ContactPage() {
               </span>
             ))}
             <br />
-            <Link href="/arborescence" className="hover:underline">
+            <Link href="/?vue=arborescence" className="hover:underline">
               tous les projets
             </Link>
           </p>

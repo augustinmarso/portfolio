@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 
 const LINKS = [
   { href: "/", label: "index" },
-  { href: "/arborescence", label: "arborescence" },
   { href: "/cv", label: "cv" },
   { href: "/contact", label: "contact" },
 ] as const;
