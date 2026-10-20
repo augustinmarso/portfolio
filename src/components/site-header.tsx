@@ -27,8 +27,14 @@ export function SiteHeader({
           marsollier
         </Link>
       )}
+      {/* Le menu reste fixé en haut à droite au défilement ; la copie invisible garde sa place dans l'en-tête. */}
       <div className="ml-auto">
-        <SiteNav active={active} />
+        <div aria-hidden className="invisible">
+          <SiteNav active={active} />
+        </div>
+        <div className="fixed right-2 top-3 z-50 bg-background/85 px-2 py-1 backdrop-blur-sm sm:right-4">
+          <SiteNav active={active} />
+        </div>
       </div>
     </header>
   );
