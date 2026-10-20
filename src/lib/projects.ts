@@ -1,4 +1,5 @@
 import raw from "@/data/projects.json";
+import site from "@/data/site.json";
 import { texts } from "@/data/texts";
 
 export type ProjectImage = { src: string; sm?: string; width: number; height: number };
@@ -22,23 +23,10 @@ export type Project = {
   video?: ProjectVideo;
 };
 
-// Les dossiers Behance n'ont pas d'accents : titres d'affichage corrigés ici.
-const TITLES: Record<string, string> = {
-  ephemeride: "Éphéméride",
-  "la-societe-de-jeux": "La société de jeux",
-  "porte-cle-jeton-de-caddie": "Porte-clé jeton de caddie",
-  "recolteur-pomme-de-pin": "Récolteur pomme de pin",
-  "fish-eye": "Fish-Eye",
-  echappee: "Échappée · Range Rover",
-  "open-mind": "Open Mind · Muuto",
-  ratp: "Du bout des doigts · RATP",
-  "de-passager-a-equipier": "De passager à équipier · Bénéteau",
-  ludilove: "LudiLove",
-  "cafetiere-au-beurre": "Cafetière au beurre",
-};
-
-// Projets présentés d'abord par une vidéo (public/videos/<slug>.mp4 + .jpg).
-const VIDEOS = new Set(["ludilove", "de-passager-a-equipier"]);
+// Titres d'affichage (les dossiers n'ont pas d'accents) et projets à vidéo : réglés dans site.json,
+// modifiable depuis l'éditeur local. Vidéo : public/videos/<slug>.mp4 + .jpg.
+const TITLES: Record<string, string> = site.titles;
+const VIDEOS = new Set<string>(site.videos);
 
 
 export const THEMES = [

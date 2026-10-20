@@ -12,26 +12,11 @@ const SMALL = 1000; // variante légère des planches (téléphones, petits écr
 const THUMB = 560; // vignettes de l'index (cartes d'environ 240 px, nettes en Retina)
 const EXT = /\.(jpe?g|png|gif|webp)$/i;
 
-// Vignette de l'index : une vraie image (photo, rendu), jamais une planche de présentation.
-// Numéro d'image du projet, ou fichier dans <source>/_covers/<slug>.*
-const COVERS = {
-  kai: "05",
-  "la-societe-de-jeux": "_covers",
-  "le-jeu-de-la-grenouille": "_covers",
-  ephemeride: "01",
-  "cylinder-chair": "02",
-  echappee: "_covers",
-  "open-mind": "_covers",
-  ratp: "_covers",
-  "de-passager-a-equipier": "_covers",
-  ludilove: "_covers",
-  "cafetiere-au-beurre": "_covers",
-  "banc-tapis-petite-voiture": "_covers",
-  "le-choix-de-malo": "_covers",
-  gorillachoc: "_covers",
-  "recolteur-pomme-de-pin": "_covers",
-  "porte-cle-jeton-de-caddie": "_covers",
-};
+// Réglages modifiables depuis l'éditeur local (scripts/editeur) : ordre, titres, couvertures.
+// Vignette de l'index : numéro d'image du projet, ou "_covers" pour <source>/_covers/<slug>.*
+const SITE_FILE = path.resolve("src/data/site.json");
+const SITE = JSON.parse(await fs.readFile(SITE_FILE, "utf8"));
+const COVERS = SITE.covers ?? {};
 
 const slugify = (s) =>
   s
@@ -98,6 +83,33 @@ for (const dir of (await fs.readdir(SRC, { withFileTypes: true })).filter((d) =>
   projects.push({ slug, title, cover: images.thumb, ...(hover && { hover }), images: [...images] });
   console.log(` ${title} (${images.length})`);
 }
+
+// Ordre choisi dans l'éditeur ; les nouveaux projets arrivent à la fin.
+const rank = (slug) => {
+  const i = (SITE.order ?? []).indexOf(slug);
+  return i === -1 ? 1e6 : i;
+};
+projects.sort((x, y) => rank(x.slug) - rank(y.slug));
+SITE.order = projects.map((p) => p.slug);
+await fs.writeFile(SITE_FILE, JSON.stringify(SITE, null, 2) + "\n");
+
+// Index des textes (un JSON par projet) : régénéré pour suivre les ajouts et suppressions.
+const TEXTS = path.resolve("src/data/texts");
+const ident = (s) => s.replace(/[^a-zA-Z0-9]/g, "_");
+const textSlugs = (await fs.readdir(TEXTS)).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5)).sort();
+await fs.writeFile(
+  path.join(TEXTS, "index.ts"),
+  [
+    "// Généré par scripts/optimize-images.mjs : un fichier JSON par projet, même slug que les images.",
+    'import type { ProjectText } from "@/lib/projects";',
+    ...textSlugs.map((s) => `import ${ident(s)} from "./${s}.json";`),
+    "",
+    "export const texts: Record<string, ProjectText> = {",
+    ...textSlugs.map((s) => `  "${s}": ${ident(s)},`),
+    "};",
+    "",
+  ].join("\n")
+);
 
 await fs.mkdir(path.dirname(DATA), { recursive: true });
 await fs.writeFile(DATA, JSON.stringify(projects, null, 2));

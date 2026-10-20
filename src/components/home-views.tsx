@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { InfiniteCanvas, type PeopleMode } from "@/components/infinite-canvas";
 import { PeopleSwitch } from "@/components/people-switch";
+import { SoundToggle } from "@/components/ui-sounds";
 
 // Vues secondaires chargées seulement quand on les ouvre (le canvas s'affiche seul au départ).
 const HoverExpand = dynamic(() => import("@/components/hover-expand").then((m) => m.HoverExpand), { ssr: false });
@@ -63,11 +64,10 @@ export function HomeViews({ projects }: { projects: Project[] }) {
                 : "survoler pour ouvrir un panneau"}
         </p>
         <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-8">
-          {view === "canvas" && (
-            <div className="self-end sm:self-auto">
-              <PeopleSwitch people={people} onChange={setPeople} />
-            </div>
-          )}
+          <div className="flex items-center gap-3 self-end sm:self-auto">
+            <SoundToggle />
+            {view === "canvas" && <PeopleSwitch people={people} onChange={setPeople} />}
+          </div>
           <div className="flex justify-between gap-4 sm:justify-end">
             {VIEWS.map((v) => (
               <button

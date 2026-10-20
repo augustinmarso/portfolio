@@ -1,0 +1,57 @@
+{
+  "order": [
+    "banc-tapis-petite-voiture",
+    "cafetiere-au-beurre",
+    "collection-d-objets-liturgiques",
+    "cylinder-chair",
+    "de-passager-a-equipier",
+    "echappee",
+    "ephemeride",
+    "fish-eye",
+    "gorillachoc",
+    "kai",
+    "la-societe-de-jeux",
+    "le-choix-de-malo",
+    "le-jeu-de-la-grenouille",
+    "ludilove",
+    "open-mind",
+    "porte-cle-jeton-de-caddie",
+    "ratp",
+    "recolteur-pomme-de-pin"
+  ],
+  "titles": {
+    "ephemeride": "Éphéméride",
+    "la-societe-de-jeux": "La société de jeux",
+    "porte-cle-jeton-de-caddie": "Porte-clé jeton de caddie",
+    "recolteur-pomme-de-pin": "Récolteur pomme de pin",
+    "fish-eye": "Fish-Eye",
+    "echappee": "Échappée · Range Rover",
+    "open-mind": "Open Mind · Muuto",
+    "ratp": "Du bout des doigts · RATP",
+    "de-passager-a-equipier": "De passager à équipier · Bénéteau",
+    "ludilove": "LudiLove",
+    "cafetiere-au-beurre": "Cafetière au beurre"
+  },
+  "covers": {
+    "kai": "05",
+    "la-societe-de-jeux": "_covers",
+    "le-jeu-de-la-grenouille": "_covers",
+    "ephemeride": "01",
+    "cylinder-chair": "02",
+    "echappee": "_covers",
+    "open-mind": "_covers",
+    "ratp": "_covers",
+    "de-passager-a-equipier": "_covers",
+    "ludilove": "_covers",
+    "cafetiere-au-beurre": "_covers",
+    "banc-tapis-petite-voiture": "_covers",
+    "le-choix-de-malo": "_covers",
+    "gorillachoc": "_covers",
+    "recolteur-pomme-de-pin": "_covers",
+    "porte-cle-jeton-de-caddie": "_covers"
+  },
+  "videos": [
+    "ludilove",
+    "de-passager-a-equipier"
+  ]
+}

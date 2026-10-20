@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { UiSounds } from "@/components/ui-sounds";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, ogImage } from "@/lib/site";
 import "./globals.css";
 
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         {children}
         <SmoothScroll />
+        <UiSounds />
       </body>
     </html>
   );
