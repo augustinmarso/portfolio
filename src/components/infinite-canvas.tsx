@@ -10,8 +10,8 @@ import type { Project } from "@/lib/projects";
 
 gsap.registerPlugin(useGSAP);
 
-const COLS = 4;
-const LABEL = 28; // hauteur réservée au numéro + titre sous chaque carte
+const COLS = 5;
+const LABEL = 22; // hauteur réservée au titre sous chaque carte
 
 type Placed = { project: Project; x: number; y: number; w: number; h: number };
 
@@ -28,28 +28,32 @@ function useViewport() {
 
 // Une « tuile » contient tous les projets en colonnes décalées ; on la répète
 // dans les deux sens et on replie le décalage modulo sa taille pour boucler.
+// Écart fixe et serré : chaque projet va dans la colonne la plus courte, puis les
+// hauteurs d'une colonne sont légèrement étirées pour remplir la tuile sans vide.
 function layoutTile(projects: Project[], vw: number) {
-  const cardW = vw < 640 ? 160 : vw < 1024 ? 220 : 270;
-  const gap = vw < 640 ? 18 : 32;
-  const columns: Project[][] = Array.from({ length: COLS }, () => []);
-  projects.forEach((p, i) => columns[i % COLS].push(p));
+  const cardW = vw < 640 ? 150 : vw < 1024 ? 200 : 240;
+  const gap = vw < 640 ? 8 : 12;
+  const natural = (p: Project) => cardW * Math.min(1.35, Math.max(0.72, p.cover.height / p.cover.width));
 
-  const heightOf = (p: Project) => {
-    const ratio = Math.min(1.35, Math.max(0.72, p.cover.height / p.cover.width));
-    return Math.round(cardW * ratio) + LABEL;
-  };
-  const tileH = Math.max(...columns.map((c) => c.reduce((s, p) => s + heightOf(p) + gap, 0)));
+  const columns: Project[][] = Array.from({ length: COLS }, () => []);
+  const sums = Array(COLS).fill(0);
+  projects.forEach((p) => {
+    const c = sums.indexOf(Math.min(...sums));
+    columns[c].push(p);
+    sums[c] += natural(p) + LABEL + gap;
+  });
+  const tileH = Math.round(sums.reduce((a, b) => a + b, 0) / COLS);
   const tileW = COLS * (cardW + gap);
 
   const placed: Placed[] = [];
   columns.forEach((col, c) => {
-    const used = col.reduce((s, p) => s + heightOf(p), 0);
-    const colGap = (tileH - used) / col.length; // chaque colonne remplit exactement la tuile
-    let y = c % 2 ? tileH * 0.38 : tileH * 0.08;
+    const fixed = col.length * (LABEL + gap);
+    const stretch = (tileH - fixed) / col.reduce((s, p) => s + natural(p), 0);
+    let y = (c % 2 ? 0.42 : 0.1) * tileH;
     col.forEach((p) => {
-      const h = heightOf(p);
+      const h = Math.round(natural(p) * stretch) + LABEL;
       placed.push({ project: p, x: c * (cardW + gap), y, w: cardW, h });
-      y += h + colGap;
+      y += h + gap;
     });
   });
   return { placed, tileW, tileH };
@@ -223,7 +227,7 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
                       className="pointer-events-none object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] group-focus-visible:scale-[1.06]"
                     />
                   </div>
-                  <div className="pt-2 text-[13px] leading-none">
+                  <div className="pt-1.5 text-[12px] font-semibold leading-none">
                     <span className="block truncate text-foreground/80 transition-colors group-hover:text-foreground">
                       {p.project.title}
                     </span>
