@@ -15,7 +15,7 @@ const EXT = /\.(jpe?g|png|gif|webp)$/i;
 // Numéro d'image du projet, ou fichier dans <source>/_covers/<slug>.*
 const COVERS = {
   kai: "05",
-  "la-societe-de-jeux": "_covers",
+  "la-societe-de-jeux": "01",
   "recolteur-pomme-de-pin": "07",
   "le-jeu-de-la-grenouille": "_covers",
   ephemeride: "01",
@@ -38,6 +38,8 @@ const slugify = (s) =>
 
 const projects = [];
 const coverFiles = await fs.readdir(path.join(SRC, "_covers")).catch(() => []);
+// Image révélée au survol dans l'index (l'objet en usage) : <source>/_hover/<slug>.*
+const hoverFiles = await fs.readdir(path.join(SRC, "_hover")).catch(() => []);
 for (const dir of (await fs.readdir(SRC, { withFileTypes: true })).filter((d) => d.isDirectory() && !d.name.startsWith("_"))) {
   const title = dir.name;
   const slug = slugify(title);
@@ -69,7 +71,17 @@ for (const dir of (await fs.readdir(SRC, { withFileTypes: true })).filter((d) =>
     }
     process.stdout.write(".");
   }
-  projects.push({ slug, title, cover: images.thumb, images: [...images] });
+  const hoverFile = hoverFiles.find((f) => f.startsWith(`${slug}.`));
+  let hover;
+  if (hoverFile) {
+    const h = await sharp(path.join(SRC, "_hover", hoverFile), { limitInputPixels: false })
+      .rotate()
+      .resize({ width: THUMB, height: THUMB, fit: "inside", withoutEnlargement: true })
+      .webp({ quality: 78 })
+      .toFile(path.join(outDir, "hover.webp"));
+    hover = { src: `/projects/${slug}/hover.webp`, width: h.width, height: h.height };
+  }
+  projects.push({ slug, title, cover: images.thumb, ...(hover && { hover }), images: [...images] });
   console.log(` ${title} (${images.length})`);
 }
 

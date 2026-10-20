@@ -204,7 +204,7 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
           Array.from({ length: copiesX }).map((_, tx) => (
             <div
               key={`${tx}-${ty}`}
-              className="absolute"
+              className="pointer-events-none absolute"
               style={{ left: tx * tileW, top: ty * tileH, width: tileW, height: tileH }}
               aria-hidden={tx !== 1 || ty !== 2 ? true : undefined}
             >
@@ -215,7 +215,7 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
                   data-slug={p.project.slug}
                   tabIndex={tx === 1 && ty === 2 ? 0 : -1}
                   draggable={false}
-                  className="canvas-card group absolute block outline-none"
+                  className="canvas-card group pointer-events-auto absolute block outline-none"
                   style={{ left: p.x, top: p.y, width: p.w, height: p.h }}
                 >
                   <div className="relative overflow-hidden" style={{ height: p.h - LABEL }}>
@@ -227,6 +227,17 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
                       draggable={false}
                       className="pointer-events-none object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] group-focus-visible:scale-[1.06]"
                     />
+                    {/* Image de survol : l'objet en usage, révélée en fondu sans recadrage */}
+                    {p.project.hover && (
+                      <Image
+                        src={p.project.hover.src}
+                        alt=""
+                        fill
+                        sizes={`${p.w * 2}px`}
+                        draggable={false}
+                        className="pointer-events-none bg-background object-contain opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100"
+                      />
+                    )}
                   </div>
                   <div className="pt-1.5 text-[12px] font-semibold leading-none">
                     <span className="block truncate text-foreground/80 transition-colors group-hover:text-foreground">

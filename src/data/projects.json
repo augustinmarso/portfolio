@@ -7,6 +7,11 @@
       "width": 600,
       "height": 900
     },
+    "hover": {
+      "src": "/projects/banc-tapis-petite-voiture/hover.webp",
+      "width": 900,
+      "height": 600
+    },
     "images": [
       {
         "src": "/projects/banc-tapis-petite-voiture/01.webp",
@@ -894,6 +899,11 @@
     "title": "La societe de jeux",
     "cover": {
       "src": "/projects/la-societe-de-jeux/thumb.webp",
+      "width": 634,
+      "height": 900
+    },
+    "hover": {
+      "src": "/projects/la-societe-de-jeux/hover.webp",
       "width": 900,
       "height": 401
     },
@@ -1373,6 +1383,11 @@
     "title": "Open Mind",
     "cover": {
       "src": "/projects/open-mind/thumb.webp",
+      "width": 567,
+      "height": 900
+    },
+    "hover": {
+      "src": "/projects/open-mind/hover.webp",
       "width": 900,
       "height": 504
     },

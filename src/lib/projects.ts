@@ -18,6 +18,7 @@ export type Project = {
   cover: ProjectImage;
   images: ProjectImage[];
   text?: ProjectText;
+  hover?: ProjectImage; // image montrée au survol dans l'index (quelqu'un qui utilise l'objet…)
   video?: ProjectVideo;
 };
 
@@ -38,6 +39,7 @@ const TITLES: Record<string, string> = {
 
 // Projets présentés d'abord par une vidéo (public/videos/<slug>.mp4 + .jpg).
 const VIDEOS = new Set(["ludilove", "de-passager-a-equipier"]);
+
 
 export const THEMES = [
   "objet",
@@ -62,6 +64,7 @@ export const projects: Project[] = (raw as Project[]).map((p) => ({
   cover: withBase(p.cover),
   images: p.images.map(withBase),
   text: texts[p.slug],
+  hover: p.hover && withBase(p.hover),
   video: VIDEOS.has(p.slug)
     ? { src: asset(`/videos/${p.slug}.mp4`), poster: asset(`/videos/${p.slug}.jpg`) }
     : undefined,
