@@ -3,6 +3,7 @@ import Link from "next/link";
 import { absolute } from "@/lib/site";
 import { SiteHeader } from "@/components/site-header";
 import { SideScrollNav } from "@/components/side-scroll-nav";
+import { Bookshelf } from "@/components/bookshelf";
 import { WordReveal } from "@/components/word-reveal";
 import { EXERGUE, NOTES, OUVRAGES, SECTIONS, TITRE } from "@/data/manifeste";
 
@@ -108,11 +109,9 @@ export default function PourquoiPage() {
 
           <section id="ouvrages" className="scroll-mt-24">
             <h2 className="text-2xl sm:text-3xl">ouvrages</h2>
-            <ul className="mt-6 grid max-w-[62ch] gap-2 text-base font-normal leading-relaxed sm:text-lg">
-              {OUVRAGES.map((o) => (
-                <li key={o}>{o}</li>
-              ))}
-            </ul>
+            <div className="mt-8">
+              <Bookshelf books={OUVRAGES} />
+            </div>
           </section>
         </article>
       </div>

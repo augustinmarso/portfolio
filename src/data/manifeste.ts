@@ -105,15 +105,18 @@ export const NOTES: { terme: string; texte: string }[] = [
   { terme: "Société post-carbone", texte: "société qui ne dépend plus des énergies fossiles (pétrole, gaz, charbon)." },
 ];
 
-export const OUVRAGES = [
-  "BERNANOS Georges, La France contre les robots, 1947.",
-  "CLOUSCARD Michel, Le Capitalisme de la séduction, Éditions sociales, 1981.",
-  "FRANÇOIS (pape), Laudato si', encyclique sur la sauvegarde de la maison commune, 2015.",
-  "JANCOVICI Jean-Marc, THE SHIFT PROJECT, ensemble des rapports et publications en libre accès (PDF), theshiftproject.org.",
-  "LÉON XIV (pape), Magnifica humanitas, encyclique sur la personne humaine au temps de l'intelligence artificielle, 2026.",
-  "MASURE Anthony, Design sous artifice : la création au risque du machine learning, HEAD – Publishing, 2023.",
-  "MORRIS William, Nouvelles de nulle part, 1890.",
-  "PAPANEK Victor, Design pour un monde réel, 1971.",
-  "STIEGLER Bernard, De la misère symbolique, Galilée, 2004.",
-  "TESSON Sylvain, Dans les forêts de Sibérie, Gallimard, 2011.",
+// Ouvrages cités, aussi rangés dans la petite bibliothèque de la page (couleur et format du dos inventés).
+export type Ouvrage = { auteur: string; titre: string; detail: string; couleur: string; encre: string; h: number; l: number };
+
+export const OUVRAGES: Ouvrage[] = [
+  { auteur: "Bernanos", titre: "La France contre les robots", detail: "Georges Bernanos, 1947", couleur: "#E9E1CF", encre: "#2B2B2B", h: 0.86, l: 34 },
+  { auteur: "Clouscard", titre: "Le Capitalisme de la séduction", detail: "Michel Clouscard, Éditions sociales, 1981", couleur: "#9B3A2C", encre: "#F4EEE2", h: 0.94, l: 40 },
+  { auteur: "François", titre: "Laudato si'", detail: "Pape François, encyclique sur la sauvegarde de la maison commune, 2015", couleur: "#F2EEE6", encre: "#7A5C1E", h: 0.78, l: 26 },
+  { auteur: "Jancovici", titre: "The Shift Project", detail: "Jean-Marc Jancovici, The Shift Project, rapports et publications en libre accès, theshiftproject.org", couleur: "#2F4858", encre: "#EAF0F2", h: 1, l: 46 },
+  { auteur: "Léon XIV", titre: "Magnifica humanitas", detail: "Pape Léon XIV, encyclique sur la personne humaine au temps de l'intelligence artificielle, 2026", couleur: "#F7F3EA", encre: "#8C1C1C", h: 0.8, l: 24 },
+  { auteur: "Masure", titre: "Design sous artifice", detail: "Anthony Masure, la création au risque du machine learning, HEAD – Publishing, 2023", couleur: "#1E1E1E", encre: "#F2F2F2", h: 0.9, l: 32 },
+  { auteur: "Morris", titre: "Nouvelles de nulle part", detail: "William Morris, 1890", couleur: "#4E6145", encre: "#EDE6CF", h: 0.84, l: 36 },
+  { auteur: "Papanek", titre: "Design pour un monde réel", detail: "Victor Papanek, 1971", couleur: "#D9A441", encre: "#1E1E1E", h: 0.96, l: 38 },
+  { auteur: "Stiegler", titre: "De la misère symbolique", detail: "Bernard Stiegler, Galilée, 2004", couleur: "#E4E0D8", encre: "#3A3A3A", h: 0.88, l: 30 },
+  { auteur: "Tesson", titre: "Dans les forêts de Sibérie", detail: "Sylvain Tesson, Gallimard, 2011", couleur: "#5B6F80", encre: "#F4F1EA", h: 0.82, l: 28 },
 ];

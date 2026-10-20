@@ -22,6 +22,8 @@ export function SideScrollNav({ items }: { items: { id: string; titre: string }[
       targets.forEach((t, k) => {
         if (t.getBoundingClientRect().top <= line) i = k;
       });
+      // tout en bas de la page, la dernière section n'atteint jamais la ligne : on la marque quand même
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) i = targets.length - 1;
       setActive(i);
     };
     const onScroll = () => {
