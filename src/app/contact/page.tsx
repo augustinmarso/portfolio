@@ -11,17 +11,18 @@ export const metadata: Metadata = { title: "Contact — Augustin Marsollier" };
 const EMAIL = "marsollier.augustin@gmail.com";
 const PHONE = { display: "07 49 32 47 31", href: "tel:+33749324731" };
 // À renseigner : identifiant du formulaire Formspree (formspree.io/f/<id>) et lien Google Meet personnel.
-// Tant qu'ils sont vides, le formulaire ouvre la messagerie du visiteur et le GIF n'est pas cliquable.
+// Tant qu'ils sont vides, le formulaire ouvre la messagerie du visiteur et le bouton du GIF propose une visio par mail.
 const FORMSPREE_ID = "";
 const MEET_URL = "";
 
 export default function ContactPage() {
   return (
-    <main className="flex min-h-dvh flex-col px-4 pb-4 pt-4 sm:px-6 sm:pb-6">
+    // Sur ordinateur, tout tient dans l'écran : la page ne défile pas.
+    <main className="flex min-h-dvh flex-col px-4 pb-4 pt-4 sm:px-6 sm:pb-6 lg:h-dvh lg:overflow-hidden">
       <SiteHeader active="/contact" />
 
-      <div className="grid flex-1 gap-10 pt-6 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:grid-cols-2">
-        <div className="flex flex-col">
+      <div className="grid min-h-0 flex-1 gap-8 pt-4 text-base font-semibold leading-snug tracking-tight sm:text-lg lg:grid-cols-2">
+        <div className="flex min-h-0 flex-col">
           <p>
             augustin marsollier,
             <br />
@@ -30,28 +31,28 @@ export default function ContactPage() {
             dsaa design produit — ensaama, paris
           </p>
 
-          <p className="mt-8">
+          <p className="mt-4">
             <a href={PHONE.href} className="hover:underline">
               {PHONE.display}
             </a>
-          </p>
-
-          <section className="mt-12">
-            <h2 className="text-2xl sm:text-3xl">projets &amp; collaborations</h2>
-            <a href={`mailto:${EMAIL}`} className="mt-6 block hover:underline">
+            {" — "}
+            <a href={`mailto:${EMAIL}`} className="hover:underline">
               {EMAIL}
             </a>
+          </p>
+
+          <section className="mt-6">
+            <h2 className="text-xl sm:text-2xl">projets &amp; collaborations</h2>
             <ContactForm email={EMAIL} formspreeId={FORMSPREE_ID || undefined} />
           </section>
 
-          <section className="mt-12">
-            <h2 className="text-2xl sm:text-3xl">parcours</h2>
-            <Link href="/cv" className="mt-6 block underline underline-offset-4">
+          <p className="mt-6">
+            <Link href="/cv" className="underline underline-offset-4">
               voir le cv
             </Link>
-          </section>
+          </p>
 
-          <p className="mt-auto pt-16">
+          <p className="mt-auto pt-6">
             {SOCIALS.map((s) => (
               <span key={s.label}>
                 <a href={s.href} target="_blank" rel="noreferrer" className="hover:underline">
@@ -67,15 +68,19 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="group relative min-h-[60vw] lg:mt-[11.5rem] lg:min-h-0">
-          {/* Un clic sur le GIF lance la visio (lien Google Meet). */}
-          {MEET_URL && (
-            <a href={MEET_URL} target="_blank" rel="noreferrer" aria-label="Démarrer une visio" className="absolute inset-0 z-10">
-              <span className="absolute bottom-3 left-3 rounded-sm bg-background px-2.5 py-1 text-base font-semibold transition-colors group-hover:bg-foreground group-hover:text-background">
-                démarrer la visio
-              </span>
-            </a>
-          )}
+        <div className="group relative min-h-[60vw] lg:min-h-0">
+          {/* Un clic sur le GIF lance la visio Google Meet (sans lien Meet : demande de visio par mail). */}
+          <a
+            href={MEET_URL || `mailto:${EMAIL}?subject=${encodeURIComponent("Demande de visio")}`}
+            target={MEET_URL ? "_blank" : undefined}
+            rel="noreferrer"
+            aria-label="Lancer le Google Meet"
+            className="absolute inset-0 z-10"
+          >
+            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-background px-5 py-2.5 text-base font-semibold shadow-sm transition-colors group-hover:bg-foreground group-hover:text-background">
+              lancer le google meet
+            </span>
+          </a>
           <Image
             src={asset("/contact/augustin.gif")}
             alt="Augustin Marsollier, appuyé contre un arbre"

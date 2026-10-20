@@ -33,15 +33,15 @@ export function ContactForm({ email, formspreeId }: { email: string; formspreeId
     }
   }
 
-  const field = "w-full border-b border-foreground/25 bg-transparent py-2 font-normal outline-none placeholder:text-muted-foreground focus:border-foreground";
+  const field = "w-full border-b border-foreground/25 bg-transparent py-1.5 font-normal outline-none placeholder:text-muted-foreground focus:border-foreground";
 
   return (
-    <form onSubmit={onSubmit} className="mt-6 grid max-w-xl gap-4 text-base sm:text-lg">
-      <div className="grid gap-4 sm:grid-cols-2">
+    <form onSubmit={onSubmit} className="mt-3 grid max-w-xl gap-3 text-base">
+      <div className="grid gap-3 sm:grid-cols-2">
         <input name="name" required placeholder="nom" autoComplete="name" className={field} />
         <input name="email" type="email" required placeholder="votre e-mail" autoComplete="email" className={field} />
       </div>
-      <textarea name="message" required rows={4} placeholder="votre message" className={cn(field, "resize-none")} />
+      <textarea name="message" required rows={3} placeholder="votre message" className={cn(field, "resize-none")} />
       <div className="flex items-center gap-4">
         <button
           type="submit"
