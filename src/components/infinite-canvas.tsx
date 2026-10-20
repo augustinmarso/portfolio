@@ -32,7 +32,7 @@ function useViewport() {
 // hauteurs d'une colonne sont légèrement étirées pour remplir la tuile sans vide.
 function layoutTile(projects: Project[], vw: number) {
   const cardW = vw < 640 ? 150 : vw < 1024 ? 200 : 240;
-  const gap = vw < 640 ? 8 : 12;
+  const gap = vw < 640 ? 14 : 24;
   const natural = (p: Project) => cardW * Math.min(1.35, Math.max(0.72, p.cover.height / p.cover.width));
 
   const columns: Project[][] = Array.from({ length: COLS }, () => []);

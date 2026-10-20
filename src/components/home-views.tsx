@@ -23,10 +23,10 @@ export function HomeViews({ projects }: { projects: Project[] }) {
       )}
 
       <div className="fixed bottom-4 left-4 right-4 z-10 flex items-center justify-end sm:justify-between text-sm font-semibold sm:bottom-5 sm:left-6 sm:right-6">
-        <p className="pointer-events-none hidden text-muted-foreground sm:block">
+        <p className="pointer-events-none hidden rounded-sm bg-background/90 px-2.5 py-1 text-muted-foreground backdrop-blur sm:block">
           {view === "canvas" ? "glisser pour explorer, cliquer pour ouvrir" : "survoler pour ouvrir un panneau"}
         </p>
-        <div className="flex gap-4 text-base">
+        <div className="flex gap-4 rounded-sm bg-background/90 px-2.5 py-1 text-base backdrop-blur">
           {(["canvas", "galerie"] as const).map((v) => (
             <button
               key={v}
