@@ -26,7 +26,7 @@ const ACCENT = "#1d1bff";
 
 type Kind = "root" | "theme" | "project";
 type N = SimulationNodeDatum & { id: string; kind: Kind; label: string; r: number; theme?: string; project?: Project };
-type L = SimulationLinkDatum<N> & { source: N; target: N; secondary?: boolean };
+type L = SimulationLinkDatum<N> & { source: N; target: N; secondary?: boolean; cross?: "theme" | "project"; weight?: number };
 type View = { id: string; kind: Kind; label: string; r: number; dot: number; x: number; y: number; theme?: string; project?: Project; side?: 1 | -1 };
 
 export function MindMap({ projects, className }: { projects: Project[]; className?: string }) {
@@ -43,7 +43,7 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
   const [hover, setHover] = useState<string | null>(null);
   const [frame, setFrame] = useState<{
     nodes: View[];
-    links: { d: string; key: string; ends: readonly [string, string]; secondary: boolean }[];
+    links: { d: string; key: string; ends: readonly [string, string]; secondary: boolean; cross?: "theme" | "project"; weight: number }[];
   }>({ nodes: [], links: [] });
   const simRef = useRef<Simulation<N, L> | null>(null);
   const nodesRef = useRef<Map<string, N>>(new Map());
@@ -106,16 +106,32 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
           links.push({ source: t, target: pn });
         });
     });
-    // Interconnexions : chaque projet est aussi relié à ses autres thèmes ouverts
-    // (à tous ses autres thèmes quand une catégorie est choisie : on voit ce qui la croise).
-    nodes
-      .filter((n) => n.kind === "project")
-      .forEach((pn) =>
-        pn.project!.text?.themes.filter((t2) => t2 !== pn.theme).forEach((t2) => {
-          const tn = map.get(`t:${t2}`);
-          if (tn && (focus || shown.has(t2)) && nodes.includes(tn)) links.push({ source: tn, target: pn, secondary: true });
-        })
-      );
+    // Interconnexions, en pointillés et sans tirer la mise en page :
+    // chaque projet affiché est relié à tous ses autres thèmes…
+    const shownProjects = nodes.filter((n) => n.kind === "project");
+    shownProjects.forEach((pn) =>
+      pn.project!.text?.themes.filter((t2) => t2 !== pn.theme).forEach((t2) => {
+        const tn = map.get(`t:${t2}`);
+        if (tn && nodes.includes(tn)) links.push({ source: tn, target: pn, secondary: true });
+      })
+    );
+    // …deux thèmes sont reliés dès qu'un projet les porte ensemble (trait d'autant plus épais)…
+    const pairs = new Map<string, number>();
+    projects.forEach((p) => {
+      const t = [...(p.text?.themes ?? [])].sort();
+      t.forEach((a, i) => t.slice(i + 1).forEach((b) => pairs.set(`${a}|${b}`, (pairs.get(`${a}|${b}`) ?? 0) + 1)));
+    });
+    pairs.forEach((weight, key) => {
+      const [a, b] = key.split("|").map((t) => map.get(`t:${t}`));
+      if (a && b && nodes.includes(a) && nodes.includes(b)) links.push({ source: a, target: b, secondary: true, cross: "theme", weight });
+    });
+    // …et deux projets affichés le sont s'ils partagent au moins deux thèmes.
+    shownProjects.forEach((a, i) =>
+      shownProjects.slice(i + 1).forEach((b) => {
+        const common = a.project!.text?.themes.filter((t) => b.project!.text?.themes.includes(t)).length ?? 0;
+        if (common >= 2) links.push({ source: a, target: b, secondary: true, cross: "project", weight: common });
+      })
+    );
 
     const snapshot = () => {
       nodes.forEach((n) => {
@@ -146,6 +162,8 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
           key: `${l.source.id}-${l.target.id}`,
           ends: [l.source.id, l.target.id] as const,
           secondary: !!l.secondary,
+          cross: l.cross,
+          weight: l.weight ?? 1,
           d: `M${l.source.x} ${l.source.y} L${l.target.x} ${l.target.y}`,
         })),
       });
@@ -164,7 +182,8 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
               l.target.r +
               (l.secondary ? 230 : l.target.kind === "theme" && shown.has(l.target.theme!) ? 130 : l.target.kind === "project" ? 50 : 70) * k
           )
-          .strength((l) => (l.secondary ? 0.05 : 0.7))
+          // Les liens entre thèmes sont seulement dessinés ; ceux entre projets rapprochent à peine.
+          .strength((l) => (l.cross === "theme" ? 0 : l.cross === "project" ? 0.02 : l.secondary ? 0.05 : 0.7))
       )
       .force("charge", forceManyBody<N>().strength((n) => (n.kind === "root" ? -1800 : n.kind === "theme" ? -1150 : -560) * k))
       // Les projets réservent la place de leur nom (à côté sur ordinateur, dessous sur mobile).
@@ -257,9 +276,10 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
                 key={l.key}
                 d={l.d}
                 stroke={accent ? ACCENT : undefined}
-                strokeWidth={accent ? 1.6 : undefined}
-                opacity={accent ? 0.9 : (l.secondary ? 0.3 : 0.45) * Math.min(dim(l.ends[0]), dim(l.ends[1]))}
-                strokeDasharray={l.secondary ? "1 5" : undefined}
+                // Thèmes croisés : tirets, plus épais quand plusieurs projets les réunissent.
+                strokeWidth={(l.cross ? 0.5 + 0.6 * l.weight : 1) * (accent ? 1.6 : 1)}
+                opacity={accent ? 0.9 : (l.cross ? 0.35 : l.secondary ? 0.3 : 0.45) * Math.min(dim(l.ends[0]), dim(l.ends[1]))}
+                strokeDasharray={l.cross === "theme" ? "4 4" : l.secondary ? "1 5" : undefined}
                 strokeLinecap="round"
               />
             );
