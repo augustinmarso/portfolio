@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { asset } from "@/lib/projects";
+import { SOCIALS } from "@/lib/socials";
 
 export const metadata: Metadata = { title: "Contact — Augustin Marsollier" };
 
 const EMAIL = "marsollier.augustin@gmail.com";
 const PHONE = { display: "07 49 32 47 31", href: "tel:+33749324731" };
-const BEHANCE = "https://www.behance.net/augustimarsoll1";
 
 export default function ContactPage() {
   return (
@@ -46,10 +46,14 @@ export default function ContactPage() {
           </section>
 
           <p className="mt-auto pt-16">
-            <a href={BEHANCE} target="_blank" rel="noreferrer" className="hover:underline">
-              behance
-            </a>
-            ,
+            {SOCIALS.map((s) => (
+              <span key={s.label}>
+                <a href={s.href} target="_blank" rel="noreferrer" className="hover:underline">
+                  {s.label}
+                </a>
+                ,{" "}
+              </span>
+            ))}
             <br />
             <Link href="/arborescence" className="hover:underline">
               tous les projets

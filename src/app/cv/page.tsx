@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PrintButton } from "@/components/print-button";
 import { SiteHeader } from "@/components/site-header";
+import { SOCIALS } from "@/lib/socials";
 
 export const metadata: Metadata = { title: "CV — Augustin Marsollier" };
 
@@ -78,6 +79,13 @@ export default function CvPage() {
             07 49 32 47 31
             <br />
             augustinmarso.github.io/portfolio
+            {SOCIALS.map((s) => (
+              <span key={s.label} className="block">
+                <a href={s.href} target="_blank" rel="noreferrer" className="hover:underline">
+                  {s.label} : {s.href.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")}
+                </a>
+              </span>
+            ))}
           </p>
           <div>
             <PrintButton />
