@@ -10,6 +10,8 @@ export const metadata: Metadata = { title: "Contact — Augustin Marsollier" };
 
 const EMAIL = "marsollier.augustin@gmail.com";
 const PHONE = { display: "07 49 32 47 31", href: "tel:+33749324731" };
+// Ouvre la conversation WhatsApp sur le numéro (on y lance l'appel vidéo).
+const WHATSAPP = "https://wa.me/33749324731";
 // À renseigner : identifiant du formulaire Formspree (formspree.io/f/<id>) et lien Google Meet personnel.
 // Tant qu'ils sont vides, le formulaire ouvre la messagerie du visiteur et le bouton du GIF propose une visio par mail.
 const FORMSPREE_ID = "";
@@ -68,8 +70,30 @@ export default function ContactPage() {
           </p>
         </div>
 
-        {/* Format écran 16:9 (celui du GIF, sans recadrage), comme une fenêtre de visio. */}
-        <div className="group relative aspect-video w-full self-start overflow-hidden rounded-sm bg-muted">
+        {/* Téléphone : vidéo verticale, comme un appel vidéo, et appel WhatsApp sur le numéro. */}
+        <a
+          href={WHATSAPP}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Appel vidéo WhatsApp"
+          className="relative mx-auto aspect-[9/16] w-full max-w-xs overflow-hidden rounded-2xl bg-muted lg:hidden"
+        >
+          <video
+            src={asset("/contact/augustin-telephone.mp4")}
+            poster={asset("/contact/augustin-telephone.jpg")}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="size-full object-cover"
+          />
+          <span className="absolute bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#25d366] px-5 py-2.5 text-base font-semibold text-white shadow-sm">
+            appel whatsapp
+          </span>
+        </a>
+
+        {/* Ordinateur : format écran 16:9 (celui du GIF, sans recadrage), comme une fenêtre de visio. */}
+        <div className="group relative hidden aspect-video w-full self-start overflow-hidden rounded-sm bg-muted lg:block">
           {/* Un clic sur le GIF lance la visio Google Meet (sans lien Meet : demande de visio par mail). */}
           <a
             href={MEET_URL || `mailto:${EMAIL}?subject=${encodeURIComponent("Demande de visio")}`}
