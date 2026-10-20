@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { setSoundOn, soundOn, sounds } from "@/lib/sounds";
+import { SOUND_EVENT, setSoundOn, soundOn, sounds } from "@/lib/sounds";
 import { cn } from "@/lib/utils";
 
 // Branche les sons sur tout le site par délégation d'événements :
@@ -46,17 +46,19 @@ export function UiSounds() {
 // Haut-parleur : coupe ou remet les sons (choix mémorisé dans ce navigateur).
 export function SoundToggle({ className }: { className?: string }) {
   const [on, setOn] = useState(true);
-  // eslint-disable-next-line react-hooks/set-state-in-effect -- préférence lue après l'hydratation
-  useEffect(() => setOn(soundOn()), []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- préférence lue après l'hydratation
+    setOn(soundOn());
+    const sync = (e: Event) => setOn((e as CustomEvent<boolean>).detail);
+    window.addEventListener(SOUND_EVENT, sync);
+    return () => window.removeEventListener(SOUND_EVENT, sync);
+  }, []);
   return (
     <button
       type="button"
       aria-pressed={on}
       aria-label={on ? "Couper les sons" : "Activer les sons"}
-      onClick={() => {
-        setSoundOn(!on);
-        setOn(!on);
-      }}
+      onClick={() => setSoundOn(!on)}
       className={cn("grid size-6 place-items-center sm:size-7", on ? "text-foreground" : "text-muted-foreground", className)}
     >
       <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">

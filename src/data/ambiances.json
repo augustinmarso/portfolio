@@ -22,10 +22,10 @@
   },
   "echappee": {
     "file": "/ambiances/echappee.mp3",
-    "titre": "rue sous la pluie, circulation lointaine",
-    "source": "https://commons.wikimedia.org/wiki/File:Urban_Street_on_a_Rainy_Afternoon.flac",
-    "auteur": "Extemporalist",
-    "licence": "CC0"
+    "titre": "intérieur de voiture isolé, sur la route",
+    "source": "synthèse originale (ffmpeg)",
+    "auteur": "Augustin Marsollier",
+    "licence": "création originale"
   },
   "fish-eye": {
     "file": "/ambiances/fish-eye.mp3",
@@ -36,9 +36,9 @@
   },
   "ludilove": {
     "file": "/ambiances/ludilove.mp3",
-    "titre": "salle de restaurant, conversations lointaines",
-    "source": "https://commons.wikimedia.org/wiki/File:Restaurant_ambience.ogg",
-    "auteur": "stephan (pdsounds.org)",
+    "titre": "groupe réuni autour d'une table, voix étouffées",
+    "source": "https://commons.wikimedia.org/wiki/File:Group_discussion_3.ogg",
+    "auteur": "ezwa (pdsounds.org)",
     "licence": "domaine public"
   },
   "porte-cle-jeton-de-caddie": {
@@ -113,16 +113,16 @@
   },
   "la-societe-de-jeux": {
     "file": "/ambiances/la-societe-de-jeux.mp3",
-    "titre": "groupe réuni autour d'une table, voix étouffées",
-    "source": "https://commons.wikimedia.org/wiki/File:Group_discussion_3.ogg",
-    "auteur": "ezwa (pdsounds.org)",
+    "titre": "pluie contre la vitre, pages qu'on tourne",
+    "source": "https://commons.wikimedia.org/wiki/File:Rain_against_the_window.ogg ; https://commons.wikimedia.org/wiki/File:Turning_a_page.ogg",
+    "auteur": "cori ; planish",
     "licence": "domaine public"
   },
   "collection-d-objets-liturgiques": {
     "file": "/ambiances/collection-d-objets-liturgiques.mp3",
-    "titre": "pas dans une église, réverbération",
-    "source": "https://commons.wikimedia.org/wiki/File:Church_people_walking_steps_with_reverb.ogg",
-    "auteur": "stephan (pdsounds.org)",
+    "titre": "chant grégorien, Veni Sancte Spiritus",
+    "source": "https://commons.wikimedia.org/wiki/File:Veni.sancte.spiritus.ogg",
+    "auteur": "Membeth",
     "licence": "domaine public"
   }
 }

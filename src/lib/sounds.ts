@@ -15,10 +15,13 @@ export const soundOn = () => {
     return true;
   }
 };
+export const SOUND_EVENT = "portfolio:son";
 export const setSoundOn = (on: boolean) => {
   try {
     localStorage.setItem(KEY, on ? "on" : "off");
   } catch {}
+  // prévient les ambiances et les autres boutons « son » de la page
+  window.dispatchEvent(new CustomEvent(SOUND_EVENT, { detail: on }));
 };
 
 // Réponse impulsionnelle générée : bruit qui s'éteint en ~2,6 s, légèrement différent à gauche et à droite.

@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { InfiniteCanvas, type PeopleMode } from "@/components/infinite-canvas";
 import { PeopleSwitch } from "@/components/people-switch";
-import { SoundToggle } from "@/components/ui-sounds";
 
 // Vues secondaires chargées seulement quand on les ouvre (le canvas s'affiche seul au départ).
 const HoverExpand = dynamic(() => import("@/components/hover-expand").then((m) => m.HoverExpand), { ssr: false });
@@ -65,7 +64,6 @@ export function HomeViews({ projects }: { projects: Project[] }) {
         </p>
         <div className="flex min-w-0 flex-1 items-center justify-between gap-2 sm:flex-none sm:justify-end sm:gap-8">
           <div className="order-last flex shrink-0 items-center gap-1 sm:order-none sm:gap-3">
-            <SoundToggle />
             {view === "canvas" && <PeopleSwitch people={people} onChange={setPeople} />}
           </div>
           <div className="flex min-w-0 flex-1 justify-between gap-2 sm:flex-none sm:justify-end sm:gap-4">

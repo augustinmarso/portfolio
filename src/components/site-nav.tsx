@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SoundToggle } from "@/components/ui-sounds";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -26,6 +27,7 @@ export function SiteNav({ active }: { active: NavHref }) {
           {l.label}
         </Link>
       ))}
+      <SoundToggle className="-mx-1 self-center" />
     </nav>
   );
 }

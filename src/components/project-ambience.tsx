@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { audioContext, setSoundOn, soundOn } from "@/lib/sounds";
+import { SOUND_EVENT, audioContext, setSoundOn, soundOn } from "@/lib/sounds";
 import { cn } from "@/lib/utils";
 
 const LEVEL = 0.22; // très doux
@@ -10,15 +10,14 @@ const FADE = 2.2; // secondes
 // Ambiance sonore d'un projet : enregistrement réel (CC0 / domaine public) en boucle sans couture,
 // à faible volume, qui apparaît et disparaît en fondu. Respecte le bouton « son » du site.
 export function ProjectAmbience({ src, title }: { src: string; title: string }) {
-  const nodes = useRef<{ source: AudioBufferSourceNode; gain: GainNode } | null>(null);
+  const nodes = useRef<{ ctx: AudioContext; source: AudioBufferSourceNode; gain: GainNode } | null>(null);
   const [state, setState] = useState<"off" | "loading" | "on" | "blocked">("off");
 
   const stop = () => {
     const n = nodes.current;
-    const ctx = audioContext();
     nodes.current = null;
-    if (!n || !ctx) return;
-    const t = ctx.currentTime;
+    if (!n) return;
+    const t = n.ctx.currentTime; // contexte gardé : il reste utilisable même son coupé
     n.gain.gain.cancelScheduledValues(t);
     n.gain.gain.setValueAtTime(n.gain.gain.value, t);
     n.gain.gain.linearRampToValueAtTime(0, t + 1.2);
@@ -42,7 +41,7 @@ export function ProjectAmbience({ src, title }: { src: string; title: string }) 
       gain.gain.linearRampToValueAtTime(LEVEL, ctx.currentTime + FADE);
       source.connect(gain).connect(ctx.destination);
       source.start();
-      nodes.current = { source, gain };
+      nodes.current = { ctx, source, gain };
       setState("on");
     } catch {
       setState("off");
@@ -52,7 +51,18 @@ export function ProjectAmbience({ src, title }: { src: string; title: string }) 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- démarrage à l'ouverture de la page
     if (soundOn()) void start();
-    return stop;
+    const sync = (e: Event) => {
+      if ((e as CustomEvent<boolean>).detail) void start();
+      else {
+        stop();
+        setState("off");
+      }
+    };
+    window.addEventListener(SOUND_EVENT, sync);
+    return () => {
+      window.removeEventListener(SOUND_EVENT, sync);
+      stop();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src]);
 
