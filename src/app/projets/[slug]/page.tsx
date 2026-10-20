@@ -31,8 +31,9 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
     <main className="w-full px-4 pb-16 pt-4 sm:px-6">
       <SiteHeader active={null} />
 
-      <section className="grid gap-10 pt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:pt-16">
-        <div className="lg:sticky lg:top-20 lg:self-start">
+      <section className="grid gap-10 pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:pt-16">
+        {/* Texte figé : collé à sa position de départ (barre 52 px + marges 16 + 64), il ne bouge jamais. */}
+        <div className="md:sticky md:top-[132px] md:self-start">
           <h1 className="text-4xl font-bold lowercase leading-[0.95] tracking-tight sm:text-5xl">{project.title}</h1>
 
           <dl className="mt-8 grid gap-1 text-lg font-semibold leading-snug tracking-tight">
@@ -98,22 +99,23 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
               </figure>
             );
           })}
+
+          {/* Dans la colonne des images : la section va jusqu'en bas et le texte ne se décolle jamais. */}
+          <Link href={`/projets/${next.slug}`} className="group mt-12 flex items-end justify-between gap-6 border-t pt-6">
+            <div>
+              <span className="text-lg font-semibold text-muted-foreground">projet suivant</span>
+              <p className="text-3xl font-bold lowercase tracking-tight group-hover:underline sm:text-5xl">{next.title}</p>
+            </div>
+            <Image
+              src={next.cover.src}
+              alt=""
+              width={next.cover.width}
+              height={next.cover.height}
+              className="hidden h-28 w-auto object-cover sm:block"
+            />
+          </Link>
         </div>
       </section>
-
-      <Link href={`/projets/${next.slug}`} className="group mt-24 flex items-end justify-between gap-6 border-t pt-6">
-        <div>
-          <span className="text-lg font-semibold text-muted-foreground">projet suivant</span>
-          <p className="text-3xl font-bold lowercase tracking-tight group-hover:underline sm:text-5xl">{next.title}</p>
-        </div>
-        <Image
-          src={next.cover.src}
-          alt=""
-          width={next.cover.width}
-          height={next.cover.height}
-          className="hidden h-28 w-auto object-cover sm:block"
-        />
-      </Link>
     </main>
   );
 }
