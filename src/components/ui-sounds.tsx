@@ -16,16 +16,16 @@ export function UiSounds() {
       if (!card || card === lastHover) return;
       lastHover = card;
       const now = performance.now();
-      if (now - lastAt < 70) return; // pas de crépitement en balayant vite
+      if (now - lastAt < 110) return; // pas de crépitement en balayant vite
       lastAt = now;
-      sounds.hover();
+      sounds.hover(e.clientX, e.clientY);
     };
     const click = (e: MouseEvent) => {
       const el = (e.target as Element).closest?.("a, button");
       if (!el || el.getAttribute("role") === "switch") return; // l'interrupteur a son propre son
       const href = el.getAttribute("href") ?? "";
-      if (href.includes("/projets/")) sounds.open();
-      else sounds.click();
+      if (href.includes("/projets/")) sounds.open(e.clientX);
+      else sounds.click(e.clientX);
     };
     document.addEventListener("pointerover", over);
     document.addEventListener("click", click, true);

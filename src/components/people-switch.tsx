@@ -14,7 +14,7 @@ const TRAVEL = W - PAD * 2 - KNOB; // course du curseur
 // puis se cale du côté le plus proche au relâchement.
 export function PeopleSwitch({ people, onChange: set }: { people: boolean; onChange: (v: boolean) => void }) {
   const onChange = (v: boolean) => {
-    if (v !== people) sounds.toggle(v);
+    if (v !== people) sounds.toggle(v, ref.current?.getBoundingClientRect().left);
     set(v);
   };
   const ref = useRef<HTMLButtonElement>(null);
