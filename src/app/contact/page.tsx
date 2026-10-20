@@ -68,7 +68,8 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="group relative min-h-[60vw] lg:min-h-0">
+        {/* Format écran 16:9 (celui du GIF, sans recadrage), comme une fenêtre de visio. */}
+        <div className="group relative aspect-video w-full self-start overflow-hidden rounded-sm bg-muted">
           {/* Un clic sur le GIF lance la visio Google Meet (sans lien Meet : demande de visio par mail). */}
           <a
             href={MEET_URL || `mailto:${EMAIL}?subject=${encodeURIComponent("Demande de visio")}`}
