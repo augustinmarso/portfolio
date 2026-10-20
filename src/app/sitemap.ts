@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return [
     { url: absolute("/"), lastModified: now, changeFrequency: "monthly", priority: 1 },
+    { url: absolute("/pourquoi/"), lastModified: now, changeFrequency: "yearly", priority: 0.7 },
     { url: absolute("/cv/"), lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: absolute("/contact/"), lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     ...projects.map((p) => ({

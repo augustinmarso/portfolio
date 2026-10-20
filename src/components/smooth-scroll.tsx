@@ -11,6 +11,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 let lenis: Lenis | null = null;
 
+// Défile jusqu'à un élément en glissant comme le reste du site (sous la barre du haut).
+export function scrollToElement(el: HTMLElement, offset = -72) {
+  if (lenis) lenis.scrollTo(el, { offset, duration: 1.6 });
+  else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + offset, behavior: "smooth" });
+}
+
 // Défilement lent et fluide sur tout le site (inertie à la molette).
 // Les zones qui gèrent leur propre molette portent l'attribut data-lenis-prevent.
 export function SmoothScroll() {

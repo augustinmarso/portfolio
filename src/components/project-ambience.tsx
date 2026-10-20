@@ -86,7 +86,7 @@ export function ProjectAmbience({ src, title }: { src: string; title: string }) 
   };
 
   return (
-    <div className={cn("mt-6 flex items-baseline gap-2 text-[13px] font-semibold", on ? "text-foreground" : "text-muted-foreground")}>
+    <div className={cn("mt-6 flex items-baseline gap-2.5 text-[15px] font-semibold", on ? "text-foreground" : "text-muted-foreground")}>
       <AmbienceBars on={on} onSilence={() => { stop(); setState("off"); }} onWake={() => { if (!on) void start(); }} />
       <button type="button" onClick={toggle} aria-pressed={on} className="lowercase hover:text-foreground">
         ambiance · {title}
@@ -100,7 +100,7 @@ export function ProjectAmbience({ src, title }: { src: string; title: string }) 
 // Maintenues et tirées vers le bas : le volume baisse jusqu'à zéro (l'ambiance s'arrête) ;
 // vers le haut : il remonte. Les barres suivent la souris en direct.
 const BARS = 5;
-const H = 10; // hauteur maximale des barres, en px (≈ hauteur des majuscules du texte)
+const H = 14; // hauteur maximale des barres, en px
 function AmbienceBars({ on, onSilence, onWake }: { on: boolean; onSilence: () => void; onWake: () => void }) {
   const [vol, setVol] = useState(0.7);
   const [drag, setDrag] = useState<{ y: number; start: number } | null>(null);
@@ -150,7 +150,8 @@ function AmbienceBars({ on, onSilence, onWake }: { on: boolean; onSilence: () =>
         if (e.key === "ArrowUp" || e.key === "ArrowRight") setVolume(vol + 0.1);
         if (e.key === "ArrowDown" || e.key === "ArrowLeft") setVolume(vol - 0.1);
       }}
-      className="flex touch-none select-none items-end gap-[2px] outline-none"
+      title="glisser vers le bas pour baisser"
+      className="group/vol flex touch-none select-none items-end gap-[2px] outline-none"
       style={{ height: H }}
     >
       {Array.from({ length: BARS }, (_, i) => {
@@ -158,15 +159,21 @@ function AmbienceBars({ on, onSilence, onWake }: { on: boolean; onSilence: () =>
         const shape = [0.55, 0.85, 1, 0.75, 0.6][i];
         const h = Math.max(2, H * shape * level);
         return (
-          <span
-            key={i}
-            className={cn(
-              "w-[2px] origin-bottom rounded-full bg-current",
-              on && level > 0 && !dragging && "ambience-bar",
-              !dragging && "transition-[height] duration-300 ease-out"
-            )}
-            style={{ height: h, animationDelay: `${i * -0.27}s`, animationDuration: `${1.2 + (i % 3) * 0.25}s` }}
-          />
+          <span key={i} className="relative h-full w-[3px]">
+            {/* trace du niveau maximal : montre qu'on peut descendre (ou remonter) les barres */}
+            <span
+              className="absolute inset-x-0 bottom-0 rounded-full bg-current opacity-15 transition-opacity duration-300 group-hover/vol:opacity-30"
+              style={{ height: H * shape }}
+            />
+            <span
+              className={cn(
+                "absolute inset-x-0 bottom-0 origin-bottom rounded-full bg-current",
+                on && level > 0 && !dragging && "ambience-bar",
+                !dragging && "transition-[height] duration-300 ease-out"
+              )}
+              style={{ height: h, animationDelay: `${i * -0.27}s`, animationDuration: `${1.2 + (i % 3) * 0.25}s` }}
+            />
+          </span>
         );
       })}
     </span>
