@@ -69,7 +69,7 @@ export default function CvPage() {
               augustin marsollier,
               <br />
             </span>
-            designer produit,
+            designer objet et service,
             <br />
             dsaa design produit — ensaama, paris
           </p>

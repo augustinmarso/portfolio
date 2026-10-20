@@ -20,7 +20,7 @@ export default function ContactPage() {
           <p>
             augustin marsollier,
             <br />
-            designer produit,
+            designer objet et service,
             <br />
             dsaa design produit — ensaama, paris
           </p>

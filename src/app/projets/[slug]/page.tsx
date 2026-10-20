@@ -31,9 +31,10 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
     <main className="w-full px-4 pb-16 pt-4 sm:px-6">
       <SiteHeader active={null} />
 
-      <section className="grid gap-10 pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:pt-16">
-        {/* Texte figé : collé à sa position de départ (barre 52 px + marges 16 + 64), il ne bouge jamais. */}
-        <div className="md:sticky md:top-[132px] md:self-start">
+      <section className="grid gap-10 pt-6 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:pt-4">
+        {/* Texte figé : collé à sa position de départ (barre 52 px + marges 16 + 16), il ne bouge jamais ;
+            plus haut que la place (écran − 84 px en haut − 64 px de marge basse), il défile dans sa propre colonne. */}
+        <div className="md:sticky md:top-[84px] md:max-h-[calc(100dvh-164px)] md:self-start md:overflow-y-auto md:pb-4">
           <h1 className="text-4xl font-bold lowercase leading-[0.95] tracking-tight sm:text-5xl">{project.title}</h1>
 
           <dl className="mt-8 grid gap-1 text-lg font-semibold leading-snug tracking-tight">
