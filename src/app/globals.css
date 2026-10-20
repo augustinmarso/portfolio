@@ -190,3 +190,11 @@
 @media (prefers-reduced-motion: reduce) {
   .people-blink { animation: none; }
 }
+
+/* Colonne de texte des pages projet : défile si besoin, sans barre visible. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

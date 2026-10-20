@@ -66,7 +66,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
           className={
             project.video
               ? "md:pb-4" // projets avec téléphone : le texte défile, le téléphone se fige ensuite (plus bas)
-              : "md:sticky md:top-[84px] md:max-h-[calc(100dvh-164px)] md:self-start md:overflow-y-auto md:pb-4"
+              : "no-scrollbar md:sticky md:top-[84px] md:max-h-[calc(100dvh-164px)] md:self-start md:overflow-y-auto md:pb-4"
           }
         >
           <h1 className="text-4xl font-bold lowercase leading-[0.95] tracking-tight sm:text-5xl">{project.title}</h1>
