@@ -1641,7 +1641,12 @@
     "title": "Recolteur pomme de pin",
     "cover": {
       "src": "/projects/recolteur-pomme-de-pin/thumb.webp",
-      "width": 609,
+      "width": 900,
+      "height": 900
+    },
+    "hover": {
+      "src": "/projects/recolteur-pomme-de-pin/hover.webp",
+      "width": 900,
       "height": 900
     },
     "images": [

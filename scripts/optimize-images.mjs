@@ -16,7 +16,6 @@ const EXT = /\.(jpe?g|png|gif|webp)$/i;
 const COVERS = {
   kai: "05",
   "la-societe-de-jeux": "_covers",
-  "recolteur-pomme-de-pin": "07",
   "le-jeu-de-la-grenouille": "_covers",
   ephemeride: "01",
   "cylinder-chair": "02",
@@ -29,6 +28,7 @@ const COVERS = {
   "banc-tapis-petite-voiture": "_covers",
   "le-choix-de-malo": "_covers",
   gorillachoc: "_covers",
+  "recolteur-pomme-de-pin": "_covers",
 };
 
 const slugify = (s) =>
