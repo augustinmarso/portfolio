@@ -22,7 +22,7 @@ export function HoverExpand({ projects }: { projects: Project[] }) {
             onMouseEnter={() => setActive(i)}
             onFocus={() => setActive(i)}
             className={cn(
-              "group relative min-h-0 min-w-0 overflow-hidden bg-muted outline-none",
+              "group relative min-h-0 min-w-0 overflow-hidden outline-none",
               "transition-[flex-grow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
               open ? "grow-[12]" : "grow"
             )}

@@ -91,7 +91,7 @@ export function ScrollRing({ projects }: { projects: Project[] }) {
               href={`/projets/${p.slug}`}
               draggable={false}
               onClick={(e) => drag.current && drag.current.moved > 6 && e.preventDefault()}
-              className="absolute inset-0 overflow-hidden bg-muted shadow-[0_0_0_1px_rgb(0_0_0/0.06)] [backface-visibility:visible]"
+              className="absolute inset-0 overflow-hidden shadow-[0_0_0_1px_rgb(0_0_0/0.06)] [backface-visibility:visible]"
               style={{ transform: `rotateY(${i * step}deg) translateZ(${radius}px) rotateY(62deg)` }}
             >
               <Image src={p.cover.src} alt="" fill sizes={`${CARD_W}px`} draggable={false} className="pointer-events-none object-cover" />

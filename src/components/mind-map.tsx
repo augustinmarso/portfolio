@@ -340,7 +340,7 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
           >
             {n.kind === "project" ? (
               <span
-                className={cn("relative shrink-0 overflow-hidden rounded-full bg-muted transition-transform duration-300", hover === n.id && "scale-125")}
+                className={cn("relative shrink-0 overflow-hidden rounded-full transition-transform duration-300", hover === n.id && "scale-125")}
                 style={{
                   width: half * 2,
                   height: half * 2,

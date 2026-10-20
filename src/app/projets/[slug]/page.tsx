@@ -138,7 +138,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
                   height={img.height}
                   priority={n === 0 && !project.video}
                   sizes="(min-width: 1024px) 66vw, 100vw"
-                  className="h-auto w-full bg-muted"
+                  className="h-auto w-full"
                 />
                 {caption && (
                   <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">{caption.toLowerCase()}</figcaption>

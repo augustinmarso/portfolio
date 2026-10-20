@@ -218,7 +218,7 @@ export function InfiniteCanvas({ projects }: { projects: Project[] }) {
                   className="canvas-card group absolute block outline-none"
                   style={{ left: p.x, top: p.y, width: p.w, height: p.h }}
                 >
-                  <div className="relative overflow-hidden bg-muted" style={{ height: p.h - LABEL }}>
+                  <div className="relative overflow-hidden" style={{ height: p.h - LABEL }}>
                     <Image
                       src={p.project.cover.src}
                       alt={p.project.title}
