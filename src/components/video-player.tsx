@@ -64,7 +64,7 @@ export function VideoPlayer({ src, poster, label }: { src: string; poster: strin
   const progress = duration ? time / duration : 0;
 
   return (
-    <div ref={wrapRef} className="group/player relative overflow-hidden bg-muted">
+    <div ref={wrapRef} className="group/player relative overflow-hidden">
       <video
         ref={videoRef}
         src={src}

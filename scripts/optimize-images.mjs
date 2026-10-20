@@ -48,7 +48,7 @@ for (const dir of (await fs.readdir(SRC, { withFileTypes: true })).filter((d) =>
   const images = [];
   for (const [i, file] of files.entries()) {
     const input = path.join(SRC, title, file);
-    const animated = /\.gif$/i.test(file);
+    const animated = /\.(gif|webp)$/i.test(file); // GIF ou WebP animés
     const name = String(i + 1).padStart(2, "0");
     const full = await sharp(input, { animated, limitInputPixels: false })
       .rotate() // applique l'orientation EXIF des photos d'appareil
