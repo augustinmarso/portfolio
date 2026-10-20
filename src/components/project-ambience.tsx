@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { SOUND_EVENT, VOLUME_EVENT, audioContext, getVolume, setSoundOn, soundOn } from "@/lib/sounds";
+import { SOUND_EVENT, VOLUME_EVENT, audioContext, getVolume, setSoundOn, setVolume, soundOn } from "@/lib/sounds";
 import { cn } from "@/lib/utils";
 
 const LEVEL = 0.22; // très doux
@@ -74,33 +74,106 @@ export function ProjectAmbience({ src, title }: { src: string; title: string }) 
   }, [src]);
 
   const on = state === "on" || state === "loading";
+  const toggle = () => {
+    if (on) {
+      stop();
+      setState("off");
+    } else {
+      if (!soundOn()) setSoundOn(true);
+      if (getVolume() < 0.05) setVolume(0.5);
+      void start();
+    }
+  };
+
   return (
-    <button
-      type="button"
-      onClick={() => {
-        if (on) {
-          stop();
-          setState("off");
-        } else {
+    <div className={cn("mt-6 flex items-center gap-2.5 text-sm font-semibold", on ? "text-foreground" : "text-muted-foreground")}>
+      <AmbienceBars on={on} onSilence={() => { stop(); setState("off"); }} onWake={() => { if (!on) void start(); }} />
+      <button type="button" onClick={toggle} aria-pressed={on} className="lowercase hover:text-foreground">
+        ambiance · {title}
+        {state === "blocked" && <span className="ml-1 font-normal text-muted-foreground">(cliquer pour écouter)</span>}
+      </button>
+    </div>
+  );
+}
+
+// Barres d'égaliseur qui ondulent tant que l'ambiance joue ; leur hauteur suit le volume.
+// Maintenues et tirées vers le bas : le volume baisse jusqu'à zéro (l'ambiance s'arrête) ;
+// vers le haut : il remonte. Les barres suivent la souris en direct.
+const BARS = 5;
+const H = 22; // hauteur maximale des barres, en px
+function AmbienceBars({ on, onSilence, onWake }: { on: boolean; onSilence: () => void; onWake: () => void }) {
+  const [vol, setVol] = useState(0.7);
+  const [drag, setDrag] = useState<{ y: number; start: number } | null>(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- préférence lue après l'hydratation
+    setVol(soundOn() ? getVolume() : 0);
+    const sync = (e: Event) => setVol((e as CustomEvent<number>).detail);
+    const syncOn = (e: Event) => setVol((e as CustomEvent<boolean>).detail ? getVolume() : 0);
+    window.addEventListener(VOLUME_EVENT, sync);
+    window.addEventListener(SOUND_EVENT, syncOn);
+    return () => {
+      window.removeEventListener(VOLUME_EVENT, sync);
+      window.removeEventListener(SOUND_EVENT, syncOn);
+    };
+  }, []);
+
+  const level = on ? vol : 0;
+  const dragging = drag !== null;
+
+  return (
+    <span
+      role="slider"
+      tabIndex={0}
+      aria-label="Volume de l'ambiance : tirer vers le bas pour baisser, vers le haut pour monter"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(level * 100)}
+      onPointerDown={(e) => {
+        e.currentTarget.setPointerCapture(e.pointerId);
+        setDrag({ y: e.clientY, start: level });
+      }}
+      onPointerMove={(e) => {
+        if (!drag) return;
+        const v = Math.min(1, Math.max(0, drag.start + (drag.y - e.clientY) / 60)); // 60 px = tout le réglage
+        setVol(v);
+        setVolume(v);
+        if (v === 0) onSilence();
+        else {
           if (!soundOn()) setSoundOn(true);
-          void start();
+          onWake();
         }
       }}
-      aria-pressed={on}
-      className={cn("mt-6 flex items-center gap-2 text-sm font-semibold", on ? "text-foreground" : "text-muted-foreground hover:text-foreground")}
+      onPointerUp={() => setDrag(null)}
+      onPointerCancel={() => setDrag(null)}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowUp" || e.key === "ArrowRight") setVolume(vol + 0.1);
+        if (e.key === "ArrowDown" || e.key === "ArrowLeft") setVolume(vol - 0.1);
+      }}
+      className="relative flex cursor-ns-resize touch-none select-none items-end gap-[3px] py-1 outline-none"
+      style={{ height: H + 8 }}
     >
-      {/* petites barres qui ondulent tant que l'ambiance joue */}
-      <span aria-hidden className="flex h-3 items-end gap-[2px]">
-        {[0, 1, 2, 3].map((i) => (
+      {Array.from({ length: BARS }, (_, i) => {
+        // profil d'égaliseur : barres du milieu plus hautes
+        const shape = [0.55, 0.85, 1, 0.75, 0.6][i];
+        const h = Math.max(3, H * shape * level);
+        return (
           <span
             key={i}
-            className={cn("w-[2px] rounded-full bg-current", on ? "ambience-bar" : "h-[3px]")}
-            style={on ? { animationDelay: `${i * -0.35}s` } : undefined}
+            className={cn(
+              "w-[3px] origin-bottom rounded-full bg-current",
+              on && level > 0 && !dragging && "ambience-bar",
+              !dragging && "transition-[height] duration-300 ease-out"
+            )}
+            style={{ height: h, animationDelay: `${i * -0.27}s`, animationDuration: `${1.2 + (i % 3) * 0.25}s` }}
           />
-        ))}
-      </span>
-      <span className="lowercase">ambiance · {title}</span>
-      {state === "blocked" && <span className="font-normal text-muted-foreground">(cliquer pour écouter)</span>}
-    </button>
+        );
+      })}
+      {dragging && (
+        <span className="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-sm bg-foreground px-1.5 py-0.5 text-[11px] font-semibold tabular-nums text-background">
+          {Math.round(level * 100)} %
+        </span>
+      )}
+    </span>
   );
 }

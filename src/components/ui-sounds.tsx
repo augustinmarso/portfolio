@@ -137,7 +137,7 @@ export function SoundToggle({ className }: { className?: string }) {
       </svg>
       {/* pourcentage pendant le réglage */}
       {dragging && (
-        <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 rounded-sm bg-foreground px-1.5 py-0.5 text-[11px] font-semibold tabular-nums text-background">
+        <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-sm bg-foreground px-1.5 py-0.5 text-[11px] font-semibold tabular-nums text-background">
           {Math.round(level * 100)} %
         </span>
       )}
