@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { absolute } from "@/lib/site";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
@@ -6,7 +7,12 @@ import { SiteHeader } from "@/components/site-header";
 import { asset } from "@/lib/projects";
 import { MEET, SOCIALS } from "@/lib/socials";
 
-export const metadata: Metadata = { title: "Contact — Augustin Marsollier" };
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Contacter Augustin Marsollier, designer objet et service à Paris : projets, collaborations, stages, appel visio.",
+  alternates: { canonical: absolute("/contact/") },
+  openGraph: { url: absolute("/contact/"), title: "Contact — Augustin Marsollier" },
+};
 
 const EMAIL = "marsollier.augustin@gmail.com";
 const PHONE = { display: "07 49 32 47 31", href: "tel:+33749324731" };

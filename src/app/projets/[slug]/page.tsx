@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { VideoPlayer } from "@/components/video-player";
 import { getProject, projects } from "@/lib/projects";
+import { absolute, excerpt, jsonLd, ogImage, PERSON } from "@/lib/site";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -12,9 +13,21 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/projets/[slug]">): Promise<Metadata> {
   const project = getProject((await params).slug);
+  if (!project) return { title: "Projet" };
+  const url = absolute(`/projets/${project.slug}/`);
+  const description = excerpt(project.text?.intro ?? `${project.title}, projet d'Augustin Marsollier.`);
   return {
-    title: project ? `${project.title} — Augustin Marsollier` : "Projet",
-    description: project?.text?.intro,
+    title: project.title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title: `${project.title} — Augustin Marsollier`,
+      description,
+      images: [{ url: ogImage(project.slug), width: 1200, height: 630, alt: project.title }],
+    },
+    twitter: { card: "summary_large_image", title: project.title, description, images: [ogImage(project.slug)] },
   };
 }
 
@@ -27,8 +40,22 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
   const next = projects[(i + 1) % projects.length];
   const text = project.text;
 
+  const structured = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.text?.intro,
+    url: absolute(`/projets/${project.slug}/`),
+    image: ogImage(project.slug),
+    dateCreated: project.text?.year ?? undefined,
+    keywords: project.text?.themes.join(", "),
+    inLanguage: "fr",
+    creator: PERSON,
+  };
+
   return (
     <main className="w-full px-4 pb-16 pt-4 sm:px-6">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(structured) }} />
       <SiteHeader active={null} />
 
       <section className="grid gap-10 pt-6 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:pt-4">

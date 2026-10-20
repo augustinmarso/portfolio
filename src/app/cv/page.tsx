@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
+import { absolute } from "@/lib/site";
 import { PrintButton } from "@/components/print-button";
 import { SiteHeader } from "@/components/site-header";
 import { SOCIALS } from "@/lib/socials";
 
-export const metadata: Metadata = { title: "CV — Augustin Marsollier" };
+export const metadata: Metadata = {
+  title: "CV",
+  description: "CV d'Augustin Marsollier : DSAA Design Produit et DN MADE Objet/Service à l'ENSAAMA, stages, engagements et compétences (Rhino, Fusion 360, Blender, prototypage).",
+  alternates: { canonical: absolute("/cv/") },
+  openGraph: { url: absolute("/cv/"), title: "CV — Augustin Marsollier" },
+};
 
 // Contenu repris du CV 2026, mis à jour (DSAA 2026–2027). Pas d'adresse postale publiée.
 const ENSAAMA = "https://ensaama.net/site/home/formations";
