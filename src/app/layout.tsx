@@ -4,7 +4,7 @@ import "./globals.css";
 // Scoutie Sans (Google Fonts, août 2026) n'est pas encore dans la liste de next/font :
 // chargée par la feuille de style Google, variable 200–800.
 const FONT_CSS =
-  "https://fonts.googleapis.com/css2?family=Scoutie+Sans:ital,wght@0,200..800;1,200..800&display=swap";
+  "https://fonts.googleapis.com/css2?family=Scoutie+Sans:ital,wght@0,200..800;1,200..800&family=IBM+Plex+Mono:wght@400;600&display=swap";
 
 export const metadata: Metadata = {
   title: "Augustin Marsollier — Portfolio",

@@ -56,7 +56,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
                   <dd>
                     {text.themes.map((t, n) => (
                       <span key={t}>
-                        <Link href={`/arborescence?theme=${encodeURIComponent(t)}`} className="underline-offset-4 hover:underline">
+                        <Link href="/arborescence" className="underline-offset-4 hover:underline">
                           {t}
                         </Link>
                         {n < text.themes.length - 1 && ", "}

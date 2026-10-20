@@ -28,32 +28,33 @@ function useViewport() {
 
 // Une « tuile » contient tous les projets en colonnes décalées ; on la répète
 // dans les deux sens et on replie le décalage modulo sa taille pour boucler.
-// Écart fixe et serré : chaque projet va dans la colonne la plus courte, puis les
-// hauteurs d'une colonne sont légèrement étirées pour remplir la tuile sans vide.
+// Les images gardent leurs proportions exactes (aucun recadrage) : chaque projet va
+// dans la colonne la plus courte, et le reste de hauteur est réparti dans les écarts.
 function layoutTile(projects: Project[], vw: number) {
   const cardW = vw < 640 ? 150 : vw < 1024 ? 200 : 240;
   const gap = vw < 640 ? 14 : 24;
-  const natural = (p: Project) => cardW * Math.min(1.35, Math.max(0.72, p.cover.height / p.cover.width));
+  const natural = (p: Project) => Math.round(cardW * (p.cover.height / p.cover.width));
 
   const columns: Project[][] = Array.from({ length: COLS }, () => []);
   const sums = Array(COLS).fill(0);
-  projects.forEach((p) => {
+  // Du plus haut au plus petit : la répartition gloutonne équilibre bien mieux les colonnes.
+  [...projects].sort((a, b) => natural(b) - natural(a)).forEach((p) => {
     const c = sums.indexOf(Math.min(...sums));
     columns[c].push(p);
     sums[c] += natural(p) + LABEL + gap;
   });
-  const tileH = Math.round(sums.reduce((a, b) => a + b, 0) / COLS);
+  const tileH = Math.ceil(Math.max(...sums));
   const tileW = COLS * (cardW + gap);
 
   const placed: Placed[] = [];
   columns.forEach((col, c) => {
-    const fixed = col.length * (LABEL + gap);
-    const stretch = (tileH - fixed) / col.reduce((s, p) => s + natural(p), 0);
+    const used = col.reduce((s, p) => s + natural(p) + LABEL, 0);
+    const colGap = (tileH - used) / col.length; // ≥ gap, la colonne remplit exactement la tuile
     let y = (c % 2 ? 0.42 : 0.1) * tileH;
     col.forEach((p) => {
-      const h = Math.round(natural(p) * stretch) + LABEL;
+      const h = natural(p) + LABEL;
       placed.push({ project: p, x: c * (cardW + gap), y, w: cardW, h });
-      y += h + gap;
+      y += h + colGap;
     });
   });
   return { placed, tileW, tileH };
