@@ -53,7 +53,7 @@ export function HomeViews({ projects }: { projects: Project[] }) {
 
       {/* Barre du bas : bande blanche pleine largeur, calée en bas, rien ne passe dessous.
           Téléphone : boutons « personne / les gens » au-dessus, les quatre vues réparties sur la largeur. */}
-      <div data-sound="barre" className="fixed inset-x-0 bottom-0 z-10 flex flex-col gap-1.5 bg-background px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-2 text-base font-semibold sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:pb-3">
+      <div data-sound="barre" className="fixed inset-x-0 bottom-0 z-10 flex items-center justify-between gap-3 bg-background px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-2 text-[clamp(12px,3.3vw,15px)] font-semibold sm:px-6 sm:pb-3 sm:text-base">
         <p className="pointer-events-none hidden text-sm text-muted-foreground sm:block">
           {view === "canvas"
             ? "glisser pour explorer, cliquer pour ouvrir"
@@ -63,12 +63,12 @@ export function HomeViews({ projects }: { projects: Project[] }) {
                 ? "cliquer un thème pour l'ouvrir, un projet pour le voir"
                 : "survoler pour ouvrir un panneau"}
         </p>
-        <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-8">
-          <div className="flex items-center gap-3 self-end sm:self-auto">
+        <div className="flex min-w-0 flex-1 items-center justify-between gap-2 sm:flex-none sm:justify-end sm:gap-8">
+          <div className="order-last flex shrink-0 items-center gap-1 sm:order-none sm:gap-3">
             <SoundToggle />
             {view === "canvas" && <PeopleSwitch people={people} onChange={setPeople} />}
           </div>
-          <div className="flex justify-between gap-4 sm:justify-end">
+          <div className="flex min-w-0 flex-1 justify-between gap-2 sm:flex-none sm:justify-end sm:gap-4">
             {VIEWS.map((v) => (
               <button
                 key={v}

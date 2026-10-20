@@ -52,7 +52,7 @@ export function SoundToggle({ className }: { className?: string }) {
         setSoundOn(!on);
         setOn(!on);
       }}
-      className={cn("grid size-7 place-items-center", on ? "text-foreground" : "text-muted-foreground", className)}
+      className={cn("grid size-6 place-items-center sm:size-7", on ? "text-foreground" : "text-muted-foreground", className)}
     >
       <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4Z" fill="currentColor" />
