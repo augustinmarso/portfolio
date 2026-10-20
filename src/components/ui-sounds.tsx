@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { SOUND_EVENT, setSoundOn, soundOn, sounds } from "@/lib/sounds";
+import { useEffect, useRef, useState } from "react";
+import { SOUND_EVENT, VOLUME_EVENT, getVolume, setSoundOn, setVolume, soundOn, sounds } from "@/lib/sounds";
 import { cn } from "@/lib/utils";
 
 // Branche les sons sur tout le site par délégation d'événements :
@@ -43,35 +43,104 @@ export function UiSounds() {
   return null;
 }
 
-// Haut-parleur : coupe ou remet les sons (choix mémorisé dans ce navigateur).
+// Haut-parleur et volume : les trois traits ondulent tant que le son joue et leur nombre suit
+// le volume. Clic : coupe / rétablit. Maintenu et glissé : gauche baisse (jusqu'à zéro), droite monte.
 export function SoundToggle({ className }: { className?: string }) {
   const [on, setOn] = useState(true);
+  const [vol, setVol] = useState(0.7);
+  const [dragging, setDragging] = useState(false);
+  const drag = useRef<{ x: number; start: number; moved: boolean } | null>(null);
+
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- préférence lue après l'hydratation
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- préférences lues après l'hydratation
     setOn(soundOn());
-    const sync = (e: Event) => setOn((e as CustomEvent<boolean>).detail);
-    window.addEventListener(SOUND_EVENT, sync);
-    return () => window.removeEventListener(SOUND_EVENT, sync);
+    setVol(getVolume());
+    const syncOn = (e: Event) => setOn((e as CustomEvent<boolean>).detail);
+    const syncVol = (e: Event) => setVol((e as CustomEvent<number>).detail);
+    window.addEventListener(SOUND_EVENT, syncOn);
+    window.addEventListener(VOLUME_EVENT, syncVol);
+    return () => {
+      window.removeEventListener(SOUND_EVENT, syncOn);
+      window.removeEventListener(VOLUME_EVENT, syncVol);
+    };
   }, []);
+
+  const level = on ? vol : 0;
+  const lit = level === 0 ? 0 : Math.max(1, Math.ceil(level * 3)); // traits allumés
+
   return (
     <button
       type="button"
+      aria-label={on ? `Volume ${Math.round(vol * 100)} % — cliquer pour couper, glisser pour régler` : "Activer les sons"}
       aria-pressed={on}
-      aria-label={on ? "Couper les sons" : "Activer les sons"}
-      onClick={() => setSoundOn(!on)}
-      className={cn("grid size-6 place-items-center sm:size-7", on ? "text-foreground" : "text-muted-foreground", className)}
+      onPointerDown={(e) => {
+        e.currentTarget.setPointerCapture(e.pointerId);
+        drag.current = { x: e.clientX, start: on ? vol : 0, moved: false };
+      }}
+      onPointerMove={(e) => {
+        const d = drag.current;
+        if (!d) return;
+        const dx = e.clientX - d.x;
+        if (!d.moved && Math.abs(dx) < 4) return;
+        d.moved = true;
+        setDragging(true);
+        const v = Math.min(1, Math.max(0, d.start + dx / 90)); // 90 px = tout le réglage
+        setVolume(v);
+        if (v === 0 && on) setSoundOn(false);
+        if (v > 0 && !on) setSoundOn(true);
+      }}
+      onPointerUp={() => {
+        const d = drag.current;
+        drag.current = null;
+        setDragging(false);
+        if (d && !d.moved) {
+          // clic simple : coupe, ou rétablit (avec un volume audible si on était à zéro)
+          if (on) setSoundOn(false);
+          else {
+            if (getVolume() < 0.05) setVolume(0.5);
+            setSoundOn(true);
+          }
+        }
+      }}
+      onPointerCancel={() => {
+        drag.current = null;
+        setDragging(false);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowRight" || e.key === "ArrowUp") setVolume(vol + 0.1);
+        if (e.key === "ArrowLeft" || e.key === "ArrowDown") setVolume(vol - 0.1);
+      }}
+      className={cn(
+        "relative grid size-6 cursor-ew-resize touch-none select-none place-items-center sm:size-7",
+        on ? "text-foreground" : "text-muted-foreground",
+        className
+      )}
     >
-      <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4Z" fill="currentColor" />
-        {on ? (
-          <>
-            <path d="M15.5 9a4 4 0 0 1 0 6" />
-            <path d="M18.3 6.5a7.5 7.5 0 0 1 0 11" />
-          </>
+      <svg viewBox="0 0 24 24" className="size-4 overflow-visible" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 9.5h3.5L11 5.5v13l-4.5-4H3Z" fill="currentColor" />
+        {level === 0 ? (
+          <path d="m15 9.5 5 5m0-5-5 5" />
         ) : (
-          <path d="m16 9.5 5 5m0-5-5 5" />
+          [
+            "M14 10a2.8 2.8 0 0 1 0 4",
+            "M16.6 7.8a6 6 0 0 1 0 8.4",
+            "M19.2 5.6a9.2 9.2 0 0 1 0 12.8",
+          ].map((d, i) => (
+            <path
+              key={d}
+              d={d}
+              className={cn("transition-opacity duration-300", i < lit && "sound-wave")}
+              style={{ opacity: i < lit ? undefined : 0.15, animationDelay: `${i * 0.18}s` }}
+            />
+          ))
         )}
       </svg>
+      {/* pourcentage pendant le réglage */}
+      {dragging && (
+        <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 rounded-sm bg-foreground px-1.5 py-0.5 text-[11px] font-semibold tabular-nums text-background">
+          {Math.round(level * 100)} %
+        </span>
+      )}
     </button>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { SOUND_EVENT, audioContext, setSoundOn, soundOn } from "@/lib/sounds";
+import { SOUND_EVENT, VOLUME_EVENT, audioContext, getVolume, setSoundOn, soundOn } from "@/lib/sounds";
 import { cn } from "@/lib/utils";
 
 const LEVEL = 0.22; // très doux
@@ -38,7 +38,7 @@ export function ProjectAmbience({ src, title }: { src: string; title: string }) 
       source.loop = true;
       const gain = ctx.createGain();
       gain.gain.setValueAtTime(0, ctx.currentTime);
-      gain.gain.linearRampToValueAtTime(LEVEL, ctx.currentTime + FADE);
+      gain.gain.linearRampToValueAtTime(LEVEL * getVolume(), ctx.currentTime + FADE);
       source.connect(gain).connect(ctx.destination);
       source.start();
       nodes.current = { ctx, source, gain };
@@ -58,9 +58,16 @@ export function ProjectAmbience({ src, title }: { src: string; title: string }) 
         setState("off");
       }
     };
+    // le réglage de volume agit en direct sur l'ambiance
+    const vol = (e: Event) => {
+      const n = nodes.current;
+      if (n) n.gain.gain.setTargetAtTime(LEVEL * (e as CustomEvent<number>).detail, n.ctx.currentTime, 0.08);
+    };
     window.addEventListener(SOUND_EVENT, sync);
+    window.addEventListener(VOLUME_EVENT, vol);
     return () => {
       window.removeEventListener(SOUND_EVENT, sync);
+      window.removeEventListener(VOLUME_EVENT, vol);
       stop();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

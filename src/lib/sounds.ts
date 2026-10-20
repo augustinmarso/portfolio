@@ -6,6 +6,7 @@
 let ctx: AudioContext | null = null;
 let bus: { dry: GainNode; wet: GainNode } | null = null;
 let noise: AudioBuffer | null = null;
+let masterGain: GainNode | null = null;
 const KEY = "portfolio:son";
 
 export const soundOn = () => {
@@ -15,6 +16,26 @@ export const soundOn = () => {
     return true;
   }
 };
+// Volume général (0 → 1), mémorisé ; appliqué aux sons d'interface et aux ambiances.
+const VOL_KEY = "portfolio:volume";
+export const VOLUME_EVENT = "portfolio:volume";
+export const getVolume = () => {
+  try {
+    const v = parseFloat(localStorage.getItem(VOL_KEY) ?? "");
+    return Number.isFinite(v) ? Math.min(1, Math.max(0, v)) : 0.7;
+  } catch {
+    return 0.7;
+  }
+};
+export const setVolume = (v: number) => {
+  const vol = Math.min(1, Math.max(0, v));
+  try {
+    localStorage.setItem(VOL_KEY, String(vol));
+  } catch {}
+  if (masterGain && ctx) masterGain.gain.setTargetAtTime(vol * 1.3, ctx.currentTime, 0.05);
+  window.dispatchEvent(new CustomEvent(VOLUME_EVENT, { detail: vol }));
+};
+
 export const SOUND_EVENT = "portfolio:son";
 export const setSoundOn = (on: boolean) => {
   try {
@@ -62,7 +83,8 @@ function audio() {
   if (!ctx) {
     ctx = new AudioContext();
     const master = ctx.createGain();
-    master.gain.value = 0.9;
+    master.gain.value = getVolume() * 1.3;
+    masterGain = master;
     const comp = ctx.createDynamicsCompressor(); // évite les pics quand plusieurs sons se superposent
     master.connect(comp).connect(ctx.destination);
     const dry = ctx.createGain();

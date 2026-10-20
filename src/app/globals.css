@@ -213,3 +213,15 @@
 @media (prefers-reduced-motion: reduce) {
   .ambience-bar { animation: none; transform: scaleY(0.6); }
 }
+
+/* Haut-parleur : les ondes allumées ondulent doucement, l'une après l'autre. */
+.sound-wave {
+  animation: sound-wave 1.4s ease-in-out infinite;
+}
+@keyframes sound-wave {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sound-wave { animation: none; }
+}
