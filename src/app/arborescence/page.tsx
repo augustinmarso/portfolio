@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ProjectTree } from "@/components/project-tree";
+import { MindMap } from "@/components/mind-map";
 import { SiteHeader } from "@/components/site-header";
 import { projects } from "@/lib/projects";
 
@@ -9,8 +9,8 @@ export default function ArborescencePage() {
   return (
     <main className="min-h-dvh px-4 pb-6 pt-4 sm:px-6">
       <SiteHeader active="/arborescence" size="md" />
-      <div className="pt-6">
-        <ProjectTree projects={projects} />
+      <div className="pt-2">
+        <MindMap projects={projects} />
       </div>
     </main>
   );
