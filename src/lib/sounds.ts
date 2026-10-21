@@ -221,15 +221,20 @@ export const sounds = {
     note(pick(root), { ...opts, dur: rnd(0.8, 1.3), gain: 0.016 });
     note(pick(root + interval), { ...opts, at: rnd(0.01, 0.05), dur: rnd(0.8, 1.2), gain: 0.011 });
   },
-  // survol d'un bouton de menu : petit son grave et feutré
-  barHover: (x?: number) =>
-    note(pick(any([0, 1, 2, 3])) / 2, { dur: rnd(0.3, 0.5), gain: 0.014, pan: panAt(x), attack: 0.012, wave: "triangle", bright: 0.45, rasp: rnd(0.1, 0.4), breath: rnd(0, 0.5) }),
-  // barres de menu (haut et bas) : note grave et mate, à la quinte inférieure, sur la pulsation
+  // survol d'un bouton de menu : son très grave et feutré (deux octaves sous la gamme),
+  // doublé à l'octave pour rester audible sur les petits haut-parleurs
+  barHover: (x?: number) => {
+    const f = pick(any([0, 1, 2, 3])) / 4;
+    note(f, { dur: rnd(0.45, 0.65), gain: 0.03, pan: panAt(x), attack: 0.015, wave: "sine", bright: 1.2, breath: rnd(0, 0.4) });
+    note(f * 2, { dur: rnd(0.3, 0.45), gain: 0.012, pan: panAt(x), attack: 0.015, wave: "triangle", bright: 0.9, rasp: rnd(0.1, 0.3) });
+  },
+  // barres de menu (haut et bas) : coup très grave et mat, pulsation, quinte et octave par-dessus
   bar: (x?: number) => {
-    const root = any([0, 1, 2]);
-    sub(0, rnd(0.04, 0.055));
-    note(pick(root) / 2, { dur: rnd(0.6, 0.9), gain: 0.03, pan: panAt(x), attack: rnd(0.02, 0.04), wave: any(["sine", "triangle"] as const), bright: rnd(0.4, 0.6), rasp: rnd(0.2, 0.5), breath: rnd(0.2, 0.6) });
-    note((pick(root) / 2) * 1.5, { at: rnd(0.02, 0.05), dur: rnd(0.5, 0.8), gain: 0.014, pan: panAt(x), attack: 0.04, bright: 0.45 });
+    const f = pick(any([0, 1, 2])) / 4;
+    sub(0, rnd(0.05, 0.065));
+    note(f, { dur: rnd(0.9, 1.2), gain: 0.05, pan: panAt(x), attack: rnd(0.02, 0.035), wave: "sine", bright: 1.2, rasp: rnd(0.2, 0.4), breath: rnd(0.1, 0.4) });
+    note(f * 2, { at: 0.01, dur: rnd(0.6, 0.9), gain: 0.02, pan: panAt(x), attack: 0.03, wave: "triangle", bright: 0.9, rasp: rnd(0.2, 0.5) });
+    note(f * 3, { at: rnd(0.03, 0.06), dur: rnd(0.5, 0.7), gain: 0.008, pan: panAt(x), attack: 0.04, bright: 0.8 });
   },
   // interrupteur : note qui gonfle et glisse vers l'aigu (personnes) ou le grave (objet), avec souffle
   toggle: (on: boolean, x?: number) => {
