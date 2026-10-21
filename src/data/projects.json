@@ -926,6 +926,12 @@
         "sm": "/projects/kai/11-sm.webp",
         "width": 2000,
         "height": 2000
+      },
+      {
+        "src": "/projects/kai/12.webp",
+        "sm": "/projects/kai/12-sm.webp",
+        "width": 1920,
+        "height": 1080
       }
     ]
   },
