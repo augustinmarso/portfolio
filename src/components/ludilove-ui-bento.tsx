@@ -31,10 +31,13 @@ export function LudiloveUiBento() {
         <Img f="swipe-actions" w={564} h={186} className="llu-pulse w-[46%] max-w-48" />
       </div>
 
-      {/* Stories : la rangée défile doucement. */}
+      {/* Stories : la rangée défile à l'infini (deux copies bout à bout). */}
       <div className="llb-cell relative col-span-2 flex items-center overflow-hidden bg-white pt-8 ring-1 ring-black/5 md:col-span-3">
         <Label>stories</Label>
-        <Img f="stories" w={900} h={415} className="llu-pan h-36 w-auto max-w-none sm:h-44" />
+        <div className="llu-loop flex w-max">
+          <Img f="stories-loop" w={1260} h={543} className="h-36 w-auto max-w-none sm:h-44" />
+          <Img f="stories-loop" w={1260} h={543} className="h-36 w-auto max-w-none sm:h-44" />
+        </div>
       </div>
 
       {/* Match : la carte apparaît en rebond, sous une pluie de confettis. */}

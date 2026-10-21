@@ -375,10 +375,9 @@
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.06); }
 }
-.llu-pan { animation: llu-pan 14s ease-in-out infinite alternate; }
-@keyframes llu-pan {
-  from { transform: translateX(0); }
-  to { transform: translateX(-28%); }
+.llu-loop { animation: llu-loop 16s linear infinite; }
+@keyframes llu-loop {
+  to { transform: translateX(-50%); }
 }
 .llu-pop { animation: llu-pop 3.6s infinite; }
 @keyframes llu-pop {
@@ -405,6 +404,6 @@
   100% { transform: translateY(0); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .llu-sway, .llu-pulse, .llu-pan, .llu-pop, .llu-join { animation: none; }
+  .llu-sway, .llu-pulse, .llu-loop, .llu-pop, .llu-join { animation: none; }
   .llu-confetti, .llu-hop { display: none; }
 }
