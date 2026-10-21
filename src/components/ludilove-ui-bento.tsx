@@ -6,9 +6,12 @@ import { LudilovePersonality } from "@/components/ludilove-personality";
 // stories, match, feuille de score, scan, salle d'attente, achat, test de personnalité.
 // Animations en CSS pur (globals.css, préfixe llu-), coupées si l'utilisateur préfère réduire les animations.
 const ui = (f: string) => asset(`/projects/ludilove/ui/${f}.webp`);
+// Fiche du jeu montré dans les captures (Décrypto).
+const PHILIBERT = "https://www.philibertnet.com/fr/le-scorpion-masque/56970-decrypto-807658000709.html";
+const AMAZON = "https://www.amazon.fr/s?k=D%C3%A9crypto+jeu+de+soci%C3%A9t%C3%A9";
 const delay = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
-function Img({ f, w, h, className, style }: { f: string; w: number; h: number; className?: string; style?: CSSProperties }) {
+function Img({ f, w, h, className = "w-full", style }: { f: string; w: number; h: number; className?: string; style?: CSSProperties }) {
   return <img src={ui(f)} alt="" width={w} height={h} loading="lazy" className={className} style={style} />;
 }
 
@@ -72,10 +75,26 @@ export function LudiloveUiBento() {
         <Img f="scan-count" w={219} h={270} className="llu-pulse w-[24%] max-w-16" />
       </div>
 
-      {/* Achat. */}
+      {/* Achat : les deux boutons ouvrent vraiment la boutique, sur Décrypto. */}
       <div className="llb-cell relative col-span-1 flex items-center justify-center bg-white px-4 pb-4 pt-10 ring-1 ring-black/5 md:col-span-2">
         <Label>acheter</Label>
-        <Img f="buy" w={900} h={459} className="w-full max-w-72" />
+        <div className="relative w-full max-w-72">
+          <Img f="buy" w={900} h={459} />
+          <a
+            href={AMAZON}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Acheter Décrypto sur Amazon"
+            className="absolute inset-x-0 top-[3%] h-[40%] rounded-2xl transition-colors hover:bg-[#353766]/5"
+          />
+          <a
+            href={PHILIBERT}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Acheter Décrypto sur Philibert"
+            className="absolute inset-x-0 top-[47%] h-[40%] rounded-2xl transition-colors hover:bg-[#353766]/5"
+          />
+        </div>
       </div>
 
       {/* Salle d'attente : les joueurs arrivent. */}
