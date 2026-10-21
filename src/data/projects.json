@@ -208,8 +208,13 @@
     "title": "De passager a equipier",
     "cover": {
       "src": "/projects/de-passager-a-equipier/thumb.webp",
-      "width": 442,
-      "height": 560
+      "width": 560,
+      "height": 420
+    },
+    "hover": {
+      "src": "/projects/de-passager-a-equipier/hover.webp",
+      "width": 560,
+      "height": 420
     },
     "images": [
       {
