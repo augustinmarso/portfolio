@@ -221,7 +221,7 @@
         "src": "/projects/de-passager-a-equipier/01.webp",
         "sm": "/projects/de-passager-a-equipier/01-sm.webp",
         "width": 2000,
-        "height": 1414
+        "height": 1500
       },
       {
         "src": "/projects/de-passager-a-equipier/02.webp",
@@ -388,6 +388,12 @@
       {
         "src": "/projects/de-passager-a-equipier/29.webp",
         "sm": "/projects/de-passager-a-equipier/29-sm.webp",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/30.webp",
+        "sm": "/projects/de-passager-a-equipier/30-sm.webp",
         "width": 2000,
         "height": 1414
       }
