@@ -1345,80 +1345,67 @@
       {
         "src": "/projects/open-mind/01.webp",
         "sm": "/projects/open-mind/01-sm.webp",
-        "width": 2000,
-        "height": 1124
+        "width": 1400,
+        "height": 1446
       },
       {
         "src": "/projects/open-mind/02.webp",
         "sm": "/projects/open-mind/02-sm.webp",
-        "width": 2000,
-        "height": 1124
+        "width": 1700,
+        "height": 1700
       },
       {
         "src": "/projects/open-mind/03.webp",
         "sm": "/projects/open-mind/03-sm.webp",
         "width": 2000,
-        "height": 1124
+        "height": 1120
       },
       {
         "src": "/projects/open-mind/04.webp",
         "sm": "/projects/open-mind/04-sm.webp",
-        "width": 2000,
-        "height": 1124
+        "width": 1260,
+        "height": 2000
       },
       {
         "src": "/projects/open-mind/05.webp",
-        "sm": "/projects/open-mind/05-sm.webp",
-        "width": 2000,
-        "height": 1124
+        "width": 923,
+        "height": 923
       },
       {
         "src": "/projects/open-mind/06.webp",
         "sm": "/projects/open-mind/06-sm.webp",
-        "width": 2000,
-        "height": 1124
+        "width": 1244,
+        "height": 1596
       },
       {
         "src": "/projects/open-mind/07.webp",
         "sm": "/projects/open-mind/07-sm.webp",
-        "width": 2000,
-        "height": 1124
+        "width": 1244,
+        "height": 1596
       },
       {
         "src": "/projects/open-mind/08.webp",
         "sm": "/projects/open-mind/08-sm.webp",
-        "width": 2000,
-        "height": 1124
+        "width": 1244,
+        "height": 1596
       },
       {
         "src": "/projects/open-mind/09.webp",
         "sm": "/projects/open-mind/09-sm.webp",
-        "width": 2000,
-        "height": 1124
+        "width": 1500,
+        "height": 2000
       },
       {
         "src": "/projects/open-mind/10.webp",
         "sm": "/projects/open-mind/10-sm.webp",
-        "width": 2000,
-        "height": 1124
+        "width": 1421,
+        "height": 1730
       },
       {
         "src": "/projects/open-mind/11.webp",
         "sm": "/projects/open-mind/11-sm.webp",
-        "width": 2000,
-        "height": 1124
-      },
-      {
-        "src": "/projects/open-mind/12.webp",
-        "sm": "/projects/open-mind/12-sm.webp",
-        "width": 2000,
-        "height": 1124
-      },
-      {
-        "src": "/projects/open-mind/13.webp",
-        "sm": "/projects/open-mind/13-sm.webp",
-        "width": 2000,
-        "height": 1124
+        "width": 1659,
+        "height": 913
       }
     ]
   },
