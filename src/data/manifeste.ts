@@ -1,4 +1,5 @@
 // Manifeste d'Augustin Marsollier (DSAA ENSAAMA, 2026), repris du PDF « Manifeste Augustin Marsollier ».
+// Portraits des trois designers favoris recadrés depuis le PDF (public/manifeste).
 // Dans les textes, [n] renvoie à la note n ; [[texte|/projets/slug]] fait un lien vers un projet.
 
 export const TITRE = "matérialisme énergétique[1], décroissance du design et croissance spirituelle";
@@ -9,7 +10,7 @@ export const EXERGUE = {
   source: "Georges Bernanos, La France contre les robots (1947)",
 };
 
-export type Section = { id: string; titre: string; paragraphes?: string[]; liste?: { nom: string; detail: string; texte?: string }[] };
+export type Section = { id: string; titre: string; paragraphes?: string[]; liste?: { nom: string; detail: string; texte?: string; photo?: string }[] };
 
 export const SECTIONS: Section[] = [
   {
@@ -51,9 +52,9 @@ export const SECTIONS: Section[] = [
     id: "designers",
     titre: "mes trois designers favoris",
     liste: [
-      { nom: "Léon XIV", detail: "Pape depuis 2025" },
-      { nom: "Jean-Marc Jancovici", detail: "Ingénieur, fondateur de The Shift Project" },
-      { nom: "Michel Clouscard", detail: "Philosophe et sociologue (1928–2009)" },
+      { nom: "Léon XIV", detail: "Pape depuis 2025", photo: "/manifeste/leon-xiv.webp" },
+      { nom: "Jean-Marc Jancovici", detail: "Ingénieur, fondateur de The Shift Project", photo: "/manifeste/jancovici.webp" },
+      { nom: "Michel Clouscard", detail: "Philosophe et sociologue (1928–2009)", photo: "/manifeste/clouscard.webp" },
     ],
   },
   {

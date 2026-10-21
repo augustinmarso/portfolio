@@ -3,6 +3,8 @@ import Link from "next/link";
 import { absolute } from "@/lib/site";
 import { SiteHeader } from "@/components/site-header";
 import { SideScrollNav } from "@/components/side-scroll-nav";
+import { FadeImg } from "@/components/fade-img";
+import { asset } from "@/lib/projects";
 import { Bookshelf } from "@/components/bookshelf";
 import { WordReveal } from "@/components/word-reveal";
 import { EXERGUE, NOTES, OUVRAGES, SECTIONS, TITRE } from "@/data/manifeste";
@@ -79,7 +81,26 @@ export default function PourquoiPage() {
                   ))}
                 </div>
               )}
-              {s.liste && (
+              {s.liste?.some((it) => it.photo) && (
+                <ul className="mt-8 grid grid-cols-3 gap-3 sm:gap-6">
+                  {s.liste.map((it) => (
+                    <li key={it.nom} className="group">
+                      <FadeImg
+                        src={asset(it.photo!)}
+                        alt={`Portrait de ${it.nom}`}
+                        width={405}
+                        height={543}
+                        sizes="(min-width: 1024px) 20vw, 30vw"
+                        className="grayscale transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                        frameClassName="overflow-hidden rounded-sm"
+                      />
+                      <p className="mt-3 text-base sm:text-lg">{it.nom}</p>
+                      <p className="mt-0.5 text-sm font-normal text-muted-foreground sm:text-base">{it.detail}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {s.liste && !s.liste.some((it) => it.photo) && (
                 <dl className="mt-6 grid gap-6">
                   {s.liste.map((it) => (
                     <div key={it.nom} className="max-w-[62ch]">
