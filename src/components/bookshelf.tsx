@@ -85,7 +85,7 @@ export function Bookshelf({ books }: { books: Ouvrage[] }) {
   const book = current !== null ? books[current] : null;
 
   return (
-    <div ref={ref} className="[--s:0.62] sm:[--s:1]">
+    <div ref={ref} className="bookshelf">
       <div className="flex justify-center py-6 [perspective:1500px] sm:py-10" style={{ height: px(SHELF_H + 150) }}>
         <div
           className="relative flex items-end gap-[2px] self-end [transform-style:preserve-3d]"
@@ -135,12 +135,12 @@ export function Bookshelf({ books }: { books: Ouvrage[] }) {
                   frontStyle={{ color: b.encre }}
                   right={last}
                 >
-                  <span className="absolute inset-0 flex flex-col items-center justify-between gap-2 overflow-hidden py-3 group-focus-visible:ring-2 group-focus-visible:ring-foreground">
+                  <span className="absolute inset-0 flex flex-col items-center justify-between gap-1.5 overflow-hidden px-[3px] py-2.5 group-focus-visible:ring-2 group-focus-visible:ring-foreground">
                     {cloth ? <span aria-hidden className={ridge} style={{ background: b.encre }} /> : <span aria-hidden className="h-px w-3/5 opacity-40" style={{ background: b.encre }} />}
-                    <span className="min-h-0 flex-1 rotate-180 overflow-hidden text-ellipsis whitespace-nowrap text-[10px] font-semibold leading-none tracking-tight [writing-mode:vertical-rl] sm:text-[11px]">
+                    <span className="flex min-h-0 flex-1 rotate-180 items-center text-center text-[max(7px,calc(10.5px*var(--s)))] font-semibold leading-[1.1] tracking-tight [writing-mode:vertical-rl]">
                       {b.titre}
                     </span>
-                    <span className="rotate-180 text-[9px] uppercase leading-none tracking-wide opacity-75 [writing-mode:vertical-rl] sm:text-[10px]">
+                    <span className="rotate-180 whitespace-nowrap text-[max(6px,calc(9px*var(--s)))] uppercase leading-none tracking-wide opacity-75 [writing-mode:vertical-rl]">
                       {b.auteur}
                     </span>
                     {cloth && <span aria-hidden className={ridge} style={{ background: b.encre }} />}

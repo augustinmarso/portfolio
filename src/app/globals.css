@@ -225,3 +225,13 @@
 @media (prefers-reduced-motion: reduce) {
   .sound-wave { animation: none; }
 }
+
+/* Bibliothèque du manifeste : échelle des volumes (réduite sur téléphone). */
+.bookshelf {
+  --s: 0.68;
+}
+@media (min-width: 40rem) {
+  .bookshelf {
+    --s: 1;
+  }
+}

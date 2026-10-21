@@ -14,7 +14,7 @@ export type NavHref = (typeof LINKS)[number]["href"] | null;
 // Navigation en minuscules, l'onglet actif en noir, les autres en gris.
 export function SiteNav({ active }: { active: NavHref }) {
   return (
-    <nav data-sound="barre" className="flex flex-wrap gap-x-5 gap-y-1 text-lg font-semibold tracking-tight">
+    <nav data-sound="barre" className="flex flex-wrap gap-x-4 gap-y-1 text-lg sm:gap-x-5 font-semibold tracking-tight">
       {LINKS.map((l) => (
         <Link
           key={l.href}
