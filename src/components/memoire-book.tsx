@@ -16,6 +16,8 @@ type Line = { x: number; y: number; len: number; a: number; size: number; spans:
 type Page = { w: number; h: number; bg: string; lines: Line[] };
 const PAGES = (data as { pages: Page[] }).pages;
 const SPREAD_W = 839.05;
+// Graisses du PDF ramenées à celles du site : texte courant en 400, titres et mises en avant en gras.
+const WEIGHT: Record<number, number> = { 300: 400, 400: 400, 500: 700, 700: 700 };
 
 function Lines({ page }: { page: Page }) {
   return (
@@ -37,7 +39,7 @@ function Lines({ page }: { page: Page }) {
             <span
               key={k}
               style={{
-                fontWeight: s.w,
+                fontWeight: WEIGHT[s.w] ?? s.w,
                 fontStyle: s.i ? "italic" : undefined,
                 color: s.c === "#231f20" ? undefined : s.c,
                 fontSize: s.s !== l.size ? `${s.s / l.size}em` : undefined,
