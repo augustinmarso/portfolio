@@ -416,116 +416,106 @@
       {
         "src": "/projects/echappee/01.webp",
         "sm": "/projects/echappee/01-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1131
       },
       {
         "src": "/projects/echappee/02.webp",
         "sm": "/projects/echappee/02-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/03.webp",
         "sm": "/projects/echappee/03-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/04.webp",
         "sm": "/projects/echappee/04-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/05.webp",
         "sm": "/projects/echappee/05-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/06.webp",
-        "sm": "/projects/echappee/06-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1200,
+        "height": 1200
       },
       {
         "src": "/projects/echappee/07.webp",
         "sm": "/projects/echappee/07-sm.webp",
         "width": 2000,
-        "height": 1413
+        "height": 2000
       },
       {
         "src": "/projects/echappee/08.webp",
-        "sm": "/projects/echappee/08-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1200,
+        "height": 1200
       },
       {
         "src": "/projects/echappee/09.webp",
         "sm": "/projects/echappee/09-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/10.webp",
-        "sm": "/projects/echappee/10-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1200,
+        "height": 1200
       },
       {
         "src": "/projects/echappee/11.webp",
         "sm": "/projects/echappee/11-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/12.webp",
         "sm": "/projects/echappee/12-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/13.webp",
         "sm": "/projects/echappee/13-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/14.webp",
         "sm": "/projects/echappee/14-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/15.webp",
         "sm": "/projects/echappee/15-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/16.webp",
-        "sm": "/projects/echappee/16-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1100,
+        "height": 1500
       },
       {
         "src": "/projects/echappee/17.webp",
         "sm": "/projects/echappee/17-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "width": 1600,
+        "height": 1067
       },
       {
         "src": "/projects/echappee/18.webp",
         "sm": "/projects/echappee/18-sm.webp",
         "width": 2000,
-        "height": 1413
-      },
-      {
-        "src": "/projects/echappee/19.webp",
-        "sm": "/projects/echappee/19-sm.webp",
-        "width": 2000,
-        "height": 1413
+        "height": 1099
       }
     ]
   },
