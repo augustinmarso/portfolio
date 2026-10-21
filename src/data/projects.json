@@ -1155,14 +1155,14 @@
     "cover": {
       "src": "/projects/le-jeu-de-la-grenouille/thumb.webp",
       "width": 560,
-      "height": 435
+      "height": 560
     },
     "images": [
       {
         "src": "/projects/le-jeu-de-la-grenouille/01.webp",
         "sm": "/projects/le-jeu-de-la-grenouille/01-sm.webp",
-        "width": 1514,
-        "height": 2000
+        "width": 2000,
+        "height": 1333
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/02.webp",
@@ -1176,47 +1176,45 @@
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/04.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/04-sm.webp",
+        "width": 1496,
+        "height": 1051
+      },
+      {
+        "src": "/projects/le-jeu-de-la-grenouille/05.webp",
         "width": 1696,
         "height": 2000
       },
       {
-        "src": "/projects/le-jeu-de-la-grenouille/05.webp",
-        "width": 1080,
-        "height": 1080
-      },
-      {
         "src": "/projects/le-jeu-de-la-grenouille/06.webp",
-        "width": 1080,
-        "height": 1080
+        "sm": "/projects/le-jeu-de-la-grenouille/06-sm.webp",
+        "width": 1981,
+        "height": 2000
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/07.webp",
+        "width": 1080,
+        "height": 1080
+      },
+      {
+        "src": "/projects/le-jeu-de-la-grenouille/08.webp",
+        "width": 1080,
+        "height": 1080
+      },
+      {
+        "src": "/projects/le-jeu-de-la-grenouille/09.webp",
+        "width": 1060,
+        "height": 1484
+      },
+      {
+        "src": "/projects/le-jeu-de-la-grenouille/10.webp",
         "width": 1440,
         "height": 1440
       },
       {
-        "src": "/projects/le-jeu-de-la-grenouille/08.webp",
-        "sm": "/projects/le-jeu-de-la-grenouille/08-sm.webp",
-        "width": 2000,
-        "height": 1500
-      },
-      {
-        "src": "/projects/le-jeu-de-la-grenouille/09.webp",
-        "sm": "/projects/le-jeu-de-la-grenouille/09-sm.webp",
-        "width": 1500,
-        "height": 2000
-      },
-      {
-        "src": "/projects/le-jeu-de-la-grenouille/10.webp",
-        "sm": "/projects/le-jeu-de-la-grenouille/10-sm.webp",
-        "width": 2000,
-        "height": 1333
-      },
-      {
         "src": "/projects/le-jeu-de-la-grenouille/11.webp",
-        "sm": "/projects/le-jeu-de-la-grenouille/11-sm.webp",
-        "width": 2000,
-        "height": 1333
+        "width": 1085,
+        "height": 1450
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/12.webp",
@@ -1226,8 +1224,9 @@
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/13.webp",
-        "width": 864,
-        "height": 1184
+        "sm": "/projects/le-jeu-de-la-grenouille/13-sm.webp",
+        "width": 1500,
+        "height": 2000
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/14.webp",
@@ -1237,46 +1236,24 @@
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/15.webp",
-        "width": 1060,
-        "height": 1484
+        "sm": "/projects/le-jeu-de-la-grenouille/15-sm.webp",
+        "width": 2000,
+        "height": 1333
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/16.webp",
-        "width": 1085,
-        "height": 1450
+        "sm": "/projects/le-jeu-de-la-grenouille/16-sm.webp",
+        "width": 1500,
+        "height": 2000
       },
       {
         "src": "/projects/le-jeu-de-la-grenouille/17.webp",
         "sm": "/projects/le-jeu-de-la-grenouille/17-sm.webp",
-        "width": 1500,
-        "height": 2000
-      },
-      {
-        "src": "/projects/le-jeu-de-la-grenouille/18.webp",
-        "sm": "/projects/le-jeu-de-la-grenouille/18-sm.webp",
-        "width": 1496,
-        "height": 1051
-      },
-      {
-        "src": "/projects/le-jeu-de-la-grenouille/19.webp",
-        "sm": "/projects/le-jeu-de-la-grenouille/19-sm.webp",
         "width": 1446,
         "height": 1088
       },
       {
-        "src": "/projects/le-jeu-de-la-grenouille/20.webp",
-        "sm": "/projects/le-jeu-de-la-grenouille/20-sm.webp",
-        "width": 1500,
-        "height": 2000
-      },
-      {
-        "src": "/projects/le-jeu-de-la-grenouille/21.webp",
-        "sm": "/projects/le-jeu-de-la-grenouille/21-sm.webp",
-        "width": 1981,
-        "height": 2000
-      },
-      {
-        "src": "/projects/le-jeu-de-la-grenouille/22.webp",
+        "src": "/projects/le-jeu-de-la-grenouille/18.webp",
         "width": 1089,
         "height": 1444
       }

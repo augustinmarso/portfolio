@@ -31,12 +31,13 @@
     "de-passager-a-equipier": "De passager à équipier · Bénéteau",
     "ludilove": "LudiLove",
     "cafetiere-au-beurre": "Cafetière au beurre",
-    "kai": "KAI"
+    "kai": "KAI",
+    "le-jeu-de-la-grenouille": "Le Jeu de la Grenouille"
   },
   "covers": {
     "kai": "11",
     "la-societe-de-jeux": "_covers",
-    "le-jeu-de-la-grenouille": "_covers",
+    "le-jeu-de-la-grenouille": "10",
     "ephemeride": "01",
     "cylinder-chair": "02",
     "echappee": "_covers",
