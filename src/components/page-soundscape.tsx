@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 // - Pachelbel, Canon : « Canon » (2004), Strolling Strings de l'United States Air Force Band
 //   (domaine public, Wikimedia Commons).
 // - Satie, Gymnopédie n° 1 : interprétée par Michael Laucke (domaine public, Wikimedia Commons).
+// - Bach, Toccata en ré mineur (BWV 565, sans la fugue) : orgue, par Ashtar Moïra (domaine public,
+//   Wikimedia Commons).
 // - Perfect Day, au piano : reprise arrangée pour Augustin, publiée sous licence de reprise
 //   obtenue par lui. (Le lecteur YouTube reste possible pour un morceau sans licence : champ youtube.)
 
@@ -19,6 +21,7 @@ const TRACKS: Track[] = [
   { id: "canon", titre: "pachelbel, canon en ré", src: "/ambiances/canon.mp3" },
   { id: "gymnopedie", titre: "satie, gymnopédie n° 1", src: "/ambiances/gymnopedie.mp3" },
   { id: "perfect-day", titre: "perfect day, au piano", src: "/ambiances/perfect-day-piano.mp3" },
+  { id: "toccata", titre: "bach, toccata en ré mineur", src: "/ambiances/toccata.mp3" },
 ];
 const STORE = "portfolio:pourquoi-musique"; // préférence de ce navigateur seulement
 const LEVEL = 0.3; // en fond, sous la lecture
