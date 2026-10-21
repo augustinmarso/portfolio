@@ -8,13 +8,10 @@ import { cn } from "@/lib/utils";
 
 // Musique de la page « pourquoi » : le Canon en ré de Pachelbel, joué en boucle, doucement.
 // Enregistrement du domaine public : « Canon » (2004), Strolling Strings de l'United States
-// Air Force Band, via Wikimedia Commons. Seul autre son : une page qu'on tourne (domaine
-// public, planish), au moment où l'on change de chapitre du manifeste.
+// Air Force Band, via Wikimedia Commons.
 
 const CANON = "/ambiances/canon.mp3";
-const PAGE = "/ambiances/page.mp3";
 const LEVEL = 0.3; // en fond, sous la lecture
-const CHAPTERS = ["foi", "fin", "ia", "pistes", "designers", "inspirations", "notes", "ouvrages"];
 
 const load = (ctx: AudioContext, url: string) =>
   fetch(asset(url))
@@ -25,7 +22,6 @@ class Engine {
   ctx: AudioContext;
   master: GainNode;
   source: AudioBufferSourceNode | null = null;
-  pageBuf: AudioBuffer | null = null;
   stopped = false;
 
   constructor(ctx: AudioContext) {
@@ -33,9 +29,6 @@ class Engine {
     this.master = ctx.createGain();
     this.master.gain.value = 0;
     this.master.connect(ctx.destination);
-    void load(ctx, PAGE)
-      .then((b) => (this.pageBuf = b))
-      .catch(() => {});
   }
 
   async play() {
@@ -56,20 +49,6 @@ class Engine {
     this.master.gain.setTargetAtTime(LEVEL * v, this.ctx.currentTime, 0.08);
   }
 
-  // Page qu'on tourne, un peu à droite, par-dessus la musique.
-  pageTurn() {
-    if (!this.pageBuf || this.stopped) return;
-    const s = this.ctx.createBufferSource();
-    s.buffer = this.pageBuf;
-    s.playbackRate.value = 0.94 + Math.random() * 0.12;
-    const g = this.ctx.createGain();
-    g.gain.value = 0.35 * getVolume();
-    const pan = this.ctx.createStereoPanner();
-    pan.pan.value = 0.25;
-    s.connect(g).connect(pan).connect(this.ctx.destination);
-    s.start();
-  }
-
   stop() {
     this.stopped = true;
     const t = this.ctx.currentTime;
@@ -81,18 +60,6 @@ class Engine {
       this.master.disconnect();
     }, 1600);
   }
-}
-
-// Chapitre courant : le dernier dont le haut a passé le milieu de l'écran (vide : ouverture).
-function currentChapter() {
-  const line = window.innerHeight * 0.5;
-  let c = "";
-  for (const id of CHAPTERS) {
-    const el = document.getElementById(id);
-    if (el && el.getBoundingClientRect().top <= line) c = id;
-  }
-  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) c = CHAPTERS[CHAPTERS.length - 1];
-  return c;
 }
 
 export function PageSoundscape() {
@@ -126,22 +93,6 @@ export function PageSoundscape() {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- démarrage à l'ouverture de la page
     if (soundOn()) void start();
 
-    // minuterie plutôt que requestAnimationFrame : continue même quand l'onglet est en arrière-plan
-    let timer = 0;
-    let last = currentChapter();
-    const onScroll = () => {
-      if (timer) return;
-      timer = window.setTimeout(() => {
-        timer = 0;
-        const c = currentChapter();
-        if (c === last) return;
-        last = c;
-        engine.current?.pageTurn(); // la page tourne seulement au changement de chapitre
-      }, 150);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    // filet de sécurité : les événements de défilement ne partent pas quand la page n'est pas affichée
-    const poll = window.setInterval(onScroll, 1000);
     // premier geste sur la page : si la lecture automatique était bloquée, on démarre
     const wake = () => {
       if (soundOn() && !engine.current) void start();
@@ -159,9 +110,6 @@ export function PageSoundscape() {
     window.addEventListener(SOUND_EVENT, sync);
     window.addEventListener(VOLUME_EVENT, vol);
     return () => {
-      window.clearTimeout(timer);
-      window.clearInterval(poll);
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("pointerdown", wake);
       window.removeEventListener("keydown", wake);
       window.removeEventListener(SOUND_EVENT, sync);
