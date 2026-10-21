@@ -18,10 +18,10 @@ function Label({ children, light }: { children: string; light?: boolean }) {
 export function LudiloveUiBento() {
   return (
     <div className="grid grid-flow-dense grid-cols-2 gap-3 md:grid-cols-6" aria-label="Composants d'interface de LudiLove en mouvement">
-      {/* Accueil : la carte qui lance une partie. */}
-      <div className="llb-cell relative col-span-2 flex items-center justify-center bg-[#F7F2E8] px-8 pb-6 pt-10 md:col-span-3">
-        <Label>accueil</Label>
-        <Img f="launch" w={900} h={863} className="llb-float w-full max-w-72" />
+      {/* Accueil : la carte qui lance une partie, fixe, occupe toute la case. */}
+      <div className="llb-cell relative col-span-2 bg-[#5F58A8] md:col-span-3">
+        <Label light>accueil</Label>
+        <Img f="launch" w={900} h={863} className="block h-full w-full object-cover" />
       </div>
 
       {/* Swipe : la carte oscille entre « passer » et « j'aime ». */}
