@@ -87,8 +87,10 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
   const leaving = useRef(false);
 
   const { placed, tileW, tileH } = useMemo(() => layoutTile(projects, viewport.w), [projects, viewport.w]);
-  const copiesX = Math.ceil(viewport.w / tileW) + 2;
-  const copiesY = Math.ceil(viewport.h / tileH) + 3;
+  // Juste assez de copies de la tuile pour couvrir l'écran (plan décalé de -1 tuile, marge de 5 %
+  // pour le léger zoom arrière pendant le glisser) : chaque copie en plus coûte des centaines d'images.
+  const copiesX = Math.ceil((viewport.w * 1.05) / tileW) + 1;
+  const copiesY = Math.ceil((viewport.h * 1.05) / tileH) + 1;
 
   // Centre la vue sur la tuile au premier rendu.
   useEffect(() => {
@@ -106,11 +108,14 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
       const ease = reduce ? 1 : 0.055;
       const tick = () => {
         const c = current.current;
-        c.x += (target.current.x - c.x) * ease;
-        c.y += (target.current.y - c.y) * ease;
+        const dx = target.current.x - c.x;
+        const dy = target.current.y - c.y;
+        if (Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05) return; // immobile : rien à recalculer
+        c.x += dx * ease;
+        c.y += dy * ease;
         gsap.set(planeRef.current, {
           x: wrap(c.x, tileW) - tileW,
-          y: wrap(c.y, tileH) - 2 * tileH,
+          y: wrap(c.y, tileH) - tileH,
         });
       };
       gsap.ticker.add(tick);
@@ -122,6 +127,7 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
           duration: 1.1,
           ease: "expo.out",
           stagger: { amount: 0.9, from: "center", grid: "auto" },
+          clearProps: "opacity,transform", // une fois arrivées, les cartes redeviennent de simples éléments (moins de couches)
         });
       }
       return () => gsap.ticker.remove(tick);
@@ -211,7 +217,7 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
       onPointerCancel={endDrag}
       onPointerLeave={endDrag}
     >
-      <div ref={zoomRef} className="absolute inset-0 origin-center">
+      <div ref={zoomRef} className="absolute inset-0 origin-center will-change-transform">
       <div ref={planeRef} className="absolute left-0 top-0 will-change-transform">
         {Array.from({ length: copiesY }).flatMap((_, ty) =>
           Array.from({ length: copiesX }).map((_, tx) => (
@@ -219,14 +225,14 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
               key={`${tx}-${ty}`}
               className="pointer-events-none absolute"
               style={{ left: tx * tileW, top: ty * tileH, width: tileW, height: tileH }}
-              aria-hidden={tx !== 1 || ty !== 2 ? true : undefined}
+              aria-hidden={tx !== 1 || ty !== 1 ? true : undefined}
             >
               {placed.map((p) => (
                 <Link
                   key={p.project.slug}
                   href={`/projets/${p.project.slug}`}
                   data-slug={p.project.slug}
-                  tabIndex={tx === 1 && ty === 2 ? 0 : -1}
+                  tabIndex={tx === 1 && ty === 1 ? 0 : -1}
                   draggable={false}
                   className="canvas-card group pointer-events-auto absolute block outline-none"
                   style={{ left: p.x, top: p.y, width: p.w, height: p.h }}

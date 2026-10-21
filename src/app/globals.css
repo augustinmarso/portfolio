@@ -401,3 +401,14 @@
   .llu-sway, .llu-pulse, .llu-loop, .llu-pop, .llu-join { animation: none; }
   .llu-confetti { display: none; }
 }
+
+/* Performance : animations en boucle mises en pause hors écran (composant OffscreenPause),
+   et cellules des bentos isolées : leurs animations de largeur ou de graisse ne recalculent
+   plus la mise en page du reste de la page. */
+[data-off],
+[data-off] * {
+  animation-play-state: paused !important;
+}
+.llb-cell {
+  contain: layout paint;
+}
