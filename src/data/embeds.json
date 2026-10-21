@@ -1,7 +1,16 @@
 {
-  "kai": {
-    "youtube": "SebGDIJWSEo",
-    "title": "Le lait est digeste",
-    "credit": "vidéo : Mao Brut, « le lait est digeste » (youtube)"
-  }
+  "kai": [
+    {
+      "youtube": "SebGDIJWSEo",
+      "title": "Le lait est digeste",
+      "credit": "vidéo : Mao Brut, « le lait est digeste » (youtube)",
+      "vertical": true
+    },
+    {
+      "youtube": "lirlaEfDpKY",
+      "title": "Kaiku : el cuenco del siglo XV para las cuajadas caseras",
+      "credit": "documentaire : Eugenio Monesma, le kaïku, bol basque taillé à la main (youtube)",
+      "vertical": false
+    }
+  ]
 }
