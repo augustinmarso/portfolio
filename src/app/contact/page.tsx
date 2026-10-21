@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { absolute } from "@/lib/site";
-import Image from "next/image";
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { SiteHeader } from "@/components/site-header";
@@ -142,13 +141,16 @@ export default function ContactPage() {
               </span>
             </span>
           </a>
-          <Image
-            src={asset("/contact/augustin.gif")}
-            alt="Augustin Marsollier, appuyé contre un arbre"
-            fill
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="scale-110 object-cover blur-md"
+          {/* ancien GIF converti en courte vidéo (dix fois plus légère ; de toute façon floutée) */}
+          <video
+            src={asset("/contact/augustin.mp4")}
+            poster={asset("/contact/augustin.jpg")}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-label="Augustin Marsollier, appuyé contre un arbre"
+            className="absolute inset-0 size-full scale-110 object-cover blur-md"
           />
         </div>
       </div>

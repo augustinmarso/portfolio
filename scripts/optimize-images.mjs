@@ -42,10 +42,12 @@ for (const dir of (await fs.readdir(SRC, { withFileTypes: true })).filter((d) =>
     const input = path.join(SRC, title, file);
     const animated = /\.(gif|webp)$/i.test(file); // GIF ou WebP animés
     const name = String(i + 1).padStart(2, "0");
+    // les animations pèsent une image par vue : plus petites et plus compressées (1000 px, qualité 62)
+    const max = animated ? 1000 : FULL;
     const full = await sharp(input, { animated, limitInputPixels: false })
       .rotate() // applique l'orientation EXIF des photos d'appareil
-      .resize({ width: FULL, height: FULL, fit: "inside", withoutEnlargement: true })
-      .webp({ quality: 80 })
+      .resize({ width: max, height: max, fit: "inside", withoutEnlargement: true })
+      .webp(animated ? { quality: 62, effort: 6 } : { quality: 80 })
       .toFile(path.join(outDir, `${name}.webp`));
     let sm;
     if (!animated && full.width > SMALL * 1.2) {

@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
+import { LoadingScreen } from "@/components/loading-screen";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { UiSounds } from "@/components/ui-sounds";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, ogImage } from "@/lib/site";
 import "./globals.css";
 
-// Scoutie Sans (Google Fonts, août 2026) n'est pas encore dans la liste de next/font :
-// chargée par la feuille de style Google, variable 200–800.
-const FONT_CSS =
-  "https://fonts.googleapis.com/css2?family=Scoutie+Sans:ital,wght@0,200..800;1,200..800&display=swap";
+// Scoutie Sans est hébergée sur le site (globals.css, fichiers dans src/app/fonts).
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${SITE_URL}/`),
@@ -44,12 +42,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr" className="h-full antialiased">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link rel="stylesheet" href={FONT_CSS} />
-      </head>
       <body className="min-h-full flex flex-col">
+        <LoadingScreen />
         {children}
         <SmoothScroll />
         <UiSounds />
