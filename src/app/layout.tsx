@@ -8,7 +8,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${SITE_URL}/`),
-  title: { default: "Augustin Marsollier — designer objet et service, portfolio", template: "%s — Augustin Marsollier" },
+  title: { default: "Portfolio Augustin Marsollier — designer objet et service", template: "%s — Portfolio Augustin Marsollier" },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
