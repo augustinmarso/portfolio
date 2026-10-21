@@ -235,3 +235,9 @@
     --s: 1;
   }
 }
+
+/* Ambiance de la page pourquoi : le nom du chapitre sonore apparaît en fondu. */
+@keyframes soundscape-in {
+  from { opacity: 0; filter: blur(3px); }
+  to { opacity: 1; filter: blur(0); }
+}

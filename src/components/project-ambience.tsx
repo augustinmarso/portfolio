@@ -101,7 +101,7 @@ export function ProjectAmbience({ src, title }: { src: string; title: string }) 
 // vers le haut : il remonte. Les barres suivent la souris en direct.
 const BARS = 5;
 const H = 14; // hauteur maximale des barres, en px
-function AmbienceBars({ on, onSilence, onWake }: { on: boolean; onSilence: () => void; onWake: () => void }) {
+export function AmbienceBars({ on, onSilence, onWake }: { on: boolean; onSilence: () => void; onWake: () => void }) {
   const [vol, setVol] = useState(0.7);
   const [drag, setDrag] = useState<{ y: number; start: number } | null>(null);
 
