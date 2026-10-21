@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { absolute } from "@/lib/site";
+import { AppLogos } from "@/components/app-logos";
 import { PrintButton } from "@/components/print-button";
 import { SiteHeader } from "@/components/site-header";
 import { asset } from "@/lib/projects";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 const ENSAAMA = "https://ensaama.net/site/home/formations";
 
 // href : site officiel de l'école ou de la structure (lien sur le nom, en ligne et dans le PDF).
-const SECTIONS: { title: string; items: { when: string; what: string; detail?: string; href?: string }[] }[] = [
+const SECTIONS: { title: string; items: { when: string; what: string; detail?: string; href?: string; logos?: boolean }[] }[] = [
   {
     title: "formation",
     items: [
@@ -76,7 +77,11 @@ const SECTIONS: { title: string; items: { when: string; what: string; detail?: s
       { when: "main", what: "Dessin en volume, croquis de recherche" },
       { when: "graphisme", what: "InDesign, Photoshop, Illustrator, Figma" },
       { when: "vidéo", what: "Premiere Pro, montages de présentation" },
-      { when: "numérique", what: "Prototypes d'applications et de sites web avec l'IA (Claude Code), automatisation avec n8n" },
+      {
+        when: "numérique",
+        what: "Prototypes d'applications et de sites web avec l'IA (Claude Code), automatisation avec n8n",
+        logos: true,
+      },
       { when: "ia", what: "Prompt engineering (ChatGPT, Nano Banana), images et vidéos génératives" },
     ],
   },
@@ -145,6 +150,7 @@ export default function CvPage() {
                     <dd>
                       {/* Lien sur l'école (détail) en formation, sur la structure (titre) ailleurs. */}
                       {it.href && s.title !== "formation" ? <Ext href={it.href}>{it.what}</Ext> : it.what}
+                      {it.logos && <AppLogos className="ml-2" />}
                       {it.detail && (
                         <span className="mt-1 block font-normal text-muted-foreground">
                           {it.href && s.title === "formation" ? <Ext href={it.href}>{it.detail}</Ext> : it.detail}
