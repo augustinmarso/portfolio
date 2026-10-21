@@ -1264,7 +1264,12 @@
     "title": "Ludilove",
     "cover": {
       "src": "/projects/ludilove/thumb.webp",
-      "width": 280,
+      "width": 373,
+      "height": 560
+    },
+    "hover": {
+      "src": "/projects/ludilove/hover.webp",
+      "width": 373,
       "height": 560
     },
     "images": [
