@@ -11,14 +11,14 @@ import { cn } from "@/lib/utils";
 // - Pachelbel, Canon : « Canon » (2004), Strolling Strings de l'United States Air Force Band
 //   (domaine public, Wikimedia Commons).
 // - Satie, Gymnopédie n° 1 : interprétée par Michael Laucke (domaine public, Wikimedia Commons).
-// - Miriam Stockley, Perfect Day : morceau protégé, donc jamais copié sur le site : lecteur
-//   YouTube de la chaîne officielle « Miriam Stockley - Topic », intégré et visible.
+// - Perfect Day, au piano : reprise arrangée pour Augustin, publiée sous licence de reprise
+//   obtenue par lui. (Le lecteur YouTube reste possible pour un morceau sans licence : champ youtube.)
 
 type Track = { id: string; titre: string; src?: string; youtube?: string };
 const TRACKS: Track[] = [
   { id: "canon", titre: "pachelbel, canon en ré", src: "/ambiances/canon.mp3" },
   { id: "gymnopedie", titre: "satie, gymnopédie n° 1", src: "/ambiances/gymnopedie.mp3" },
-  { id: "perfect-day", titre: "miriam stockley, perfect day", youtube: "keBmxDPn3dk" },
+  { id: "perfect-day", titre: "perfect day, au piano", src: "/ambiances/perfect-day-piano.mp3" },
 ];
 const STORE = "portfolio:pourquoi-musique"; // préférence de ce navigateur seulement
 const LEVEL = 0.3; // en fond, sous la lecture
