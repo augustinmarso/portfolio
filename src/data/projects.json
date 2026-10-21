@@ -168,7 +168,12 @@
     "title": "Cylinder chair",
     "cover": {
       "src": "/projects/cylinder-chair/thumb.webp",
-      "width": 560,
+      "width": 440,
+      "height": 560
+    },
+    "hover": {
+      "src": "/projects/cylinder-chair/hover.webp",
+      "width": 440,
       "height": 560
     },
     "images": [
