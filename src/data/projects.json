@@ -1465,6 +1465,30 @@
         "sm": "/projects/ludilove/charte-sm.webp",
         "width": 2000,
         "height": 6581
+      },
+      {
+        "src": "/projects/ludilove/33.webp",
+        "sm": "/projects/ludilove/33-sm.webp",
+        "width": 1433,
+        "height": 2000
+      },
+      {
+        "src": "/projects/ludilove/34.webp",
+        "sm": "/projects/ludilove/34-sm.webp",
+        "width": 2000,
+        "height": 928
+      },
+      {
+        "src": "/projects/ludilove/35.webp",
+        "sm": "/projects/ludilove/35-sm.webp",
+        "width": 2000,
+        "height": 1442
+      },
+      {
+        "src": "/projects/ludilove/36.webp",
+        "sm": "/projects/ludilove/36-sm.webp",
+        "width": 2000,
+        "height": 1419
       }
     ]
   },

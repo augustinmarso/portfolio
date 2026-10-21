@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Fragment } from "react";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { FadeImg } from "@/components/fade-img";
 import { ProjectAmbience } from "@/components/project-ambience";
 import ambiances from "@/data/ambiances.json";
 import { VideoPlayer } from "@/components/video-player";
+import { LudiloveBento } from "@/components/ludilove-bento";
 import { asset, getProject, projects } from "@/lib/projects";
 import { absolute, excerpt, jsonLd, ogImage, PERSON } from "@/lib/site";
 
@@ -144,7 +146,17 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
           {project.images.map((img, n) => {
             const caption = text?.captions[n];
             return (
-              <figure key={img.src}>
+              <Fragment key={img.src}>
+                {/* LudiLove : la charte en mouvement, juste avant la planche de la charte. */}
+                {project.slug === "ludilove" && img.src.endsWith("/ludilove/33.webp") && (
+                  <figure>
+                    <LudiloveBento />
+                    <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">
+                      charte en mouvement : logo, mascotte, navigation, typographie, couleurs et pictogrammes
+                    </figcaption>
+                  </figure>
+                )}
+              <figure>
                 <FadeImg
                   src={img.src}
                   sm={img.sm}
@@ -158,6 +170,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
                   <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">{caption.toLowerCase()}</figcaption>
                 )}
               </figure>
+              </Fragment>
             );
           })}
 

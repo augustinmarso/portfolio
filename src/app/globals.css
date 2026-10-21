@@ -298,3 +298,68 @@
 @media (prefers-reduced-motion: reduce) {
   .loading-logo { animation: none; }
 }
+
+/* Bento de la charte LudiLove (page projet) : Quicksand, police de l'app, hébergée ici.
+   Police variable 300–700, découpée en latin et latin étendu comme chez Google. */
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("./fonts/quicksand-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("./fonts/quicksand-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+.llb-font { font-family: "Quicksand", ui-rounded, sans-serif; }
+.llb-cell { border-radius: 1.75rem; overflow: hidden; }
+/* le logo flotte doucement */
+.llb-float { animation: llb-float 5s ease-in-out infinite; }
+@keyframes llb-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+/* six poses de la mascotte, 2 s chacune, qui apparaissent en rebond */
+.llb-mascot { opacity: 0; animation: llb-pose 12s infinite; animation-delay: var(--d); }
+@keyframes llb-pose {
+  0% { opacity: 0; transform: translateY(14px) scale(0.92); }
+  3% { opacity: 1; transform: translateY(-4px) scale(1.02); }
+  6%, 14% { opacity: 1; transform: translateY(0) scale(1); }
+  17%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+}
+/* onglets : contour → aplat à tour de rôle */
+.llb-on { opacity: 0; animation: llb-tab 8s infinite; animation-delay: var(--d); }
+@keyframes llb-tab {
+  0% { opacity: 0; transform: scale(0.85); }
+  4%, 16% { opacity: 1; transform: scale(1); }
+  20%, 100% { opacity: 0; transform: scale(1); }
+}
+/* graisse qui respire */
+.llb-weight { animation: llb-weight 4s ease-in-out infinite; }
+@keyframes llb-weight {
+  0%, 100% { font-weight: 300; }
+  50% { font-weight: 700; }
+}
+/* couleurs en vague */
+.llb-swatch { flex: 1 1 0; animation: llb-wave 3.2s ease-in-out infinite; animation-delay: var(--d); }
+@keyframes llb-wave {
+  0%, 100% { flex-grow: 1; }
+  50% { flex-grow: 2.6; }
+}
+/* pictogrammes en défilement continu (la liste est doublée pour boucler sans couture) */
+.llb-marquee { display: flex; gap: 2.5rem; width: max-content; animation: llb-marquee 40s linear infinite; }
+.llb-marquee-rev { animation-direction: reverse; }
+@keyframes llb-marquee {
+  to { transform: translateX(calc(-50% - 1.25rem)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .llb-float, .llb-weight, .llb-swatch, .llb-marquee { animation: none; }
+  .llb-mascot, .llb-on { animation: none; }
+  .llb-mascot:first-of-type, .llb-cell span:first-child > .llb-on { opacity: 1; }
+}
