@@ -11,14 +11,14 @@ import { cn } from "@/lib/utils";
 // - Pachelbel, Canon : « Canon » (2004), Strolling Strings de l'United States Air Force Band
 //   (domaine public, Wikimedia Commons).
 // - Satie, Gymnopédie n° 1 : interprétée par Michael Laucke (domaine public, Wikimedia Commons).
-// - Lou Reed, Perfect Day : morceau protégé, donc jamais copié sur le site : lecteur officiel
-//   YouTube (LouReedVEVO) intégré et visible, YouTube gère les droits.
+// - Miriam Stockley, Perfect Day : morceau protégé, donc jamais copié sur le site : lecteur
+//   YouTube de la chaîne officielle « Miriam Stockley - Topic », intégré et visible.
 
 type Track = { id: string; titre: string; src?: string; youtube?: string };
 const TRACKS: Track[] = [
   { id: "canon", titre: "pachelbel, canon en ré", src: "/ambiances/canon.mp3" },
   { id: "gymnopedie", titre: "satie, gymnopédie n° 1", src: "/ambiances/gymnopedie.mp3" },
-  { id: "perfect-day", titre: "lou reed, perfect day", youtube: "9wxI4KK9ZYo" },
+  { id: "perfect-day", titre: "miriam stockley, perfect day", youtube: "keBmxDPn3dk" },
 ];
 const STORE = "portfolio:pourquoi-musique"; // préférence de ce navigateur seulement
 const LEVEL = 0.3; // en fond, sous la lecture
@@ -198,7 +198,7 @@ export function PageSoundscape() {
       {track.youtube && (
         <iframe
           ref={frame}
-          title="Lou Reed — Perfect Day (lecteur YouTube officiel)"
+          title="Miriam Stockley — Perfect Day (lecteur YouTube officiel)"
           src={`https://www.youtube-nocookie.com/embed/${track.youtube}?autoplay=1&loop=1&playlist=${track.youtube}&rel=0&enablejsapi=1`}
           allow="autoplay; encrypted-media; picture-in-picture"
           className="mb-2 aspect-video w-56 rounded-md sm:w-64"
