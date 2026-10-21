@@ -17,9 +17,9 @@ const EMAIL = "marsollier.augustin@gmail.com";
 const PHONE = { display: "07 49 32 47 31", href: "tel:+33749324731" };
 // Ouvre la conversation WhatsApp sur le numéro (on y lance l'appel vidéo).
 const WHATSAPP = "https://wa.me/33749324731";
-// À renseigner : identifiant du formulaire Formspree (formspree.io/f/<id>) et lien Google Meet personnel.
-// Tant qu'ils sont vides, le formulaire ouvre la messagerie du visiteur et le bouton du GIF propose une visio par mail.
-const FORMSPREE_ID = "";
+// Identifiant du formulaire Formspree (formspree.io/f/<id>) ; vide, le formulaire ouvre la messagerie du visiteur.
+// Lien Google Meet personnel à renseigner : tant qu'il est vide, le bouton du GIF propose une visio par mail.
+const FORMSPREE_ID = "mrpenbga";
 const MEET_URL = MEET;
 
 export default function ContactPage() {
