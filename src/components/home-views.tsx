@@ -52,7 +52,7 @@ export function HomeViews({ projects }: { projects: Project[] }) {
 
       {/* Barre du bas : bande blanche pleine largeur, calée en bas, rien ne passe dessous.
           Téléphone : boutons « personne / les gens » au-dessus, les quatre vues réparties sur la largeur. */}
-      <div data-sound="barre" className="fixed inset-x-0 bottom-0 z-10 flex items-center justify-between gap-3 bg-background px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-2 text-[clamp(12px,3.3vw,15px)] font-semibold sm:px-6 sm:pb-3 sm:text-base">
+      <div className="fixed inset-x-0 bottom-0 z-10 flex items-center justify-between gap-3 bg-background px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-2 text-[clamp(12px,3.3vw,15px)] font-semibold sm:px-6 sm:pb-3 sm:text-base">
         <p className="pointer-events-none hidden text-sm text-muted-foreground sm:block">
           {view === "canvas"
             ? "glisser pour explorer, cliquer pour ouvrir"

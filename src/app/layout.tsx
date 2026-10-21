@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { LoadingScreen } from "@/components/loading-screen";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { UiSounds } from "@/components/ui-sounds";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, ogImage } from "@/lib/site";
 import "./globals.css";
 
@@ -46,7 +45,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <LoadingScreen />
         {children}
         <SmoothScroll />
-        <UiSounds />
       </body>
     </html>
   );

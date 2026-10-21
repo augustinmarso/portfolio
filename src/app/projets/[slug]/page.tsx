@@ -5,12 +5,10 @@ import { Fragment } from "react";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { FadeImg } from "@/components/fade-img";
-import { ProjectAmbience } from "@/components/project-ambience";
-import ambiances from "@/data/ambiances.json";
 import { VideoPlayer } from "@/components/video-player";
 import { LudiloveBento } from "@/components/ludilove-bento";
 import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
-import { asset, getProject, projects } from "@/lib/projects";
+import { getProject, projects } from "@/lib/projects";
 import { absolute, excerpt, jsonLd, ogImage, PERSON } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -45,8 +43,6 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
   const i = projects.indexOf(project);
   const next = projects[(i + 1) % projects.length];
   const text = project.text;
-  // Ambiance sonore du projet (enregistrement libre, voir src/data/ambiances.json)
-  const ambience = (ambiances as Record<string, { file: string; titre: string }>)[slug];
 
   const structured = {
     "@context": "https://schema.org",
@@ -133,7 +129,6 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
 
           {text?.intro && <p className="mt-8 max-w-prose text-lg leading-relaxed">{text.intro}</p>}
 
-          {ambience && <ProjectAmbience src={asset(ambience.file)} title={ambience.titre} />}
 
           {/* Exception : le téléphone sous le texte ; une fois apparu, il reste fixe pendant le défilement. */}
           {project.video && (
