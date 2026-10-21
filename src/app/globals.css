@@ -363,3 +363,48 @@
   .llb-mascot, .llb-on { animation: none; }
   .llb-mascot:first-of-type, .llb-cell span:first-child > .llb-on { opacity: 1; }
 }
+/* Bento des composants d'interface LudiLove (page projet) */
+.llu-sway { animation: llu-sway 4.4s ease-in-out infinite; transform-origin: 50% 90%; }
+@keyframes llu-sway {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-14px) rotate(-5deg); }
+  75% { transform: translateX(14px) rotate(5deg); }
+}
+.llu-pulse { animation: llu-pulse 2.2s ease-in-out infinite; }
+@keyframes llu-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+.llu-pan { animation: llu-pan 14s ease-in-out infinite alternate; }
+@keyframes llu-pan {
+  from { transform: translateX(0); }
+  to { transform: translateX(-28%); }
+}
+.llu-pop { animation: llu-pop 3.6s infinite; }
+@keyframes llu-pop {
+  0% { transform: scale(0.8) rotate(-4deg); opacity: 0; }
+  12% { transform: scale(1.06) rotate(2deg); opacity: 1; }
+  20%, 88% { transform: scale(1) rotate(0); opacity: 1; }
+  100% { transform: scale(0.96); opacity: 0; }
+}
+.llu-confetti { position: absolute; top: -12px; width: 9px; height: 14px; border-radius: 3px; animation: llu-fall 3.6s linear infinite; animation-delay: var(--d); }
+@keyframes llu-fall {
+  from { transform: translateY(0) rotate(0); }
+  to { transform: translateY(560px) rotate(540deg); }
+}
+.llu-hop { position: absolute; top: 40%; width: 12%; aspect-ratio: 1; border-radius: 999px; translate: -50% -50%; margin-left: 0;
+  box-shadow: 0 0 0 3px #8687BC; opacity: 0; animation: llu-hop 2.5s infinite; animation-delay: var(--d); }
+@keyframes llu-hop {
+  0%, 30%, 100% { opacity: 0; transform: scale(0.8); }
+  10%, 20% { opacity: 1; transform: scale(1); }
+}
+.llu-join { animation: llu-join 4s ease-out infinite; }
+@keyframes llu-join {
+  0% { transform: translateY(18px); opacity: 0; }
+  15%, 85% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .llu-sway, .llu-pulse, .llu-pan, .llu-pop, .llu-join { animation: none; }
+  .llu-confetti, .llu-hop { display: none; }
+}

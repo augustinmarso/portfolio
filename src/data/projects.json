@@ -1277,221 +1277,41 @@
         "src": "/projects/ludilove/01.webp",
         "sm": "/projects/ludilove/01-sm.webp",
         "width": 2000,
-        "height": 1125
+        "height": 1300
       },
       {
         "src": "/projects/ludilove/02.webp",
         "sm": "/projects/ludilove/02-sm.webp",
         "width": 2000,
-        "height": 1125
+        "height": 1300
       },
       {
         "src": "/projects/ludilove/03.webp",
         "sm": "/projects/ludilove/03-sm.webp",
         "width": 2000,
-        "height": 1125
+        "height": 1300
       },
       {
         "src": "/projects/ludilove/04.webp",
         "sm": "/projects/ludilove/04-sm.webp",
-        "width": 2000,
-        "height": 1125
+        "width": 1433,
+        "height": 2000
       },
       {
         "src": "/projects/ludilove/05.webp",
         "sm": "/projects/ludilove/05-sm.webp",
         "width": 2000,
-        "height": 1125
+        "height": 928
       },
       {
         "src": "/projects/ludilove/06.webp",
         "sm": "/projects/ludilove/06-sm.webp",
         "width": 2000,
-        "height": 1125
+        "height": 1442
       },
       {
         "src": "/projects/ludilove/07.webp",
         "sm": "/projects/ludilove/07-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/08.webp",
-        "sm": "/projects/ludilove/08-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/09.webp",
-        "sm": "/projects/ludilove/09-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/10.webp",
-        "sm": "/projects/ludilove/10-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/11.webp",
-        "sm": "/projects/ludilove/11-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/12.webp",
-        "sm": "/projects/ludilove/12-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/13.webp",
-        "sm": "/projects/ludilove/13-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/14.webp",
-        "sm": "/projects/ludilove/14-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/15.webp",
-        "sm": "/projects/ludilove/15-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/16.webp",
-        "sm": "/projects/ludilove/16-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/17.webp",
-        "sm": "/projects/ludilove/17-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/18.webp",
-        "sm": "/projects/ludilove/18-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/19.webp",
-        "sm": "/projects/ludilove/19-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/20.webp",
-        "sm": "/projects/ludilove/20-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/21.webp",
-        "sm": "/projects/ludilove/21-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/22.webp",
-        "sm": "/projects/ludilove/22-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/23.webp",
-        "sm": "/projects/ludilove/23-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/24.webp",
-        "sm": "/projects/ludilove/24-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/25.webp",
-        "sm": "/projects/ludilove/25-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/26.webp",
-        "sm": "/projects/ludilove/26-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/27.webp",
-        "sm": "/projects/ludilove/27-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/28.webp",
-        "sm": "/projects/ludilove/28-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/29.webp",
-        "sm": "/projects/ludilove/29-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/30.webp",
-        "sm": "/projects/ludilove/30-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/31.webp",
-        "sm": "/projects/ludilove/31-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/32.webp",
-        "sm": "/projects/ludilove/32-sm.webp",
-        "width": 2000,
-        "height": 1125
-      },
-      {
-        "src": "/projects/ludilove/charte.webp",
-        "sm": "/projects/ludilove/charte-sm.webp",
-        "width": 2000,
-        "height": 6581
-      },
-      {
-        "src": "/projects/ludilove/33.webp",
-        "sm": "/projects/ludilove/33-sm.webp",
-        "width": 1433,
-        "height": 2000
-      },
-      {
-        "src": "/projects/ludilove/34.webp",
-        "sm": "/projects/ludilove/34-sm.webp",
-        "width": 2000,
-        "height": 928
-      },
-      {
-        "src": "/projects/ludilove/35.webp",
-        "sm": "/projects/ludilove/35-sm.webp",
-        "width": 2000,
-        "height": 1442
-      },
-      {
-        "src": "/projects/ludilove/36.webp",
-        "sm": "/projects/ludilove/36-sm.webp",
         "width": 2000,
         "height": 1419
       }

@@ -9,6 +9,7 @@ import { ProjectAmbience } from "@/components/project-ambience";
 import ambiances from "@/data/ambiances.json";
 import { VideoPlayer } from "@/components/video-player";
 import { LudiloveBento } from "@/components/ludilove-bento";
+import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
 import { asset, getProject, projects } from "@/lib/projects";
 import { absolute, excerpt, jsonLd, ogImage, PERSON } from "@/lib/site";
 
@@ -147,8 +148,16 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
             const caption = text?.captions[n];
             return (
               <Fragment key={img.src}>
-                {/* LudiLove : la charte en mouvement, juste avant la planche de la charte. */}
-                {project.slug === "ludilove" && img.src.endsWith("/ludilove/33.webp") && (
+                {/* LudiLove : les composants puis la charte en mouvement, juste avant les planches de la charte. */}
+                {project.slug === "ludilove" && img.src.endsWith("/ludilove/04.webp") && (
+                  <figure>
+                    <LudiloveUiBento />
+                    <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">
+                      les composants des écrans principaux : accueil, swipe, stories, match, partie, profil, scan, achat
+                    </figcaption>
+                  </figure>
+                )}
+                {project.slug === "ludilove" && img.src.endsWith("/ludilove/04.webp") && (
                   <figure>
                     <LudiloveBento />
                     <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">
