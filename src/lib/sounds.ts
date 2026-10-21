@@ -134,12 +134,15 @@ type NoteOpts = {
   wave?: OscillatorType;
 };
 
-// Une note mate : oscillateur passé dans un passe-bas qui se referme, un peu saturé (rasp),
-// avec un souffle filtré autour de la note (breath) pour le grain rauque.
-function note(freq: number, { at = 0, dur = 1.4, gain = 0.03, pan = 0, attack = 0.09, glide, bright = 1, rasp = 0, breath = 0, wave = "sine" }: NoteOpts = {}) {
+// Une note douce : oscillateur passé dans un passe-bas qui se referme, avec à peine de souffle.
+// Sons lissés : plus de saturation (rasp ignoré), souffle réduit à une trace, attaque jamais sèche.
+function note(freq: number, { at = 0, dur = 1.4, gain = 0.03, pan = 0, attack = 0.09, glide, bright = 1, breath = 0, wave = "sine" }: NoteOpts = {}) {
   const a = audio();
   if (!a || !bus || !noise) return;
   const t = a.currentTime + at;
+  const rasp = 0;
+  breath *= 0.2;
+  attack = Math.max(attack, 0.025);
   const out = a.createGain();
   out.gain.setValueAtTime(0.0001, t);
   out.gain.exponentialRampToValueAtTime(gain, t + attack);
@@ -169,7 +172,7 @@ function note(freq: number, { at = 0, dur = 1.4, gain = 0.03, pan = 0, attack = 
   const o = a.createOscillator();
   o.type = wave;
   o.frequency.setValueAtTime(freq, t);
-  o.detune.value = rnd(-7, 7);
+  o.detune.value = rnd(-3, 3);
   if (glide) o.frequency.exponentialRampToValueAtTime(glide, t + Math.min(dur * 0.5, 0.4));
   o.connect(pre);
   o.start(t);
@@ -193,9 +196,9 @@ function note(freq: number, { at = 0, dur = 1.4, gain = 0.03, pan = 0, attack = 
   }
 }
 
-// Pulsation grave, mate et brève.
+// Pulsation grave et brève, sur les notes de la gamme (sol#, si, do#).
 function sub(at = 0, gain = 0.04) {
-  note(any([55, 61.74, 69.3]), { at, dur: rnd(0.35, 0.6), gain, attack: 0.025, bright: 0.6, rasp: rnd(0.2, 0.6) });
+  note(any([51.91, 61.74, 69.3]), { at, dur: rnd(0.4, 0.6), gain, attack: 0.03, bright: 1 });
 }
 
 // Position horizontale convertie en placement stéréo.
