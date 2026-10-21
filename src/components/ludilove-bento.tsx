@@ -70,7 +70,7 @@ export function LudiloveBento() {
         {PALETTE.map((c, n) => (
           <span
             key={c.hex}
-            className="llb-swatch llb-font flex items-end justify-center rounded-2xl pb-3 text-[10px] font-bold"
+            className="llb-swatch llb-font flex items-center justify-center overflow-hidden rounded-2xl text-[10px] font-bold"
             style={{ background: c.hex, color: c.ink, boxShadow: c.hex === "#F7F2E8" ? "inset 0 0 0 1px #e6dfd0" : undefined, ...delay(n * 0.35) }}
           >
             <span className="hidden -rotate-90 whitespace-nowrap sm:inline">{c.hex}</span>

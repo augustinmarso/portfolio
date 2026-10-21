@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { asset } from "@/lib/projects";
+import { LudilovePersonality } from "@/components/ludilove-personality";
 
 // Bento animé des composants d'interface de LudiLove, capturés dans l'app : accueil, swipe,
 // stories, match, feuille de score, scan, salle d'attente, achat, test de personnalité.
@@ -12,7 +13,7 @@ function Img({ f, w, h, className, style }: { f: string; w: number; h: number; c
 }
 
 function Label({ children, light }: { children: string; light?: boolean }) {
-  return <span className={`llb-font absolute left-4 top-3 text-xs font-bold ${light ? "text-[#F7F2E8]/80" : "text-[#353766]/60"}`}>{children}</span>;
+  return <span className={`llb-font absolute left-6 top-5 z-10 text-xs font-bold ${light ? "text-[#F7F2E8]/80" : "text-[#353766]/60"}`}>{children}</span>;
 }
 
 export function LudiloveUiBento() {
@@ -21,7 +22,7 @@ export function LudiloveUiBento() {
       {/* Accueil : la carte qui lance une partie, fixe, occupe toute la case. */}
       <div className="llb-cell relative col-span-2 bg-[#5F58A8] md:col-span-3">
         <Label light>accueil</Label>
-        <Img f="launch" w={900} h={863} className="block h-full w-full object-cover" />
+        <Img f="launch" w={900} h={863} className="block h-full w-full scale-[1.06] object-cover" />
       </div>
 
       {/* Swipe : la carte oscille entre « passer » et « j'aime ». */}
@@ -32,7 +33,7 @@ export function LudiloveUiBento() {
       </div>
 
       {/* Stories : la rangée défile à l'infini (deux copies bout à bout). */}
-      <div className="llb-cell relative col-span-2 flex items-center overflow-hidden bg-white pt-8 ring-1 ring-black/5 md:col-span-3">
+      <div className="llb-cell relative col-span-2 flex items-center overflow-hidden bg-white pt-12 ring-1 ring-black/5 md:col-span-3">
         <Label>stories</Label>
         <div className="llu-loop flex w-max">
           <Img f="stories-loop" w={1260} h={543} className="h-36 w-auto max-w-none sm:h-44" />
@@ -58,10 +59,10 @@ export function LudiloveUiBento() {
         <Img f="score-end" w={900} h={159} className="w-full max-w-md" />
       </div>
 
-      {/* Test de personnalité. */}
+      {/* Test de personnalité : curseurs animés, réglables au doigt ou au clavier. */}
       <div className="llb-cell relative col-span-2 flex items-center justify-center bg-white px-6 pb-4 pt-10 ring-1 ring-black/5 md:col-span-2 md:row-span-2">
         <Label>profil</Label>
-        <Img f="personality" w={790} h={1100} className="llb-float w-full max-w-64" style={delay(0)} />
+        <LudilovePersonality />
       </div>
 
       {/* Scan : la boîte reconnue et le compteur. */}
