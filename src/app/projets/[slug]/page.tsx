@@ -172,7 +172,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
                 loading="lazy"
                 allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                className={cn("w-full rounded-md bg-muted", embed.vertical ? "aspect-[9/16] max-w-xs" : "aspect-video")}
+                className={cn("w-full rounded-md bg-muted", embed.vertical ? "aspect-[9/16]" : "aspect-video")}
               />
               <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">{embed.credit}</figcaption>
             </figure>
