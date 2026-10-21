@@ -1415,7 +1415,12 @@
     "cover": {
       "src": "/projects/porte-cle-jeton-de-caddie/thumb.webp",
       "width": 560,
-      "height": 313
+      "height": 293
+    },
+    "hover": {
+      "src": "/projects/porte-cle-jeton-de-caddie/hover.webp",
+      "width": 560,
+      "height": 293
     },
     "images": [
       {
