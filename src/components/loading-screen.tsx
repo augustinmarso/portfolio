@@ -29,7 +29,7 @@ function Tile({ x, y }: { x: number; y: number }) {
           const r = (
             <span
               key={`${i}-${j}`}
-              className="absolute rounded-[1.5px] bg-foreground"
+              className="absolute rounded-[1.5px] bg-muted-foreground/45"
               style={{ left: x + i * (W + GAP), top: y + top, width: W, height: h }}
             />
           );
