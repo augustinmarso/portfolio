@@ -28,6 +28,7 @@ function Box({
   top,
   children,
   frontStyle,
+  right,
 }: {
   w: string;
   h: string;
@@ -37,18 +38,19 @@ function Box({
   top: string;
   children?: ReactNode;
   frontStyle?: CSSProperties;
+  right?: boolean; // plat droit : seulement quand il est visible, sinon il se bat avec le voisin et clignote
 }) {
-  const face = "absolute";
+  const face = "pointer-events-none absolute";
   const line = { border: LINE };
   return (
     <>
       {/* plat gauche, côté lumière */}
       <span aria-hidden className={face} style={{ left: 0, top: 0, width: d, height: h, background: side, ...line, transformOrigin: "left", transform: "rotateY(90deg)" }} />
       {/* plat droit, dans l'ombre */}
-      <span aria-hidden className={face} style={{ left: w, top: 0, width: d, height: h, background: side, ...line, filter: "brightness(0.8)", transformOrigin: "left", transform: "rotateY(90deg)" }} />
+      {right && <span aria-hidden className={face} style={{ left: w, top: 0, width: d, height: h, background: side, ...line, transformOrigin: "left", transform: "rotateY(90deg)" }} />}
       {/* tranche du haut */}
       <span aria-hidden className={face} style={{ left: 0, top: 0, width: w, height: d, background: top, ...line, transformOrigin: "top", transform: "rotateX(-90deg)" }} />
-      <span className="absolute inset-0" style={{ background: front, ...line, ...frontStyle }}>
+      <span className="pointer-events-none absolute inset-0" style={{ background: front, ...line, ...frontStyle }}>
         {children}
       </span>
     </>
@@ -60,6 +62,7 @@ export function Bookshelf({ books }: { books: Ouvrage[] }) {
   const [shown, setShown] = useState(false);
   const [hover, setHover] = useState<number | null>(null);
   const [picked, setPicked] = useState<number | null>(null);
+  const [settled, setSettled] = useState(false); // entrée terminée : plus de décalage entre les livres
 
   useEffect(() => {
     const el = ref.current;
@@ -68,6 +71,7 @@ export function Bookshelf({ books }: { books: Ouvrage[] }) {
       ([e]) => {
         if (e.isIntersecting) {
           setShown(true);
+          window.setTimeout(() => setSettled(true), books.length * 70 + 900);
           io.disconnect();
         }
       },
@@ -75,7 +79,7 @@ export function Bookshelf({ books }: { books: Ouvrage[] }) {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [books.length]);
 
   const current = hover ?? picked;
   const book = current !== null ? books[current] : null;
@@ -110,14 +114,17 @@ export function Bookshelf({ books }: { books: Ouvrage[] }) {
                   width: w,
                   height: h,
                   transformOrigin: "bottom left",
-                  transform: shown ? `${lift} rotate(${last ? -8 : 0}deg)` : "scale3d(1, 0.001, 1)",
+                  // la zone survolée reste fixe (seul le livre dessiné bouge) : pas d'aller-retour sous la souris
+                  transform: shown ? `rotate(${last ? -8 : 0}deg)` : "scale3d(1, 0.001, 1)",
                   // le livre penché laisse la place à son sommet, qui s'appuie sur le voisin
                   marginLeft: last ? `calc(${b.h * SHELF_H * 0.139 + 2}px * var(--s))` : undefined,
-                  transition: `transform ${shown && !lift && !last ? 900 : 550}ms cubic-bezier(0.32,0.72,0,1) ${
-                    shown && hover === null && picked === null ? i * 70 : 0
-                  }ms`,
+                  transition: `transform 900ms cubic-bezier(0.32,0.72,0,1) ${settled ? 0 : i * 70}ms`,
                 }}
               >
+                <span
+                  className="pointer-events-none absolute inset-0 [transform-style:preserve-3d]"
+                  style={{ transform: lift || "translate3d(0, 0, 0)", transition: "transform 450ms cubic-bezier(0.32,0.72,0,1)" }}
+                >
                 <Box
                   w={w}
                   h={h}
@@ -126,6 +133,7 @@ export function Bookshelf({ books }: { books: Ouvrage[] }) {
                   side={shade(b.couleur, 82)}
                   top={PAGES}
                   frontStyle={{ color: b.encre }}
+                  right={last}
                 >
                   <span className="absolute inset-0 flex flex-col items-center justify-between gap-2 overflow-hidden py-3 group-focus-visible:ring-2 group-focus-visible:ring-foreground">
                     {cloth ? <span aria-hidden className={ridge} style={{ background: b.encre }} /> : <span aria-hidden className="h-px w-3/5 opacity-40" style={{ background: b.encre }} />}
@@ -138,13 +146,14 @@ export function Bookshelf({ books }: { books: Ouvrage[] }) {
                     {cloth && <span aria-hidden className={ridge} style={{ background: b.encre }} />}
                   </span>
                 </Box>
+                </span>
               </button>
             );
           })}
 
           {/* serre-livre en métal */}
           <span aria-hidden className="relative ml-3 shrink-0 [transform-style:preserve-3d]" style={{ width: px(14), height: px(80) }}>
-            <Box w={px(14)} h={px(80)} d={px(DEPTH * 0.8)} front="#3a3a3a" side="#2a2a2a" top="#555" />
+            <Box w={px(14)} h={px(80)} d={px(DEPTH * 0.8)} front="#3a3a3a" side="#2a2a2a" top="#555" right />
           </span>
 
           {/* tablette en chêne clair, en aplats : chant devant, dessus qui part vers le mur */}
