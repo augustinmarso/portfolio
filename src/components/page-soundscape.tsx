@@ -45,7 +45,7 @@ const CHAPTERS: Chapter[] = [
   { id: "ouvrages", titre: "lire au coin du feu", notes: [51.91, 77.78, 103.83, 123.47], cutoff: 560, layers: { feu: 0.85 } },
 ];
 
-const LEVEL = 0.3; // très doux
+const LEVEL = 0.1; // à peine audible, en fond
 const BLIPS = [830.61, 932.33, 1046.5, 1244.51, 1396.91]; // pentatonique de sol dièse, dans l'aigu
 
 function impulse(ctx: AudioContext, seconds = 4.5) {
@@ -204,7 +204,7 @@ class Engine {
     const ctx = this.ctx;
     const t = ctx.currentTime;
     const out = ctx.createGain();
-    out.gain.value = 0.09;
+    out.gain.value = 0.05;
     const pan = ctx.createStereoPanner();
     pan.pan.value = Math.random() * 0.8 - 0.4;
     out.connect(pan);
