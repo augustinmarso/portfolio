@@ -93,8 +93,8 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
             plus haut que la place (écran − 84 px en haut − 64 px de marge basse), il défile dans sa propre colonne. */}
         <div
           className={
-            project.video
-              ? "md:pb-4" // projets avec téléphone : le texte défile, le téléphone se fige ensuite (plus bas)
+            project.video || embedList.length
+              ? "md:pb-4" // projets avec téléphone ou vidéos YouTube : le texte défile avec la page (sinon colonne figée, vidéos coupées)
               : "no-scrollbar md:sticky md:top-[84px] md:max-h-[calc(100dvh-164px)] md:self-start md:overflow-y-auto md:pb-4"
           }
         >
