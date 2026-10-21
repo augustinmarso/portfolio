@@ -9,6 +9,7 @@ import { VideoPlayer } from "@/components/video-player";
 import { LudiloveBento } from "@/components/ludilove-bento";
 import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
 import { MemoireBook } from "@/components/memoire-book";
+import embeds from "@/data/embeds.json";
 import { getProject, projects } from "@/lib/projects";
 import { absolute, excerpt, jsonLd, ogImage, PERSON } from "@/lib/site";
 
@@ -44,6 +45,8 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
   const i = projects.indexOf(project);
   const next = projects[(i + 1) % projects.length];
   const text = project.text;
+  // Vidéo d'une autre chaîne (droits non cédés) : lecteur YouTube intégré, jamais une copie du fichier.
+  const embed = (embeds as Record<string, { youtube: string; title: string; credit: string }>)[project.slug];
   // Mémoire « La société de jeux » : ses 17 doubles pages en image sont remplacées par le mémoire
   // mis en page dans le site (vrai texte en Scoutie Sans, BD et flèches gardées), en pleine largeur.
   const memoire = project.slug === "la-societe-de-jeux";
@@ -158,6 +161,19 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
           {project.video && (
             <figure className="mt-12 md:sticky md:top-[84px]">
               <VideoPlayer src={project.video.src} poster={project.video.poster} label={`Vidéo de présentation — ${project.title}`} />
+            </figure>
+          )}
+          {embed && (
+            <figure className="mt-12">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${embed.youtube}?rel=0&modestbranding=1`}
+                title={embed.title}
+                loading="lazy"
+                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="aspect-[9/16] w-full max-w-xs rounded-md bg-muted"
+              />
+              <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">{embed.credit}</figcaption>
             </figure>
           )}
         </div>
