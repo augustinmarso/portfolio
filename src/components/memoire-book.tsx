@@ -75,7 +75,9 @@ function Sheet({ page, half }: { page: Page; half?: 0 | 1 }) {
   );
 }
 
-export function MemoireBook() {
+// `pages` : la couverture seule (colonne du haut de page) ou tout le reste (pleine largeur).
+export function MemoireBook({ pages = "all" }: { pages?: "all" | "cover" | "rest" }) {
+  const shown = pages === "cover" ? PAGES.slice(0, 1) : pages === "rest" ? PAGES.slice(1) : PAGES;
   const ref = useRef<HTMLDivElement>(null);
 
   // ajuste chaque ligne à la largeur de l'original (compression ou étirement léger)
@@ -102,10 +104,10 @@ export function MemoireBook() {
 
   return (
     <div ref={ref} className="grid gap-6">
-      {PAGES.map((page, n) => (
-        <figure key={page.bg} aria-label={`Mémoire, ${page.w < 500 ? "page" : "double page"} ${n + 1}`}>
+      {shown.map((page) => (
+        <figure key={page.bg} aria-label={`Mémoire, ${page.w < 500 ? "page" : "double page"} ${PAGES.indexOf(page) + 1}`}>
           {/* ordinateur : la double page entière */}
-          <div className={cn("hidden md:block", page.w < 500 && "md:mx-auto md:w-1/2")}>
+          <div className={cn("hidden md:block", page.w < 500 && (pages === "cover" ? "md:max-w-xl" : "md:mx-auto md:w-1/2"))}>
             <Sheet page={page} />
           </div>
           {/* téléphone : page par page */}

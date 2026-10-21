@@ -47,7 +47,8 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
   // Mémoire « La société de jeux » : ses 17 doubles pages en image sont remplacées par le mémoire
   // mis en page dans le site (vrai texte en Scoutie Sans, BD et flèches gardées), en pleine largeur.
   const memoire = project.slug === "la-societe-de-jeux";
-  const SKIP = memoire ? 17 : 0;
+  // (le mémoire remplace toutes les images du projet : doubles pages et croquis)
+  const SKIP = memoire ? project.images.length : 0;
 
   const nextLink = (
     <Link href={`/projets/${next.slug}`} className="group mt-12 flex items-end justify-between gap-6 border-t pt-6">
@@ -142,10 +143,12 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
                 </dd>
               </div>
             ) : null}
-            <div className="flex gap-2">
-              <dt className="text-muted-foreground">planches</dt>
-              <dd>{project.images.length}</dd>
-            </div>
+            {!memoire && (
+              <div className="flex gap-2">
+                <dt className="text-muted-foreground">planches</dt>
+                <dd>{project.images.length}</dd>
+              </div>
+            )}
           </dl>
 
           {text?.intro && <p className="mt-8 max-w-prose text-lg leading-relaxed">{text.intro}</p>}
@@ -160,6 +163,8 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
         </div>
 
         <div className="grid gap-12">
+          {/* le mémoire commence par sa première de couverture, à côté du texte */}
+          {memoire && <MemoireBook pages="cover" />}
           {project.images.map((img, n) => {
             if (n < SKIP) return null;
             const caption = text?.captions[n];
@@ -207,7 +212,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
 
       {memoire && (
         <section aria-label="Le mémoire" className="mt-20">
-          <MemoireBook />
+          <MemoireBook pages="rest" />
           {nextLink}
         </section>
       )}
