@@ -8,6 +8,7 @@ import { FadeImg } from "@/components/fade-img";
 import { VideoPlayer } from "@/components/video-player";
 import { LudiloveBento } from "@/components/ludilove-bento";
 import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
+import { MemoireBook } from "@/components/memoire-book";
 import { getProject, projects } from "@/lib/projects";
 import { absolute, excerpt, jsonLd, ogImage, PERSON } from "@/lib/site";
 
@@ -43,6 +44,26 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
   const i = projects.indexOf(project);
   const next = projects[(i + 1) % projects.length];
   const text = project.text;
+  // Mémoire « La société de jeux » : ses 17 doubles pages en image sont remplacées par le mémoire
+  // mis en page dans le site (vrai texte en Scoutie Sans, BD et flèches gardées), en pleine largeur.
+  const memoire = project.slug === "la-societe-de-jeux";
+  const SKIP = memoire ? 17 : 0;
+
+  const nextLink = (
+    <Link href={`/projets/${next.slug}`} className="group mt-12 flex items-end justify-between gap-6 border-t pt-6">
+      <div>
+        <span className="text-lg font-semibold text-muted-foreground">projet suivant</span>
+        <p className="text-3xl font-bold lowercase tracking-tight group-hover:underline sm:text-5xl">{next.title}</p>
+      </div>
+      <Image
+        src={next.cover.src}
+        alt=""
+        width={next.cover.width}
+        height={next.cover.height}
+        className="hidden h-28 w-auto object-cover sm:block"
+      />
+    </Link>
+  );
 
   const structured = {
     "@context": "https://schema.org",
@@ -140,6 +161,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
 
         <div className="grid gap-12">
           {project.images.map((img, n) => {
+            if (n < SKIP) return null;
             const caption = text?.captions[n];
             return (
               <Fragment key={img.src}>
@@ -179,21 +201,16 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
           })}
 
           {/* Dans la colonne des images : la section va jusqu'en bas et le texte ne se décolle jamais. */}
-          <Link href={`/projets/${next.slug}`} className="group mt-12 flex items-end justify-between gap-6 border-t pt-6">
-            <div>
-              <span className="text-lg font-semibold text-muted-foreground">projet suivant</span>
-              <p className="text-3xl font-bold lowercase tracking-tight group-hover:underline sm:text-5xl">{next.title}</p>
-            </div>
-            <Image
-              src={next.cover.src}
-              alt=""
-              width={next.cover.width}
-              height={next.cover.height}
-              className="hidden h-28 w-auto object-cover sm:block"
-            />
-          </Link>
+          {!memoire && nextLink}
         </div>
       </section>
+
+      {memoire && (
+        <section aria-label="Le mémoire" className="mt-20">
+          <MemoireBook />
+          {nextLink}
+        </section>
+      )}
     </main>
   );
 }
