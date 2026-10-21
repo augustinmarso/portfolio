@@ -6,7 +6,6 @@ import { SideScrollNav } from "@/components/side-scroll-nav";
 import { FadeImg } from "@/components/fade-img";
 import { asset } from "@/lib/projects";
 import { Bookshelf } from "@/components/bookshelf";
-import { PageSoundscape } from "@/components/page-soundscape";
 import { WordReveal } from "@/components/word-reveal";
 import { EXERGUE, NOTES, OUVRAGES, SECTIONS, TITRE } from "@/data/manifeste";
 
@@ -52,7 +51,6 @@ export default function PourquoiPage() {
   return (
     <main className="px-4 pb-24 pt-4 sm:px-6">
       <SiteHeader active="/pourquoi" />
-      <PageSoundscape />
 
       <header className="pt-10 sm:pt-16">
         <p className="text-lg font-semibold tracking-tight text-muted-foreground">manifeste · dsaa ensaama · 2026</p>

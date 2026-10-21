@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# musique de la page pourquoi : gardée en local seulement, hors du site publié
+src/components/page-soundscape.tsx
+public/ambiances/canon.mp3
