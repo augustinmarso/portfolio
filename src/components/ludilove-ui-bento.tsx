@@ -50,16 +50,11 @@ export function LudiloveUiBento() {
         <Img f="match-btn" w={900} h={139} className="w-full max-w-60" />
       </div>
 
-      {/* Partie : feuille de score, outils qui sautillent à tour de rôle. */}
+      {/* Partie : feuille de score et outils de la partie. */}
       <div className="llb-cell relative col-span-2 flex flex-col items-center justify-center gap-3 bg-[#EFE7D3] px-6 pb-6 pt-10 md:col-span-4 md:row-span-2">
         <Label>partie</Label>
         <Img f="score-sheet" w={900} h={617} className="w-full max-w-md" />
-        <div className="relative w-full max-w-md">
-          <Img f="score-tools" w={900} h={223} className="w-full" />
-          {[0, 1, 2, 3, 4].map((n) => (
-            <span key={n} className="llu-hop" style={{ left: `${10 + n * 20}%`, ...delay(n * 0.5) }} />
-          ))}
-        </div>
+        <Img f="score-tools" w={900} h={223} className="w-full max-w-md" />
         <Img f="score-end" w={900} h={159} className="w-full max-w-md" />
       </div>
 

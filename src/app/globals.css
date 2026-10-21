@@ -391,12 +391,6 @@
   from { transform: translateY(0) rotate(0); }
   to { transform: translateY(560px) rotate(540deg); }
 }
-.llu-hop { position: absolute; top: 40%; width: 12%; aspect-ratio: 1; border-radius: 999px; translate: -50% -50%; margin-left: 0;
-  box-shadow: 0 0 0 3px #8687BC; opacity: 0; animation: llu-hop 2.5s infinite; animation-delay: var(--d); }
-@keyframes llu-hop {
-  0%, 30%, 100% { opacity: 0; transform: scale(0.8); }
-  10%, 20% { opacity: 1; transform: scale(1); }
-}
 .llu-join { animation: llu-join 4s ease-out infinite; }
 @keyframes llu-join {
   0% { transform: translateY(18px); opacity: 0; }
@@ -405,5 +399,5 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .llu-sway, .llu-pulse, .llu-loop, .llu-pop, .llu-join { animation: none; }
-  .llu-confetti, .llu-hop { display: none; }
+  .llu-confetti { display: none; }
 }
