@@ -26,12 +26,15 @@ export type Project = {
   text?: ProjectText;
   hover?: ProjectImage; // image montrée au survol dans l'index (quelqu'un qui utilise l'objet…)
   video?: ProjectVideo;
+  boucle?: ProjectVideo; // vidéo 3D en boucle, en tête de l'onglet produit (publiée par l'atelier)
 };
 
 // Titres d'affichage (les dossiers n'ont pas d'accents) et projets à vidéo : réglés dans site.json,
 // modifiable depuis l'éditeur en ligne. Vidéo : public/videos/<slug>.mp4 + .jpg.
 const TITLES: Record<string, string> = site.titles;
 const VIDEOS = new Set<string>(site.videos);
+// vidéos 3D en boucle : public/videos/<slug>-boucle.mp4 + .jpg, liste tenue par scripts/atelier.mjs
+const BOUCLES = new Set<string>((site as { boucles?: string[] }).boucles ?? []);
 
 
 export const THEMES = [
@@ -60,6 +63,9 @@ export const projects: Project[] = (raw as Project[]).map((p) => ({
   hover: p.hover && withBase(p.hover),
   video: VIDEOS.has(p.slug)
     ? { src: asset(`/videos/${p.slug}.mp4`), poster: asset(`/videos/${p.slug}.jpg`) }
+    : undefined,
+  boucle: BOUCLES.has(p.slug)
+    ? { src: asset(`/videos/${p.slug}-boucle.mp4`), poster: asset(`/videos/${p.slug}-boucle.jpg`) }
     : undefined,
 }));
 

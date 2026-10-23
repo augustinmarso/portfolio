@@ -20,6 +20,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { execFileSync } from "node:child_process";
 import sharp from "sharp";
+import { existsSync } from "node:fs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const ATELIER = process.env.ATELIER_PORTFOLIO ?? "G:\\Mon Drive\\Atelier portfolio";
@@ -31,6 +32,9 @@ const METHODE = JSON.parse(await fs.readFile(METHODE_FILE, "utf8"));
 const FULL = 2000;
 const SMALL = 1000;
 const MIN_PRODUIT = 6;
+const SITE_FILE = path.join(ROOT, "src/data/site.json");
+const VIDEO = /\.(mp4|mov|webm|mkv)$/i;
+const FFMPEG = [process.env.FFMPEG, "C:/claude/_tools/ffmpeg/ffmpeg-8.1.1-essentials_build/bin/ffmpeg.exe"].find((f) => f && existsSync(f)) ?? "ffmpeg";
 const EXT = /\.(jpe?g|png|gif|webp|avif|tiff?)$/i;
 
 const slugify = (s) =>
@@ -63,7 +67,8 @@ const pad = (n) => String(n).padStart(2, "0");
 const base = (src) => src.split("/").pop();
 const natural = (a, b) => a.localeCompare(b, "fr", { numeric: true });
 // nom de fichier → légende : numéro d'ordre en tête et extension retirés
-const captionOf = (file) => file.replace(EXT, "").replace(/^\d+[\s._-]*/, "").trim();
+// (« (retouché) », ajouté par scripts/rendu.mjs, n'apparaît jamais sur le site)
+const captionOf = (file) => file.replace(EXT, "").replace(/\s*\(retouch[ée]\)\s*$/i, "").replace(/^\d+[\s._-]*/, "").trim();
 // légende → partie lisible du nom de fichier (Windows refuse \ / : * ? " < > |)
 const safe = (caption) => (caption ?? "").replace(/[\\/:*?"<>|]/g, " ").replace(/\s+/g, " ").trim().slice(0, 120);
 const fileName = (n, caption) => `${pad(n)}${safe(caption) ? " " + safe(caption) : ""}.webp`;
@@ -238,6 +243,8 @@ function ordreProduit(files) {
 
 async function publier() {
   const done = [];
+  const site = await readJson(SITE_FILE, {});
+  const boucles = new Set(site.boucles ?? []);
   for (const p of selected) {
     const a = await lireAtelier(p.slug);
     if (!a) {
@@ -311,6 +318,25 @@ async function publier() {
     await fs.rm(tmp, { recursive: true, force: true });
 
     renumeroter(p.slug, remap);
+    // vidéo 3D en boucle : la première vidéo du dossier produit, en tête de l'onglet produit
+    const boucle = (await fs.readdir(path.join(dir, PRODUIT)).catch(() => [])).filter((n) => VIDEO.test(n)).sort(natural)[0];
+    const vOut = path.join(PUBLIC, "videos", `${p.slug}-boucle`);
+    if (boucle) {
+      const src = path.join(dir, PRODUIT, boucle);
+      const print = await sha1(src);
+      if (memo.boucle !== print || !(await exists(`${vOut}.mp4`))) {
+        await fs.mkdir(path.dirname(vOut), { recursive: true });
+        // H.264 muet, 1600 px au plus, lecture dès le début du téléchargement ; image d'attente = première image
+        execFileSync(FFMPEG, ["-y", "-loglevel", "error", "-i", src, "-an", "-vf", "scale='min(1600,iw)':-2", "-c:v", "libx264", "-crf", "26", "-preset", "slow", "-pix_fmt", "yuv420p", "-movflags", "+faststart", `${vOut}.mp4`]);
+        execFileSync(FFMPEG, ["-y", "-loglevel", "error", "-i", `${vOut}.mp4`, "-frames:v", "1", "-q:v", "3", `${vOut}.jpg`]);
+      }
+      memo.boucle = print;
+      boucles.add(p.slug);
+    } else if (boucles.delete(p.slug)) {
+      delete memo.boucle;
+      await fs.rm(`${vOut}.mp4`, { force: true });
+      await fs.rm(`${vOut}.jpg`, { force: true });
+    }
     p.images = images;
     const tFile = path.join(TEXTS, `${p.slug}.json`);
     const t = await readJson(tFile, { slug: p.slug, year: null, context: null, themes: [], intro: "", captions: [] });
@@ -320,17 +346,20 @@ async function publier() {
     if (Object.keys(etapes).length) t.etapes = etapes;
     else delete t.etapes;
     await writeJson(tFile, t);
-    await writeJson(path.join(dir, "_atelier.json"), { depot: await repoPrints(p), fichiers, legendes });
+    await writeJson(path.join(dir, "_atelier.json"), { depot: await repoPrints(p), fichiers, legendes, ...(memo.boucle && { boucle: memo.boucle }) });
     done.push(p.slug);
     console.log(` ${p.slug} : ${images.length} planches (${reused} reprises telles quelles)`);
   }
   if (!done.length) return console.log("Rien à publier.");
   await fs.writeFile(DATA, JSON.stringify(projects, null, 2));
   await writeJson(METHODE_FILE, METHODE);
+  if (boucles.size) site.boucles = [...boucles].sort();
+  else delete site.boucles;
+  await writeJson(SITE_FILE, site);
 
   if (flags.has("--sans-pousser")) return console.log("Écrit dans le dépôt, sans commit (--sans-pousser).");
   const git = (...a) => execFileSync("git", a, { cwd: ROOT, stdio: "inherit" });
-  git("add", "src/data/projects.json", "src/data/pages/processus.json", ...done.flatMap((s) => [`public/projects/${s}`, `src/data/texts/${s}.json`]));
+  git("add", "-A", "src/data/projects.json", "src/data/pages/processus.json", "src/data/site.json", "public/videos", ...done.flatMap((s) => [`public/projects/${s}`, `src/data/texts/${s}.json`]));
   git("commit", "-m", `Atelier : ${done.join(", ")} publié${done.length > 1 ? "s" : ""} depuis Google Drive`);
   git("pull", "--rebase");
   git("push", "origin", "main");

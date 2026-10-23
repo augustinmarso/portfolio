@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { SiteHeader } from "@/components/site-header";
 import { FadeImg } from "@/components/fade-img";
 import { VideoPlayer } from "@/components/video-player";
+import { LazyVideo } from "@/components/lazy-video";
 import { YouTubeEmbed } from "@/components/youtube-embed";
 import { LudiloveBento } from "@/components/ludilove-bento";
 import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
@@ -170,6 +171,11 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
         </div>
 
         <div className="grid gap-12">
+          {produit && project.boucle && (
+            <figure>
+              <LazyVideo src={project.boucle.src} poster={project.boucle.poster} aria-label={`${project.title} en 3D`} className="h-auto w-full" />
+            </figure>
+          )}
           {/* le mémoire commence par sa première de couverture, à côté du texte */}
           {memoire && <MemoireBook pages="cover" />}
           {!memoire && !shown.length && (
