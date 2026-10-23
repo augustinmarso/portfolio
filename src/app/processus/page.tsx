@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { absolute } from "@/lib/site";
 import { SiteHeader } from "@/components/site-header";
-import { FadeImg } from "@/components/fade-img";
+import { PlateCarousel } from "@/components/plate-carousel";
 import { ProcessTimeline, TimelineDot } from "@/components/process-timeline";
 import { getProject } from "@/lib/projects";
 import data from "@/data/pages/processus.json";
@@ -64,9 +63,14 @@ export default function ProcessusPage() {
       <ProcessTimeline className="mt-20 text-lg font-semibold leading-snug tracking-tight sm:mt-28 sm:text-xl">
         {ETAPES.map((e, i) => {
           const ex = exemples(e);
-          // une planche toujours visible (l'image d'étape, sinon le premier exemple), les autres au dérouleur
+          // carrousel des planches : l'image d'étape (sinon le premier exemple) en tête, puis les autres
           const lead = (e.image ? plate(e.image)[0] : undefined) ?? ex[0];
-          const rest = ex.filter((x) => x.img.src !== lead?.img.src);
+          const plates = lead ? [lead, ...ex.filter((x) => x.img.src !== lead.img.src)] : [];
+          const slides = plates.map(({ project, img }) => ({
+            ...img,
+            href: `/projets/${project.slug}/processus`,
+            alt: `${e.titre} : planche`,
+          }));
           return (
             <li key={e.titre} id={`etape-${i + 1}`} className="relative min-w-0 scroll-mt-24">
               <TimelineDot />
@@ -87,53 +91,15 @@ export default function ProcessusPage() {
               )}
               <div className="mt-6 grid gap-x-10 gap-y-5 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
                 <p className="max-w-[62ch] font-normal leading-relaxed">{e.texte}</p>
-                <div>
-                  {lead ? (
-                    <Link href={`/projets/${lead.project.slug}/processus`} className="block max-w-sm">
-                      <FadeImg
-                        src={lead.img.src}
-                        sm={lead.img.sm}
-                        alt={`${e.titre} : planche`}
-                        width={lead.img.width}
-                        height={lead.img.height}
-                        sizes="(min-width: 1024px) 384px, 90vw"
-                        frameClassName="overflow-hidden rounded-xl bg-muted"
-                      />
-                    </Link>
+                <div className="min-w-0">
+                  {slides.length > 0 ? (
+                    <PlateCarousel slides={slides} />
                   ) : (
                     e.note && <p className="text-2xl leading-tight sm:text-3xl">« {e.note} »</p>
                   )}
                   <p className="mt-4 text-base font-normal text-muted-foreground sm:text-lg">{e.outils}</p>
                 </div>
               </div>
-
-              {rest.length > 0 && (
-                <details className="group mt-8">
-                  <summary className="inline-flex cursor-pointer list-none items-center gap-2 text-base text-muted-foreground transition-colors hover:text-foreground sm:text-lg [&::-webkit-details-marker]:hidden">
-                    <span aria-hidden className="transition-transform duration-300 group-open:rotate-90">→</span>
-                    <span className="group-open:hidden">voir les autres planches ({rest.length})</span>
-                    <span className="hidden group-open:inline">masquer les planches</span>
-                  </summary>
-                  <ul className="-mr-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 pr-4 sm:-mr-6 sm:pr-6">
-                  {rest.map(({ project, img }) => (
-                    <li key={img.src} className="shrink-0 snap-start">
-                      <Link href={`/projets/${project.slug}/processus`} className="group block">
-                        <FadeImg
-                          src={img.src}
-                          sm={img.sm}
-                          alt={`${e.titre} : planche de recherche`}
-                          width={img.width}
-                          height={img.height}
-                          sizes="(min-width: 640px) 320px, 60vw"
-                          frameClassName="h-[36vw] max-h-[200px] w-auto overflow-hidden rounded-xl bg-muted sm:h-[200px]"
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                        />
-                      </Link>
-                    </li>
-                  ))}
-                  </ul>
-                </details>
-              )}
             </li>
           );
         })}
