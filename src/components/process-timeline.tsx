@@ -31,10 +31,14 @@ export function ProcessTimeline({ children, className }: { children: ReactNode; 
       if (!frame) frame = requestAnimationFrame(update);
     };
     update();
+    // un dérouleur de planches qui s'ouvre change la hauteur de la frise
+    const resize = new ResizeObserver(onScroll);
+    resize.observe(el);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       cancelAnimationFrame(frame);
+      resize.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };

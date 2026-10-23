@@ -5,38 +5,88 @@
   "etapes": [
     {
       "titre": "s’étonner",
-      "texte": "Tout commence par un geste que plus personne ne regarde : une main qui évite une barre, un rituel du matin, une règle de jeu qu’on se transmet sans l’écrire. Je vais voir les personnes là où elles vivent, je les écoute, je dessine ce qu’elles font plutôt que ce qu’elles disent.",
+      "sousEtapes": [
+        "observation in situ",
+        "entretiens semi-directifs",
+        "cartographie des irritants"
+      ],
+      "texte": "Tout commence par un geste que plus personne ne regarde : une habitude, un rituel, une règle qu’on se transmet sans l’écrire. Je vais voir les personnes là où elles vivent, je les écoute, je dessine ce qu’elles font plutôt que ce qu’elles disent.",
       "outils": "entretiens, questionnaires, photos, croquis d’usage",
       "note": "Avant l’objet, il y a toujours quelqu’un.",
-      "exemples": ["ephemeride 2", "ratp 2", "ratp 1", "ephemeride 17"]
+      "exemples": [
+        "ephemeride 2",
+        "ratp 2",
+        "ratp 1",
+        "ephemeride 17"
+      ]
     },
     {
       "titre": "chercher",
-      "texte": "Puis je remonte le fil. Les objets anciens, les brevets oubliés, les savoir-faire d’ailleurs ont souvent déjà résolu le problème avec moins de matière et moins d’énergie. J’ouvre large, je dessine vite, je garde peu ; l’IA m’aide à faire des ponts entre des domaines qui ne se parlent pas.",
+      "sousEtapes": [
+        "état de l’art",
+        "analyse de l’existant",
+        "benchmark fonctionnel"
+      ],
+      "texte": "Puis je remonte le fil. Les objets anciens, les archives, les savoir-faire d’ailleurs ont souvent déjà résolu le problème avec moins de matière et moins d’énergie. J’ouvre large, je dessine vite, je garde peu ; l’IA m’aide à faire des ponts entre des domaines qui ne se parlent pas.",
       "outils": "carnet, archives, bibliothèques, planches de recherche",
       "note": "Innover, c’est souvent se souvenir.",
-      "exemples": ["kai 7", "le-jeu-de-la-grenouille 1", "le-jeu-de-la-grenouille 2", "fish-eye 1"]
+      "exemples": [
+        "kai 7",
+        "le-jeu-de-la-grenouille 1",
+        "le-jeu-de-la-grenouille 2",
+        "fish-eye 1"
+      ]
     },
     {
       "titre": "jouer",
+      "sousEtapes": [
+        "idéation et croquis",
+        "maquettes d’étude",
+        "scénarios d’usage"
+      ],
       "texte": "Vient le moment que je préfère : passer au volume et traiter le projet comme un système, avec ses pièces, ses règles et ses interactions. Carton, bois, impression rapide : la maquette est un terrain de jeu où l’on se trompe vite et sans regret.",
       "outils": "carton, découpe laser, impression 3D, règles de jeu",
       "note": "Je vais là où je m’amuse, et l’usager aussi.",
-      "exemples": ["le-jeu-de-la-grenouille 10", "ephemeride 9", "cylinder-chair 3", "gorillachoc 10"]
+      "exemples": [
+        "le-jeu-de-la-grenouille 10",
+        "ephemeride 9",
+        "cylinder-chair 3",
+        "gorillachoc 10"
+      ]
     },
     {
       "titre": "éprouver",
+      "sousEtapes": [
+        "modélisation CAO",
+        "prototypage rapide",
+        "tests utilisateurs"
+      ],
       "texte": "Ensuite le projet affronte le réel. Je modélise au millimètre, je fabrique, je fais tester par les personnes concernées. Un prototype qui casse me renvoie à la maquette : le projet se règle par allers-retours, avec des matériaux simples, réparables et fabricables près de chez nous.",
       "outils": "Rhino, Fusion 360, atelier, tests d’usage",
       "note": "Un échec en atelier coûte moins cher qu’un échec en rayon.",
-      "exemples": ["de-passager-a-equipier 26", "ratp 4", "le-choix-de-malo 10", "le-jeu-de-la-grenouille 11"]
+      "exemples": [
+        "de-passager-a-equipier 26",
+        "ratp 4",
+        "le-choix-de-malo 10",
+        "le-jeu-de-la-grenouille 11"
+      ]
     },
     {
       "titre": "transmettre",
+      "sousEtapes": [
+        "plans cotés et nomenclature",
+        "dossier de fabrication",
+        "notice et édition"
+      ],
       "texte": "Enfin, je rends le projet lisible pour celui qui le fabrique comme pour celui qui l’utilise : plans, patrons, fichiers de découpe, notices, rendus. Un bon objet doit pouvoir être compris, réparé et refait sans moi.",
       "outils": "Blender, plans de fabrication, notices, édition",
-      "note": "La dernière étape, c’est passer la main.",
-      "exemples": ["le-jeu-de-la-grenouille 16", "le-jeu-de-la-grenouille 5", "kai 5", "echappee 17"]
+      "image": "le-jeu-de-la-grenouille 17",
+      "exemples": [
+        "le-jeu-de-la-grenouille 16",
+        "le-jeu-de-la-grenouille 5",
+        "kai 5",
+        "echappee 17"
+      ]
     }
   ],
   "inspirations": "Cette méthode doit beaucoup à Bruno Munari (Da cosa nasce cosa, la méthode comme une recette), au diagramme du processus de Charles et Ray Eames et à Victor Papanek, pour qui le design devait d’abord servir les personnes."

@@ -16,20 +16,27 @@ export const metadata: Metadata = {
 };
 
 // Contenu dans pages/processus.json (modifiable depuis l'éditeur en ligne).
-// `exemples` : une planche par ligne, « slug-du-projet indice-de-la-planche ».
-type Etape = { titre: string; texte: string; outils: string; note?: string; exemples?: string[] };
+// `exemples` : une planche par ligne, « slug-du-projet indice-de-la-planche » ; `image` : même format,
+// une grande planche qui prend la place de la note.
+type Etape = {
+  titre: string;
+  sousEtapes?: string[];
+  texte: string;
+  outils: string;
+  note?: string;
+  image?: string;
+  exemples?: string[];
+};
 const ETAPES: Etape[] = page.etapes;
 
-// Les exemples introuvables (projet retiré, planche supprimée) sont simplement ignorés.
-function exemples(e: Etape) {
-  return (e.exemples ?? []).flatMap((line) => {
-    const [slug, n] = line.trim().split(/\s+/);
-    const project = getProject(slug);
-    const img = project?.images[Number(n)];
-    if (!project || !img) return [];
-    return [{ project, img }];
-  });
+// Les planches introuvables (projet retiré, planche supprimée) sont simplement ignorées.
+function plate(line: string) {
+  const [slug, n] = line.trim().split(/\s+/);
+  const project = getProject(slug);
+  const img = project?.images[Number(n)];
+  return project && img ? [{ project, img }] : [];
 }
+const exemples = (e: Etape) => (e.exemples ?? []).flatMap(plate);
 
 export default function ProcessusPage() {
   return (
@@ -49,6 +56,7 @@ export default function ProcessusPage() {
       <ProcessTimeline className="mt-20 text-lg font-semibold leading-snug tracking-tight sm:mt-28 sm:text-xl">
         {ETAPES.map((e, i) => {
           const ex = exemples(e);
+          const big = e.image ? plate(e.image)[0] : undefined;
           return (
             <li key={e.titre} id={`etape-${i + 1}`} className="relative min-w-0 scroll-mt-24">
               <TimelineDot />
@@ -58,16 +66,45 @@ export default function ProcessusPage() {
                 </span>
                 {e.titre}
               </h2>
+              {e.sousEtapes && (
+                <ol className="mt-5 flex flex-wrap gap-x-6 gap-y-1 font-mono text-sm font-normal uppercase tracking-wide text-muted-foreground">
+                  {e.sousEtapes.map((t, k) => (
+                    <li key={t}>
+                      {i + 1}.{k + 1} {t}
+                    </li>
+                  ))}
+                </ol>
+              )}
               <div className="mt-6 grid gap-x-10 gap-y-5 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
                 <p className="max-w-[62ch] font-normal leading-relaxed">{e.texte}</p>
                 <div>
-                  {e.note && <p className="text-2xl leading-tight sm:text-3xl">« {e.note} »</p>}
+                  {big ? (
+                    <Link href={`/projets/${big.project.slug}/processus`} className="block max-w-sm">
+                      <FadeImg
+                        src={big.img.src}
+                        sm={big.img.sm}
+                        alt={`${e.titre} : planche`}
+                        width={big.img.width}
+                        height={big.img.height}
+                        sizes="(min-width: 1024px) 384px, 90vw"
+                        frameClassName="overflow-hidden rounded-xl bg-muted"
+                      />
+                    </Link>
+                  ) : (
+                    e.note && <p className="text-2xl leading-tight sm:text-3xl">« {e.note} »</p>
+                  )}
                   <p className="mt-4 text-base font-normal text-muted-foreground sm:text-lg">{e.outils}</p>
                 </div>
               </div>
 
               {ex.length > 0 && (
-                <ul className="-mr-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 pr-4 sm:-mr-6 sm:pr-6">
+                <details className="group mt-8">
+                  <summary className="inline-flex cursor-pointer list-none items-center gap-2 text-base text-muted-foreground transition-colors hover:text-foreground sm:text-lg [&::-webkit-details-marker]:hidden">
+                    <span aria-hidden className="transition-transform duration-300 group-open:rotate-90">→</span>
+                    <span className="group-open:hidden">voir les planches ({ex.length})</span>
+                    <span className="hidden group-open:inline">masquer les planches</span>
+                  </summary>
+                  <ul className="-mr-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 pr-4 sm:-mr-6 sm:pr-6">
                   {ex.map(({ project, img }) => (
                     <li key={img.src} className="shrink-0 snap-start">
                       <Link href={`/projets/${project.slug}/processus`} className="group block">
@@ -77,14 +114,15 @@ export default function ProcessusPage() {
                           alt={`${e.titre} : planche de recherche`}
                           width={img.width}
                           height={img.height}
-                          sizes="(min-width: 640px) 480px, 80vw"
-                          frameClassName="h-[52vw] max-h-[340px] w-auto overflow-hidden rounded-2xl bg-muted sm:h-[340px]"
+                          sizes="(min-width: 640px) 320px, 60vw"
+                          frameClassName="h-[36vw] max-h-[200px] w-auto overflow-hidden rounded-xl bg-muted sm:h-[200px]"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                         />
                       </Link>
                     </li>
                   ))}
-                </ul>
+                  </ul>
+                </details>
               )}
             </li>
           );
