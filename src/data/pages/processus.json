@@ -6,11 +6,11 @@
     {
       "titre": "s’étonner",
       "sousEtapes": [
+        "lire le brief",
         "aller sur le terrain",
-        "observer les gestes",
         "écouter les gens"
       ],
-      "texte": "Tout commence par un geste du quotidien que plus personne ne remarque. Je vais voir les gens chez eux ou là où ils travaillent, je les écoute et je dessine ce qu’ils font vraiment.",
+      "texte": "Tout commence par le brief. Je le lis, je le questionne, puis je vais voir sur place : un geste du quotidien que plus personne ne remarque, des gens chez eux ou là où ils travaillent. Je les écoute et je dessine ce qu’ils font vraiment.",
       "outils": "entretiens, questionnaires, photos, croquis d’usage",
       "note": "Avant l’objet, il y a toujours quelqu’un.",
       "exemples": [
