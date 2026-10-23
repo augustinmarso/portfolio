@@ -225,6 +225,17 @@ function renumeroter(slug, remap) {
   }
 }
 
+// Onglet produit : la série dans un ordre fixe (photo sur fond, mise en situation, éclaté, couleur matière
+// finition, packaging), repérée par le nom des fichiers ; les autres planches suivent dans l'ordre des noms.
+const ORDRE_SERIE = ["photo sur fond", "mise en situation", "éclaté", "couleur matière finition", "packaging"];
+function ordreProduit(files) {
+  const rang = (f) => {
+    const i = ORDRE_SERIE.findIndex((nom) => SERIE.find((s) => s.nom === nom).motif.test(path.basename(f)));
+    return i === -1 ? ORDRE_SERIE.length : i;
+  };
+  return files.map((f, i) => ({ f, i })).sort((x, y) => rang(x.f) - rang(y.f) || x.i - y.i).map((x) => x.f);
+}
+
 async function publier() {
   const done = [];
   for (const p of selected) {
@@ -241,7 +252,7 @@ async function publier() {
       continue;
     }
     const order = [
-      ...a[PRODUIT].map((f) => ({ f, step: -1 })),
+      ...ordreProduit(a[PRODUIT]).map((f) => ({ f, step: -1 })),
       ...STEP_DIRS.flatMap((d, i) => a[d].map((f) => ({ f, step: i + 1 }))),
       ...a[A_CLASSER].map((f) => ({ f, step: 0 })),
     ];
