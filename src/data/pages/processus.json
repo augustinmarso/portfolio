@@ -72,10 +72,10 @@
       "sousEtapes": [
         "plans cotés et nomenclature",
         "dossier de fabrication",
-        "soutenance et édition"
+        "packaging et édition"
       ],
-      "texte": "Enfin, je rends le projet lisible pour celui qui le fabrique comme pour celui qui l’utilise : plans, patrons, fichiers de découpe, notices, rendus. Un bon objet doit pouvoir être compris, réparé et refait sans moi.",
-      "outils": "Blender, plans de fabrication, notices, édition",
+      "texte": "Enfin, je rends le projet lisible pour celui qui le fabrique comme pour celui qui l’utilise : plans, patrons, fichiers de découpe, notices, packaging, rendus. Un bon objet doit pouvoir être compris, réparé et refait sans moi.",
+      "outils": "Blender, plans de fabrication, notices, packaging, édition",
       "exemples": [
         "le-jeu-de-la-grenouille 16",
         "le-jeu-de-la-grenouille 5",
