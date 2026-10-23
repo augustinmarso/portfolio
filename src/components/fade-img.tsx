@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 // Image qui apparaît en fondu dès qu'elle est chargée : la page s'affiche tout de suite
@@ -29,29 +28,26 @@ export function FadeImg({
   className?: string;
   frameClassName?: string;
 }) {
-  const ref = useRef<HTMLImageElement>(null);
-  const [loaded, setLoaded] = useState(false);
-
-  // Image déjà en cache : l'événement load a pu partir avant l'hydratation.
-  useEffect(() => {
-    const img = ref.current;
-    if (img?.complete && img.naturalWidth > 0) setLoaded(true);
-  }, []);
+  // Chargement marqué directement sur l'élément (data-loaded) plutôt que dans un état React :
+  // des centaines d'images à l'index, chacune aurait déclenché un nouveau rendu.
+  const markLoaded = (img: HTMLImageElement | null) => {
+    if (img?.complete && img.naturalWidth > 0) img.dataset.loaded = "";
+  };
 
   return (
     <span
       className={cn(
-        "block transition-[border-color] duration-500",
+        "block border border-foreground/10 transition-[border-color] duration-500",
         fill && "absolute inset-0",
         // cadre très léger tant que l'image n'est pas arrivée
-        loaded ? "border-transparent" : "border border-foreground/10",
+        "has-[img[data-loaded]]:border-transparent",
         frameClassName
       )}
       style={!fill && width && height ? { aspectRatio: `${width} / ${height}` } : undefined}
     >
       {/* eslint-disable-next-line @next/next/no-img-element -- export statique, variantes fournies à la main */}
       <img
-        ref={ref}
+        ref={markLoaded} // image déjà en cache : l'événement load a pu partir avant l'hydratation
         src={src}
         srcSet={sm ? `${sm} 1000w, ${src} ${Math.max(width ?? 2000, 1001)}w` : undefined}
         sizes={sm ? sizes : undefined}
@@ -62,10 +58,9 @@ export function FadeImg({
         decoding="async"
         fetchPriority={priority ? "high" : "auto"}
         draggable={false}
-        onLoad={() => setLoaded(true)}
+        onLoad={(e) => (e.currentTarget.dataset.loaded = "")}
         className={cn(
-          "transition-opacity duration-700 ease-out",
-          loaded ? "opacity-100" : "opacity-0",
+          "opacity-0 transition-opacity duration-700 ease-out data-loaded:opacity-100",
           fill ? "size-full" : "h-auto w-full",
           className
         )}

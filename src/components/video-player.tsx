@@ -2,32 +2,30 @@
 
 import { useRef, useState } from "react";
 import { Play } from "lucide-react";
+import { LazyVideo } from "@/components/lazy-video";
 import { cn } from "@/lib/utils";
 
 // Vidéo de démonstration cadrée sur le téléphone : lecture automatique en boucle,
 // sans barre de lecture ; un clic met en pause, le bouton lecture n'apparaît qu'en pause.
 export function VideoPlayer({ src, poster, label }: { src: string; poster: string; label: string }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(true);
+  const userPaused = useRef(false);
 
-  const toggle = () => {
-    const v = videoRef.current;
+  const toggle = (e: React.MouseEvent) => {
+    const v = (e.currentTarget.closest("div")?.querySelector("video") ?? null) as HTMLVideoElement | null;
     if (!v) return;
+    userPaused.current = !v.paused;
     if (v.paused) void v.play();
     else v.pause();
   };
 
   return (
     <div className="relative">
-      <video
-        ref={videoRef}
+      {/* chargée et lue seulement quand elle arrive à l'écran (3,5 Mo pour LudiLove) */}
+      <LazyVideo
         src={src}
         poster={poster}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
+        pausedRef={userPaused}
         aria-label={label}
         onClick={toggle}
         onPlay={() => setPlaying(true)}

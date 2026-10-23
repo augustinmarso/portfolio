@@ -6,11 +6,11 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { FadeImg } from "@/components/fade-img";
 import { VideoPlayer } from "@/components/video-player";
+import { YouTubeEmbed } from "@/components/youtube-embed";
 import { LudiloveBento } from "@/components/ludilove-bento";
 import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
 import { MemoireBook } from "@/components/memoire-book";
 import embeds from "@/data/embeds.json";
-import { cn } from "@/lib/utils";
 import { getProject, projects } from "@/lib/projects";
 import { absolute, excerpt, jsonLd, ogImage, PERSON } from "@/lib/site";
 
@@ -166,14 +166,7 @@ export default async function ProjectPage({ params }: PageProps<"/projets/[slug]
           )}
           {embedList.map((embed) => (
             <figure key={embed.youtube} className="mt-12">
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${embed.youtube}?rel=0&modestbranding=1`}
-                title={embed.title}
-                loading="lazy"
-                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className={cn("w-full rounded-md bg-muted", embed.vertical ? "aspect-[9/16]" : "aspect-video")}
-              />
+              <YouTubeEmbed id={embed.youtube} title={embed.title} vertical={embed.vertical} />
               <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">{embed.credit}</figcaption>
             </figure>
           ))}

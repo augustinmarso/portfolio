@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/contact-form";
 import { SiteHeader } from "@/components/site-header";
 import { asset } from "@/lib/projects";
 import { MEET, SOCIALS } from "@/lib/socials";
+import { LazyVideo } from "@/components/lazy-video";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -87,13 +88,9 @@ export default function ContactPage() {
           aria-label="Appel vidéo WhatsApp"
           className="relative mx-auto aspect-[9/16] w-full max-w-60 overflow-hidden rounded-2xl bg-muted lg:hidden"
         >
-          <video
+          <LazyVideo
             src={asset("/contact/augustin-telephone.mp4")}
             poster={asset("/contact/augustin-telephone.jpg")}
-            autoPlay
-            muted
-            loop
-            playsInline
             className="size-full scale-110 object-cover blur-md"
           />
           {/* Indicateur « en ligne », comme dans une fenêtre d'appel vidéo */}
@@ -142,13 +139,9 @@ export default function ContactPage() {
             </span>
           </a>
           {/* ancien GIF converti en courte vidéo (dix fois plus légère ; de toute façon floutée) */}
-          <video
+          <LazyVideo
             src={asset("/contact/augustin.mp4")}
             poster={asset("/contact/augustin.jpg")}
-            autoPlay
-            muted
-            loop
-            playsInline
             aria-label="Augustin Marsollier, appuyé contre un arbre"
             className="absolute inset-0 size-full scale-110 object-cover blur-md"
           />

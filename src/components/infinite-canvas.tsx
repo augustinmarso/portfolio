@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { FadeImg } from "@/components/fade-img";
 import { cn } from "@/lib/utils";
+import { LABEL, layoutTile, startOffset } from "@/lib/canvas-layout";
 import type { Project } from "@/lib/projects";
 
 // false : objet seul au repos (personne au survol) ; true : personnes au repos (objet seul au survol).
@@ -23,13 +24,10 @@ function blinkTiming(slug: string, tx: number, ty: number): React.CSSProperties 
 
 gsap.registerPlugin(useGSAP);
 
-const COLS = 5;
-const LABEL = 22; // hauteur réservée au titre sous chaque carte
-
-type Placed = { project: Project; x: number; y: number; w: number; h: number };
-
+// null avant le montage : la taille d'écran n'existe que dans le navigateur, et rendre d'abord
+// pour 1440 px puis tout reconstruire à la vraie taille coûtait cher au chargement.
 function useViewport() {
-  const [size, setSize] = useState({ w: 1440, h: 900 });
+  const [size, setSize] = useState<{ w: number; h: number } | null>(null);
   useEffect(() => {
     const update = () => setSize({ w: window.innerWidth, h: window.innerHeight });
     update();
@@ -37,43 +35,6 @@ function useViewport() {
     return () => window.removeEventListener("resize", update);
   }, []);
   return size;
-}
-
-// Une « tuile » contient tous les projets en colonnes décalées ; on la répète
-// dans les deux sens et on replie le décalage modulo sa taille pour boucler.
-// Les images gardent leurs proportions exactes (aucun recadrage) : chaque projet va
-// dans la colonne la plus courte, et le reste de hauteur est réparti dans les écarts.
-function layoutTile(projects: Project[], vw: number) {
-  const gap = vw < 640 ? 40 : vw < 1024 ? 56 : 72;
-  // Ordinateur : les colonnes remplissent exactement la largeur de l'écran (aucune carte coupée
-  // sur les côtés) ; téléphone : cartes de taille fixe, on glisse pour voir les autres colonnes.
-  const cardW = vw < 640 ? 150 : Math.min(320, Math.round(vw / COLS - gap));
-  const natural = (p: Project) => Math.round(cardW * (p.cover.height / p.cover.width));
-
-  const columns: Project[][] = Array.from({ length: COLS }, () => []);
-  const sums = Array(COLS).fill(0);
-  // Du plus haut au plus petit : la répartition gloutonne équilibre bien mieux les colonnes.
-  [...projects].sort((a, b) => natural(b) - natural(a)).forEach((p) => {
-    const c = sums.indexOf(Math.min(...sums));
-    columns[c].push(p);
-    sums[c] += natural(p) + LABEL + gap;
-  });
-  const tileH = Math.ceil(Math.max(...sums));
-  const tileW = COLS * (cardW + gap);
-
-  const placed: Placed[] = [];
-  columns.forEach((col, c) => {
-    const used = col.reduce((s, p) => s + natural(p) + LABEL, 0);
-    const colGap = (tileH - used) / col.length; // ≥ gap, la colonne remplit exactement la tuile
-    // quinconce : une colonne sur deux descend d'une demi-carte, sans laisser de grand vide
-    let y = c % 2 ? (natural(col[0]) + LABEL + colGap) / 2 : 0;
-    col.forEach((p) => {
-      const h = natural(p) + LABEL;
-      placed.push({ project: p, x: c * (cardW + gap), y, w: cardW, h });
-      y += h + colGap;
-    });
-  });
-  return { placed, tileW, tileH, gap };
 }
 
 const wrap = (v: number, m: number) => ((v % m) + m) % m;
@@ -89,24 +50,25 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
   const drag = useRef({ active: false, moved: 0, lastX: 0, lastY: 0, vx: 0, vy: 0 });
   const leaving = useRef(false);
 
-  const { placed, tileW, tileH, gap } = useMemo(() => layoutTile(projects, viewport.w), [projects, viewport.w]);
+  const ready = viewport !== null;
+  const vw = viewport?.w ?? 1440;
+  const vh = viewport?.h ?? 900;
+  const { placed, tileW, tileH, gap } = useMemo(() => layoutTile(projects, vw), [projects, vw]);
   // Juste assez de copies de la tuile pour couvrir l'écran (plan décalé de -1 tuile, marge de 5 %
   // pour le léger zoom arrière pendant le glisser) : chaque copie en plus coûte des centaines d'images.
-  const copiesX = Math.ceil((viewport.w * 1.05) / tileW) + 1;
-  const copiesY = Math.ceil((viewport.h * 1.05) / tileH) + 1;
-
-  // Au premier rendu : colonnes centrées dans la largeur, haut de la tuile sous l'en-tête.
-  useEffect(() => {
-    target.current = { x: (viewport.w - tileW + gap) / 2, y: 88 };
-    current.current = { ...target.current };
-    // le ticker ne bouge le plan qu'en mouvement : on le place nous-mêmes
-    gsap.set(planeRef.current, { x: wrap(target.current.x, tileW) - tileW, y: wrap(target.current.y, tileH) - tileH });
-  }, [tileW, tileH, gap, viewport.w, viewport.h]);
+  const copiesX = Math.ceil((vw * 1.05) / tileW) + 1;
+  const copiesY = Math.ceil((vh * 1.05) / tileH) + 1;
 
   // Next garde la page d'accueil en cache (<Activity>) : à chaque retour, le contexte
   // GSAP est rejoué : on efface d'abord ce qu'a laissé l'animation de sortie.
   useGSAP(
     () => {
+      if (!ready) return;
+      // Le ticker ne bouge le plan qu'en mouvement : on le place nous-mêmes, avant de choisir
+      // les cartes à animer.
+      target.current = startOffset(vw, tileW, gap);
+      current.current = { ...target.current };
+      gsap.set(planeRef.current, { x: wrap(target.current.x, tileW) - tileW, y: wrap(target.current.y, tileH) - tileH });
       leaving.current = false;
       gsap.set(".canvas-card", { clearProps: "opacity,transform" });
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -125,8 +87,13 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
       };
       gsap.ticker.add(tick);
 
-      if (!reduce) {
-        gsap.from(".canvas-card", {
+      // Entrée animée pour les seules cartes à l'écran : les autres copies n'ont pas à être calculées.
+      const visible = gsap.utils.toArray<HTMLElement>(".canvas-card").filter((el) => {
+        const r = el.getBoundingClientRect();
+        return r.bottom > 0 && r.top < vh && r.right > 0 && r.left < vw;
+      });
+      if (!reduce && visible.length) {
+        gsap.from(visible, {
           opacity: 0,
           scale: 0.6,
           duration: 1.1,
@@ -137,7 +104,7 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
       }
       return () => gsap.ticker.remove(tick);
     },
-    { scope: rootRef, dependencies: [tileW, tileH], revertOnUpdate: true }
+    { scope: rootRef, dependencies: [ready, vw, vh, tileW, tileH, gap], revertOnUpdate: true }
   );
 
   const onPointerDown = (e: React.PointerEvent) => {
@@ -196,6 +163,15 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
     };
   }, []);
 
+  // Préchargement de la page d'un projet au survol de sa carte, une fois par projet.
+  const prefetched = useRef(new Set<string>());
+  const onPointerOver = (e: React.PointerEvent) => {
+    const slug = (e.target as HTMLElement).closest<HTMLAnchorElement>("a[data-slug]")?.dataset.slug;
+    if (!slug || prefetched.current.has(slug)) return;
+    prefetched.current.add(slug);
+    router.prefetch(`/projets/${slug}`);
+  };
+
   // Délégation : un seul handler pour toutes les cartes (et pas de clic après un glisser).
   // En phase de capture : il passe avant le <Link>, qui sinon navigue tout de suite.
   const onClick = (e: React.MouseEvent) => {
@@ -217,6 +193,7 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
       ref={rootRef}
       className="fixed inset-0 cursor-grab touch-none select-none overflow-hidden bg-background active:cursor-grabbing"
       onClickCapture={onClick}
+      onPointerOver={onPointerOver}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
@@ -225,7 +202,7 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
     >
       <div ref={zoomRef} className="absolute inset-0 origin-center will-change-transform">
       <div ref={planeRef} className="absolute left-0 top-0 will-change-transform">
-        {Array.from({ length: copiesY }).flatMap((_, ty) =>
+        {ready && Array.from({ length: copiesY }).flatMap((_, ty) =>
           Array.from({ length: copiesX }).map((_, tx) => (
             <div
               key={`${tx}-${ty}`}
@@ -238,6 +215,7 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
                   key={p.project.slug}
                   href={`/projets/${p.project.slug}`}
                   data-slug={p.project.slug}
+                  prefetch={false} // une centaine de cartes à l'écran : préchargées au survol (onPointerOver)
                   tabIndex={tx === 1 && ty === 1 ? 0 : -1}
                   draggable={false}
                   className="canvas-card group pointer-events-auto absolute block outline-none"

@@ -105,7 +105,7 @@ export default function CvPage() {
         <div className="grid content-start gap-8 print:gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element -- portrait fixe, aussi imprimé */}
           <img
-            src={asset("/cv-portrait.jpg")}
+            src={asset("/cv-portrait.webp")}
             alt="Augustin Marsollier"
             width={480}
             height={640}
