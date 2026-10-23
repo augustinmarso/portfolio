@@ -147,7 +147,12 @@ async function etat() {
       counts[A_CLASSER] && `${counts[A_CLASSER]} à classer`,
       ...(a ? plans.map((n) => `plan « ${n} »`) : []),
     ].filter(Boolean);
-    rows.push({ slug: p.slug, title: p.title, atelier: !!a, counts, manques });
+    // impressions 3D : G-code dans _impression/, date du plus récent
+    const imprDir = path.join(ATELIER, p.slug, "_impression");
+    const gcodes = (await fs.readdir(imprDir).catch(() => [])).filter((n) => n.endsWith(".gcode"));
+    const dates = await Promise.all(gcodes.map((n) => fs.stat(path.join(imprDir, n)).then((st) => st.mtime)));
+    const impressions = { n: gcodes.length, last: dates.length ? new Date(Math.max(...dates)) : null };
+    rows.push({ slug: p.slug, title: p.title, atelier: !!a, counts, manques, impressions });
   }
 
   const w = Math.max(...rows.map((r) => r.slug.length));
@@ -174,11 +179,11 @@ th:first-child,td:first-child,td:last-child{text-align:left}td.ok{color:#111}td.
 <h1>Atelier portfolio</h1><p>Mis à jour le ${new Date().toLocaleString("fr-FR")} · ${complets}/${rows.length} projets complets ·
 objectif : ${MIN_PRODUIT} planches produit (${SERIE.map((s) => (s.min > 1 ? `${s.min} × ` : "") + s.nom).join(", ")}) et au moins une planche par étape.
 Retouche IA (seulement retirer un objet d'une photo ou ajouter une personne sur un rendu 3D) : retoucher.cmd · publier : publier.cmd.</p>
-<table><tr><th>projet</th><th>produit</th>${METHODE.etapes.map((e, i) => `<th>${i + 1}. ${esc(e.titre)}</th>`).join("")}<th>à classer</th><th>il manque</th></tr>
+<table><tr><th>projet</th><th>produit</th>${METHODE.etapes.map((e, i) => `<th>${i + 1}. ${esc(e.titre)}</th>`).join("")}<th>à classer</th><th>impressions</th><th>il manque</th></tr>
 ${rows
   .map(
     (r) =>
-      `<tr><td>${esc(r.title)}${r.atelier ? "" : " <small>(pas dans l'atelier)</small>"}</td>${cell(r.counts[PRODUIT], r.counts[PRODUIT] >= MIN_PRODUIT)}${STEP_DIRS.map((f) => cell(r.counts[f], r.counts[f] > 0)).join("")}${cell(r.counts[A_CLASSER], !r.counts[A_CLASSER])}<td class="manque">${esc(r.manques.join(", ") || "—")}</td></tr>`
+      `<tr><td>${esc(r.title)}${r.atelier ? "" : " <small>(pas dans l'atelier)</small>"}</td>${cell(r.counts[PRODUIT], r.counts[PRODUIT] >= MIN_PRODUIT)}${STEP_DIRS.map((f) => cell(r.counts[f], r.counts[f] > 0)).join("")}${cell(r.counts[A_CLASSER], !r.counts[A_CLASSER])}<td>${r.impressions.n ? `${r.impressions.n} <small>(${r.impressions.last.toLocaleDateString("fr-FR")})</small>` : "·"}</td><td class="manque">${esc(r.manques.join(", ") || "—")}</td></tr>`
   )
   .join("\n")}</table>`;
     await fs.writeFile(path.join(ATELIER, "tableau-de-bord.html"), html);
