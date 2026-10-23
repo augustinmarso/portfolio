@@ -64,7 +64,9 @@ export default function ProcessusPage() {
       <ProcessTimeline className="mt-20 text-lg font-semibold leading-snug tracking-tight sm:mt-28 sm:text-xl">
         {ETAPES.map((e, i) => {
           const ex = exemples(e);
-          const big = e.image ? plate(e.image)[0] : undefined;
+          // une planche toujours visible (l'image d'étape, sinon le premier exemple), les autres au dérouleur
+          const lead = (e.image ? plate(e.image)[0] : undefined) ?? ex[0];
+          const rest = ex.filter((x) => x.img.src !== lead?.img.src);
           return (
             <li key={e.titre} id={`etape-${i + 1}`} className="relative min-w-0 scroll-mt-24">
               <TimelineDot />
@@ -86,14 +88,14 @@ export default function ProcessusPage() {
               <div className="mt-6 grid gap-x-10 gap-y-5 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
                 <p className="max-w-[62ch] font-normal leading-relaxed">{e.texte}</p>
                 <div>
-                  {big ? (
-                    <Link href={`/projets/${big.project.slug}/processus`} className="block max-w-sm">
+                  {lead ? (
+                    <Link href={`/projets/${lead.project.slug}/processus`} className="block max-w-sm">
                       <FadeImg
-                        src={big.img.src}
-                        sm={big.img.sm}
+                        src={lead.img.src}
+                        sm={lead.img.sm}
                         alt={`${e.titre} : planche`}
-                        width={big.img.width}
-                        height={big.img.height}
+                        width={lead.img.width}
+                        height={lead.img.height}
                         sizes="(min-width: 1024px) 384px, 90vw"
                         frameClassName="overflow-hidden rounded-xl bg-muted"
                       />
@@ -105,15 +107,15 @@ export default function ProcessusPage() {
                 </div>
               </div>
 
-              {ex.length > 0 && (
+              {rest.length > 0 && (
                 <details className="group mt-8">
                   <summary className="inline-flex cursor-pointer list-none items-center gap-2 text-base text-muted-foreground transition-colors hover:text-foreground sm:text-lg [&::-webkit-details-marker]:hidden">
                     <span aria-hidden className="transition-transform duration-300 group-open:rotate-90">→</span>
-                    <span className="group-open:hidden">voir les planches ({ex.length})</span>
+                    <span className="group-open:hidden">voir les autres planches ({rest.length})</span>
                     <span className="hidden group-open:inline">masquer les planches</span>
                   </summary>
                   <ul className="-mr-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 pr-4 sm:-mr-6 sm:pr-6">
-                  {ex.map(({ project, img }) => (
+                  {rest.map(({ project, img }) => (
                     <li key={img.src} className="shrink-0 snap-start">
                       <Link href={`/projets/${project.slug}/processus`} className="group block">
                         <FadeImg
