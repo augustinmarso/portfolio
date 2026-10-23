@@ -3,12 +3,11 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { FadeImg } from "@/components/fade-img";
-import { cn } from "@/lib/utils";
 
 export type Slide = { href: string; src: string; sm?: string; width: number; height: number; alt: string };
 
 // Carrousel des planches d'une étape : défilement horizontal aimanté (glisser au doigt ou au pavé),
-// flèches et pastilles pour passer d'une planche à l'autre. Chaque planche mène à son projet.
+// flèches et compteur, dans le style du menu, pour passer d'une planche à l'autre. Chaque planche mène à son projet.
 export function PlateCarousel({ slides }: { slides: Slide[] }) {
   const track = useRef<HTMLUListElement>(null);
   const [index, setIndex] = useState(0);
@@ -54,38 +53,26 @@ export function PlateCarousel({ slides }: { slides: Slide[] }) {
       </ul>
 
       {slides.length > 1 && (
-        <div className="mt-3 flex items-center gap-3">
+        <div className="mt-3 flex items-baseline gap-4 text-lg font-semibold tracking-tight">
           <button
             type="button"
             onClick={() => go(index - 1)}
             aria-label="planche précédente"
-            className="grid size-9 place-items-center rounded-full border border-foreground/15 text-base transition-colors hover:bg-foreground hover:text-background"
+            className="text-muted-foreground transition-colors hover:text-foreground"
           >
             ←
           </button>
+          <span className="tabular-nums text-muted-foreground">
+            {index + 1}/{slides.length}
+          </span>
           <button
             type="button"
             onClick={() => go(index + 1)}
             aria-label="planche suivante"
-            className="grid size-9 place-items-center rounded-full border border-foreground/15 text-base transition-colors hover:bg-foreground hover:text-background"
+            className="text-muted-foreground transition-colors hover:text-foreground"
           >
             →
           </button>
-          <div className="ml-1 flex gap-1.5">
-            {slides.map((s, i) => (
-              <button
-                key={s.src}
-                type="button"
-                onClick={() => go(i)}
-                aria-label={`planche ${i + 1}`}
-                aria-current={i === index}
-                className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  i === index ? "w-6 bg-foreground" : "w-1.5 bg-foreground/25 hover:bg-foreground/50"
-                )}
-              />
-            ))}
-          </div>
         </div>
       )}
     </div>
