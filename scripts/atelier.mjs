@@ -268,6 +268,12 @@ function ordreProduit(files) {
 }
 
 async function publier() {
+  // le site se déploie depuis main : publier ailleurs (branche d'une PR…) n'enverrait rien en ligne
+  const branche = execFileSync("git", ["branch", "--show-current"], { cwd: ROOT }).toString().trim();
+  if (branche !== "main" && !flags.has("--sans-pousser")) {
+    console.error(`✗ Le dépôt est sur la branche « ${branche} », pas sur main : rien publié. Revenir sur main (git switch main) puis relancer.`);
+    process.exit(1);
+  }
   const done = [];
   const site = await readJson(SITE_FILE, {});
   const boucles = new Set(site.boucles ?? []);
