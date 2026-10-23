@@ -1,7 +1,7 @@
 {
   "surtitre": "méthode · design produit, service",
   "titre": "de l’usage au prototype",
-  "intro": "Ce qui m’intéresse, c’est la narration et le jeu : j’adore raconter des histoires. Un projet se raconte comme une partie : on part d’un geste ordinaire, on cherche les règles, on joue avec la matière, on rate, on recommence. Rien n’est figé : à chaque étape, je fais des allers-retours, et à la fin quelqu’un d’autre peut reprendre la partie.",
+  "intro": "Ce qui m’intéresse, c’est la narration et le jeu : j’adore raconter des histoires. Un projet se raconte comme une partie : on part d’un geste ordinaire, on cherche les règles, on joue avec la matière, on rate, on recommence. Rien n’est figé : à chaque étape, je fais des allers-retours, et à la fin quelqu’un d’autre peut reprendre la partie. Chaque étape se termine par un jalon : je présente ce que j’ai produit et on valide ensemble avant de passer à la suite.",
   "etapes": [
     {
       "titre": "s’étonner",
@@ -13,6 +13,7 @@
       ],
       "texte": "Tout commence par le brief, puis je vais sur place observer les gestes du quotidien et écouter les gens, avec eux plutôt que pour eux.",
       "outils": "entretiens, questionnaires, photos, croquis d’usage, parcours usager",
+      "livrables": "planche d’analyse du terrain, parcours usager",
       "exemples": [
         "ratp 1",
         "ephemeride 2",
@@ -30,6 +31,7 @@
       ],
       "texte": "Je regarde ce qui existe déjà : les objets anciens et les savoir-faire d’ailleurs ont souvent trouvé une solution simple, avec peu de matière. Je dessine beaucoup, vite, puis je pose le problème : une question claire et quelques critères.",
       "outils": "carnet, archives, bibliothèques, planches de recherche, cahier des charges",
+      "livrables": "cahier des charges, planches de recherche",
       "exemples": [
         "fish-eye 1",
         "kai 7",
@@ -47,6 +49,7 @@
       ],
       "texte": "Le moment que je préfère : trois itérations, chacune pensée comme un système et racontée en storyboard. Je fais des va-et-vient entre le dessin, la maquette et la 3D, puis je choisis une piste avec le commanditaire et les usagers.",
       "outils": "carton, découpe laser, impression 3D, storyboard, règles de jeu",
+      "livrables": "trois pistes en croquis et en maquettes, storyboards, piste retenue",
       "exemples": [
         "le-jeu-de-la-grenouille 3",
         "le-jeu-de-la-grenouille 10",
@@ -65,6 +68,7 @@
       ],
       "texte": "Le projet affronte le réel : matériaux simples et réparables, fabrication locale avec des artisans et des ingénieurs, tests avec les usagers. J’analyse ce que l’objet leur fait : ce qu’il fait ressentir, les habitudes qu’il crée, l’image de soi qu’il renvoie. Mon imaginaire se heurte aux limites techniques, et cette friction fait souvent naître la meilleure idée.",
       "outils": "Rhino, Fusion 360, atelier, fiches matériaux, tests d’usage",
+      "livrables": "plans et 3D, prototype testé, choix des matériaux",
       "exemples": [
         "de-passager-a-equipier 26",
         "ratp 4",
@@ -75,13 +79,14 @@
     {
       "titre": "transmettre",
       "sousEtapes": [
-        "plans cotés et nomenclature",
-        "dossier de fabrication",
+        "plans et dossier de fabrication",
+        "suivi de fabrication",
         "packaging et édition",
         "retour d’usage"
       ],
-      "texte": "Je rends le projet lisible pour qui le fabrique comme pour qui l’utilise : plans, notices, packaging, récit. Puis je retourne voir l’objet en usage, et ce retour lance une nouvelle partie.",
+      "texte": "Je rends le projet lisible pour qui le fabrique comme pour qui l’utilise : plans, notices, packaging, récit. Je suis la fabrication avec l’atelier jusqu’aux premières pièces de série, puis je retourne voir l’objet en usage, et ce retour lance une nouvelle partie.",
       "outils": "Blender, plans de fabrication, notices, packaging, édition",
+      "livrables": "dossier de fabrication, packaging et notices, suivi jusqu’à la série",
       "exemples": [
         "le-jeu-de-la-grenouille 16",
         "le-jeu-de-la-grenouille 5",

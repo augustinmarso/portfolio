@@ -24,6 +24,7 @@ type Etape = {
   outils: string;
   note?: string;
   image?: string;
+  livrables?: string;
   exemples?: string[];
 };
 // Champs facultatifs : l'éditeur en ligne peut les retirer du JSON sans casser la construction.
@@ -98,6 +99,14 @@ export default function ProcessusPage() {
                     e.note && <p className="text-2xl leading-tight sm:text-3xl">« {e.note} »</p>
                   )}
                   <p className="mt-4 text-base font-normal text-muted-foreground sm:text-lg">{e.outils}</p>
+                  {e.livrables && (
+                    <p className="mt-3 text-base sm:text-lg">
+                      <span className="block font-mono text-sm font-normal uppercase tracking-wide text-muted-foreground">
+                        jalon {i + 1} · à valider ensemble
+                      </span>
+                      {e.livrables}
+                    </p>
+                  )}
                 </div>
               </div>
             </li>
