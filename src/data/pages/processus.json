@@ -8,10 +8,11 @@
       "sousEtapes": [
         "lire le brief",
         "aller sur le terrain",
-        "écouter les gens"
+        "écouter les gens",
+        "parcours usager"
       ],
-      "texte": "Tout commence par le brief. Je le lis, je le questionne, puis je vais voir sur place : un geste du quotidien que plus personne ne remarque, des gens chez eux ou là où ils travaillent. Je les écoute et je dessine ce qu’ils font vraiment.",
-      "outils": "entretiens, questionnaires, photos, croquis d’usage",
+      "texte": "Tout commence par le brief. Je le lis, je le questionne, puis je vais voir sur place : un geste du quotidien que plus personne ne remarque, des gens chez eux ou là où ils travaillent. Je les écoute, je dessine ce qu’ils font vraiment et tout le parcours autour : qui intervient, à quel moment, avec quoi. Je travaille avec eux plutôt que pour eux.",
+      "outils": "entretiens, questionnaires, photos, croquis d’usage, parcours usager",
       "exemples": [
         "ephemeride 2",
         "ratp 2",
@@ -24,10 +25,11 @@
       "sousEtapes": [
         "poser des questions",
         "regarder ce qui existe",
-        "faire des liens"
+        "faire des liens",
+        "problématique et critères"
       ],
-      "texte": "Ensuite, je regarde ce qui existe déjà : les objets anciens, les savoir-faire d’ailleurs. Souvent, ils ont déjà trouvé une solution simple, avec peu de matière. Je dessine beaucoup d’idées, vite, et j’en garde peu.",
-      "outils": "carnet, archives, bibliothèques, planches de recherche",
+      "texte": "Ensuite, je regarde ce qui existe déjà : les objets anciens, les savoir-faire d’ailleurs. Souvent, ils ont déjà trouvé une solution simple, avec peu de matière. Je dessine beaucoup d’idées, vite, et j’en garde peu. Je finis en posant le problème : une question claire et quelques critères, qui serviront ensuite à choisir.",
+      "outils": "carnet, archives, bibliothèques, planches de recherche, cahier des charges",
       "exemples": [
         "kai 7",
         "le-jeu-de-la-grenouille 1",
@@ -39,11 +41,12 @@
       "titre": "jouer",
       "sousEtapes": [
         "trois itérations",
-        "série de maquettes",
-        "dessin, maquette, 3D"
+        "dessin, maquette, 3D",
+        "storyboard d’usage",
+        "choix de la piste"
       ],
-      "texte": "Vient le moment que je préfère : je développe le projet en trois itérations. Chacune passe au volume, comme un système avec ses pièces, ses règles et ses interactions, et nourrit la suivante. Carton, bois, impression rapide : la maquette est un terrain de jeu où l’on se trompe vite et sans regret. Je fais des va-et-vient entre le dessin, la maquette et la 3D : je teste, je corrige, je recommence, et à chaque tour le projet se précise.",
-      "outils": "carton, découpe laser, impression 3D, règles de jeu",
+      "texte": "Vient le moment que je préfère : je développe le projet en trois itérations. Chacune passe au volume, comme un système avec ses pièces, ses règles et ses interactions, et nourrit la suivante. Carton, bois, impression rapide : la maquette est un terrain de jeu où l’on se trompe vite et sans regret. Je fais des va-et-vient entre le dessin, la maquette et la 3D, et je raconte chaque piste en storyboard pour la voir vivre. À la fin, je compare les pistes avec le commanditaire et les usagers, selon les critères posés, et je n’en garde qu’une.",
+      "outils": "carton, découpe laser, impression 3D, storyboard, règles de jeu",
       "exemples": [
         "le-jeu-de-la-grenouille 10",
         "ephemeride 9",
@@ -54,12 +57,13 @@
     {
       "titre": "éprouver",
       "sousEtapes": [
+        "matériaux et procédés",
         "modélisation CAO",
         "prototypage",
         "tests avec les usagers"
       ],
-      "texte": "Ensuite le projet affronte le réel. Je modélise au millimètre, je fabrique, je fais tester par les personnes concernées. Un prototype qui casse me renvoie à la maquette : le projet se règle par allers-retours, avec des matériaux simples, réparables et fabricables près de chez nous.",
-      "outils": "Rhino, Fusion 360, atelier, tests d’usage",
+      "texte": "Ensuite le projet affronte le réel. Je choisis les matériaux et les procédés : simples, réparables, fabricables près de chez nous, en regardant le coût et l’impact. Je modélise au millimètre, je fabrique avec des artisans, des ateliers et des ingénieurs, et je fais tester par les personnes concernées. Un prototype qui casse me renvoie à la maquette : le projet se règle par allers-retours.",
+      "outils": "Rhino, Fusion 360, atelier, fiches matériaux, tests d’usage",
       "exemples": [
         "de-passager-a-equipier 26",
         "ratp 4",
@@ -72,9 +76,10 @@
       "sousEtapes": [
         "plans cotés et nomenclature",
         "dossier de fabrication",
-        "packaging et édition"
+        "packaging et édition",
+        "retour d’usage"
       ],
-      "texte": "Enfin, je rends le projet lisible pour celui qui le fabrique comme pour celui qui l’utilise : plans, patrons, fichiers de découpe, notices, packaging, rendus. Un bon objet doit pouvoir être compris, réparé et refait sans moi.",
+      "texte": "Enfin, je rends le projet lisible pour celui qui le fabrique comme pour celui qui l’utilise : plans, patrons, fichiers de découpe, notices, packaging, rendus. Je le mets en récit pour le présenter. Un bon objet doit pouvoir être compris, réparé et refait sans moi. Une fois l’objet en usage, je retourne voir comment il vit : ce retour lance une nouvelle partie.",
       "outils": "Blender, plans de fabrication, notices, packaging, édition",
       "exemples": [
         "le-jeu-de-la-grenouille 16",
