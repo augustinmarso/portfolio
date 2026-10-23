@@ -28,7 +28,7 @@ type Etape = {
   exemples?: string[];
 };
 // Champs facultatifs : l'éditeur en ligne peut les retirer du JSON sans casser la construction.
-const page: { surtitre: string; titre: string; intro?: string; inspirations?: string; etapes: Etape[] } = data;
+const page: { surtitre: string; titre: string; allersRetours?: string; intro?: string; inspirations?: string; etapes: Etape[] } = data;
 const ETAPES = page.etapes;
 
 // Les planches introuvables (projet retiré, planche supprimée) sont simplement ignorées.
@@ -50,6 +50,12 @@ export default function ProcessusPage() {
         <h1 className="mt-4 max-w-[18ch] text-[clamp(40px,7.5vw,120px)] font-bold leading-[0.95] tracking-[-0.05em]">
           {page.titre}
         </h1>
+        {page.allersRetours && (
+          <p className="mt-6 flex max-w-[52ch] gap-3 text-lg font-semibold tracking-tight text-muted-foreground">
+            <span aria-hidden>↺</span>
+            {page.allersRetours}
+          </p>
+        )}
         {page.intro && (
           <p className="mt-8 max-w-[52ch] text-xl font-semibold leading-snug tracking-tight sm:text-2xl">{page.intro}</p>
         )}
