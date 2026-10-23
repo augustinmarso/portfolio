@@ -1,6 +1,7 @@
 // Atelier portfolio sur Google Drive : un dossier par projet, rangé selon la méthode de la page Processus.
 //
-//   <atelier>/<projet>/produit/          planches du produit fini (6 au moins)
+//   <atelier>/<projet>/produit/          planches du produit fini (6 au moins) ; + une vidéo 3D en boucle (.mp4)
+//                                        et un modèle 3D tournable (.glb, 8 Mo au plus), facultatifs
 //   <atelier>/<projet>/1-s-etonner/ …    une planche par fichier, pour chaque étape de la méthode
 //   <atelier>/<projet>/0-a-classer/      planches du processus pas encore rangées dans une étape
 //
@@ -34,6 +35,8 @@ const SMALL = 1000;
 const MIN_PRODUIT = 6;
 const SITE_FILE = path.join(ROOT, "src/data/site.json");
 const VIDEO = /\.(mp4|mov|webm|mkv)$/i;
+const MODELE = /\.glb$/i;
+const MODELE_MAX = 8 * 1024 * 1024; // au-delà, trop lourd pour une page web : refusé
 const FFMPEG = [process.env.FFMPEG, "C:/claude/_tools/ffmpeg/ffmpeg-8.1.1-essentials_build/bin/ffmpeg.exe"].find((f) => f && existsSync(f)) ?? "ffmpeg";
 const EXT = /\.(jpe?g|png|gif|webp|avif|tiff?)$/i;
 
@@ -245,6 +248,7 @@ async function publier() {
   const done = [];
   const site = await readJson(SITE_FILE, {});
   const boucles = new Set(site.boucles ?? []);
+  const modeles = new Set(site.modeles ?? []);
   for (const p of selected) {
     const a = await lireAtelier(p.slug);
     if (!a) {
@@ -337,6 +341,25 @@ async function publier() {
       await fs.rm(`${vOut}.mp4`, { force: true });
       await fs.rm(`${vOut}.jpg`, { force: true });
     }
+    // modèle 3D tournable : le premier .glb du dossier produit, copié tel quel (8 Mo au plus)
+    const glb = (await fs.readdir(path.join(dir, PRODUIT)).catch(() => [])).filter((n) => MODELE.test(n)).sort(natural)[0];
+    const mOut = path.join(PUBLIC, "models", `${p.slug}.glb`);
+    const glbSize = glb ? (await fs.stat(path.join(dir, PRODUIT, glb))).size : 0;
+    if (glb && glbSize > MODELE_MAX) {
+      console.log(`\n! ${p.slug} : ${glb} pèse ${(glbSize / 1024 / 1024).toFixed(1)} Mo (8 Mo au plus) : modèle 3D non publié, alléger l'export (décimer, textures 1k).`);
+    } else if (glb) {
+      const src = path.join(dir, PRODUIT, glb);
+      const print = await sha1(src);
+      if (memo.modele !== print || !(await exists(mOut))) {
+        await fs.mkdir(path.dirname(mOut), { recursive: true });
+        await fs.copyFile(src, mOut);
+      }
+      memo.modele = print;
+      modeles.add(p.slug);
+    } else if (modeles.delete(p.slug)) {
+      delete memo.modele;
+      await fs.rm(mOut, { force: true });
+    }
     p.images = images;
     const tFile = path.join(TEXTS, `${p.slug}.json`);
     const t = await readJson(tFile, { slug: p.slug, year: null, context: null, themes: [], intro: "", captions: [] });
@@ -346,7 +369,7 @@ async function publier() {
     if (Object.keys(etapes).length) t.etapes = etapes;
     else delete t.etapes;
     await writeJson(tFile, t);
-    await writeJson(path.join(dir, "_atelier.json"), { depot: await repoPrints(p), fichiers, legendes, ...(memo.boucle && { boucle: memo.boucle }) });
+    await writeJson(path.join(dir, "_atelier.json"), { depot: await repoPrints(p), fichiers, legendes, ...(memo.boucle && { boucle: memo.boucle }), ...(memo.modele && { modele: memo.modele }) });
     done.push(p.slug);
     console.log(` ${p.slug} : ${images.length} planches (${reused} reprises telles quelles)`);
   }
@@ -355,11 +378,17 @@ async function publier() {
   await writeJson(METHODE_FILE, METHODE);
   if (boucles.size) site.boucles = [...boucles].sort();
   else delete site.boucles;
+  if (modeles.size) site.modeles = [...modeles].sort();
+  else delete site.modeles;
   await writeJson(SITE_FILE, site);
 
   if (flags.has("--sans-pousser")) return console.log("Écrit dans le dépôt, sans commit (--sans-pousser).");
   const git = (...a) => execFileSync("git", a, { cwd: ROOT, stdio: "inherit" });
-  git("add", "-A", "src/data/projects.json", "src/data/pages/processus.json", "src/data/site.json", "public/videos", ...done.flatMap((s) => [`public/projects/${s}`, `src/data/texts/${s}.json`]));
+  // dossier absent et jamais suivi : « git add » refuserait le chemin
+  const medias = ["public/videos", "public/models"].filter(
+    (d) => existsSync(path.join(ROOT, d)) || execFileSync("git", ["ls-files", d], { cwd: ROOT }).length
+  );
+  git("add", "-A", "src/data/projects.json", "src/data/pages/processus.json", "src/data/site.json", ...medias, ...done.flatMap((s) => [`public/projects/${s}`, `src/data/texts/${s}.json`]));
   git("commit", "-m", `Atelier : ${done.join(", ")} publié${done.length > 1 ? "s" : ""} depuis Google Drive`);
   git("pull", "--rebase");
   git("push", "origin", "main");
