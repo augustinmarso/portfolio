@@ -6,10 +6,9 @@
     {
       "titre": "s’étonner",
       "sousEtapes": [
-        "lire le brief",
-        "aller sur le terrain",
-        "écouter les usagers",
-        "parcours usager"
+        "analyse du brief",
+        "enquête de terrain et entretiens",
+        "cartographie du parcours usager"
       ],
       "texte": "Je pars du brief, que je lis et questionne, puis je vais sur le terrain observer les gestes du quotidien et écouter les usagers. Je reconstitue leur parcours complet, en travaillant avec eux plutôt que pour eux.",
       "outils": "entretiens, questionnaires, photographies, croquis d’usage, cartographie de parcours",
@@ -24,10 +23,9 @@
     {
       "titre": "chercher",
       "sousEtapes": [
-        "poser des questions",
-        "analyser l’existant",
-        "croiser les domaines",
-        "problématique et critères"
+        "état de l’art et analyse de l’existant",
+        "références croisées entre domaines",
+        "problématique et cahier des charges"
       ],
       "texte": "J’analyse l’existant : objets anciens, savoir-faire d’autres cultures, solutions voisines, qui ont souvent résolu le problème simplement et avec peu de matière. Je croise ces références, je dessine rapidement de nombreuses idées, puis je formule une problématique et des critères de choix.",
       "outils": "carnet de croquis, archives, bibliothèques, planches de recherche",
@@ -42,11 +40,9 @@
     {
       "titre": "jouer",
       "sousEtapes": [
-        "trois pistes",
-        "itérations dessin, maquette, 3D",
-        "recherche technique",
-        "storyboard d’usage",
-        "choix de la piste"
+        "trois pistes de conception",
+        "itérations dessin, maquette, CAO",
+        "recherche technique et faisabilité"
       ],
       "texte": "Je développe trois pistes, chacune pensée comme un système, avec ses éléments, ses règles et ses interactions, et racontée en storyboard. Chaque piste progresse par itérations entre le dessin, la maquette et la 3D. En parallèle, je mène une recherche technique sur chacune : principes mécaniques, assemblages, matériaux envisageables et premiers essais de faisabilité. Je choisis ensuite la piste à développer avec le commanditaire et les usagers, au regard des critères définis.",
       "outils": "carton, découpe laser, impression 3D, essais techniques, storyboard, règles de jeu",
@@ -62,10 +58,9 @@
     {
       "titre": "éprouver",
       "sousEtapes": [
-        "matériaux et procédés",
-        "imaginaire et limites techniques",
-        "prototypage",
-        "tests et analyse psychologique"
+        "choix des matériaux et procédés",
+        "prototypage et essais techniques",
+        "tests utilisateurs et analyse psychologique"
       ],
       "texte": "Je choisis des matériaux et des procédés simples, réparables et disponibles localement, puis je prototype avec des artisans, des ateliers et des ingénieurs. Le projet confronte alors mes intentions aux limites techniques et économiques ; ces contraintes orientent souvent les meilleures décisions. Les tests avec les usagers me permettent d’analyser ce que l’objet produit chez eux : ce qu’il fait ressentir, les habitudes qu’il installe, l’image de soi qu’il renvoie.",
       "outils": "Rhino, Fusion 360, atelier, fiches matériaux, tests d’usage",
@@ -80,10 +75,9 @@
     {
       "titre": "transmettre",
       "sousEtapes": [
-        "plans et dossier de fabrication",
-        "suivi de fabrication",
-        "packaging et édition",
-        "retour d’usage"
+        "plans cotés et dossier de fabrication",
+        "suivi de fabrication en série",
+        "packaging, notices et retour d’usage"
       ],
       "texte": "Je rends le projet lisible pour ceux qui le fabriquent comme pour ceux qui l’utilisent : plans, dossier de fabrication, notices, packaging et mise en récit. J’accompagne la fabrication jusqu’aux premières pièces de série, puis j’observe l’objet en usage ; ce retour nourrit le projet suivant.",
       "outils": "Blender, plans cotés, notices, packaging, édition",
