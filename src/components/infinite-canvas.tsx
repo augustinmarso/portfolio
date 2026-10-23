@@ -197,6 +197,7 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
   }, []);
 
   // Délégation : un seul handler pour toutes les cartes (et pas de clic après un glisser).
+  // En phase de capture : il passe avant le <Link>, qui sinon navigue tout de suite.
   const onClick = (e: React.MouseEvent) => {
     const card = (e.target as HTMLElement).closest<HTMLAnchorElement>("a[data-slug]");
     if (!card || e.metaKey || e.ctrlKey) return;
@@ -215,7 +216,7 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
     <div
       ref={rootRef}
       className="fixed inset-0 cursor-grab touch-none select-none overflow-hidden bg-background active:cursor-grabbing"
-      onClick={onClick}
+      onClickCapture={onClick}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
