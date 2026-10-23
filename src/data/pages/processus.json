@@ -1,19 +1,19 @@
 {
-  "surtitre": "méthode · design produit, service",
+  "surtitre": "méthode · design produit et service",
   "titre": "de l’usage au prototype",
-  "intro": "Ce qui m’intéresse, c’est la narration et le jeu : j’adore raconter des histoires. Un projet se raconte comme une partie : on part d’un geste ordinaire, on cherche les règles, on joue avec la matière, on rate, on recommence. Rien n’est figé : à chaque étape, je fais des allers-retours, et à la fin quelqu’un d’autre peut reprendre la partie. Chaque étape se termine par un jalon : je présente ce que j’ai produit et on valide ensemble avant de passer à la suite.",
+  "intro": "Ce qui m’intéresse, c’est la narration et le jeu : j’aime raconter des histoires, et je conçois un projet comme une partie. On part d’un geste ordinaire, on en cherche les règles, on expérimente avec la matière, on se trompe, on recommence. À l’intérieur de chaque étape, je procède par allers-retours ; chaque étape se termine par un jalon, où je présente le travail et où nous validons ensemble avant de passer à la suite.",
   "etapes": [
     {
       "titre": "s’étonner",
       "sousEtapes": [
         "lire le brief",
         "aller sur le terrain",
-        "écouter les gens",
+        "écouter les usagers",
         "parcours usager"
       ],
-      "texte": "Tout commence par le brief, puis je vais sur place observer les gestes du quotidien et écouter les gens, avec eux plutôt que pour eux.",
-      "outils": "entretiens, questionnaires, photos, croquis d’usage, parcours usager",
-      "livrables": "planche d’analyse du terrain, parcours usager",
+      "texte": "Je pars du brief, que je lis et questionne, puis je vais sur le terrain observer les gestes du quotidien et écouter les usagers. Je reconstitue leur parcours complet, en travaillant avec eux plutôt que pour eux.",
+      "outils": "entretiens, questionnaires, photographies, croquis d’usage, cartographie de parcours",
+      "livrables": "analyse du terrain, parcours usager",
       "exemples": [
         "ratp 1",
         "ephemeride 2",
@@ -25,12 +25,12 @@
       "titre": "chercher",
       "sousEtapes": [
         "poser des questions",
-        "regarder ce qui existe",
-        "faire des liens",
+        "analyser l’existant",
+        "croiser les domaines",
         "problématique et critères"
       ],
-      "texte": "Je regarde ce qui existe déjà : les objets anciens et les savoir-faire d’ailleurs ont souvent trouvé une solution simple, avec peu de matière. Je dessine beaucoup, vite, puis je pose le problème : une question claire et quelques critères.",
-      "outils": "carnet, archives, bibliothèques, planches de recherche, cahier des charges",
+      "texte": "J’analyse l’existant : objets anciens, savoir-faire d’autres cultures, solutions voisines, qui ont souvent résolu le problème simplement et avec peu de matière. Je croise ces références, je dessine rapidement de nombreuses idées, puis je formule une problématique et des critères de choix.",
+      "outils": "carnet de croquis, archives, bibliothèques, planches de recherche",
       "livrables": "cahier des charges, planches de recherche",
       "exemples": [
         "fish-eye 1",
@@ -42,12 +42,12 @@
     {
       "titre": "jouer",
       "sousEtapes": [
-        "trois itérations",
-        "dessin, maquette, 3D",
+        "trois pistes",
+        "itérations dessin, maquette, 3D",
         "storyboard d’usage",
         "choix de la piste"
       ],
-      "texte": "Le moment que je préfère : trois itérations, chacune pensée comme un système et racontée en storyboard. Je fais des va-et-vient entre le dessin, la maquette et la 3D, puis je choisis une piste avec le commanditaire et les usagers.",
+      "texte": "Je développe trois pistes, chacune pensée comme un système, avec ses éléments, ses règles et ses interactions, et racontée en storyboard. Chaque piste progresse par itérations entre le dessin, la maquette et la 3D. Je choisis ensuite la piste à développer avec le commanditaire et les usagers, au regard des critères définis.",
       "outils": "carton, découpe laser, impression 3D, storyboard, règles de jeu",
       "livrables": "trois pistes en croquis et en maquettes, storyboards, piste retenue",
       "exemples": [
@@ -66,9 +66,9 @@
         "prototypage",
         "tests et analyse psychologique"
       ],
-      "texte": "Le projet affronte le réel : matériaux simples et réparables, fabrication locale avec des artisans et des ingénieurs, tests avec les usagers. J’analyse ce que l’objet leur fait : ce qu’il fait ressentir, les habitudes qu’il crée, l’image de soi qu’il renvoie. Mon imaginaire se heurte aux limites techniques, et cette friction fait souvent naître la meilleure idée.",
+      "texte": "Je choisis des matériaux et des procédés simples, réparables et disponibles localement, puis je prototype avec des artisans, des ateliers et des ingénieurs. Le projet confronte alors mes intentions aux limites techniques et économiques ; ces contraintes orientent souvent les meilleures décisions. Les tests avec les usagers me permettent d’analyser ce que l’objet produit chez eux : ce qu’il fait ressentir, les habitudes qu’il installe, l’image de soi qu’il renvoie.",
       "outils": "Rhino, Fusion 360, atelier, fiches matériaux, tests d’usage",
-      "livrables": "plans et 3D, prototype testé, choix des matériaux",
+      "livrables": "modèle 3D, prototype testé, synthèse des tests, choix des matériaux et procédés",
       "exemples": [
         "de-passager-a-equipier 26",
         "ratp 4",
@@ -84,8 +84,8 @@
         "packaging et édition",
         "retour d’usage"
       ],
-      "texte": "Je rends le projet lisible pour qui le fabrique comme pour qui l’utilise : plans, notices, packaging, récit. Je suis la fabrication avec l’atelier jusqu’aux premières pièces de série, puis je retourne voir l’objet en usage, et ce retour lance une nouvelle partie.",
-      "outils": "Blender, plans de fabrication, notices, packaging, édition",
+      "texte": "Je rends le projet lisible pour ceux qui le fabriquent comme pour ceux qui l’utilisent : plans, dossier de fabrication, notices, packaging et mise en récit. J’accompagne la fabrication jusqu’aux premières pièces de série, puis j’observe l’objet en usage ; ce retour nourrit le projet suivant.",
+      "outils": "Blender, plans cotés, notices, packaging, édition",
       "livrables": "dossier de fabrication, packaging et notices, suivi jusqu’à la série",
       "exemples": [
         "le-jeu-de-la-grenouille 16",
