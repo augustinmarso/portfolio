@@ -7,11 +7,11 @@
       "titre": "s’étonner",
       "sousEtapes": [
         "lire le brief",
-        "aller sur le terrain",
-        "écouter les gens",
-        "parcours usager"
+        "terrain et écoute",
+        "parcours usager",
+        "analyse psychologique"
       ],
-      "texte": "Tout commence par le brief. Je le lis, je le questionne, puis je vais voir sur place : un geste du quotidien que plus personne ne remarque, des gens chez eux ou là où ils travaillent. Je les écoute, je dessine ce qu’ils font vraiment et tout le parcours autour : qui intervient, à quel moment, avec quoi. Je travaille avec eux plutôt que pour eux.",
+      "texte": "Tout commence par le brief. Je le lis, je le questionne, puis je vais voir sur place : un geste du quotidien que plus personne ne remarque, des gens chez eux ou là où ils travaillent. Je les écoute, je dessine ce qu’ils font vraiment et tout le parcours autour : qui intervient, à quel moment, avec quoi. J’analyse aussi ce que l’objet fait à la personne : ce qu’il lui fait ressentir, les habitudes qu’il crée, l’image de soi qu’il renvoie. Je travaille avec eux plutôt que pour eux.",
       "outils": "entretiens, questionnaires, photos, croquis d’usage, parcours usager",
       "exemples": [
         "ephemeride 2",
@@ -58,11 +58,11 @@
       "titre": "éprouver",
       "sousEtapes": [
         "matériaux et procédés",
-        "modélisation CAO",
+        "imaginaire et limites techniques",
         "prototypage",
         "tests avec les usagers"
       ],
-      "texte": "Ensuite le projet affronte le réel. Je choisis les matériaux et les procédés : simples, réparables, fabricables près de chez nous, en regardant le coût et l’impact. Je modélise au millimètre, je fabrique avec des artisans, des ateliers et des ingénieurs, et je fais tester par les personnes concernées. Un prototype qui casse me renvoie à la maquette : le projet se règle par allers-retours.",
+      "texte": "Ensuite le projet affronte le réel. Je choisis les matériaux et les procédés : simples, réparables, fabricables près de chez nous, en regardant le coût et l’impact. Je modélise au millimètre, je fabrique avec des artisans, des ateliers et des ingénieurs, et je fais tester par les personnes concernées. C’est là que mon imaginaire se confronte aux limites techniques : ce que je rêvais en maquette doit tenir face à la matière, aux procédés et aux coûts. Cette friction fait souvent naître la meilleure idée. Un prototype qui casse me renvoie à la maquette : le projet se règle par allers-retours.",
       "outils": "Rhino, Fusion 360, atelier, fiches matériaux, tests d’usage",
       "exemples": [
         "de-passager-a-equipier 26",
