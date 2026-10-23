@@ -44,12 +44,13 @@
       "sousEtapes": [
         "trois pistes",
         "itérations dessin, maquette, 3D",
+        "recherche technique",
         "storyboard d’usage",
         "choix de la piste"
       ],
-      "texte": "Je développe trois pistes, chacune pensée comme un système, avec ses éléments, ses règles et ses interactions, et racontée en storyboard. Chaque piste progresse par itérations entre le dessin, la maquette et la 3D. Je choisis ensuite la piste à développer avec le commanditaire et les usagers, au regard des critères définis.",
-      "outils": "carton, découpe laser, impression 3D, storyboard, règles de jeu",
-      "livrables": "trois pistes en croquis et en maquettes, storyboards, piste retenue",
+      "texte": "Je développe trois pistes, chacune pensée comme un système, avec ses éléments, ses règles et ses interactions, et racontée en storyboard. Chaque piste progresse par itérations entre le dessin, la maquette et la 3D. En parallèle, je mène une recherche technique sur chacune : principes mécaniques, assemblages, matériaux envisageables et premiers essais de faisabilité. Je choisis ensuite la piste à développer avec le commanditaire et les usagers, au regard des critères définis.",
+      "outils": "carton, découpe laser, impression 3D, essais techniques, storyboard, règles de jeu",
+      "livrables": "trois pistes en croquis et en maquettes, recherches techniques, storyboards, piste retenue",
       "exemples": [
         "le-jeu-de-la-grenouille 3",
         "le-jeu-de-la-grenouille 10",
