@@ -40,7 +40,7 @@ const PRODUIT = "produit";
 const A_CLASSER = "0-a-classer";
 const FOLDERS = [PRODUIT, ...STEP_DIRS, A_CLASSER];
 // dossiers de travail (rendus 3D sources, références d'ambiance), jamais publiés
-const WORK = ["_sources", "_references"];
+const WORK = ["_sources", "_references", "_impression"];
 // série produit attendue : plans repérés par le nom des fichiers du dossier « produit »
 const SERIE = [
   { nom: "mise en situation", motif: /situation/i, min: 1 },
