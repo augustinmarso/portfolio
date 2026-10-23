@@ -22,5 +22,11 @@
     "Impression 3D de la coque sur imprimante Creality",
     "Éléments démontés : coque, panneau solaire et électronique",
     "Storyboard des usages au fil de la journée et de la nuit"
+  ],
+  "processus": [
+    9,
+    10,
+    11,
+    12
   ]
 }

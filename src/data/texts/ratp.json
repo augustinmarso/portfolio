@@ -32,5 +32,13 @@
     "Rendu de la prise rouge, vue de côté",
     "Trois prises imprimées en rouge, jaune et bleu sur des barres",
     "Rendu de la prise jaune ouverte, vue de dessus"
+  ],
+  "processus": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
   ]
 }

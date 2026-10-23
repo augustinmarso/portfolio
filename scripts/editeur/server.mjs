@@ -43,7 +43,7 @@ async function folders() {
 async function imagesOf(folder) {
   return (await fs.readdir(path.join(SRC, folder))).filter((f) => EXT.test(f)).sort();
 }
-const emptyText = () => ({ year: null, context: null, themes: [], intro: "", captions: [] });
+const emptyText = () => ({ year: null, context: null, themes: [], intro: "", captions: [], processus: [] });
 
 async function state() {
   const site = await readJson(SITE_FILE, { order: [], titles: {}, covers: {}, videos: [] });
@@ -64,12 +64,14 @@ async function state() {
   return { projects };
 }
 
-// Renumérote 01, 02… dans l'ordre donné, déplace les légendes avec les images
-// et suit la couverture si elle désigne un numéro d'image.
-// capOf : légende de chaque fichier ; par défaut lue dans l'ordre actuel du dossier.
+// Renumérote 01, 02… dans l'ordre donné, déplace les légendes et le classement produit/processus
+// avec les images et suit la couverture si elle désigne un numéro d'image.
+// capOf : légende et onglet de chaque fichier ; par défaut lus dans l'ordre actuel du dossier.
 async function captionsByFile(slug, folder) {
   const text = await readJson(path.join(TEXTS, `${slug}.json`), emptyText());
-  return Object.fromEntries((await imagesOf(folder)).map((f, i) => [f, text.captions?.[i] ?? ""]));
+  return Object.fromEntries(
+    (await imagesOf(folder)).map((f, i) => [f, { cap: text.captions?.[i] ?? "", proc: (text.processus ?? []).includes(i) }])
+  );
 }
 async function renumber(slug, folder, ordered, capOf) {
   const site = await readJson(SITE_FILE, {});
@@ -88,7 +90,8 @@ async function renumber(slug, folder, ordered, capOf) {
     await fs.rename(path.join(SRC, folder, t), path.join(SRC, folder, name));
     renamed[path.parse(orig).name] = String(i + 1).padStart(2, "0");
   }
-  text.captions = ordered.map((f) => capOf[f] ?? "");
+  text.captions = ordered.map((f) => capOf[f]?.cap ?? "");
+  text.processus = ordered.flatMap((f, i) => (capOf[f]?.proc ? [i] : []));
   await writeJson(tf, text);
   const c = site.covers?.[slug];
   if (c && c !== "_covers") {

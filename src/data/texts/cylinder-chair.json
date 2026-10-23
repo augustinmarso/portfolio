@@ -13,5 +13,9 @@
     "Croquis des trois éléments du siège",
     "Maquette imprimée en 3D, pièces séparées",
     "Sièges déployés dans une salle de jeu, avec personnages dessinés"
+  ],
+  "processus": [
+    2,
+    3
   ]
 }

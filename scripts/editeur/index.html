@@ -44,6 +44,10 @@
   .card .cov { position: absolute; top: 12px; right: 12px; background: var(--accent); color: #fff; border-radius: 999px; padding: 0 7px; font-size: 12px; font-weight: 700; }
   .card input { margin-top: 6px; font-size: 13px; padding: 5px 8px; }
   .card .acts { display: flex; justify-content: space-between; margin-top: 4px; }
+  .card .view { display: flex; margin-top: 6px; border: 1px solid var(--line); border-radius: 999px; padding: 2px; }
+  .card .view button { flex: 1; border: none; padding: 3px 0; font-size: 12px; color: var(--muted); }
+  .card .view button.on { background: var(--fg); color: #fff; }
+  .card.proc { background: var(--soft); }
   .drop { border: 2px dashed var(--line); border-radius: 10px; display: grid; place-items: center; min-height: 190px; color: var(--muted); text-align: center; padding: 10px; cursor: pointer; }
   .drop.over { border-color: var(--accent); color: var(--accent); }
   #toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--fg); color: #fff; padding: 8px 16px; border-radius: 999px; font-weight: 600; opacity: 0; transition: opacity .3s; pointer-events: none; }
@@ -142,16 +146,17 @@ function select(slug) {
       <span class="sp" style="flex:1"></span>
       <button class="danger" id="delproj">Supprimer le projet</button>
     </div>
-    <div class="row"><h2>Images (${p.images.length})</h2><span class="hint" style="margin:0">glisser pour réordonner · « couverture » choisit la vignette de l'index</span></div>
+    <div class="row"><h2>Images (${p.images.length} · <span id="count-proc">${(t.processus || []).length}</span> en processus)</h2><span class="hint" style="margin:0">glisser pour réordonner · « couverture » choisit la vignette de l'index · produit / processus choisit l'onglet de la page projet</span></div>
     <div class="grid" id="imgs">
-      ${p.images.map((f, i) => `
-        <div class="card" data-key="${esc(f)}">
+      ${p.images.map((f, i) => { const proc = (t.processus || []).includes(i); return `
+        <div class="card${proc ? " proc" : ""}" data-key="${esc(f)}">
           <span class="num">${i + 1}</span>
           ${p.cover === f.replace(/\.[^.]+$/, "") ? '<span class="cov">couverture</span>' : ""}
           <img src="${thumbUrl(p, f)}" alt="" loading="lazy">
+          <div class="view"><button class="${proc ? "" : "on"}" data-v="produit">produit</button><button class="${proc ? "on" : ""}" data-v="processus">processus</button></div>
           <input class="cap" value="${esc(t.captions?.[i])}" placeholder="légende">
           <div class="acts"><button class="ghost setcov">couverture</button><button class="ghost del">supprimer</button></div>
-        </div>`).join("")}
+        </div>`; }).join("")}
       <div class="drop" id="drop">Déposer des images ici<br>ou cliquer pour en choisir</div>
     </div>`;
 
@@ -162,6 +167,7 @@ function select(slug) {
     themes: $("#f-themes").value.split(",").map((s) => s.trim()).filter(Boolean),
     intro: $("#f-intro").value,
     captions: [...document.querySelectorAll(".card .cap")].map((i) => i.value.trim()),
+    processus: [...document.querySelectorAll(".card")].flatMap((c, i) => (c.classList.contains("proc") ? [i] : [])),
   });
   const save = async () => { await api(`/api/${slug}/text`, collect()); toast("Textes enregistrés"); };
   $("#save").onclick = async () => { await save(); await load(slug); };
@@ -170,7 +176,16 @@ function select(slug) {
   sortable($("#imgs"), ".card", async (files) => { await save(); await api(`/api/${slug}/reorder`, { files }); toast("Ordre des images enregistré"); await load(slug); });
   document.querySelectorAll(".card").forEach((c) => {
     $(".del", c).onclick = async (e) => { e.stopPropagation(); if (!confirm("Retirer cette image ? (elle part dans la corbeille, rien n'est effacé)")) return; await save(); await api(`/api/${slug}/delete-image`, { file: c.dataset.key }); toast("Image retirée"); await load(slug); };
-    $(".setcov", c).onclick = async (e) => { e.stopPropagation(); await api(`/api/${slug}/cover`, { file: c.dataset.key }); toast("Couverture choisie"); await load(slug); };
+    c.querySelectorAll(".view button").forEach((b) => (b.onclick = async (e) => {
+      e.stopPropagation();
+      const proc = b.dataset.v === "processus";
+      c.classList.toggle("proc", proc);
+      c.querySelectorAll(".view button").forEach((x) => x.classList.toggle("on", x === b));
+      $("#count-proc").textContent = document.querySelectorAll(".card.proc").length;
+      await save();
+      toast(`Planche dans l'onglet ${b.dataset.v}`);
+    }));
+    $(".setcov", c).onclick =async (e) => { e.stopPropagation(); await api(`/api/${slug}/cover`, { file: c.dataset.key }); toast("Couverture choisie"); await load(slug); };
   });
   $("#delproj").onclick = async () => { if (!confirm(`Retirer le projet « ${p.title} » du site ? (il part dans la corbeille, rien n'est effacé)`)) return; await api(`/api/${slug}/delete`); current = null; toast("Projet retiré"); await load(); };
 

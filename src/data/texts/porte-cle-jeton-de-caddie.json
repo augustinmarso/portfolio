@@ -14,5 +14,9 @@
     "Les deux pièces à plat, rendu 3D",
     "Pièces séparées, vue en perspective",
     "Fichier de découpe laser avec variantes"
+  ],
+  "processus": [
+    1,
+    6
   ]
 }

@@ -11,6 +11,7 @@ export type ProjectText = {
   themes: string[];
   intro: string;
   captions: string[];
+  processus?: number[]; // indices des planches de l'onglet « processus » (les autres vont dans « produit »)
 };
 export type ProjectVideo = { src: string; poster: string };
 export type Project = {
@@ -59,3 +60,12 @@ export const projects: Project[] = (raw as Project[]).map((p) => ({
 }));
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
+
+// Onglets d'un projet : « produit » (l'objet fini) et « processus » (recherche, croquis, maquettes,
+// fabrication). Le classement de chaque planche se règle dans l'éditeur local.
+export type ProjectView = "produit" | "processus";
+
+export function viewIndices(project: Project, view: ProjectView): number[] {
+  const proc = project.text?.processus ?? [];
+  return project.images.map((_, n) => n).filter((n) => proc.includes(n) === (view === "processus"));
+}
