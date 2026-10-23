@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { absolute } from "@/lib/site";
 import { SiteHeader } from "@/components/site-header";
+import page from "@/data/pages/processus.json";
 
 export const metadata: Metadata = {
   title: "Processus",
@@ -10,39 +11,8 @@ export const metadata: Metadata = {
   openGraph: { url: absolute("/processus/"), title: "Processus — Augustin Marsollier" },
 };
 
-// Première version : les étapes et leurs textes sont à ajuster.
-const ETAPES: { titre: string; texte: string; outils: string }[] = [
-  {
-    titre: "observer",
-    texte:
-      "Partir des personnes et de leurs gestes plutôt que de l'objet. Aller sur le terrain, regarder comment on fait aujourd'hui, noter ce qui coince.",
-    outils: "entretiens, photos, croquis d'usage",
-  },
-  {
-    titre: "chercher",
-    texte:
-      "Ouvrir large avant de choisir : références, matériaux, histoire des objets voisins. Beaucoup d'idées dessinées vite, peu gardées.",
-    outils: "carnet, planches de recherche, bibliothèques",
-  },
-  {
-    titre: "maquetter",
-    texte:
-      "Passer au volume le plus tôt possible. Carton, bois, impression rapide : la maquette dit tout de suite ce que le dessin cache.",
-    outils: "carton, découpe laser, impression 3D",
-  },
-  {
-    titre: "prototyper",
-    texte:
-      "Modéliser au millimètre, fabriquer, tester avec les personnes concernées, recommencer. Le projet se règle par allers-retours.",
-    outils: "Rhino, Fusion 360, atelier",
-  },
-  {
-    titre: "transmettre",
-    texte:
-      "Rendre le projet lisible pour celui qui le fabrique comme pour celui qui l'utilise : rendus, plans, notices, mise en page.",
-    outils: "Blender, plans de fabrication, édition",
-  },
-];
+// Contenu dans pages/processus.json (modifiable depuis l'éditeur en ligne).
+const ETAPES: { titre: string; texte: string; outils: string }[] = page.etapes;
 
 export default function ProcessusPage() {
   return (
@@ -50,9 +20,9 @@ export default function ProcessusPage() {
       <SiteHeader active="/processus" />
 
       <header className="pt-10 sm:pt-16">
-        <p className="text-lg font-semibold tracking-tight text-muted-foreground">méthode · design produit</p>
+        <p className="text-lg font-semibold tracking-tight text-muted-foreground">{page.surtitre}</p>
         <h1 className="mt-4 max-w-[18ch] text-[clamp(40px,7.5vw,120px)] font-bold leading-[0.95] tracking-[-0.05em]">
-          de l’usage au prototype
+          {page.titre}
         </h1>
       </header>
 

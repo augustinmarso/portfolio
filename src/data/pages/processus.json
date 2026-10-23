@@ -1,0 +1,31 @@
+{
+  "surtitre": "méthode · design produit",
+  "titre": "de l’usage au prototype",
+  "etapes": [
+    {
+      "titre": "observer",
+      "texte": "Partir des personnes et de leurs gestes plutôt que de l'objet. Aller sur le terrain, regarder comment on fait aujourd'hui, noter ce qui coince.",
+      "outils": "entretiens, photos, croquis d'usage"
+    },
+    {
+      "titre": "chercher",
+      "texte": "Ouvrir large avant de choisir : références, matériaux, histoire des objets voisins. Beaucoup d'idées dessinées vite, peu gardées.",
+      "outils": "carnet, planches de recherche, bibliothèques"
+    },
+    {
+      "titre": "maquetter",
+      "texte": "Passer au volume le plus tôt possible. Carton, bois, impression rapide : la maquette dit tout de suite ce que le dessin cache.",
+      "outils": "carton, découpe laser, impression 3D"
+    },
+    {
+      "titre": "prototyper",
+      "texte": "Modéliser au millimètre, fabriquer, tester avec les personnes concernées, recommencer. Le projet se règle par allers-retours.",
+      "outils": "Rhino, Fusion 360, atelier"
+    },
+    {
+      "titre": "transmettre",
+      "texte": "Rendre le projet lisible pour celui qui le fabrique comme pour celui qui l'utilise : rendus, plans, notices, mise en page.",
+      "outils": "Blender, plans de fabrication, édition"
+    }
+  ]
+}

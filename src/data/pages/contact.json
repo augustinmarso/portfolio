@@ -1,0 +1,24 @@
+{
+  "identite": [
+    "augustin marsollier,",
+    "designer objet et service,",
+    "dsaa design produit — ensaama, paris"
+  ],
+  "email": "marsollier.augustin@gmail.com",
+  "telephone": {
+    "affichage": "07 49 32 47 31",
+    "international": "+33749324731"
+  },
+  "formspree": "mrpenbga",
+  "meet": "https://meet.google.com/poz-crmg-qtx",
+  "reseaux": [
+    {
+      "label": "instagram",
+      "href": "https://www.instagram.com/augustin_marsollier/"
+    },
+    {
+      "label": "behance",
+      "href": "https://www.behance.net/augustimarsoll1"
+    }
+  ]
+}

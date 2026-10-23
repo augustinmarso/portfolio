@@ -1,10 +1,17 @@
 // Convertit les exports Behance (C:\claude\behance) en WebP légers pour le site.
-// Usage : node scripts/optimize-images.mjs [dossierSource]
+// Usage : node scripts/optimize-images.mjs --force [dossierSource]
+// ⚠ Le site se modifie désormais depuis l'éditeur en ligne (dépôt portfolio-editeur) : le dépôt est la
+// source de vérité. Ce script régénère TOUTES les images et projects.json depuis le dossier source et
+// effacerait les changements faits en ligne ; il ne sert plus qu'à repartir de zéro, d'où --force.
 import fs from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
-const SRC = path.resolve(process.argv[2] ?? "../behance");
+if (!process.argv.includes("--force")) {
+  console.error("Ce script écrase les modifications faites dans l'éditeur en ligne. Relancer avec --force pour confirmer.");
+  process.exit(1);
+}
+const SRC = path.resolve(process.argv.slice(2).find((a) => !a.startsWith("--")) ?? "../behance");
 const OUT = path.resolve("public/projects");
 const DATA = path.resolve("src/data/projects.json");
 const FULL = 2000;

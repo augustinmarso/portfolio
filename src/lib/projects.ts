@@ -25,7 +25,7 @@ export type Project = {
 };
 
 // Titres d'affichage (les dossiers n'ont pas d'accents) et projets à vidéo : réglés dans site.json,
-// modifiable depuis l'éditeur local. Vidéo : public/videos/<slug>.mp4 + .jpg.
+// modifiable depuis l'éditeur en ligne. Vidéo : public/videos/<slug>.mp4 + .jpg.
 const TITLES: Record<string, string> = site.titles;
 const VIDEOS = new Set<string>(site.videos);
 
@@ -62,7 +62,7 @@ export const projects: Project[] = (raw as Project[]).map((p) => ({
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
 
 // Onglets d'un projet : « produit » (l'objet fini) et « processus » (recherche, croquis, maquettes,
-// fabrication). Le classement de chaque planche se règle dans l'éditeur local.
+// fabrication). Le classement de chaque planche se règle dans l'éditeur en ligne.
 export type ProjectView = "produit" | "processus";
 
 export function viewIndices(project: Project, view: ProjectView): number[] {

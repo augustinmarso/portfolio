@@ -11,22 +11,21 @@ pnpm install
 pnpm dev
 ```
 
-## Ajouter ou mettre à jour des projets
+## Modifier le contenu : éditeur en ligne
 
-Les images viennent des exports Behance (un dossier par projet, images numérotées). Le script les convertit en WebP et régénère `src/data/projects.json` :
+Le contenu se modifie depuis l'éditeur en ligne, dépôt séparé : https://github.com/augustinmarso/portfolio-editeur
+(page : https://augustinmarso.github.io/portfolio-editeur/). Il écrit directement dans ce dépôt par l'API GitHub ;
+chaque publication est un commit sur `main`, donc le site se redéploie tout seul.
 
-```bash
-node scripts/optimize-images.mjs "C:\claude\behance"
-```
+Ce que l'éditeur lit et écrit :
 
-## Éditeur local (uniquement sur l'ordinateur d'Augustin)
+- `src/data/projects.json` : projets, ordre, planches (`public/projects/<slug>/`), couverture, image de survol ;
+- `src/data/texts/<slug>.json` : textes, légendes, classement produit / processus (`processus` = indices des planches) ;
+- `src/data/site.json` : titres, couvertures, projets à vidéo (`public/videos/<slug>.mp4` + `.jpg`) ;
+- `src/data/embeds.json` : vidéos YouTube des projets ;
+- `src/data/pages/*.json` : pages processus, cv, contact (et réseaux), pourquoi (manifeste) ;
+- `src/data/corbeille.json` : projets retirés, restaurables depuis l'éditeur.
 
-Double-cliquer sur `Editeur.cmd` (ou `pnpm editeur`), puis ouvrir http://localhost:5310.
-
-- Projets : glisser pour changer l'ordre, créer, retirer.
-- Images : glisser pour réordonner, ajouter (déposer des fichiers), retirer, choisir la couverture de l'index.
-- Textes : titre, année, contexte, thèmes, texte et légendes.
-- « Publier en ligne » : régénère les images, vérifie le code, puis envoie sur GitHub (le site se met à jour en 1 à 2 minutes).
-
-Rien n'est effacé : ce qui est retiré part dans `../behance/_corbeille/<date>/`. Le serveur n'écoute que `127.0.0.1` et refuse les requêtes venant d'autres sites.
-Réglages partagés avec le site : `src/data/site.json` (ordre, titres, couvertures, vidéos).
+Le dépôt est la source de vérité. `scripts/optimize-images.mjs` régénère tout depuis les exports Behance
+(`C:\claude\behance`) et effacerait les changements faits en ligne : il ne sert plus qu'à repartir de zéro
+(`node scripts/optimize-images.mjs --force "C:\claude\behance"`).

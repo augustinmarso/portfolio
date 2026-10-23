@@ -5,6 +5,8 @@ import { PrintButton } from "@/components/print-button";
 import { SiteHeader } from "@/components/site-header";
 import { asset } from "@/lib/projects";
 import { SOCIALS } from "@/lib/socials";
+import cv from "@/data/pages/cv.json";
+import contact from "@/data/pages/contact.json";
 
 export const metadata: Metadata = {
   title: "CV",
@@ -14,78 +16,9 @@ export const metadata: Metadata = {
 };
 
 // Contenu repris du CV 2026, mis à jour (DSAA 2026–2027). Pas d'adresse postale publiée.
-const ENSAAMA = "https://ensaama.net/site/home/formations";
-
+// Sections dans pages/cv.json, coordonnées dans pages/contact.json (modifiables depuis l'éditeur en ligne).
 // href : site officiel de l'école ou de la structure (lien sur le nom, en ligne et dans le PDF).
-const SECTIONS: { title: string; items: { when: string; what: string; detail?: string; href?: string; logos?: boolean }[] }[] = [
-  {
-    title: "formation",
-    items: [
-      {
-        when: "2026 — 2027",
-        what: "DSAA Design Produit",
-        detail: "ENSAAMA, Paris",
-        href: `${ENSAAMA}/dsaa/design-produit-strategies-et-innovations-industrielles-produire-autrement`,
-      },
-      {
-        when: "2023 — 2026",
-        what: "DN MADE, mention Objet / Service",
-        detail: "ENSAAMA, Paris",
-        href: `${ENSAAMA}/dnmade/objet-design-de-produits-et-services`,
-      },
-      {
-        when: "2021 — 2023",
-        what: "Première et Terminale STD2A, bac mention très bien",
-        detail: "ESAAT, Roubaix",
-        href: "https://www.esaat-roubaix.com/",
-      },
-    ],
-  },
-  {
-    title: "expériences et engagements",
-    items: [
-      {
-        when: "2025",
-        what: "Stage chez Bec et Croc",
-        detail: "Jeux en bois artisanaux. Trois mois consacrés à la refonte d'un calendrier d'activités pour les EHPAD.",
-      },
-      {
-        when: "2024",
-        what: "Maison Magis, Paris",
-        detail: "Maraudes auprès de personnes en situation de précarité ; montage vidéo au lab de la radio RCF.",
-      },
-      {
-        when: "2021 — 2022",
-        what: "ATD Quart Monde",
-        href: "https://www.atd-quartmonde.fr/",
-        detail: "Bibliothèque de rue hebdomadaire, le jeu comme outil pédagogique et culturel.",
-      },
-      {
-        when: "2020 — 2023",
-        what: "Animation d'anniversaires",
-        detail: "Une quinzaine d'événements pour des enfants de 6 à 11 ans, jeux et récits créés sur mesure.",
-      },
-    ],
-  },
-  {
-    title: "compétences",
-    items: [
-      { when: "3d", what: "Rhino 3D et Grasshopper, Fusion 360, Blender" },
-      { when: "rendu", what: "Blender (Cycles), KeyShot, mises en situation photoréalistes" },
-      { when: "prototypage", what: "Impression 3D (TPU, PLA), gravure et découpe laser, maquettes" },
-      { when: "matériaux", what: "Papier, carton, silicone, bois" },
-      { when: "main", what: "Dessin en volume, croquis de recherche" },
-      { when: "graphisme", what: "InDesign, Photoshop, Illustrator, Figma" },
-      { when: "vidéo", what: "Premiere Pro, montages de présentation" },
-      {
-        when: "numérique",
-        what: "Prototypes d'applications et de sites web avec l'IA (Claude Code), automatisation avec n8n",
-        logos: true,
-      },
-      { when: "ia", what: "Prompt engineering (ChatGPT, Nano Banana), images et vidéos génératives" },
-    ],
-  },
-];
+const SECTIONS: { title: string; items: { when: string; what: string; detail?: string; href?: string; logos?: boolean }[] }[] = cv.sections;
 
 function Ext({ href, children }: { href: string; children: React.ReactNode }) {
   return (
@@ -112,18 +45,16 @@ export default function CvPage() {
             className="w-36 rounded-sm object-cover sm:w-44 print:w-[32mm]"
           />
           <p>
-            <span className="print:hidden">
-              augustin marsollier,
-              <br />
-            </span>
-            designer objet et service,
-            <br />
-            dsaa design produit — ensaama, paris
+            {contact.identite.map((l, n) => (
+              <span key={n} className={n === 0 ? "block print:hidden" : "block"}>
+                {l}
+              </span>
+            ))}
           </p>
           <p className="font-normal">
-            marsollier.augustin@gmail.com
+            {contact.email}
             <br />
-            07 49 32 47 31
+            {contact.telephone.affichage}
             <br />
             augustinmarso.github.io/portfolio
             {SOCIALS.map((s) => (

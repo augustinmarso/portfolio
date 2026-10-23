@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { asset } from "@/lib/projects";
 import { MEET, SOCIALS } from "@/lib/socials";
 import { LazyVideo } from "@/components/lazy-video";
+import contact from "@/data/pages/contact.json";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -14,13 +15,14 @@ export const metadata: Metadata = {
   openGraph: { url: absolute("/contact/"), title: "Contact — Augustin Marsollier" },
 };
 
-const EMAIL = "marsollier.augustin@gmail.com";
-const PHONE = { display: "07 49 32 47 31", href: "tel:+33749324731" };
+// Coordonnées dans pages/contact.json (modifiables depuis l'éditeur en ligne).
+const EMAIL = contact.email;
+const PHONE = { display: contact.telephone.affichage, href: `tel:${contact.telephone.international}` };
 // Ouvre la conversation WhatsApp sur le numéro (on y lance l'appel vidéo).
-const WHATSAPP = "https://wa.me/33749324731";
+const WHATSAPP = `https://wa.me/${contact.telephone.international.replace(/\D/g, "")}`;
 // Identifiant du formulaire Formspree (formspree.io/f/<id>) ; vide, le formulaire ouvre la messagerie du visiteur.
-// Lien Google Meet personnel à renseigner : tant qu'il est vide, le bouton du GIF propose une visio par mail.
-const FORMSPREE_ID = "mrpenbga";
+// Lien Google Meet : tant qu'il est vide, le bouton du GIF propose une visio par mail.
+const FORMSPREE_ID = contact.formspree;
 const MEET_URL = MEET;
 
 export default function ContactPage() {
@@ -32,11 +34,11 @@ export default function ContactPage() {
       <div className="grid min-h-0 flex-1 gap-8 pt-4 text-base font-semibold leading-snug tracking-tight sm:text-lg lg:grid-cols-2">
         <div className="flex min-h-0 flex-col">
           <p>
-            augustin marsollier,
-            <br />
-            designer objet et service,
-            <br />
-            dsaa design produit — ensaama, paris
+            {contact.identite.map((l, n) => (
+              <span key={n} className="block">
+                {l}
+              </span>
+            ))}
           </p>
 
           <p className="mt-4">

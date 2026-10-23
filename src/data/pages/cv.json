@@ -1,0 +1,95 @@
+{
+  "sections": [
+    {
+      "title": "formation",
+      "items": [
+        {
+          "when": "2026 — 2027",
+          "what": "DSAA Design Produit",
+          "detail": "ENSAAMA, Paris",
+          "href": "https://ensaama.net/site/home/formations/dsaa/design-produit-strategies-et-innovations-industrielles-produire-autrement"
+        },
+        {
+          "when": "2023 — 2026",
+          "what": "DN MADE, mention Objet / Service",
+          "detail": "ENSAAMA, Paris",
+          "href": "https://ensaama.net/site/home/formations/dnmade/objet-design-de-produits-et-services"
+        },
+        {
+          "when": "2021 — 2023",
+          "what": "Première et Terminale STD2A, bac mention très bien",
+          "detail": "ESAAT, Roubaix",
+          "href": "https://www.esaat-roubaix.com/"
+        }
+      ]
+    },
+    {
+      "title": "expériences et engagements",
+      "items": [
+        {
+          "when": "2025",
+          "what": "Stage chez Bec et Croc",
+          "detail": "Jeux en bois artisanaux. Trois mois consacrés à la refonte d'un calendrier d'activités pour les EHPAD."
+        },
+        {
+          "when": "2024",
+          "what": "Maison Magis, Paris",
+          "detail": "Maraudes auprès de personnes en situation de précarité ; montage vidéo au lab de la radio RCF."
+        },
+        {
+          "when": "2021 — 2022",
+          "what": "ATD Quart Monde",
+          "href": "https://www.atd-quartmonde.fr/",
+          "detail": "Bibliothèque de rue hebdomadaire, le jeu comme outil pédagogique et culturel."
+        },
+        {
+          "when": "2020 — 2023",
+          "what": "Animation d'anniversaires",
+          "detail": "Une quinzaine d'événements pour des enfants de 6 à 11 ans, jeux et récits créés sur mesure."
+        }
+      ]
+    },
+    {
+      "title": "compétences",
+      "items": [
+        {
+          "when": "3d",
+          "what": "Rhino 3D et Grasshopper, Fusion 360, Blender"
+        },
+        {
+          "when": "rendu",
+          "what": "Blender (Cycles), KeyShot, mises en situation photoréalistes"
+        },
+        {
+          "when": "prototypage",
+          "what": "Impression 3D (TPU, PLA), gravure et découpe laser, maquettes"
+        },
+        {
+          "when": "matériaux",
+          "what": "Papier, carton, silicone, bois"
+        },
+        {
+          "when": "main",
+          "what": "Dessin en volume, croquis de recherche"
+        },
+        {
+          "when": "graphisme",
+          "what": "InDesign, Photoshop, Illustrator, Figma"
+        },
+        {
+          "when": "vidéo",
+          "what": "Premiere Pro, montages de présentation"
+        },
+        {
+          "when": "numérique",
+          "what": "Prototypes d'applications et de sites web avec l'IA (Claude Code), automatisation avec n8n",
+          "logos": true
+        },
+        {
+          "when": "ia",
+          "what": "Prompt engineering (ChatGPT, Nano Banana), images et vidéos génératives"
+        }
+      ]
+    }
+  ]
+}
