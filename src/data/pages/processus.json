@@ -38,11 +38,11 @@
     {
       "titre": "jouer",
       "sousEtapes": [
-        "trois propositions",
+        "trois itérations",
         "série de maquettes",
         "dessin, maquette, 3D"
       ],
-      "texte": "Vient le moment que je préfère : de mes recherches, je tire trois propositions à développer. Je les passe au volume, chacune comme un système avec ses pièces, ses règles et ses interactions, pour les comparer. Carton, bois, impression rapide : la maquette est un terrain de jeu où l’on se trompe vite et sans regret. Je fais des va-et-vient entre le dessin, la maquette et la 3D : je teste, je corrige, je recommence, et à chaque tour le projet se précise.",
+      "texte": "Vient le moment que je préfère : je développe le projet en trois itérations. Chacune passe au volume, comme un système avec ses pièces, ses règles et ses interactions, et nourrit la suivante. Carton, bois, impression rapide : la maquette est un terrain de jeu où l’on se trompe vite et sans regret. Je fais des va-et-vient entre le dessin, la maquette et la 3D : je teste, je corrige, je recommence, et à chaque tour le projet se précise.",
       "outils": "carton, découpe laser, impression 3D, règles de jeu",
       "exemples": [
         "le-jeu-de-la-grenouille 10",
