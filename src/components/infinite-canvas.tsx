@@ -44,8 +44,10 @@ function useViewport() {
 // Les images gardent leurs proportions exactes (aucun recadrage) : chaque projet va
 // dans la colonne la plus courte, et le reste de hauteur est réparti dans les écarts.
 function layoutTile(projects: Project[], vw: number) {
-  const cardW = vw < 640 ? 150 : vw < 1024 ? 200 : 240;
-  const gap = vw < 640 ? 40 : 96;
+  const gap = vw < 640 ? 40 : vw < 1024 ? 56 : 72;
+  // Ordinateur : les colonnes remplissent exactement la largeur de l'écran (aucune carte coupée
+  // sur les côtés) ; téléphone : cartes de taille fixe, on glisse pour voir les autres colonnes.
+  const cardW = vw < 640 ? 150 : Math.min(320, Math.round(vw / COLS - gap));
   const natural = (p: Project) => Math.round(cardW * (p.cover.height / p.cover.width));
 
   const columns: Project[][] = Array.from({ length: COLS }, () => []);
@@ -63,14 +65,15 @@ function layoutTile(projects: Project[], vw: number) {
   columns.forEach((col, c) => {
     const used = col.reduce((s, p) => s + natural(p) + LABEL, 0);
     const colGap = (tileH - used) / col.length; // ≥ gap, la colonne remplit exactement la tuile
-    let y = (c % 2 ? 0.42 : 0.1) * tileH;
+    // quinconce : une colonne sur deux descend d'une demi-carte, sans laisser de grand vide
+    let y = c % 2 ? (natural(col[0]) + LABEL + colGap) / 2 : 0;
     col.forEach((p) => {
       const h = natural(p) + LABEL;
       placed.push({ project: p, x: c * (cardW + gap), y, w: cardW, h });
       y += h + colGap;
     });
   });
-  return { placed, tileW, tileH };
+  return { placed, tileW, tileH, gap };
 }
 
 const wrap = (v: number, m: number) => ((v % m) + m) % m;
@@ -86,17 +89,19 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
   const drag = useRef({ active: false, moved: 0, lastX: 0, lastY: 0, vx: 0, vy: 0 });
   const leaving = useRef(false);
 
-  const { placed, tileW, tileH } = useMemo(() => layoutTile(projects, viewport.w), [projects, viewport.w]);
+  const { placed, tileW, tileH, gap } = useMemo(() => layoutTile(projects, viewport.w), [projects, viewport.w]);
   // Juste assez de copies de la tuile pour couvrir l'écran (plan décalé de -1 tuile, marge de 5 %
   // pour le léger zoom arrière pendant le glisser) : chaque copie en plus coûte des centaines d'images.
   const copiesX = Math.ceil((viewport.w * 1.05) / tileW) + 1;
   const copiesY = Math.ceil((viewport.h * 1.05) / tileH) + 1;
 
-  // Centre la vue sur la tuile au premier rendu.
+  // Au premier rendu : colonnes centrées dans la largeur, haut de la tuile sous l'en-tête.
   useEffect(() => {
-    target.current = { x: (viewport.w - tileW) / 2, y: (viewport.h - tileH) / 2 };
+    target.current = { x: (viewport.w - tileW + gap) / 2, y: 88 };
     current.current = { ...target.current };
-  }, [tileW, tileH, viewport.w, viewport.h]);
+    // le ticker ne bouge le plan qu'en mouvement : on le place nous-mêmes
+    gsap.set(planeRef.current, { x: wrap(target.current.x, tileW) - tileW, y: wrap(target.current.y, tileH) - tileH });
+  }, [tileW, tileH, gap, viewport.w, viewport.h]);
 
   // Next garde la page d'accueil en cache (<Activity>) : à chaque retour, le contexte
   // GSAP est rejoué : on efface d'abord ce qu'a laissé l'animation de sortie.
