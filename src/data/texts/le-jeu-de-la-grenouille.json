@@ -8,31 +8,41 @@
   ],
   "intro": "Le jeu de la grenouille est un loisir flamand ancestral, qui a charmé des générations dans les estaminets et les fêtes de village. Le projet le réinterprète pour la maison. Un plateau en bois massif, moins encombrant, se pose au mur. Les grenouilles en silicone, légèrement adhérentes, y collent un instant avant de tomber dans une case numérotée.",
   "captions": [
+    "Plateau en bois posé au sol contre le mur, cases 5 1 3 2 4",
+    "Plateau en bois vu de face, cases 5 1 3 2 4, grenouille bleue",
+    "Grenouilles bleue et rose, rendu de détail",
+    "Plateau adossé au mur, pot de grenouilles",
+    "Enfant lançant une grenouille vers le plateau mural",
+    "Plateau incliné et grenouilles en l'air, vue de côté",
+    "Grenouille en silicone translucide tenue à la main",
     "Grenouille verte lancée dans la main",
     "Grenouille verte adhérant à une paroi en bois",
-    "Carte postale ancienne, jeux dans la cour d'un cercle militaire",
     "Grenouille en silicone blanc, vue du dessus",
-    "Croquis de recherche : plateau, grenouilles et système de transport",
-    "Plan du plateau et d'une grenouille, dessin au trait",
     "Boîte kraft du jeu, illustration de silhouettes et de grenouilles",
     "Catalogue ancien de jeux de tonneau Allo",
-    "Plateau en bois vu de face, cases 5 1 3 2 4",
-    "Plateau adossé au mur, pot de grenouilles",
-    "Plateau et grenouilles, vue en plongée",
-    "Moule imprimé en 3D en deux parties",
-    "Grenouilles bleue et rose, rendu de détail",
-    "Plateau en bois posé au sol contre le mur, cases 5 1 3 2 4",
-    "Enfant lançant une grenouille vers le plateau mural",
-    "Grenouille en silicone translucide tenue à la main",
+    "Carte postale ancienne, jeux dans la cour d'un cercle militaire",
+    "Croquis de recherche plateau, grenouilles et système de transport",
     "Formes de plateau découpées dans du carton, essais d'empilement",
+    "Moule imprimé en 3D en deux parties",
+    "Plan du plateau et d'une grenouille, dessin au trait",
     "Livret des règles ouvert, plateau illustré et grenouille"
   ],
   "processus": [
-    2,
-    4,
-    5,
-    7,
     11,
-    16
-  ]
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "etapes": {
+    "12.webp": 2,
+    "13.webp": 2,
+    "14.webp": 3,
+    "15.webp": 3,
+    "16.webp": 4,
+    "17.webp": 5,
+    "18.webp": 5
+  }
 }

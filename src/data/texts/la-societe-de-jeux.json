@@ -26,12 +26,16 @@
     "Des lieux qui incitent à jouer, la table de tric-trac",
     "Conclusion du mémoire",
     "Corpus : ouvrages, sources web et jeux de référence",
-    "Croquis du plateau de tric-trac avec gobelets, dés et jetons",
     "Brochure du mémoire, couverture La société de jeux",
+    "Croquis du plateau de tric-trac avec gobelets, dés et jetons",
     "Croquis de la table de tric-trac et de ses tiroirs"
   ],
   "processus": [
-    17,
+    18,
     19
-  ]
+  ],
+  "etapes": {
+    "19.webp": 3,
+    "20.webp": 3
+  }
 }

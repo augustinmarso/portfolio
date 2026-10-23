@@ -8,20 +8,26 @@
   ],
   "intro": "Le projet répond à un concours du salon Silmo : concevoir une paire de lunettes avec de la bakélite et des matériaux naturels. Les formes viennent de l'œil et de la tête du poisson. La monture translucide porte un bord en matière à base d'algues.",
   "captions": [
+    "Logo Fish Eye",
+    "Lunettes translucides, rendu 3D",
+    "Lunettes vues de face, monture translucide et bord en algues",
+    "Lunettes dans une boîte de sardines",
+    "Lunettes portées, portrait en extérieur",
     "Photographie d'inspiration, deux poissons devant les yeux",
     "Croquis de recherche de montures",
     "Recherche de formes et de matériaux, poissons et algues",
-    "Fiche produit, vues cotées de la monture",
-    "Logo Fish Eye",
-    "Lunettes translucides, rendu 3D",
-    "Lunettes sur fond noir",
-    "Lunettes dans une boîte de sardines",
-    "Lunettes portées, portrait en extérieur"
+    "Fiche produit, vues cotées de la monture"
   ],
   "processus": [
-    0,
-    1,
-    2,
-    3
-  ]
+    5,
+    6,
+    7,
+    8
+  ],
+  "etapes": {
+    "06.webp": 2,
+    "07.webp": 2,
+    "08.webp": 2,
+    "09.webp": 5
+  }
 }

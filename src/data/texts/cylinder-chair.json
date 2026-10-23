@@ -9,13 +9,17 @@
   "intro": "Le projet vise une série de sièges faciles à ranger pour une école primaire. Les pièces sont des cylindres qui s'emboîtent. Les enfants peuvent s'asseoir, tourner, rouler ou empiler les sièges, pour un usage à la fois fonctionnel et imaginatif.",
   "captions": [
     "Trois pièces cylindriques, rendu 3D orange",
-    "Cylindre fermé posé dans une salle de classe",
+    "Siège empilé sur un cylindre cannelé, cylindre fermé couché, en classe",
+    "Sièges déployés dans une salle de jeu, avec personnages dessinés",
     "Croquis des trois éléments du siège",
-    "Maquette imprimée en 3D, pièces séparées",
-    "Sièges déployés dans une salle de jeu, avec personnages dessinés"
+    "Maquette imprimée en 3D, pièces séparées"
   ],
   "processus": [
-    2,
-    3
-  ]
+    3,
+    4
+  ],
+  "etapes": {
+    "04.webp": 3,
+    "05.webp": 3
+  }
 }

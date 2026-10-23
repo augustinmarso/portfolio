@@ -9,10 +9,13 @@
   "intro": "La collection part d'un verset de Matthieu sur le baptême d'eau et de feu. L'ostensoir, objet qui présente l'hostie consacrée à l'adoration, est dessiné à partir de l'onde de l'eau, symbole du baptême et de la purification. Des anneaux concentriques dorés entourent le centre, sur un pied de cuivre.",
   "captions": [
     "Ostensoir en anneaux concentriques, rendu 3D",
-    "Planche d'analyse de l'ostensoir de la Trinité",
-    "Ostensoir posé sur une pierre, vue rapprochée"
+    "Ostensoir posé sur une pierre, vue rapprochée",
+    "Planche d'analyse de l'ostensoir de la Trinité"
   ],
   "processus": [
-    1
-  ]
+    2
+  ],
+  "etapes": {
+    "03.webp": 2
+  }
 }

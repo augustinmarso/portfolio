@@ -18,15 +18,21 @@
     "Veilleuse éteinte dans l'obscurité",
     "Veilleuse allumée, lueur rose tenue à la main",
     "Veilleuse sur la table de chevet, enfant endormi",
+    "Storyboard des usages au fil de la journée et de la nuit",
     "Modèle filaire Rhino avec cotes",
     "Impression 3D de la coque sur imprimante Creality",
-    "Éléments démontés : coque, panneau solaire et électronique",
-    "Storyboard des usages au fil de la journée et de la nuit"
+    "Éléments démontés : coque, panneau solaire et électronique"
   ],
   "processus": [
     9,
     10,
     11,
     12
-  ]
+  ],
+  "etapes": {
+    "10.webp": 3,
+    "11.webp": 4,
+    "12.webp": 4,
+    "13.webp": 4
+  }
 }

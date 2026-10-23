@@ -12,12 +12,6 @@
   "intro": "Certains voyageurs perçoivent les barres d'appui du métro parisien comme des foyers de microbes et adoptent des gestes inhabituels pour limiter le contact. Du bout des doigts propose une série de prises individuelles à fixer sur les barres existantes. Inspirées des prises d'escalade et des vertèbres, elles épousent les gestes observés (pincer, appuyer, crocheter avec deux doigts) et offrent une accroche stable avec un minimum de contact. Projet réalisé avec Jesse Desuraume-Rajol.",
   "captions": [
     "Rendu de la prise chromée sur une barre, vue de face",
-    "Croquis des gestes de préhension et des surfaces de contact",
-    "Main saisissant une barre avec une feuille de papier en protection",
-    "Pictogrammes des quatre gestes de préhension, mains et formes orange",
-    "Poing fermé sur une barre protégée par un autocollant orange",
-    "Prise imprimée en 3D en blanc, vue de face",
-    "Croquis des positions de la main pour limiter le contact",
     "Rendu de la prise bleue ouverte en deux parties",
     "Rendu de la prise rouge avec sa poignée en crochet",
     "Rendu de la prise bleue ouverte, vue de trois quarts",
@@ -31,14 +25,28 @@
     "Rendu de la prise jaune à bec, vue de trois quarts",
     "Rendu de la prise rouge, vue de côté",
     "Trois prises imprimées en rouge, jaune et bleu sur des barres",
-    "Rendu de la prise jaune ouverte, vue de dessus"
+    "Rendu de la prise jaune ouverte, vue de dessus",
+    "Croquis des gestes de préhension et des surfaces de contact",
+    "Main saisissant une barre avec une feuille de papier en protection",
+    "Pictogrammes des quatre gestes de préhension, mains et formes orange",
+    "Croquis des positions de la main pour limiter le contact",
+    "Poing fermé sur une barre protégée par un autocollant orange",
+    "Prise imprimée en 3D en blanc, vue de face"
   ],
   "processus": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6
-  ]
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "etapes": {
+    "16.webp": 1,
+    "17.webp": 1,
+    "18.webp": 2,
+    "19.webp": 3,
+    "20.webp": 4,
+    "21.webp": 4
+  }
 }

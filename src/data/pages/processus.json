@@ -14,10 +14,10 @@
       "outils": "entretiens, questionnaires, photographies, croquis d’usage, cartographie de parcours",
       "livrables": "analyse du terrain, parcours usager",
       "exemples": [
-        "ratp 1",
-        "ephemeride 2",
-        "ratp 2",
-        "ephemeride 17"
+        "ratp 15",
+        "ephemeride 7",
+        "ratp 16",
+        "ephemeride 8"
       ]
     },
     {
@@ -31,10 +31,10 @@
       "outils": "carnet de croquis, archives, bibliothèques, planches de recherche",
       "livrables": "moodboard, planches de recherche, cahier des charges",
       "exemples": [
-        "fish-eye 1",
+        "fish-eye 6",
         "kai 7",
-        "le-jeu-de-la-grenouille 1",
-        "le-jeu-de-la-grenouille 2"
+        "le-jeu-de-la-grenouille 12",
+        "le-jeu-de-la-grenouille 11"
       ]
     },
     {
@@ -48,11 +48,11 @@
       "outils": "carton, découpe laser, impression 3D, essais techniques, storyboard, règles de jeu",
       "livrables": "trois pistes en croquis et en maquettes, recherches techniques, storyboards, piste retenue",
       "exemples": [
-        "le-jeu-de-la-grenouille 3",
-        "le-jeu-de-la-grenouille 10",
-        "ephemeride 9",
-        "cylinder-chair 3",
-        "gorillachoc 10"
+        "le-jeu-de-la-grenouille 13",
+        "le-jeu-de-la-grenouille 14",
+        "ephemeride 14",
+        "cylinder-chair 4",
+        "gorillachoc 13"
       ]
     },
     {
@@ -66,10 +66,10 @@
       "outils": "Rhino, Fusion 360, atelier, fiches matériaux, tests d’usage",
       "livrables": "modèle 3D, prototype testé, synthèse des tests, choix des matériaux et procédés",
       "exemples": [
-        "de-passager-a-equipier 26",
-        "ratp 4",
-        "le-choix-de-malo 10",
-        "le-jeu-de-la-grenouille 11"
+        "de-passager-a-equipier 29",
+        "ratp 19",
+        "le-choix-de-malo 11",
+        "le-jeu-de-la-grenouille 15"
       ]
     },
     {
@@ -83,8 +83,8 @@
       "outils": "Blender, plans cotés, notices, packaging, édition",
       "livrables": "dossier de fabrication, packaging et notices, suivi jusqu’à la série",
       "exemples": [
+        "le-jeu-de-la-grenouille 17",
         "le-jeu-de-la-grenouille 16",
-        "le-jeu-de-la-grenouille 5",
         "kai 5",
         "echappee 17"
       ]

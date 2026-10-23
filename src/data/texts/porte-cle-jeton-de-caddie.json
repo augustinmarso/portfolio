@@ -8,15 +8,19 @@
   "intro": "Le projet a été réalisé pendant un stage chez Sauge, artisan du bois dans le Doubs. Il s'agit d'un goodie découpé au laser, qui renouvelle le porte-clé jeton de caddie, traditionnellement en plastique. Le jeton en bois s'emboîte dans le porte-clé et reprend le logo du Département du Doubs.",
   "captions": [
     "Porte-clé en bois, deux pièces emboîtées",
-    "Logo du Département du Doubs",
     "Plusieurs porte-clés en bois sur un plateau",
     "Porte-clé gravé du logo, fond blanc",
     "Les deux pièces à plat, rendu 3D",
     "Pièces séparées, vue en perspective",
+    "Logo du Département du Doubs",
     "Fichier de découpe laser avec variantes"
   ],
   "processus": [
-    1,
+    5,
     6
-  ]
+  ],
+  "etapes": {
+    "06.webp": 1,
+    "07.webp": 5
+  }
 }

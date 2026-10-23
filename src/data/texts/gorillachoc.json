@@ -19,6 +19,9 @@
     "Gorille portant la boîte, vue rapprochée",
     "Gorille et pastilles de chocolat devant la boîte",
     "L'enfant mange le gorille",
+    "Le gorille à côté d'un lapin de Pâques classique",
+    "Enfant croquant le gorille en chocolat",
+    "Gorille en chocolat portant la boîte kraft pleine de pastilles",
     "Moules imprimés en 3D sur le plateau",
     "Moule en main, empreinte du visage visible",
     "Moule imprimé vide, avant coulage",
@@ -26,19 +29,26 @@
     "Chocolat versé dans le moule",
     "Remplissage du moule au-dessus du bol",
     "Démoulage de la pièce en chocolat",
-    "Gravure du logo sur le carton kraft",
-    "Le gorille à côté d'un lapin de Pâques classique",
-    "Enfant croquant le gorille en chocolat",
-    "Gorille en chocolat portant la boîte kraft pleine de pastilles"
+    "Gravure du logo sur le carton kraft"
   ],
   "processus": [
-    10,
-    11,
-    12,
     13,
     14,
     15,
     16,
-    17
-  ]
+    17,
+    18,
+    19,
+    20
+  ],
+  "etapes": {
+    "14.webp": 4,
+    "15.webp": 4,
+    "16.webp": 4,
+    "17.webp": 4,
+    "18.webp": 4,
+    "19.webp": 4,
+    "20.webp": 4,
+    "21.webp": 5
+  }
 }

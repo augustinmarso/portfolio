@@ -9,18 +9,24 @@
   "intro": "Les sécheresses de plus en plus fréquentes réduisent les récoltes et fragilisent les agriculteurs qui dépendent de la pluie. Le récolteur capte l'eau contenue dans l'air avec deux principes naturels. Les facettes imitent la pomme de pin, qui s'ouvre quand l'air est humide. Les petits pics rappellent le scarabée du désert.",
   "captions": [
     "Planche titre, récolteur entouré de pommes de pin",
-    "Pomme de pin fermée et ouverte",
-    "Scarabée du désert couvert de gouttes",
     "Récolteur installé dans un paysage aride",
-    "Schéma de fonctionnement du récolteur",
     "Détail des facettes ouvertes, rendu 3D",
     "Récolteur sur un sol rocheux, rendu 3D",
+    "Pomme de pin fermée et ouverte",
+    "Scarabée du désert couvert de gouttes",
+    "Schéma de fonctionnement du récolteur",
     "Modélisation sous Rhino et Grasshopper"
   ],
   "processus": [
-    1,
-    2,
     4,
+    5,
+    6,
     7
-  ]
+  ],
+  "etapes": {
+    "05.webp": 2,
+    "06.webp": 2,
+    "07.webp": 3,
+    "08.webp": 4
+  }
 }
