@@ -1,11 +1,16 @@
 {
-  "surtitre": "méthode · design produit, service ",
+  "surtitre": "méthode · design produit, service",
   "titre": "de l’usage au prototype",
   "intro": "Un projet, se raconte comme une partie : on part d’un geste ordinaire, on cherche les règles, on joue avec la matière, on rate, on recommence, et à la fin quelqu’un d’autre peut reprendre la partie.",
   "etapes": [
     {
       "titre": "s’étonner",
-      "texte": "Tout commence par un geste que plus personne ne regarde : une main qui évite une barre, un rituel du matin, une règle de jeu qu’on se transmet sans l’écrire. Je vais voir les personnes là où elles vivent, je les écoute, je dessine ce qu’elles font plutôt que ce qu’elles disent.",
+      "sousEtapes": [
+        "aller sur le terrain",
+        "observer les gestes",
+        "écouter les gens"
+      ],
+      "texte": "Tout commence par un geste du quotidien que plus personne ne remarque. Je vais voir les gens chez eux ou là où ils travaillent, je les écoute et je dessine ce qu’ils font vraiment.",
       "outils": "entretiens, questionnaires, photos, croquis d’usage",
       "note": "Avant l’objet, il y a toujours quelqu’un.",
       "exemples": [
@@ -17,7 +22,12 @@
     },
     {
       "titre": "chercher",
-      "texte": "Puis je remonte le fil. Les objets anciens, les brevets oubliés, les savoir-faire d’ailleurs ont souvent déjà résolu le problème avec moins de matière et moins d’énergie. J’ouvre large, je dessine vite, je garde peu ; l’IA m’aide à faire des ponts entre des domaines qui ne se parlent pas.",
+      "sousEtapes": [
+        "poser des questions",
+        "regarder ce qui existe",
+        "faire des liens"
+      ],
+      "texte": "Ensuite, je regarde ce qui existe déjà : les objets anciens, les savoir-faire d’ailleurs. Souvent, ils ont déjà trouvé une solution simple, avec peu de matière. Je dessine beaucoup d’idées, vite, et j’en garde peu.",
       "outils": "carnet, archives, bibliothèques, planches de recherche",
       "note": "Innover, c’est souvent se souvenir.",
       "exemples": [
@@ -29,6 +39,11 @@
     },
     {
       "titre": "jouer",
+      "sousEtapes": [
+        "recherches plastiques",
+        "série de maquettes",
+        "scénarios d’usage"
+      ],
       "texte": "Vient le moment que je préfère : passer au volume et traiter le projet comme un système, avec ses pièces, ses règles et ses interactions. Carton, bois, impression rapide : la maquette est un terrain de jeu où l’on se trompe vite et sans regret.",
       "outils": "carton, découpe laser, impression 3D, règles de jeu",
       "note": "Je vais là où je m’amuse, et l’usager aussi.",
@@ -41,6 +56,11 @@
     },
     {
       "titre": "éprouver",
+      "sousEtapes": [
+        "modélisation CAO",
+        "prototypage",
+        "tests avec les usagers"
+      ],
       "texte": "Ensuite le projet affronte le réel. Je modélise au millimètre, je fabrique, je fais tester par les personnes concernées. Un prototype qui casse me renvoie à la maquette : le projet se règle par allers-retours, avec des matériaux simples, réparables et fabricables près de chez nous.",
       "outils": "Rhino, Fusion 360, atelier, tests d’usage",
       "note": "Un échec en atelier coûte moins cher qu’un échec en rayon.",
@@ -53,6 +73,11 @@
     },
     {
       "titre": "transmettre",
+      "sousEtapes": [
+        "plans cotés et nomenclature",
+        "dossier de fabrication",
+        "soutenance et édition"
+      ],
       "texte": "Enfin, je rends le projet lisible pour celui qui le fabrique comme pour celui qui l’utilise : plans, patrons, fichiers de découpe, notices, rendus. Un bon objet doit pouvoir être compris, réparé et refait sans moi.",
       "outils": "Blender, plans de fabrication, notices, édition",
       "note": "La dernière étape, c’est passer la main.",
