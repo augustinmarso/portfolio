@@ -10,7 +10,7 @@ import { LudiloveBento } from "@/components/ludilove-bento";
 import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
 import { MemoireBook } from "@/components/memoire-book";
 import embeds from "@/data/embeds.json";
-import { projects, viewIndices, type Project, type ProjectView } from "@/lib/projects";
+import { plateStep, projects, STEPS, viewIndices, type Project, type ProjectView } from "@/lib/projects";
 import { absolute, jsonLd, ogImage, PERSON } from "@/lib/site";
 
 // Page d'un projet, en deux onglets : « produit » (/projets/<slug>/) et « processus » (/projets/<slug>/processus/).
@@ -29,6 +29,8 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
   // Il remplace toutes les planches de l'onglet produit ; les croquis restent dans « processus ».
   const memoire = produit && project.slug === "la-societe-de-jeux";
   const shown = memoire ? [] : viewIndices(project, view);
+  // processus rangé par étapes de la méthode : un intertitre avant la première planche de chaque étape
+  const byStep = !produit && shown.some((n) => plateStep(project, n));
 
   const tabs = (
     <nav aria-label="Onglets du projet" className="mt-6 flex gap-5 text-lg font-semibold tracking-tight">
@@ -178,8 +180,24 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
           {shown.map((n, k) => {
             const img = project.images[n];
             const caption = text?.captions[n];
+            const step = plateStep(project, n);
+            const newStep = byStep && (k === 0 || plateStep(project, shown[k - 1]) !== step);
             return (
               <Fragment key={img.src}>
+                {newStep && (
+                  <h2 className="flex items-baseline gap-3 border-t pt-4 text-2xl font-bold tracking-tight sm:text-3xl">
+                    {step ? (
+                      <>
+                        <span className="text-muted-foreground">{String(step).padStart(2, "0")}</span>
+                        <Link href={`/processus#etape-${step}`} className="hover:underline">
+                          {STEPS[step - 1]}
+                        </Link>
+                      </>
+                    ) : (
+                      "autres planches"
+                    )}
+                  </h2>
+                )}
                 {/* LudiLove : les composants puis la charte en mouvement, juste avant les planches de la charte. */}
                 {produit && project.slug === "ludilove" && img.src.endsWith("/ludilove/04.webp") && (
                   <figure>

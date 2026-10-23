@@ -1,4 +1,5 @@
 import raw from "@/data/projects.json";
+import methode from "@/data/pages/processus.json";
 import site from "@/data/site.json";
 import { texts } from "@/data/texts";
 
@@ -12,6 +13,9 @@ export type ProjectText = {
   intro: string;
   captions: string[];
   processus?: number[]; // indices des planches de l'onglet « processus » (les autres vont dans « produit »)
+  // étape de la méthode (1 à 5, voir pages/processus.json) de chaque planche du processus, par nom de fichier
+  // (« 06.webp ») pour survivre aux changements d'ordre ; une planche sans étape va dans « autres planches »
+  etapes?: Record<string, number>;
 };
 export type ProjectVideo = { src: string; poster: string };
 export type Project = {
@@ -67,5 +71,13 @@ export type ProjectView = "produit" | "processus";
 
 export function viewIndices(project: Project, view: ProjectView): number[] {
   const proc = project.text?.processus ?? [];
-  return project.images.map((_, n) => n).filter((n) => proc.includes(n) === (view === "processus"));
+  const shown = project.images.map((_, n) => n).filter((n) => proc.includes(n) === (view === "processus"));
+  // processus : planches rangées dans l'ordre des étapes, les planches sans étape à la fin
+  return view === "processus" ? shown.sort((a, b) => (plateStep(project, a) || 99) - (plateStep(project, b) || 99)) : shown;
 }
+
+// Étapes de la méthode (page Processus) : titres dans l'ordre, numérotés à partir de 1.
+export const STEPS: string[] = methode.etapes.map((e) => e.titre);
+
+export const plateStep = (project: Project, n: number) =>
+  project.text?.etapes?.[project.images[n]?.src.split("/").pop() ?? ""] ?? 0;
