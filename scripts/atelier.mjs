@@ -39,6 +39,16 @@ const STEP_DIRS = METHODE.etapes.map((e, i) => `${i + 1}-${slugify(e.titre)}`);
 const PRODUIT = "produit";
 const A_CLASSER = "0-a-classer";
 const FOLDERS = [PRODUIT, ...STEP_DIRS, A_CLASSER];
+// dossiers de travail des visuels générés (scripts/rendu.mjs), jamais publiés
+const WORK = ["_sources", "_references"];
+// série produit attendue : plans repérés par le nom des fichiers du dossier « produit »
+const SERIE = [
+  { nom: "mise en situation", motif: /situation/i, min: 1 },
+  { nom: "éclaté", motif: /[ée]clat[ée]/i, min: 1 },
+  { nom: "packaging", motif: /packaging|emballage/i, min: 1 },
+  { nom: "couleur matière finition", motif: /couleur|mati[eè]re|finition|cmf/i, min: 3 },
+  { nom: "photo sur fond", motif: /fond/i, min: 1 },
+];
 
 const args = process.argv.slice(2);
 const cmd = args[0];
@@ -80,7 +90,7 @@ async function tirer() {
       continue;
     }
     await fs.rm(dir, { recursive: true, force: true });
-    for (const f of FOLDERS) await fs.mkdir(path.join(dir, f), { recursive: true });
+    for (const f of [...FOLDERS, ...WORK]) await fs.mkdir(path.join(dir, f), { recursive: true });
     const t = await textOf(p.slug);
     const proc = new Set(t.processus ?? []);
     const count = Object.fromEntries(FOLDERS.map((f) => [f, 0]));
@@ -118,6 +128,8 @@ async function etat() {
   for (const p of projects) {
     const a = await lireAtelier(p.slug);
     let counts;
+    const prodNames = a ? a[PRODUIT].map((f) => path.basename(f)) : [];
+    const plans = SERIE.filter((s) => prodNames.filter((n) => s.motif.test(n)).length < s.min).map((s) => s.nom);
     if (a) counts = Object.fromEntries(FOLDERS.map((f) => [f, a[f].length]));
     else {
       // pas encore dans l'atelier : compte d'après le dépôt
@@ -133,6 +145,7 @@ async function etat() {
       counts[PRODUIT] < MIN_PRODUIT && `${MIN_PRODUIT - counts[PRODUIT]} planche(s) produit`,
       ...STEP_DIRS.filter((f) => !counts[f]).map((f) => `étape ${f}`),
       counts[A_CLASSER] && `${counts[A_CLASSER]} à classer`,
+      ...(a ? plans.map((n) => `plan « ${n} »`) : []),
     ].filter(Boolean);
     rows.push({ slug: p.slug, title: p.title, atelier: !!a, counts, manques });
   }
@@ -159,7 +172,8 @@ async function etat() {
 table{border-collapse:collapse;margin-top:24px}th,td{padding:6px 10px;border-bottom:1px solid #eee;text-align:center}
 th:first-child,td:first-child,td:last-child{text-align:left}td.ok{color:#111}td.ko{color:#c33;font-weight:600}td.manque{color:#c33;font-size:13px}</style>
 <h1>Atelier portfolio</h1><p>Mis à jour le ${new Date().toLocaleString("fr-FR")} · ${complets}/${rows.length} projets complets ·
-objectif : ${MIN_PRODUIT} planches produit et au moins une planche par étape. Pour publier : publier.cmd.</p>
+objectif : ${MIN_PRODUIT} planches produit (${SERIE.map((s) => (s.min > 1 ? `${s.min} × ` : "") + s.nom).join(", ")}) et au moins une planche par étape.
+Générer un plan : <code>node scripts/rendu.mjs &lt;projet&gt; situation|eclate|packaging|cmf|fond</code> · publier : publier.cmd.</p>
 <table><tr><th>projet</th><th>produit</th>${METHODE.etapes.map((e, i) => `<th>${i + 1}. ${esc(e.titre)}</th>`).join("")}<th>à classer</th><th>il manque</th></tr>
 ${rows
   .map(
