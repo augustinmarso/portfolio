@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { FadeImg } from "@/components/fade-img";
 import { ProcessTimeline, TimelineDot } from "@/components/process-timeline";
 import { getProject } from "@/lib/projects";
-import page from "@/data/pages/processus.json";
+import data from "@/data/pages/processus.json";
 
 export const metadata: Metadata = {
   title: "Processus",
@@ -27,7 +27,9 @@ type Etape = {
   image?: string;
   exemples?: string[];
 };
-const ETAPES: Etape[] = page.etapes;
+// Champs facultatifs : l'éditeur en ligne peut les retirer du JSON sans casser la construction.
+const page: { surtitre: string; titre: string; intro?: string; inspirations?: string; etapes: Etape[] } = data;
+const ETAPES = page.etapes;
 
 // Les planches introuvables (projet retiré, planche supprimée) sont simplement ignorées.
 function plate(line: string) {
