@@ -12,7 +12,6 @@
       ],
       "texte": "Tout commence par le brief. Je le lis, je le questionne, puis je vais voir sur place : un geste du quotidien que plus personne ne remarque, des gens chez eux ou là où ils travaillent. Je les écoute et je dessine ce qu’ils font vraiment.",
       "outils": "entretiens, questionnaires, photos, croquis d’usage",
-      "note": "Avant l’objet, il y a toujours quelqu’un.",
       "exemples": [
         "ephemeride 2",
         "ratp 2",
@@ -29,7 +28,6 @@
       ],
       "texte": "Ensuite, je regarde ce qui existe déjà : les objets anciens, les savoir-faire d’ailleurs. Souvent, ils ont déjà trouvé une solution simple, avec peu de matière. Je dessine beaucoup d’idées, vite, et j’en garde peu.",
       "outils": "carnet, archives, bibliothèques, planches de recherche",
-      "note": "Innover, c’est souvent se souvenir.",
       "exemples": [
         "kai 7",
         "le-jeu-de-la-grenouille 1",
@@ -46,7 +44,6 @@
       ],
       "texte": "Vient le moment que je préfère : passer au volume et traiter le projet comme un système, avec ses pièces, ses règles et ses interactions. Carton, bois, impression rapide : la maquette est un terrain de jeu où l’on se trompe vite et sans regret. Chaque maquette en appelle une autre : je teste, je corrige, je recommence, et à chaque tour le projet se précise.",
       "outils": "carton, découpe laser, impression 3D, règles de jeu",
-      "note": "Je vais là où je m’amuse, et l’usager aussi.",
       "exemples": [
         "le-jeu-de-la-grenouille 10",
         "ephemeride 9",
@@ -63,7 +60,6 @@
       ],
       "texte": "Ensuite le projet affronte le réel. Je modélise au millimètre, je fabrique, je fais tester par les personnes concernées. Un prototype qui casse me renvoie à la maquette : le projet se règle par allers-retours, avec des matériaux simples, réparables et fabricables près de chez nous.",
       "outils": "Rhino, Fusion 360, atelier, tests d’usage",
-      "note": "Un échec en atelier coûte moins cher qu’un échec en rayon.",
       "exemples": [
         "de-passager-a-equipier 26",
         "ratp 4",
@@ -80,7 +76,6 @@
       ],
       "texte": "Enfin, je rends le projet lisible pour celui qui le fabrique comme pour celui qui l’utilise : plans, patrons, fichiers de découpe, notices, rendus. Un bon objet doit pouvoir être compris, réparé et refait sans moi.",
       "outils": "Blender, plans de fabrication, notices, édition",
-      "note": "La dernière étape, c’est passer la main.",
       "exemples": [
         "le-jeu-de-la-grenouille 16",
         "le-jeu-de-la-grenouille 5",
