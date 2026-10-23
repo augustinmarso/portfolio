@@ -204,6 +204,13 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
                     )}
                   </h2>
                 )}
+                {newStep && step > 0 && text?.notesEtapes?.[step] && (
+                  <div className="-mt-6 grid max-w-prose gap-3 text-lg leading-relaxed">
+                    {text.notesEtapes[step].map((para) => (
+                      <p key={para}>{para}</p>
+                    ))}
+                  </div>
+                )}
                 {/* LudiLove : les composants puis la charte en mouvement, juste avant les planches de la charte. */}
                 {produit && project.slug === "ludilove" && img.src.endsWith("/ludilove/04.webp") && (
                   <figure>

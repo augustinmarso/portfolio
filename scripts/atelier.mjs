@@ -73,6 +73,29 @@ const captionOf = (file) => file.replace(EXT, "").replace(/\s*\(retouch[ée]\)\s
 const safe = (caption) => (caption ?? "").replace(/[\\/:*?"<>|]/g, " ").replace(/\s+/g, " ").trim().slice(0, 120);
 const fileName = (n, caption) => `${pad(n)}${safe(caption) ? " " + safe(caption) : ""}.webp`;
 
+// notes.md : quelques phrases par étape, affichées sous chaque intertitre de l'onglet processus.
+// Titres « ## 1. s'étonner », « ## 2. chercher »… ; commentaires <!-- --> ignorés ; ligne vide = paragraphe.
+const NOTES = "notes.md";
+const modeleNotes = (title, notes = {}) =>
+  `# Notes de ${title}\n\n<!-- Sous chaque étape : 2 ou 3 phrases, ce que tu as fait et la décision prise au jalon.\n` +
+  `     Étape laissée vide : rien n'est affiché. Une ligne vide sépare deux paragraphes. -->\n\n` +
+  METHODE.etapes.map((e, i) => `## ${i + 1}. ${e.titre}\n\n${(notes[i + 1] ?? []).map((x) => x + "\n\n").join("")}`).join("");
+function lireNotes(txt) {
+  const out = {};
+  let cur = 0;
+  for (const line of txt.replace(/<!--[\s\S]*?-->/g, "").split(/\r?\n/)) {
+    const h = line.match(/^#{1,6}\s*(\d+)\b/);
+    if (h) cur = Number(h[1]);
+    else if (/^#/.test(line)) cur = 0;
+    else if (cur >= 1 && cur <= METHODE.etapes.length) out[cur] = (out[cur] ?? "") + line + "\n";
+  }
+  return Object.fromEntries(
+    Object.entries(out)
+      .map(([k, v]) => [k, v.split(/\n\s*\n/).map((x) => x.replace(/\s+/g, " ").trim()).filter(Boolean)])
+      .filter(([, v]) => v.length)
+  );
+}
+
 const projects = await readJson(DATA, []);
 const selected = only.length ? projects.filter((p) => only.includes(p.slug)) : projects;
 if (only.length && selected.length !== only.length) {
@@ -111,6 +134,7 @@ async function tirer() {
       legendes[prints[n]] = t.captions?.[n] ?? "";
     }
     await writeJson(path.join(dir, "_atelier.json"), { depot: prints, fichiers: files, legendes });
+    if (!(await exists(path.join(dir, NOTES)))) await fs.writeFile(path.join(dir, NOTES), modeleNotes(p.title, t.notesEtapes));
     console.log(`✓ ${p.slug} : ${p.images.length} planches tirées`);
   }
   await etat();
@@ -157,6 +181,8 @@ async function etat() {
     const gcodes = (await fs.readdir(imprDir).catch(() => [])).filter((n) => n.endsWith(".gcode"));
     const dates = await Promise.all(gcodes.map((n) => fs.stat(path.join(imprDir, n)).then((st) => st.mtime)));
     const impressions = { n: gcodes.length, last: dates.length ? new Date(Math.max(...dates)) : null };
+    const notes = Object.keys(lireNotes(await fs.readFile(path.join(ATELIER, p.slug, NOTES), "utf8").catch(() => ""))).length;
+    if (a && notes < STEP_DIRS.length) manques.push(`textes ${notes}/${STEP_DIRS.length} étapes`);
     rows.push({ slug: p.slug, title: p.title, atelier: !!a, counts, manques, impressions });
   }
 
@@ -345,6 +371,9 @@ async function publier() {
     else delete t.processus;
     if (Object.keys(etapes).length) t.etapes = etapes;
     else delete t.etapes;
+    const notes = lireNotes(await fs.readFile(path.join(dir, NOTES), "utf8").catch(() => ""));
+    if (Object.keys(notes).length) t.notesEtapes = notes;
+    else delete t.notesEtapes;
     await writeJson(tFile, t);
     await writeJson(path.join(dir, "_atelier.json"), { depot: await repoPrints(p), fichiers, legendes, ...(memo.boucle && { boucle: memo.boucle }) });
     done.push(p.slug);

@@ -16,6 +16,8 @@ export type ProjectText = {
   // étape de la méthode (1 à 5, voir pages/processus.json) de chaque planche du processus, par nom de fichier
   // (« 06.webp ») pour survivre aux changements d'ordre ; une planche sans étape va dans « autres planches »
   etapes?: Record<string, number>;
+  // textes par étape (« 1 » à « 5 » → paragraphes), écrits dans notes.md de l'atelier
+  notesEtapes?: Record<string, string[]>;
 };
 export type ProjectVideo = { src: string; poster: string };
 export type Project = {
