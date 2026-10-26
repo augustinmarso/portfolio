@@ -16,11 +16,11 @@ import {
 } from "d3-force";
 import { THEMES, type Project } from "@/lib/projects";
 
-// Rayon d'un point selon son nombre de connexions : plus il est relié, plus il est gros.
-// Noir pour la racine et les thèmes, image ronde pour un projet (connexions = ses thèmes).
-// Les rayons de la simulation, eux, réservent la place des noms.
-const dotRadius = (kind: Kind, links: number) =>
-  kind === "project" ? 12 + 7 * (links - 1) : 2.5 + 2 * Math.sqrt(links);
+// Style planche : petits cercles creux reliés par des traits fins, vignettes rectangulaires
+// posées à l'extérieur de leur point. Rayon un peu plus grand pour la racine et les thèmes.
+const dotRadius = (kind: Kind) => (kind === "root" ? 6 : kind === "theme" ? 5 : 4);
+// Largeur d'une vignette de projet (la hauteur suit les proportions de la couverture).
+const thumbW = (w: number, k: number) => (w < 600 ? 60 : 96 * k);
 
 // Couleur de la catégorie choisie : son point, son nom, ses liens et le contour de ses projets.
 const ACCENT = "#1d1bff";
@@ -136,15 +136,15 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
       })
     );
 
+    const tw = thumbW(size.w, k);
     const clamp = () =>
       nodes.forEach((n) => {
-        // Marge au bord : la place de l'image ronde d'un projet (et de son nom centré dessous sur mobile).
-        const side = n.kind === "project" ? (size.w < 600 ? 58 : Math.max(n.r, 36)) : n.r;
+        // Marge au bord : la place de la vignette d'un projet, posée à l'extérieur de son point.
+        const side = n.kind === "project" ? tw + 16 : n.r;
         n.x = Math.max(side, Math.min(size.w - side, n.x!));
-        const below = n.kind === "project" && size.w < 600 ? 34 : 0;
-        const edge = n.kind === "project" ? Math.max(n.r, 36) : n.r;
+        const edge = n.kind === "project" ? tw * 0.6 + 12 : n.r;
         // En haut, on laisse aussi la place de la rangée des catégories.
-        n.y = Math.max(edge + 60, Math.min(size.h - edge - below, n.y!));
+        n.y = Math.max(edge + 60, Math.min(size.h - edge, n.y!));
       });
     const cx = size.w / 2;
     const cy = size.h / 2;
@@ -170,33 +170,22 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
           // Nom tourné vers l'extérieur (à l'opposé du centre), sauf s'il sortirait du cadre.
           let side: 1 | -1 = x < cx ? -1 : 1;
           if (kind === "root") side = 1;
+          if (kind === "project") side = x < cx ? 1 : -1; // nom vers l'intérieur, vignette vers l'extérieur
           if (kind !== "root" && x + 150 > size.w) side = -1;
           if (x - 150 < 0) side = 1;
-          const links =
-            kind === "root"
-              ? groups.length
-              : kind === "theme"
-                ? 1 + projects.filter((p) => p.text?.themes.includes(theme!)).length
-                : Math.max(1, project!.text?.themes.length ?? 1);
-          return { id, kind, label, r, dot: dotRadius(kind, links), x, y, theme, project, side };
+          return { id, kind, label, r, dot: dotRadius(kind), x, y, theme, project, side };
         }),
+        // traits droits, comme une constellation
         links: links.map((l) => {
           const a = at(l.source);
           const b = at(l.target);
-          // courbe douce : le milieu est poussé vers l'extérieur (loin du centre)
-          const mx = (a.x + b.x) / 2;
-          const my = (a.y + b.y) / 2;
-          const ox = mx - cx;
-          const oy = my - cy;
-          const len = Math.hypot(ox, oy) || 1;
-          const bend = Math.min(40, Math.hypot(b.x - a.x, b.y - a.y) * 0.12);
           return {
             key: `${l.source.id}-${l.target.id}`,
             ends: [l.source.id, l.target.id] as const,
             secondary: !!l.secondary,
             cross: l.cross,
             weight: l.weight ?? 1,
-            d: `M${a.x} ${a.y} Q${mx + (ox / len) * bend} ${my + (oy / len) * bend} ${b.x} ${b.y}`,
+            d: `M${a.x} ${a.y} L${b.x} ${b.y}`,
           };
         }),
       });
@@ -221,12 +210,12 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
           // Les liens entre thèmes sont seulement dessinés ; ceux entre projets rapprochent à peine.
           .strength((l) => (l.cross === "theme" ? 0 : l.cross === "project" ? 0.02 : l.secondary ? 0.05 : 0.7))
       )
-      .force("charge", forceManyBody<N>().strength((n) => (n.kind === "root" ? -1200 : n.kind === "theme" ? -700 : -380) * k))
+      .force("charge", forceManyBody<N>().strength((n) => (n.kind === "root" ? -600 : n.kind === "theme" ? -300 : -160) * k))
       // Anneaux concentriques : les thèmes autour du nom, les projets à l'extérieur.
       .force(
         "radial",
         forceRadial<N>(
-          (n) => (n.kind === "root" ? 0 : n.kind === "theme" ? Math.min(size.w, size.h) * 0.24 : Math.min(size.w, size.h) * 0.43),
+          (n) => (n.kind === "root" ? 0 : n.kind === "theme" ? Math.min(size.w, size.h) * 0.2 : Math.min(size.w, size.h) * 0.36),
           size.w / 2,
           size.h / 2
         ).strength((n) => (n.kind === "theme" ? 0.35 : n.kind === "project" ? 0.25 : 0))
@@ -235,7 +224,8 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
       .force(
         "collide",
         // un projet réserve aussi la place de son nom (≈ 6,5 px par lettre sur ordinateur)
-        forceCollide<N>((n) => (n.kind === "project" ? n.r + (size.w < 600 ? 34 : Math.min(110, 18 + n.label.length * 3.4)) * k : n.r + 26 * k)).strength(1)
+        // un projet réserve la place de sa vignette
+        forceCollide<N>((n) => (n.kind === "project" ? tw * 0.68 : n.r + 20 * k)).strength(0.9)
       )
       .velocityDecay(0.55) // mouvements amortis, sans rebonds
       .on("tick", clamp)
@@ -317,9 +307,9 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
         if (d.moved < 6 && v) activate(v);
       }}
     >
-      {/* Rien que des points et des traits fins : liens principaux pleins, liens secondaires pointillés. */}
+      {/* Traits fins et droits, tous pleins ; cercles creux à chaque nœud. */}
       <svg className="absolute inset-0 size-full text-foreground" aria-hidden>
-        <g stroke="currentColor" strokeWidth={1} fill="none">
+        <g stroke="currentColor" strokeWidth={0.6} fill="none">
           {frame.links.map((l) => {
             const accent = !!focus && l.ends.includes(`t:${focus}`);
             // au survol d'un point, toutes ses connexions se révèlent
@@ -330,38 +320,67 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
                 d={l.d}
                 stroke={accent ? ACCENT : undefined}
                 className="transition-[opacity,stroke-width] duration-500"
-                // Thèmes croisés : tirets, plus épais quand plusieurs projets les réunissent.
-                strokeWidth={(l.cross ? 0.5 + 0.4 * l.weight : 1) * (accent || near ? 1.5 : 1)}
+                strokeWidth={accent || near ? 1 : 0.6}
                 opacity={
                   accent || near
-                    ? 0.85
-                    : (l.cross ? 0.07 : l.secondary ? 0.06 : 0.32) * Math.min(dim(l.ends[0]), dim(l.ends[1])) * (hover ? 0.6 : 1)
+                    ? 0.8
+                    : (l.cross === "theme" ? 0 : l.secondary ? 0.12 : 0.4) * Math.min(dim(l.ends[0]), dim(l.ends[1])) * (hover ? 0.6 : 1)
                 }
-                strokeDasharray={l.cross === "theme" ? "4 4" : l.secondary ? "1 5" : undefined}
-                strokeLinecap="round"
               />
             );
           })}
         </g>
-        <g fill="currentColor">
-          {frame.nodes
-            .filter((n) => n.kind !== "project")
-            .map((n) => (
-              <circle
-                key={n.id}
-                cx={n.x}
-                cy={n.y}
-                r={n.dot * (hover === n.id || focus === n.theme ? 1.4 : 1)}
-                fill={focus && n.id === `t:${focus}` ? ACCENT : undefined}
-                opacity={dim(n.id)}
-              />
-            ))}
+        <g className="fill-background" stroke="currentColor" strokeWidth={0.7}>
+          {frame.nodes.map((n) => (
+            <circle
+              key={n.id}
+              cx={n.x}
+              cy={n.y}
+              r={n.dot * (hover === n.id || (n.kind === "theme" && focus === n.theme) ? 1.4 : 1)}
+              stroke={focus && n.id === `t:${focus}` ? ACCENT : undefined}
+              strokeOpacity={0.6}
+              opacity={dim(n.id)}
+            />
+          ))}
         </g>
       </svg>
 
+      {/* Vignettes rectangulaires en noir et blanc, posées à l'extérieur de leur point (couleur au survol). */}
+      {frame.nodes
+        .filter((n) => n.kind === "project")
+        .map((n) => {
+          const c = n.project!.cover;
+          const tw = thumbW(size.w, k);
+          const th = tw * 0.6; // recadrage paysage uniforme, comme des tirages
+          const ox = n.x - size.w / 2;
+          const oy = n.y - size.h / 2;
+          const len = Math.hypot(ox, oy) || 1;
+          const dist = Math.hypot(tw / 2, th / 2) + 14;
+          return (
+            <span
+              key={`img:${n.id}`}
+              aria-hidden
+              className={cn(
+                "pointer-events-none absolute overflow-hidden grayscale transition-[filter,transform] duration-500",
+                hover === n.id && "scale-110 grayscale-0"
+              )}
+              style={{
+                width: tw,
+                height: th,
+                left: n.x + (ox / len) * dist - tw / 2,
+                top: n.y + (oy / len) * dist - th / 2,
+                opacity: dim(n.id),
+                boxShadow: focus && n.theme === focus ? `0 0 0 1px ${ACCENT}` : undefined,
+              }}
+            >
+              <Image src={c.src} alt="" fill sizes="120px" className="object-cover" />
+            </span>
+          );
+        })}
+
       {frame.nodes.map((n) => {
         const right = n.side !== -1;
-        const half = n.kind === "project" ? n.dot : 10;
+        const half = 10;
         return (
           <div
             key={n.id}
@@ -384,7 +403,7 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
             className={cn(
               "absolute flex cursor-grab items-center gap-2 whitespace-nowrap py-1 leading-none outline-none active:cursor-grabbing",
               right ? "flex-row" : "flex-row-reverse",
-              n.kind === "root" ? "text-base font-bold" : n.kind === "theme" ? "text-sm font-semibold" : "text-sm font-medium text-muted-foreground",
+              n.kind === "root" ? "text-sm font-bold" : n.kind === "theme" ? "text-xs font-semibold" : "text-[10px] text-muted-foreground",
               (hover === n.id || (focus && focus === n.theme && n.kind === "theme")) && "text-foreground underline underline-offset-4"
             )}
             // Le point (vide, ou l'image ronde d'un projet) est centré sur sa position : le nom part à droite ou à gauche.
@@ -396,21 +415,11 @@ export function MindMap({ projects, className }: { projects: Project[]; classNam
               transform: right ? `translate(-${half}px, -50%)` : `translate(calc(-100% + ${half}px), -50%)`,
             }}
           >
-            {n.kind === "project" ? (
-              <span
-                className={cn("relative shrink-0 overflow-hidden rounded-full transition-transform duration-300", hover === n.id && "scale-125")}
-                style={{
-                  width: half * 2,
-                  height: half * 2,
-                  boxShadow: focus && n.theme === focus ? `0 0 0 2px var(--background), 0 0 0 4px ${ACCENT}` : undefined,
-                }}
-              >
-                <Image src={n.project!.cover.src} alt="" fill sizes="64px" className="object-cover" />
-              </span>
-            ) : (
-              <span className="size-5 shrink-0" />
-            )}
-            <span className="lowercase">{n.label}</span>
+            <span className="size-5 shrink-0" />
+            <span className={cn("lowercase", n.kind === "project" && size.w < 600 && "sr-only")}>
+              {n.label}
+              {n.kind === "project" && n.project!.text?.year && <span className="ml-1 tabular-nums">{n.project!.text.year}</span>}
+            </span>
           </div>
         );
       })}
