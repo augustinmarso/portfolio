@@ -29,6 +29,7 @@ export type Project = {
   hover?: ProjectImage; // image montrée au survol dans l'index (quelqu'un qui utilise l'objet…)
   video?: ProjectVideo;
   boucle?: ProjectVideo; // vidéo 3D en boucle, en tête de l'onglet produit (publiée par l'atelier)
+  modele?: string; // modèle 3D .glb tournable, dans l'onglet produit (publié par l'atelier)
 };
 
 // Titres d'affichage (les dossiers n'ont pas d'accents) et projets à vidéo : réglés dans site.json,
@@ -37,6 +38,8 @@ const TITLES: Record<string, string> = site.titles;
 const VIDEOS = new Set<string>(site.videos);
 // vidéos 3D en boucle : public/videos/<slug>-boucle.mp4 + .jpg, liste tenue par scripts/atelier.mjs
 const BOUCLES = new Set<string>((site as { boucles?: string[] }).boucles ?? []);
+// modèles 3D : public/models/<slug>.glb, liste tenue par scripts/atelier.mjs
+const MODELES = new Set<string>((site as { modeles?: string[] }).modeles ?? []);
 
 
 export const THEMES = [
@@ -69,6 +72,7 @@ export const projects: Project[] = (raw as Project[]).map((p) => ({
   boucle: BOUCLES.has(p.slug)
     ? { src: asset(`/videos/${p.slug}-boucle.mp4`), poster: asset(`/videos/${p.slug}-boucle.jpg`) }
     : undefined,
+  modele: MODELES.has(p.slug) ? asset(`/models/${p.slug}.glb`) : undefined,
 }));
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
