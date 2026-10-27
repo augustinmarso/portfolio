@@ -1,6 +1,16 @@
 {
   "sections": [
     {
+      "title": "stage recherché",
+      "items": [
+        {
+          "when": "dès mi-mars 2027",
+          "what": "Stage en design produit",
+          "detail": "Dans le cadre du DSAA Design Produit, ENSAAMA, Paris"
+        }
+      ]
+    },
+    {
       "title": "formation",
       "items": [
         {
@@ -17,7 +27,7 @@
         },
         {
           "when": "2021 — 2023",
-          "what": "Première et Terminale STD2A, bac mention très bien",
+          "what": "Première et Terminale STD2A, bac",
           "detail": "ESAAT, Roubaix",
           "href": "https://www.esaat-roubaix.com/"
         }
