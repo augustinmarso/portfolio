@@ -32,7 +32,7 @@
       "exemples": [
         "fish-eye 6",
         "kai 7",
-        "le-jeu-de-la-grenouille 12",
+        "la-societe-de-jeux 18",
         "le-jeu-de-la-grenouille 11"
       ]
     },
@@ -65,6 +65,7 @@
       "outils": "Rhino, Fusion 360, atelier, fiches matériaux, tests d’usage",
       "livrables": "modèle 3D, prototype testé, synthèse des tests, choix des matériaux et procédés",
       "exemples": [
+        "le-choix-de-malo 10",
         "le-choix-de-malo 11",
         "gorillachoc 17",
         "ratp 19",
@@ -82,7 +83,6 @@
       "outils": "Blender, plans cotés, notices, packaging, édition",
       "livrables": "dossier de fabrication, packaging et notices, suivi jusqu’à la série",
       "exemples": [
-        "le-choix-de-malo 10",
         "kai 5",
         "le-jeu-de-la-grenouille 17",
         "open-mind 9"
