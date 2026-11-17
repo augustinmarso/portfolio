@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { FadeImg } from "@/components/fade-img";
 import { VideoPlayer } from "@/components/video-player";
 import { LazyVideo } from "@/components/lazy-video";
+import { ModelViewer } from "@/components/model-viewer";
 import { YouTubeEmbed } from "@/components/youtube-embed";
 import { LudiloveBento } from "@/components/ludilove-bento";
 import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
@@ -174,6 +175,18 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
           {produit && project.boucle && (
             <figure>
               <LazyVideo src={project.boucle.src} poster={project.boucle.poster} aria-label={`${project.title} en 3D`} className="h-auto w-full" />
+            </figure>
+          )}
+          {produit && project.modele && (
+            <figure>
+              <ModelViewer
+                src={project.modele}
+                poster={project.boucle?.poster ?? project.cover.src}
+                label={`${project.title}, modèle 3D à faire tourner`}
+              />
+              <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">
+                modèle 3D : le faire tourner à la souris ou au doigt
+              </figcaption>
             </figure>
           )}
           {/* le mémoire commence par sa première de couverture, à côté du texte */}
