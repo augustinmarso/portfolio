@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { InfiniteCanvas, type PeopleMode } from "@/components/infinite-canvas";
 import { PeopleSwitch } from "@/components/people-switch";
+import { YearRange } from "@/components/year-range";
 
 // Vues secondaires chargées seulement quand on les ouvre (le canvas s'affiche seul au départ).
 const HoverExpand = dynamic(() => import("@/components/hover-expand").then((m) => m.HoverExpand), { ssr: false });
@@ -34,21 +35,46 @@ export function HomeViews({ projects }: { projects: Project[] }) {
     [projects]
   );
 
+  // Période choisie sur la ligne des années (toutes au départ).
+  const years = useMemo(
+    () => [...new Set(projects.map((p) => Number(p.text?.year)).filter(Boolean))].sort((a, b) => a - b),
+    [projects]
+  );
+  const [range, setRange] = useState<[number, number]>([years[0], years[years.length - 1]]);
+  // projet sans année : toujours affiché
+  const inRange = (p: Project) => !p.text?.year || (Number(p.text.year) >= range[0] && Number(p.text.year) <= range[1]);
+  // Canvas et galerie gardent leur mise en page : les projets hors période s'effacent sur place (CSS).
+  // L'anneau et l'arborescence se recomposent avec les seuls projets retenus.
+  const hiddenYears = years.filter((y) => y < range[0] || y > range[1]);
+  const hideCss = hiddenYears.length
+    ? hiddenYears.map((y) => `.canvas-card[data-year="${y}"],.hx-panel[data-year="${y}"]`).join(",") +
+      "{pointer-events:none}" +
+      hiddenYears.map((y) => `.canvas-card[data-year="${y}"]>*`).join(",") +
+      "{opacity:0;filter:blur(6px)}" +
+      hiddenYears.map((y) => `.hx-panel[data-year="${y}"]`).join(",") +
+      "{flex-grow:0!important;opacity:0}"
+    : "";
+  const ringProjects = useMemo(() => byDate.filter(inRange), [byDate, range]); // eslint-disable-line react-hooks/exhaustive-deps
+  const mapProjects = useMemo(() => projects.filter(inRange), [projects, range]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <>
+      {hideCss && <style>{hideCss}</style>}
       {view === "canvas" ? (
         <InfiniteCanvas projects={projects} people={people} />
       ) : view === "scroll" ? (
-        <ScrollRing projects={byDate} />
+        <ScrollRing projects={ringProjects} />
       ) : view === "arborescence" ? (
-        <div className="fixed inset-x-4 bottom-24 top-16 sm:inset-x-6 sm:bottom-16">
-          <MindMap projects={projects} className="h-full" />
+        <div className="fixed bottom-24 left-4 right-16 top-16 sm:bottom-16 sm:left-6 sm:right-24">
+          <MindMap projects={mapProjects} className="h-full" />
         </div>
       ) : (
-        <div className="fixed inset-x-4 bottom-24 top-16 sm:inset-x-6 sm:bottom-16 sm:top-36">
+        <div className="fixed bottom-24 left-4 right-16 top-16 sm:bottom-16 sm:left-6 sm:right-24 sm:top-36">
           <HoverExpand projects={byDate} />
         </div>
       )}
+
+      {years.length > 1 && <YearRange years={years} value={range} onChange={setRange} />}
 
       {/* Barre du bas : bande blanche pleine largeur, calée en bas, rien ne passe dessous.
           Téléphone : boutons « personne / les gens » au-dessus, les quatre vues réparties sur la largeur. */}

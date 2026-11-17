@@ -28,9 +28,10 @@ export function HoverExpand({ projects }: { projects: Project[] }) {
               }
             }}
             onFocus={() => setActive(i)}
+            data-year={p.text?.year ?? undefined}
             className={cn(
-              "group relative min-h-0 min-w-0 overflow-hidden outline-none",
-              "transition-[flex-grow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+              "hx-panel group relative min-h-0 min-w-0 overflow-hidden outline-none",
+              "transition-[flex-grow,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
               open ? "grow-[12]" : "grow"
             )}
             style={{ flexBasis: 0 }}

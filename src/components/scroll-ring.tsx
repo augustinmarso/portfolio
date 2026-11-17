@@ -50,7 +50,8 @@ export function ScrollRing({ projects }: { projects: Project[] }) {
     };
   }, [radius, step, n]);
 
-  const shown = projects[front];
+  // la liste peut rétrécir (filtre par année) avant que l'anneau recalcule la carte de face
+  const shown = projects[Math.min(front, n - 1)];
 
   return (
     <div

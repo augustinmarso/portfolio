@@ -215,13 +215,14 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
                   key={p.project.slug}
                   href={`/projets/${p.project.slug}`}
                   data-slug={p.project.slug}
+                  data-year={p.project.text?.year ?? undefined}
                   prefetch={false} // une centaine de cartes à l'écran : préchargées au survol (onPointerOver)
                   tabIndex={tx === 1 && ty === 1 ? 0 : -1}
                   draggable={false}
                   className="canvas-card group pointer-events-auto absolute block outline-none"
                   style={{ left: p.x, top: p.y, width: p.w, height: p.h }}
                 >
-                  <div className="relative overflow-hidden" style={{ height: p.h - LABEL }}>
+                  <div className="relative overflow-hidden transition-[opacity,filter] duration-700 ease-out" style={{ height: p.h - LABEL }}>
                     <FadeImg src={p.project.cover.src} alt={p.project.title} fill className="pointer-events-none object-cover" />
                     {/* Image de survol, au même cadrage : seule la personne apparaît (fondu court, sans zoom) */}
                     {p.project.hover && (
@@ -244,7 +245,7 @@ export function InfiniteCanvas({ projects, people = false }: { projects: Project
                       />
                     )}
                   </div>
-                  <div className="pt-1.5 text-[12px] font-semibold leading-none">
+                  <div className="pt-1.5 text-[12px] font-semibold leading-none transition-[opacity,filter] duration-700 ease-out">
                     <span className="block truncate text-foreground/80 transition-colors group-hover:text-foreground">
                       {p.project.title}
                     </span>
