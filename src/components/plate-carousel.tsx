@@ -28,7 +28,7 @@ export function PlateCarousel({ slides }: { slides: Slide[] }) {
       <ul
         ref={track}
         onScroll={onScroll}
-        className="flex w-full snap-x snap-mandatory overflow-x-auto rounded-xl bg-muted [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex w-full snap-x snap-mandatory overflow-x-auto rounded-xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {slides.map((s, i) => (
           <li key={s.src} className="relative aspect-[4/3] w-full shrink-0 snap-center">
