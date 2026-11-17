@@ -16,7 +16,7 @@
       "exemples": [
         "ratp 15",
         "ephemeride 7",
-        "ratp 16",
+        "ratp 18",
         "ephemeride 8"
       ]
     },
@@ -48,11 +48,11 @@
       "outils": "carton, découpe laser, impression 3D, essais techniques, storyboard, règles de jeu",
       "livrables": "trois pistes en croquis et en maquettes, recherches techniques, storyboards, piste retenue",
       "exemples": [
+        "cylinder-chair 3",
+        "cylinder-chair 4",
         "le-jeu-de-la-grenouille 13",
         "le-jeu-de-la-grenouille 14",
-        "ephemeride 14",
-        "cylinder-chair 4",
-        "gorillachoc 13"
+        "ephemeride 14"
       ]
     },
     {
@@ -66,10 +66,10 @@
       "outils": "Rhino, Fusion 360, atelier, fiches matériaux, tests d’usage",
       "livrables": "modèle 3D, prototype testé, synthèse des tests, choix des matériaux et procédés",
       "exemples": [
-        "de-passager-a-equipier 29",
-        "ratp 19",
         "le-choix-de-malo 11",
-        "le-jeu-de-la-grenouille 15"
+        "gorillachoc 17",
+        "ratp 19",
+        "de-passager-a-equipier 29"
       ]
     },
     {
@@ -83,9 +83,9 @@
       "outils": "Blender, plans cotés, notices, packaging, édition",
       "livrables": "dossier de fabrication, packaging et notices, suivi jusqu’à la série",
       "exemples": [
-        "le-jeu-de-la-grenouille 17",
-        "le-jeu-de-la-grenouille 16",
+        "le-choix-de-malo 10",
         "kai 5",
+        "le-jeu-de-la-grenouille 17",
         "echappee 17"
       ]
     }

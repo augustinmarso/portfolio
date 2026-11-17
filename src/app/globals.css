@@ -412,3 +412,12 @@
 .llb-cell {
   contain: layout paint;
 }
+
+/* référence d'un livre de l'étagère (pourquoi) : fondu doux à chaque changement */
+@keyframes ref-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bookshelf [class*="ref-in"] { animation: none; }
+}

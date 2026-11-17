@@ -82,7 +82,14 @@ export function Bookshelf({ books }: { books: Ouvrage[] }) {
   }, [books.length]);
 
   const current = hover ?? picked;
-  const book = current !== null ? books[current] : null;
+  // la référence suit le pointeur avec retard : balayer l'étagère ne fait pas défiler les noms,
+  // et en quittant un livre, son nom reste un moment au lieu de revenir aussitôt à la consigne
+  const [label, setLabel] = useState<number | null>(null);
+  useEffect(() => {
+    const t = window.setTimeout(() => setLabel(current), current === null ? 900 : 280);
+    return () => window.clearTimeout(t);
+  }, [current]);
+  const book = label !== null ? books[label] : null;
 
   return (
     <div ref={ref} className="bookshelf">
@@ -175,10 +182,10 @@ export function Bookshelf({ books }: { books: Ouvrage[] }) {
 
       <p className="mt-6 min-h-[3.5em] max-w-[62ch] text-base font-normal leading-relaxed sm:text-lg" aria-live="polite">
         {book ? (
-          <>
+          <span key={label} className="block animate-[ref-in_450ms_ease-out]">
             <span className="font-semibold">{book.titre}</span>
             <span className="text-muted-foreground"> — {book.detail}</span>
-          </>
+          </span>
         ) : (
           <span className={cn("text-muted-foreground transition-opacity duration-500", shown ? "opacity-100" : "opacity-0")}>
             survoler ou toucher un livre pour lire sa référence.
