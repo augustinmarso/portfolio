@@ -60,5 +60,8 @@
   "boucles": [
     "cylinder-chair",
     "de-passager-a-equipier"
+  ],
+  "sons": [
+    "cylinder-chair"
   ]
 }

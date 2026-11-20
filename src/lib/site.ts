@@ -29,5 +29,5 @@ export const PERSON = {
   email: "mailto:marsollier.augustin@gmail.com",
   affiliation: { "@type": "CollegeOrUniversity", name: "ENSAAMA", url: "https://www.ensaama.net" },
   address: { "@type": "PostalAddress", addressLocality: "Paris", addressCountry: "FR" },
-  sameAs: ["https://www.instagram.com/augustin_marsollier/", "https://www.behance.net/augustimarsoll1"],
+  sameAs: ["https://www.instagram.com/augustin_marsollier/", "https://www.behance.net/augustimarsoll1", "https://www.linkedin.com/in/augustin-marsollier-05b406275/"],
 };

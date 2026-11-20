@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { SiteHeader } from "@/components/site-header";
 import { FadeImg } from "@/components/fade-img";
 import { VideoPlayer } from "@/components/video-player";
-import { LazyVideo } from "@/components/lazy-video";
+import { BoucleVideo } from "@/components/boucle-video";
 import { YouTubeEmbed } from "@/components/youtube-embed";
 import { LudiloveBento } from "@/components/ludilove-bento";
 import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
@@ -157,9 +157,16 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
 
 
           {/* Exception : le téléphone sous le texte ; une fois apparu, il reste fixe pendant le défilement. */}
+          {/* avec une vidéo 3D en dessous, le téléphone ne reste pas figé (il la recouvrirait) */}
           {video && (
-            <figure className="mt-12 md:sticky md:top-[84px]">
+            <figure className={cn("mt-12", !project.boucle && "md:sticky md:top-[84px]")}>
               <VideoPlayer src={video.src} poster={video.poster} label={`Vidéo de présentation — ${project.title}`} />
+            </figure>
+          )}
+          {/* téléphone + vidéo 3D : la vidéo 3D passe sous le téléphone, dans la colonne du texte */}
+          {video && project.boucle && (
+            <figure className="mt-12">
+              <BoucleVideo video={project.boucle} label={`${project.title} en 3D`} />
             </figure>
           )}
           {embedList.map((embed) => (
@@ -171,9 +178,9 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
         </div>
 
         <div className="grid gap-12">
-          {produit && project.boucle && (
+          {produit && project.boucle && !video && (
             <figure>
-              <LazyVideo src={project.boucle.src} poster={project.boucle.poster} aria-label={`${project.title} en 3D`} className="mx-auto h-auto max-h-[calc(100dvh-120px)] w-auto max-w-full" />
+              <BoucleVideo video={project.boucle} label={`${project.title} en 3D`} />
             </figure>
           )}
           {/* le mémoire commence par sa première de couverture, à côté du texte */}

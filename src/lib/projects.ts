@@ -19,7 +19,7 @@ export type ProjectText = {
   // textes par étape (« 1 » à « 5 » → paragraphes), écrits dans notes.md de l'atelier
   notesEtapes?: Record<string, string[]>;
 };
-export type ProjectVideo = { src: string; poster: string };
+export type ProjectVideo = { src: string; poster: string; son?: boolean };
 export type Project = {
   slug: string;
   title: string;
@@ -37,6 +37,8 @@ const TITLES: Record<string, string> = site.titles;
 const VIDEOS = new Set<string>(site.videos);
 // vidéos 3D en boucle : public/videos/<slug>-boucle.mp4 + .jpg, liste tenue par scripts/atelier.mjs
 const BOUCLES = new Set<string>((site as { boucles?: string[] }).boucles ?? []);
+// vidéos en boucle qui ont une bande son (bouton pour l'activer)
+const SONS = new Set<string>((site as { sons?: string[] }).sons ?? []);
 
 
 export const THEMES = [
@@ -67,7 +69,7 @@ export const projects: Project[] = (raw as Project[]).map((p) => ({
     ? { src: asset(`/videos/${p.slug}.mp4`), poster: asset(`/videos/${p.slug}.jpg`) }
     : undefined,
   boucle: BOUCLES.has(p.slug)
-    ? { src: asset(`/videos/${p.slug}-boucle.mp4`), poster: asset(`/videos/${p.slug}-boucle.jpg`) }
+    ? { src: asset(`/videos/${p.slug}-boucle.mp4`), poster: asset(`/videos/${p.slug}-boucle.jpg`), son: SONS.has(p.slug) }
     : undefined,
 }));
 

@@ -3,6 +3,7 @@ import { absolute } from "@/lib/site";
 import { AppLogos } from "@/components/app-logos";
 import { PrintButton } from "@/components/print-button";
 import { SiteHeader } from "@/components/site-header";
+import { asset } from "@/lib/projects";
 import { SOCIALS } from "@/lib/socials";
 import cv from "@/data/pages/cv.json";
 import contact from "@/data/pages/contact.json";
@@ -35,6 +36,14 @@ export default function CvPage() {
 
       <div className="grid gap-x-10 gap-y-16 pt-10 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] print:grid-cols-[minmax(0,1fr)_minmax(0,2.2fr)] print:gap-y-6 print:pt-6 print:text-[10.5pt]">
         <div className="grid content-start gap-8 print:gap-4">
+          {/* eslint-disable-next-line @next/next/no-img-element -- portrait fixe (photo LinkedIn), aussi imprimé */}
+          <img
+            src={asset("/cv-portrait.webp")}
+            alt="Augustin Marsollier"
+            width={480}
+            height={480}
+            className="w-36 rounded-sm object-cover sm:w-44 print:w-[32mm]"
+          />
           <p>
             {contact.identite.map((l, n) => (
               <span key={n} className={n === 0 ? "block print:hidden" : "block"}>
