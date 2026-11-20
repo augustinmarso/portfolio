@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 // Contenu repris du CV 2026, mis à jour (DSAA 2026–2027). Pas d'adresse postale publiée.
 // Sections dans pages/cv.json, coordonnées dans pages/contact.json (modifiables depuis l'éditeur en ligne).
 // href : site officiel de l'école ou de la structure (lien sur le nom, en ligne et dans le PDF).
-const SECTIONS: { title: string; items: { when: string; what: string; detail?: string; href?: string; logos?: boolean }[] }[] = cv.sections;
+const SECTIONS: { title: string; items: { when: string; what: string; detail?: string; href?: string; logos?: boolean; logo?: string }[] }[] = cv.sections;
 
 function Ext({ href, children }: { href: string; children: React.ReactNode }) {
   return (
@@ -88,6 +88,8 @@ export default function CvPage() {
                           {it.href && s.title === "formation" ? <Ext href={it.href}>{it.detail}</Ext> : it.detail}
                         </span>
                       )}
+                      {/* eslint-disable-next-line @next/next/no-img-element -- petit logo fixe, aussi imprimé */}
+                      {it.logo && <img src={asset(it.logo)} alt="ENSAAMA" className="mt-3 h-5 w-auto dark:invert print:h-3.5" />}
                     </dd>
                   </div>
                 ))}

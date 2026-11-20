@@ -17,6 +17,7 @@
           "when": "2026 — 2027",
           "what": "DSAA Design Produit",
           "detail": "ENSAAMA, Paris",
+          "logo": "/ensaama.svg",
           "href": "https://ensaama.net/site/home/formations/dsaa/design-produit-strategies-et-innovations-industrielles-produire-autrement"
         },
         {
@@ -179,6 +180,13 @@
       "projet": "le-jeu-de-la-grenouille",
       "ratio": 3.22,
       "type": "concours"
+    },
+    {
+      "nom": "Granville Terre et Mer",
+      "logo": "/partenaires/granville-terre-et-mer.png",
+      "projet": "points-de-vue",
+      "ratio": 3.12,
+      "type": "partenariat"
     }
   ]
 }
