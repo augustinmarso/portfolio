@@ -10,6 +10,7 @@ import { YouTubeEmbed } from "@/components/youtube-embed";
 import { LudiloveBento } from "@/components/ludilove-bento";
 import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
 import { MemoireBook } from "@/components/memoire-book";
+import { PointsDeVueBento } from "@/components/points-de-vue-bento";
 import { PartnerLogo } from "@/components/partner-logos";
 import embeds from "@/data/embeds.json";
 import cv from "@/data/pages/cv.json";
@@ -253,6 +254,15 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
                     <LudiloveBento />
                     <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">
                       charte en mouvement : logo, mascotte, navigation, typographie, couleurs et pictogrammes
+                    </figcaption>
+                  </figure>
+                )}
+                {/* Points de vue : la charte en mouvement, juste avant la planche du logo. */}
+                {produit && project.slug === "points-de-vue" && img.src.endsWith("/points-de-vue/04.webp") && (
+                  <figure>
+                    <PointsDeVueBento />
+                    <figcaption className="mt-3 text-sm font-semibold text-muted-foreground">
+                      charte en mouvement : les habitants du logo, les trois publics, les encres qui se mélangent, les pictogrammes, la ligne au sol et le label
                     </figcaption>
                   </figure>
                 )}

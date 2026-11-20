@@ -16,6 +16,7 @@ import le_jeu_de_la_grenouille from "./le-jeu-de-la-grenouille.json";
 import les_mauvais_lundis from "./les-mauvais-lundis.json";
 import ludilove from "./ludilove.json";
 import open_mind from "./open-mind.json";
+import points_de_vue from "./points-de-vue.json";
 import porte_cle_jeton_de_caddie from "./porte-cle-jeton-de-caddie.json";
 import ratp from "./ratp.json";
 import recolteur_pomme_de_pin from "./recolteur-pomme-de-pin.json";
@@ -37,6 +38,7 @@ export const texts: Record<string, ProjectText> = {
   "les-mauvais-lundis": les_mauvais_lundis,
   "ludilove": ludilove,
   "open-mind": open_mind,
+  "points-de-vue": points_de_vue,
   "porte-cle-jeton-de-caddie": porte_cle_jeton_de_caddie,
   "ratp": ratp,
   "recolteur-pomme-de-pin": recolteur_pomme_de_pin,

@@ -14,6 +14,7 @@
     "le-choix-de-malo",
     "le-jeu-de-la-grenouille",
     "ludilove",
+    "points-de-vue",
     "open-mind",
     "porte-cle-jeton-de-caddie",
     "ratp",
@@ -33,7 +34,8 @@
     "cafetiere-au-beurre": "Cafetière au beurre",
     "kai": "KAI",
     "le-jeu-de-la-grenouille": "Le Jeu de la Grenouille",
-    "cylinder-chair": "Cylinder chair"
+    "cylinder-chair": "Cylinder chair",
+    "points-de-vue": "Points de vue · Granville Terre et Mer"
   },
   "covers": {
     "kai": "11",
@@ -60,7 +62,8 @@
   "boucles": [
     "cylinder-chair",
     "de-passager-a-equipier",
-    "porte-cle-jeton-de-caddie"
+    "porte-cle-jeton-de-caddie",
+    "points-de-vue"
   ],
   "sons": [
     "cylinder-chair"

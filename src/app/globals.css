@@ -363,6 +363,78 @@
   .llb-mascot, .llb-on { animation: none; }
   .llb-mascot:first-of-type, .llb-cell span:first-child > .llb-on { opacity: 1; }
 }
+/* Bento de la charte « Points de vue » (page projet) */
+/* les trois habitants dérivent, regardent autour d'eux et clignent, chacun à son rythme */
+.pdv-drift, .pdv-look, .pdv-blink, .pdv-spin { transform-box: fill-box; transform-origin: center; }
+.pdv-drift { animation: pdv-drift 7s ease-in-out infinite; animation-delay: var(--d); }
+@keyframes pdv-drift {
+  0%, 100% { transform: translate(0, 0); }
+  30% { transform: translate(-4px, 3px); }
+  65% { transform: translate(3px, -3px); }
+}
+.pdv-look { animation: pdv-look 6s ease-in-out infinite; animation-delay: var(--d); }
+@keyframes pdv-look {
+  0%, 18%, 100% { transform: translate(0, 0); }
+  24%, 42% { transform: translate(3px, 1px); }
+  50%, 70% { transform: translate(-3px, -1px); }
+  78%, 92% { transform: translate(1px, 2px); }
+}
+.pdv-blink { animation: pdv-blink 4.6s infinite; animation-delay: var(--d); }
+@keyframes pdv-blink {
+  0%, 44%, 50%, 100% { transform: scaleY(1); }
+  47% { transform: scaleY(0.1); }
+}
+/* le nom : les trois points s'allument l'un après l'autre */
+.pdv-line { animation: pdv-line 6s infinite; animation-delay: var(--d); }
+@keyframes pdv-line {
+  0% { opacity: 0.2; transform: translateX(-6px); }
+  8%, 80% { opacity: 1; transform: none; }
+  92%, 100% { opacity: 0.2; transform: none; }
+}
+/* les encres se recouvrent puis se séparent : les mélanges apparaissent */
+.pdv-ink-l { animation: pdv-ink-l 5s ease-in-out infinite; }
+.pdv-ink-r { animation: pdv-ink-r 5s ease-in-out infinite; }
+@keyframes pdv-ink-l {
+  0%, 100% { transform: translateX(-28%); }
+  50% { transform: translateX(38%); }
+}
+@keyframes pdv-ink-r {
+  0%, 100% { transform: translateX(28%); }
+  50% { transform: translateX(-38%); }
+}
+/* graisse qui respire */
+.pdv-weight { animation: pdv-weight 4s ease-in-out infinite; }
+@keyframes pdv-weight {
+  0%, 100% { font-weight: 200; }
+  50% { font-weight: 800; }
+}
+/* six pictogrammes, 2 s chacun (même rebond que la mascotte LudiLove) */
+.pdv-picto { opacity: 0; animation: llb-pose 12s infinite; animation-delay: var(--d); }
+/* ligne au sol : chacun part de son avis, hésite, puis tous convergent */
+.pdv-vote { animation: pdv-vote 9s cubic-bezier(0.6, 0, 0.3, 1) infinite; animation-delay: var(--d); }
+@keyframes pdv-vote {
+  0%, 12% { transform: translateX(var(--from)); }
+  38%, 50% { transform: translateX(var(--mid)); }
+  74%, 92% { transform: translateX(var(--to)); }
+  100% { transform: translateX(var(--from)); }
+}
+/* photo tramée : lent zoom */
+.pdv-zoom { animation: pdv-zoom 18s ease-in-out infinite alternate; }
+@keyframes pdv-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.18) translate(-3%, 2%); }
+}
+/* label : l'anneau de texte tourne */
+.pdv-spin { animation: pdv-spin 24s linear infinite; }
+@keyframes pdv-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pdv-drift, .pdv-look, .pdv-blink, .pdv-line, .pdv-ink-l, .pdv-ink-r, .pdv-weight, .pdv-vote, .pdv-zoom, .pdv-spin { animation: none; }
+  .pdv-weight { font-weight: 800; }
+  .pdv-picto { animation: none; }
+  .pdv-picto:first-child { opacity: 1; }
+}
 /* Bento des composants d'interface LudiLove (page projet) */
 .llu-sway { animation: llu-sway 4.4s ease-in-out infinite; transform-origin: 50% 90%; }
 @keyframes llu-sway {

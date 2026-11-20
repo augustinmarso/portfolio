@@ -2068,5 +2068,134 @@
         "height": 1250
       }
     ]
+  },
+  {
+    "slug": "points-de-vue",
+    "title": "Points de vue",
+    "cover": {
+      "src": "/projects/points-de-vue/thumb.webp",
+      "width": 560,
+      "height": 315
+    },
+    "hover": {
+      "src": "/projects/points-de-vue/hover.webp",
+      "width": 560,
+      "height": 315
+    },
+    "images": [
+      {
+        "src": "/projects/points-de-vue/01.webp",
+        "sm": "/projects/points-de-vue/01-sm.webp",
+        "width": 2000,
+        "height": 1125
+      },
+      {
+        "src": "/projects/points-de-vue/02.webp",
+        "sm": "/projects/points-de-vue/02-sm.webp",
+        "width": 2000,
+        "height": 1125
+      },
+      {
+        "src": "/projects/points-de-vue/03.webp",
+        "sm": "/projects/points-de-vue/03-sm.webp",
+        "width": 2000,
+        "height": 1125
+      },
+      {
+        "src": "/projects/points-de-vue/04.webp",
+        "sm": "/projects/points-de-vue/04-sm.webp",
+        "width": 2000,
+        "height": 1125
+      },
+      {
+        "src": "/projects/points-de-vue/05.webp",
+        "sm": "/projects/points-de-vue/05-sm.webp",
+        "width": 2000,
+        "height": 1125
+      },
+      {
+        "src": "/projects/points-de-vue/06.webp",
+        "sm": "/projects/points-de-vue/06-sm.webp",
+        "width": 2000,
+        "height": 1125
+      },
+      {
+        "src": "/projects/points-de-vue/07.webp",
+        "sm": "/projects/points-de-vue/07-sm.webp",
+        "width": 2000,
+        "height": 1125
+      },
+      {
+        "src": "/projects/points-de-vue/08.webp",
+        "sm": "/projects/points-de-vue/08-sm.webp",
+        "width": 2000,
+        "height": 1125
+      },
+      {
+        "src": "/projects/points-de-vue/09.webp",
+        "sm": "/projects/points-de-vue/09-sm.webp",
+        "width": 2000,
+        "height": 1125
+      },
+      {
+        "src": "/projects/points-de-vue/10.webp",
+        "sm": "/projects/points-de-vue/10-sm.webp",
+        "width": 1414,
+        "height": 2000
+      },
+      {
+        "src": "/projects/points-de-vue/11.webp",
+        "width": 750,
+        "height": 2000
+      },
+      {
+        "src": "/projects/points-de-vue/12.webp",
+        "sm": "/projects/points-de-vue/12-sm.webp",
+        "width": 2000,
+        "height": 1125
+      },
+      {
+        "src": "/projects/points-de-vue/13.webp",
+        "sm": "/projects/points-de-vue/13-sm.webp",
+        "width": 1600,
+        "height": 2000
+      },
+      {
+        "src": "/projects/points-de-vue/14.webp",
+        "sm": "/projects/points-de-vue/14-sm.webp",
+        "width": 2000,
+        "height": 1400
+      },
+      {
+        "src": "/projects/points-de-vue/15.webp",
+        "sm": "/projects/points-de-vue/15-sm.webp",
+        "width": 2000,
+        "height": 1240
+      },
+      {
+        "src": "/projects/points-de-vue/16.webp",
+        "sm": "/projects/points-de-vue/16-sm.webp",
+        "width": 2000,
+        "height": 860
+      },
+      {
+        "src": "/projects/points-de-vue/17.webp",
+        "sm": "/projects/points-de-vue/17-sm.webp",
+        "width": 2000,
+        "height": 1300
+      },
+      {
+        "src": "/projects/points-de-vue/18.webp",
+        "sm": "/projects/points-de-vue/18-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/points-de-vue/19.webp",
+        "sm": "/projects/points-de-vue/19-sm.webp",
+        "width": 2000,
+        "height": 1300
+      }
+    ]
   }
 ]

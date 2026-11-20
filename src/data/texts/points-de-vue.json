@@ -1,0 +1,49 @@
+{
+  "slug": "points-de-vue",
+  "year": "2026",
+  "context": "DSAA Design Produit, ENSAAMA — avec Granville Terre et Mer (CLIC/Santé)",
+  "ensaama": "https://ensaama.net/site/home/formations/dsaa/design-produit-strategies-et-innovations-industrielles-produire-autrement",
+  "themes": [
+    "service",
+    "numérique",
+    "espace public"
+  ],
+  "intro": "Les affiches de santé publique parlent souvent à côté de ceux qu'elles visent. Points de vue est un groupe d'habitants de Granville Terre et Mer qui teste ces affiches avant qu'elles soient imprimées : seniors, proches aidants et tous les habitants. Une séance se joue sur grand écran : chacun répond depuis son téléphone, ou sur une fiche papier lue par photo, et les avis s'affichent en direct. L'identité tient en trois cercles imprimés l'un sur l'autre : chacun a deux yeux, c'est un habitant qui regarde, et là où ils se croisent naît une couleur commune.",
+  "captions": [
+    "Couverture de la charte",
+    "Le nom : un avis, une vue, des habitants",
+    "Le principe : un cercle, deux cercles qui se croisent, le logo",
+    "Le logo et ses versions : couleur, fond noir, une couleur, zone protégée",
+    "Les couleurs : trois encres et leurs mélanges, vert pour oui, orange pour non",
+    "Une seule famille de caractères : Scoutie Sans",
+    "Pictogrammes nés du logo et jetons de vote",
+    "Images : toutes les photos sortent tramées en gros points",
+    "Éléments graphiques : affiche, label, badge et ligne au sol",
+    "Affiche d'invitation A3 pour la première séance",
+    "Kakémono d'accueil des séances, 60 × 160 cm",
+    "L'application : passer le test, le modifier, étudier les données ; au téléphone ou sur papier",
+    "La fiche A3 : on noircit un rond par réponse, les quatre carrés noirs servent à la lire par photo",
+    "Premières pistes sur Figma : l'affiche de la réunion d'information, avant la charte",
+    "La séance au grand écran : salle d'attente avec QR code, titres d'étape, affiche montrée 5 secondes, comparaison A / B, réussites, atelier",
+    "La même séance au téléphone : inscription, jeu de l'œil, réussites, choix multiples, A ou B, lieux de diffusion, photo de l'affiche du binôme",
+    "Les affiches de test : chaque variante ne change qu'une chose (titre, texte, police, contraste, couleurs, densité, date, image)",
+    "Le kit de modules à découper : titres, phrases, informations pratiques, images, formes et bas de page, pour que chaque binôme compose son affiche",
+    "L'éditeur : chaque écran de la séance se règle sans code (ordre, questions, réponses, affiches A et B)"
+  ],
+  "processus": [
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "etapes": {
+    "14.webp": 3,
+    "15.webp": 4,
+    "16.webp": 4,
+    "17.webp": 4,
+    "18.webp": 4,
+    "19.webp": 5
+  }
+}
