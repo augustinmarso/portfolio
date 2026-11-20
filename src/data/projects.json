@@ -160,6 +160,30 @@
         "sm": "/projects/collection-d-objets-liturgiques/03-sm.webp",
         "width": 1414,
         "height": 2000
+      },
+      {
+        "src": "/projects/collection-d-objets-liturgiques/04.webp",
+        "sm": "/projects/collection-d-objets-liturgiques/04-sm.webp",
+        "width": 1600,
+        "height": 2000
+      },
+      {
+        "src": "/projects/collection-d-objets-liturgiques/05.webp",
+        "sm": "/projects/collection-d-objets-liturgiques/05-sm.webp",
+        "width": 1600,
+        "height": 2000
+      },
+      {
+        "src": "/projects/collection-d-objets-liturgiques/06.webp",
+        "sm": "/projects/collection-d-objets-liturgiques/06-sm.webp",
+        "width": 1125,
+        "height": 2000
+      },
+      {
+        "src": "/projects/collection-d-objets-liturgiques/07.webp",
+        "sm": "/projects/collection-d-objets-liturgiques/07-sm.webp",
+        "width": 1600,
+        "height": 2000
       }
     ]
   },
