@@ -131,6 +131,24 @@
         "src": "/projects/cafetiere-au-beurre/12.webp",
         "width": 840,
         "height": 1188
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/13.webp",
+        "sm": "/projects/cafetiere-au-beurre/13-sm.webp",
+        "width": 1500,
+        "height": 2000
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/14.webp",
+        "sm": "/projects/cafetiere-au-beurre/14-sm.webp",
+        "width": 1500,
+        "height": 2000
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/15.webp",
+        "sm": "/projects/cafetiere-au-beurre/15-sm.webp",
+        "width": 2000,
+        "height": 800
       }
     ]
   },
@@ -184,6 +202,24 @@
         "sm": "/projects/collection-d-objets-liturgiques/07-sm.webp",
         "width": 1600,
         "height": 2000
+      },
+      {
+        "src": "/projects/collection-d-objets-liturgiques/08.webp",
+        "sm": "/projects/collection-d-objets-liturgiques/08-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/collection-d-objets-liturgiques/09.webp",
+        "sm": "/projects/collection-d-objets-liturgiques/09-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/collection-d-objets-liturgiques/10.webp",
+        "sm": "/projects/collection-d-objets-liturgiques/10-sm.webp",
+        "width": 2000,
+        "height": 546
       }
     ]
   },
@@ -229,6 +265,24 @@
         "sm": "/projects/cylinder-chair/05-sm.webp",
         "width": 2000,
         "height": 1333
+      },
+      {
+        "src": "/projects/cylinder-chair/06.webp",
+        "sm": "/projects/cylinder-chair/06-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/cylinder-chair/07.webp",
+        "sm": "/projects/cylinder-chair/07-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/cylinder-chair/08.webp",
+        "sm": "/projects/cylinder-chair/08-sm.webp",
+        "width": 2000,
+        "height": 546
       }
     ]
   },
@@ -425,6 +479,18 @@
         "sm": "/projects/de-passager-a-equipier/30-sm.webp",
         "width": 2000,
         "height": 1414
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/31.webp",
+        "sm": "/projects/de-passager-a-equipier/31-sm.webp",
+        "width": 1500,
+        "height": 2000
+      },
+      {
+        "src": "/projects/de-passager-a-equipier/32.webp",
+        "sm": "/projects/de-passager-a-equipier/32-sm.webp",
+        "width": 2000,
+        "height": 800
       }
     ]
   },
@@ -540,6 +606,24 @@
         "sm": "/projects/echappee/18-sm.webp",
         "width": 2000,
         "height": 1099
+      },
+      {
+        "src": "/projects/echappee/19.webp",
+        "sm": "/projects/echappee/19-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/echappee/20.webp",
+        "sm": "/projects/echappee/20-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/echappee/21.webp",
+        "sm": "/projects/echappee/21-sm.webp",
+        "width": 2000,
+        "height": 546
       }
     ]
   },
@@ -670,6 +754,24 @@
         "src": "/projects/ephemeride/22.webp",
         "width": 385,
         "height": 2000
+      },
+      {
+        "src": "/projects/ephemeride/23.webp",
+        "sm": "/projects/ephemeride/23-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/ephemeride/24.webp",
+        "sm": "/projects/ephemeride/24-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/ephemeride/25.webp",
+        "sm": "/projects/ephemeride/25-sm.webp",
+        "width": 2000,
+        "height": 546
       }
     ]
   },
@@ -732,6 +834,24 @@
         "sm": "/projects/fish-eye/09-sm.webp",
         "width": 2000,
         "height": 1414
+      },
+      {
+        "src": "/projects/fish-eye/10.webp",
+        "sm": "/projects/fish-eye/10-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/fish-eye/11.webp",
+        "sm": "/projects/fish-eye/11-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/fish-eye/12.webp",
+        "sm": "/projects/fish-eye/12-sm.webp",
+        "width": 2000,
+        "height": 546
       }
     ]
   },
@@ -956,6 +1076,24 @@
         "sm": "/projects/kai/12-sm.webp",
         "width": 1920,
         "height": 1080
+      },
+      {
+        "src": "/projects/kai/17.webp",
+        "sm": "/projects/kai/17-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/kai/18.webp",
+        "sm": "/projects/kai/18-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/kai/19.webp",
+        "sm": "/projects/kai/19-sm.webp",
+        "width": 2000,
+        "height": 546
       }
     ]
   },
@@ -1292,6 +1430,24 @@
         "sm": "/projects/le-jeu-de-la-grenouille/18-sm.webp",
         "width": 1446,
         "height": 1088
+      },
+      {
+        "src": "/projects/le-jeu-de-la-grenouille/19.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/19-sm.webp",
+        "width": 1500,
+        "height": 2000
+      },
+      {
+        "src": "/projects/le-jeu-de-la-grenouille/20.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/20-sm.webp",
+        "width": 1500,
+        "height": 2000
+      },
+      {
+        "src": "/projects/le-jeu-de-la-grenouille/21.webp",
+        "sm": "/projects/le-jeu-de-la-grenouille/21-sm.webp",
+        "width": 2000,
+        "height": 800
       }
     ]
   },
@@ -1431,6 +1587,24 @@
         "sm": "/projects/open-mind/11-sm.webp",
         "width": 1659,
         "height": 913
+      },
+      {
+        "src": "/projects/open-mind/12.webp",
+        "sm": "/projects/open-mind/12-sm.webp",
+        "width": 2000,
+        "height": 2000
+      },
+      {
+        "src": "/projects/open-mind/13.webp",
+        "sm": "/projects/open-mind/13-sm.webp",
+        "width": 1558,
+        "height": 2000
+      },
+      {
+        "src": "/projects/open-mind/14.webp",
+        "sm": "/projects/open-mind/14-sm.webp",
+        "width": 1558,
+        "height": 2000
       }
     ]
   },
@@ -1672,6 +1846,24 @@
         "sm": "/projects/recolteur-pomme-de-pin/08-sm.webp",
         "width": 1920,
         "height": 1006
+      },
+      {
+        "src": "/projects/recolteur-pomme-de-pin/09.webp",
+        "sm": "/projects/recolteur-pomme-de-pin/09-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/recolteur-pomme-de-pin/10.webp",
+        "sm": "/projects/recolteur-pomme-de-pin/10-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/recolteur-pomme-de-pin/11.webp",
+        "sm": "/projects/recolteur-pomme-de-pin/11-sm.webp",
+        "width": 2000,
+        "height": 546
       }
     ]
   }

@@ -51,7 +51,9 @@
         "cylinder-chair 4",
         "le-jeu-de-la-grenouille 13",
         "le-jeu-de-la-grenouille 14",
-        "ephemeride 14"
+        "ephemeride 14",
+        "recolteur-pomme-de-pin 8",
+        "cafetiere-au-beurre 12"
       ]
     },
     {
@@ -69,7 +71,9 @@
         "le-choix-de-malo 11",
         "gorillachoc 17",
         "ratp 19",
-        "de-passager-a-equipier 29"
+        "de-passager-a-equipier 29",
+        "echappee 19",
+        "kai 13"
       ]
     },
     {
@@ -85,7 +89,10 @@
       "exemples": [
         "kai 5",
         "le-jeu-de-la-grenouille 17",
-        "open-mind 9"
+        "open-mind 9",
+        "cafetiere-au-beurre 14",
+        "cylinder-chair 7",
+        "fish-eye 11"
       ]
     }
   ]

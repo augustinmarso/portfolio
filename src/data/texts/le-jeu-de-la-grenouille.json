@@ -25,7 +25,10 @@
     "Formes de plateau découpées dans du carton, essais d'empilement",
     "Moule imprimé en 3D en deux parties",
     "Plan du plateau et d'une grenouille, dessin au trait",
-    "Livret des règles ouvert, plateau illustré et grenouille"
+    "Livret des règles ouvert, plateau illustré et grenouille",
+    "Modèle 3D en fil de fer : le plateau et les grenouilles",
+    "Modèle 3D sans matière : le plateau et les grenouilles, vue de trois quarts",
+    "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
     11,
@@ -34,7 +37,10 @@
     14,
     15,
     16,
-    17
+    17,
+    18,
+    19,
+    20
   ],
   "etapes": {
     "12.webp": 2,
@@ -43,6 +49,9 @@
     "15.webp": 3,
     "16.webp": 4,
     "17.webp": 5,
-    "18.webp": 5
+    "18.webp": 5,
+    "19.webp": 3,
+    "20.webp": 4,
+    "21.webp": 5
   }
 }

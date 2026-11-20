@@ -12,14 +12,23 @@
     "Siège empilé sur un cylindre cannelé, cylindre fermé couché, en classe",
     "Sièges déployés dans une salle de jeu, avec personnages dessinés",
     "Croquis des trois éléments du siège",
-    "Maquette imprimée en 3D, pièces séparées"
+    "Maquette imprimée en 3D, pièces séparées",
+    "Modèle 3D en fil de fer : les trois pièces du siège",
+    "Modèle 3D sans matière : les trois pièces du siège, vue de trois quarts",
+    "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
     3,
-    4
+    4,
+    5,
+    6,
+    7
   ],
   "etapes": {
     "04.webp": 3,
-    "05.webp": 3
+    "05.webp": 3,
+    "06.webp": 3,
+    "07.webp": 4,
+    "08.webp": 5
   }
 }

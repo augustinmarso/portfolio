@@ -15,18 +15,27 @@
     "Pomme de pin fermée et ouverte",
     "Scarabée du désert couvert de gouttes",
     "Schéma de fonctionnement du récolteur",
-    "Modélisation sous Rhino et Grasshopper"
+    "Modélisation sous Rhino et Grasshopper",
+    "Modèle 3D en fil de fer : le récolteur",
+    "Modèle 3D sans matière : le récolteur, vue de trois quarts",
+    "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
     4,
     5,
     6,
-    7
+    7,
+    8,
+    9,
+    10
   ],
   "etapes": {
     "05.webp": 2,
     "06.webp": 2,
     "07.webp": 3,
-    "08.webp": 4
+    "08.webp": 4,
+    "09.webp": 3,
+    "10.webp": 4,
+    "11.webp": 5
   }
 }

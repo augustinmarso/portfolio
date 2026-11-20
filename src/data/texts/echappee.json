@@ -26,12 +26,21 @@
     "Le tri dans l'entrée, bac Électrique ouvert sur le sac jaune",
     "Un meuble avant d'être une poubelle",
     "Le carton ouvert sur ses calages",
-    "Patron du carton à plat"
+    "Patron du carton à plat",
+    "Modèle 3D en fil de fer : la poubelle Échappée",
+    "Modèle 3D sans matière : la poubelle Échappée, vue de trois quarts",
+    "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
-    17
+    17,
+    18,
+    19,
+    20
   ],
   "etapes": {
-    "18.webp": 5
+    "18.webp": 5,
+    "19.webp": 3,
+    "20.webp": 4,
+    "21.webp": 5
   }
 }

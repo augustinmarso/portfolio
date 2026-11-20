@@ -20,16 +20,25 @@
     "Service d'un café au beurre émulsionné",
     "Enquête : Éthiopie, Tibet et café Bulletproof",
     "Croquis de recherche, premières silhouettes",
-    "Croquis d'architecture, piston et module à émulsion"
+    "Croquis d'architecture, piston et module à émulsion",
+    "Modèle 3D en fil de fer : la cafetière",
+    "Modèle 3D sans matière : la cafetière, vue de trois quarts",
+    "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
     9,
     10,
-    11
+    11,
+    12,
+    13,
+    14
   ],
   "etapes": {
     "10.webp": 1,
     "11.webp": 3,
-    "12.webp": 3
+    "12.webp": 3,
+    "13.webp": 3,
+    "14.webp": 4,
+    "15.webp": 5
   }
 }

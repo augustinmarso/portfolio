@@ -20,6 +20,19 @@
     "Les billes d'argile et de chêne dans la gorge du labyrinthe",
     "Ouvrir le kit : le cordon déjà perlé",
     "Le kit dans sa boîte plate",
-    "La porte grande ouverte sur le jardin"
-  ]
+    "La porte grande ouverte sur le jardin",
+    "Scène 3D en vue de travail : l'entrée et le kit en éclaté",
+    "Modèle 3D sans matière : les billes dans la gorge du labyrinthe",
+    "Modèle 3D sans matière : le tube-guide percé de losanges"
+  ],
+  "processus": [
+    11,
+    12,
+    13
+  ],
+  "etapes": {
+    "12.webp": 3,
+    "13.webp": 4,
+    "14.webp": 4
+  }
 }

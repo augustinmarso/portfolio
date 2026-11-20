@@ -30,7 +30,10 @@
     "Prototype découpé au laser, plaques semainier de février et activités",
     "Main changeant le jour et le mois sur la plaque en bois",
     "Les quatre plaques, du gabarit de découpe au rendu imprimé",
-    "Pictogrammes des saisons et de la météo"
+    "Pictogrammes des saisons et de la météo",
+    "Modèle 3D en fil de fer : les plaques et les lamelles",
+    "Modèle 3D sans matière : les plaques et les lamelles, vue de trois quarts",
+    "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
     5,
@@ -49,7 +52,10 @@
     18,
     19,
     20,
-    21
+    21,
+    22,
+    23,
+    24
   ],
   "etapes": {
     "06.webp": 1,
@@ -68,6 +74,9 @@
     "19.webp": 4,
     "20.webp": 4,
     "21.webp": 5,
-    "22.webp": 5
+    "22.webp": 5,
+    "23.webp": 3,
+    "24.webp": 4,
+    "25.webp": 5
   }
 }

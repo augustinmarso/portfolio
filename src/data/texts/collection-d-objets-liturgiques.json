@@ -14,16 +14,25 @@
     "Ostensoir en feuille d'or, anneaux de l'onde, rendu studio",
     "Version martelée : la feuille d'or garde la trace des coups",
     "Vue de face sur fond noir : les anneaux de l'onde autour de la lunette",
-    "L'ostensoir posé sur un rocher"
+    "L'ostensoir posé sur un rocher",
+    "Modèle 3D en fil de fer : l'ostensoir",
+    "Modèle 3D sans matière : l'ostensoir, vue de trois quarts",
+    "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
     2,
     3,
-    4
+    4,
+    7,
+    8,
+    9
   ],
   "etapes": {
     "03.webp": 2,
     "04.webp": 4,
-    "05.webp": 4
+    "05.webp": 4,
+    "08.webp": 3,
+    "09.webp": 4,
+    "10.webp": 5
   }
 }

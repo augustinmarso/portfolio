@@ -40,7 +40,9 @@
     "Croquis : régler la voile avec les cordages repérés par couleur",
     "Croquis : se déplacer en gilet et se tenir au bateau",
     "Poignée de maintien : photos et schéma des pièces",
-    "Prototypes de la poignée : gaine textile, patron et pièces"
+    "Prototypes de la poignée : gaine textile, patron et pièces",
+    "Modèle 3D sans matière : l'Oceanis, vue de trois quarts",
+    "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
     18,
@@ -54,7 +56,9 @@
     26,
     27,
     28,
-    29
+    29,
+    30,
+    31
   ],
   "etapes": {
     "19.webp": 1,
@@ -68,6 +72,8 @@
     "27.webp": 3,
     "28.webp": 3,
     "29.webp": 4,
-    "30.webp": 4
+    "30.webp": 4,
+    "31.webp": 4,
+    "32.webp": 5
   }
 }
