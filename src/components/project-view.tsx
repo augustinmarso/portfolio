@@ -173,7 +173,7 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
         <div className="grid gap-12">
           {produit && project.boucle && (
             <figure>
-              <LazyVideo src={project.boucle.src} poster={project.boucle.poster} aria-label={`${project.title} en 3D`} className="h-auto w-full" />
+              <LazyVideo src={project.boucle.src} poster={project.boucle.poster} aria-label={`${project.title} en 3D`} className="mx-auto h-auto max-h-[calc(100dvh-120px)] w-auto max-w-full" />
             </figure>
           )}
           {/* le mémoire commence par sa première de couverture, à côté du texte */}
