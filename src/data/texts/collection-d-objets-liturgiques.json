@@ -17,9 +17,13 @@
     "L'ostensoir posé sur un rocher"
   ],
   "processus": [
-    2
+    2,
+    3,
+    4
   ],
   "etapes": {
-    "03.webp": 2
+    "03.webp": 2,
+    "04.webp": 4,
+    "05.webp": 4
   }
 }
