@@ -59,7 +59,8 @@
   ],
   "boucles": [
     "cylinder-chair",
-    "de-passager-a-equipier"
+    "de-passager-a-equipier",
+    "porte-cle-jeton-de-caddie"
   ],
   "sons": [
     "cylinder-chair"

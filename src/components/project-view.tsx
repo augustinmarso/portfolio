@@ -25,6 +25,8 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
     ? ((embeds as Record<string, { youtube: string; title: string; credit: string; vertical: boolean }[]>)[project.slug] ?? [])
     : [];
   const video = produit ? project.video : undefined;
+  // vidéo en boucle placée après la 1re planche (comme sur Behance) plutôt qu'en tête
+  const boucleApres1 = project.slug === "porte-cle-jeton-de-caddie";
   // Mémoire « La société de jeux » : ses 17 doubles pages en image sont remplacées par le mémoire
   // mis en page dans le site (vrai texte en Scoutie Sans, BD et flèches gardées), en pleine largeur.
   // Il remplace toutes les planches de l'onglet produit ; les croquis restent dans « processus ».
@@ -178,7 +180,7 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
         </div>
 
         <div className="grid gap-12">
-          {produit && project.boucle && !video && (
+          {produit && project.boucle && !video && !boucleApres1 && (
             <figure>
               <BoucleVideo video={project.boucle} label={`${project.title} en 3D`} />
             </figure>
@@ -217,6 +219,11 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
                       <p key={para}>{para}</p>
                     ))}
                   </div>
+                )}
+                {produit && boucleApres1 && k === 1 && project.boucle && (
+                  <figure>
+                    <BoucleVideo video={project.boucle} label={`${project.title} en démonstration`} />
+                  </figure>
                 )}
                 {/* LudiLove : les composants puis la charte en mouvement, juste avant les planches de la charte. */}
                 {produit && project.slug === "ludilove" && img.src.endsWith("/ludilove/04.webp") && (
