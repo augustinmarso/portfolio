@@ -1605,6 +1605,48 @@
         "sm": "/projects/open-mind/14-sm.webp",
         "width": 1558,
         "height": 2000
+      },
+      {
+        "src": "/projects/open-mind/15.webp",
+        "sm": "/projects/open-mind/15-sm.webp",
+        "width": 2000,
+        "height": 608
+      },
+      {
+        "src": "/projects/open-mind/16.webp",
+        "sm": "/projects/open-mind/16-sm.webp",
+        "width": 2000,
+        "height": 560
+      },
+      {
+        "src": "/projects/open-mind/17.webp",
+        "sm": "/projects/open-mind/17-sm.webp",
+        "width": 2000,
+        "height": 730
+      },
+      {
+        "src": "/projects/open-mind/18.webp",
+        "sm": "/projects/open-mind/18-sm.webp",
+        "width": 2000,
+        "height": 580
+      },
+      {
+        "src": "/projects/open-mind/19.webp",
+        "sm": "/projects/open-mind/19-sm.webp",
+        "width": 2000,
+        "height": 1426
+      },
+      {
+        "src": "/projects/open-mind/20.webp",
+        "sm": "/projects/open-mind/20-sm.webp",
+        "width": 2000,
+        "height": 1426
+      },
+      {
+        "src": "/projects/open-mind/21.webp",
+        "sm": "/projects/open-mind/21-sm.webp",
+        "width": 2000,
+        "height": 784
       }
     ]
   },

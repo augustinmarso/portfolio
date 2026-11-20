@@ -23,16 +23,37 @@
     "La porte grande ouverte sur le jardin",
     "Scène 3D en vue de travail : l'entrée et le kit en éclaté",
     "Modèle 3D sans matière : les billes dans la gorge du labyrinthe",
-    "Modèle 3D sans matière : le tube-guide percé de losanges"
+    "Modèle 3D sans matière : le tube-guide percé de losanges",
+    "Références : le cerveau qui jardine, les tracés du vivant (corail, écorce, lichen, scolytes) et le ferme-porte à poids existant",
+    "Tests de forme : cinq tracés génératifs, une seule voie pour le cordon, puis la forme finale",
+    "Scénario d'utilisation au trait : fermée, on ouvre, grande ouverte, on lâche",
+    "Notice de pose : 12 pages, 6 étapes, sur papier recyclé",
+    "Plan 1/2 : ensemble monté et nomenclature, échelle 1:10",
+    "Plan 2/2 : la planche-labyrinthe en chêne massif, échelle 1:5",
+    "Croquis de recherche : dérouleur, élastique à mémoire de forme, cordon dans la porte"
   ],
   "processus": [
     11,
     12,
-    13
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
   ],
   "etapes": {
     "12.webp": 3,
     "13.webp": 4,
-    "14.webp": 4
+    "14.webp": 4,
+    "15.webp": 2,
+    "16.webp": 3,
+    "21.webp": 3,
+    "17.webp": 4,
+    "18.webp": 5,
+    "19.webp": 5,
+    "20.webp": 5
   }
 }
