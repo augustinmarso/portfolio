@@ -13,14 +13,23 @@
     "Les deux pièces à plat, rendu 3D",
     "Pièces séparées, vue en perspective",
     "Logo du Département du Doubs",
-    "Fichier de découpe laser avec variantes"
+    "Fichier de découpe laser avec variantes",
+    "Les quatre versions retenues en porte-clés, rendu 3D",
+    "Jeton emboîté à mi-bois dans la tête de la clé, rendu 3D",
+    "Les quatre versions, jetons emboîtés, rendu 3D",
+    "Planche de contreplaqué au sortir de la découpe laser, rendu 3D",
+    "Pièces découpées et gravées des quatre versions, rendu 3D"
   ],
   "processus": [
     5,
-    6
+    6,
+    10,
+    11
   ],
   "etapes": {
     "06.webp": 1,
-    "07.webp": 5
+    "07.webp": 5,
+    "11.webp": 5,
+    "12.webp": 5
   }
 }

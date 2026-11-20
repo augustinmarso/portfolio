@@ -1704,6 +1704,36 @@
         "sm": "/projects/porte-cle-jeton-de-caddie/07-sm.webp",
         "width": 2000,
         "height": 1742
+      },
+      {
+        "src": "/projects/porte-cle-jeton-de-caddie/08.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/08-sm.webp",
+        "width": 1800,
+        "height": 1200
+      },
+      {
+        "src": "/projects/porte-cle-jeton-de-caddie/09.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/09-sm.webp",
+        "width": 1800,
+        "height": 1200
+      },
+      {
+        "src": "/projects/porte-cle-jeton-de-caddie/10.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/10-sm.webp",
+        "width": 1800,
+        "height": 1200
+      },
+      {
+        "src": "/projects/porte-cle-jeton-de-caddie/11.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/11-sm.webp",
+        "width": 1800,
+        "height": 1200
+      },
+      {
+        "src": "/projects/porte-cle-jeton-de-caddie/12.webp",
+        "sm": "/projects/porte-cle-jeton-de-caddie/12-sm.webp",
+        "width": 1800,
+        "height": 1200
       }
     ]
   },
