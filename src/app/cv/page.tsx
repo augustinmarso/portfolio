@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { absolute } from "@/lib/site";
 import { AppLogos } from "@/components/app-logos";
+import { PartnerLogos } from "@/components/partner-logos";
 import { PrintButton } from "@/components/print-button";
 import { SiteHeader } from "@/components/site-header";
 import { asset } from "@/lib/projects";
@@ -93,6 +94,10 @@ export default function CvPage() {
               </dl>
             </section>
           ))}
+          <section>
+            <h2 className="text-2xl sm:text-3xl print:text-[15pt]">partenaires</h2>
+            <PartnerLogos partners={cv.partenaires} />
+          </section>
         </div>
       </div>
     </main>

@@ -101,5 +101,67 @@
         }
       ]
     }
+  ],
+  "partenaires": [
+    {
+      "nom": "Bénéteau",
+      "logo": "/partenaires/beneteau.png",
+      "projet": "de-passager-a-equipier",
+      "ratio": 1.61
+    },
+    {
+      "nom": "Tribord Sailing Lab (Decathlon)",
+      "logo": "/partenaires/tribord.svg",
+      "projet": "de-passager-a-equipier",
+      "ratio": 5.35
+    },
+    {
+      "nom": "Range Rover",
+      "logo": "/partenaires/range-rover.svg",
+      "projet": "echappee",
+      "ratio": 19.41
+    },
+    {
+      "nom": "Muuto",
+      "logo": "/partenaires/muuto.svg",
+      "projet": "open-mind",
+      "ratio": 5.22
+    },
+    {
+      "nom": "RATP",
+      "logo": "/partenaires/ratp.svg",
+      "projet": "ratp",
+      "ratio": 1.49
+    },
+    {
+      "nom": "Silmo",
+      "logo": "/partenaires/silmo.png",
+      "projet": "fish-eye",
+      "ratio": 1.79
+    },
+    {
+      "nom": "Bec et Croc",
+      "logo": "/partenaires/bec-et-croc.png",
+      "projet": "ephemeride",
+      "ratio": 5.14
+    },
+    {
+      "nom": "Sauge, artisans du bois",
+      "logo": "/partenaires/sauge.png",
+      "projet": "porte-cle-jeton-de-caddie",
+      "ratio": 2.41
+    },
+    {
+      "nom": "Département du Doubs",
+      "logo": "/partenaires/doubs.png",
+      "projet": "porte-cle-jeton-de-caddie",
+      "ratio": 2.44
+    },
+    {
+      "nom": "Concours Design Zéro Déchet (Syctom)",
+      "logo": "/partenaires/design-zero-dechet.png",
+      "projet": "kai",
+      "ratio": 2.57
+    }
   ]
 }

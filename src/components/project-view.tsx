@@ -10,7 +10,9 @@ import { YouTubeEmbed } from "@/components/youtube-embed";
 import { LudiloveBento } from "@/components/ludilove-bento";
 import { LudiloveUiBento } from "@/components/ludilove-ui-bento";
 import { MemoireBook } from "@/components/memoire-book";
+import { PartnerLogo } from "@/components/partner-logos";
 import embeds from "@/data/embeds.json";
+import cv from "@/data/pages/cv.json";
 import { plateStep, projects, STEPS, viewIndices, type Project, type ProjectView } from "@/lib/projects";
 import { absolute, jsonLd, ogImage, PERSON } from "@/lib/site";
 
@@ -34,6 +36,8 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
   const shown = memoire ? [] : viewIndices(project, view);
   // processus rangé par étapes de la méthode : un intertitre avant la première planche de chaque étape
   const byStep = !produit && shown.some((n) => plateStep(project, n));
+  // logos des partenaires du projet (liste tenue dans pages/cv.json, section « partenaires » du CV)
+  const partners = cv.partenaires.filter((p) => p.projet === project.slug);
 
   const tabs = (
     <nav aria-label="Onglets du projet" className="mt-6 flex gap-5 text-lg font-semibold tracking-tight">
@@ -154,6 +158,16 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
               </div>
             )}
           </dl>
+
+          {partners.length > 0 && (
+            <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-4" aria-label="Partenaires du projet">
+              {partners.map((p) => (
+                <span key={p.nom} className="opacity-70">
+                  <PartnerLogo p={p} scale={0.85} />
+                </span>
+              ))}
+            </div>
+          )}
 
           {text?.intro && <p className="mt-8 max-w-prose text-lg leading-relaxed">{text.intro}</p>}
 
