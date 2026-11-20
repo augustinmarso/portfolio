@@ -95,8 +95,13 @@ export default function CvPage() {
             </section>
           ))}
           <section>
-            <h2 className="text-2xl sm:text-3xl print:text-[15pt]">partenaires</h2>
-            <PartnerLogos partners={cv.partenaires} />
+            <h2 className="text-2xl sm:text-3xl print:text-[15pt]">partenariats et concours</h2>
+            {(["partenariat", "concours"] as const).map((type) => (
+              <div key={type} className="mt-6 grid gap-1 sm:grid-cols-[11rem_1fr] sm:gap-6 print:mt-2 print:grid-cols-[7.5rem_1fr] print:gap-4">
+                <h3 className="text-muted-foreground">{type === "partenariat" ? "partenariats" : "concours"}</h3>
+                <PartnerLogos partners={cv.partenaires.filter((p) => p.type === type)} />
+              </div>
+            ))}
           </section>
         </div>
       </div>

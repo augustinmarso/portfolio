@@ -24,7 +24,7 @@ export function PartnerLogo({ p, scale }: { p: Partner; scale?: number }) {
 // Bande du CV : chaque logo mène au projet fait avec ce partenaire.
 export function PartnerLogos({ partners }: { partners: Partner[] }) {
   return (
-    <ul className="mt-6 flex flex-wrap items-center gap-x-10 gap-y-8 print:mt-3 print:gap-x-6 print:gap-y-3">
+    <ul className="flex flex-wrap items-center gap-x-10 gap-y-6 print:gap-x-6 print:gap-y-3">
       {partners.map((p) => (
         <li key={p.nom}>
           <Link href={`/projets/${p.projet}/`} className="block opacity-70 transition-opacity hover:opacity-100 print:opacity-90">
