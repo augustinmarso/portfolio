@@ -1908,5 +1908,135 @@
         "height": 546
       }
     ]
+  },
+  {
+    "slug": "les-mauvais-lundis",
+    "title": "Les mauvais lundis — Mobilier national",
+    "cover": {
+      "src": "/projects/les-mauvais-lundis/thumb.webp",
+      "width": 373,
+      "height": 560
+    },
+    "images": [
+      {
+        "src": "/projects/les-mauvais-lundis/01.webp",
+        "sm": "/projects/les-mauvais-lundis/01-sm.webp",
+        "width": 1333,
+        "height": 2000
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/02.webp",
+        "width": 1065,
+        "height": 1600
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/03.webp",
+        "sm": "/projects/les-mauvais-lundis/03-sm.webp",
+        "width": 1333,
+        "height": 2000
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/04.webp",
+        "sm": "/projects/les-mauvais-lundis/04-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/05.webp",
+        "sm": "/projects/les-mauvais-lundis/05-sm.webp",
+        "width": 1333,
+        "height": 2000
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/06.webp",
+        "sm": "/projects/les-mauvais-lundis/06-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/07.webp",
+        "sm": "/projects/les-mauvais-lundis/07-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/08.webp",
+        "sm": "/projects/les-mauvais-lundis/08-sm.webp",
+        "width": 2000,
+        "height": 2000
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/09.webp",
+        "sm": "/projects/les-mauvais-lundis/09-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/10.webp",
+        "sm": "/projects/les-mauvais-lundis/10-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/11.webp",
+        "sm": "/projects/les-mauvais-lundis/11-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/12.webp",
+        "sm": "/projects/les-mauvais-lundis/12-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/13.webp",
+        "sm": "/projects/les-mauvais-lundis/13-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/14.webp",
+        "sm": "/projects/les-mauvais-lundis/14-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/15.webp",
+        "sm": "/projects/les-mauvais-lundis/15-sm.webp",
+        "width": 2000,
+        "height": 2000
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/16.webp",
+        "sm": "/projects/les-mauvais-lundis/16-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/17.webp",
+        "sm": "/projects/les-mauvais-lundis/17-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/18.webp",
+        "sm": "/projects/les-mauvais-lundis/18-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/19.webp",
+        "sm": "/projects/les-mauvais-lundis/19-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/les-mauvais-lundis/20.webp",
+        "sm": "/projects/les-mauvais-lundis/20-sm.webp",
+        "width": 2000,
+        "height": 1250
+      }
+    ]
   }
 ]
