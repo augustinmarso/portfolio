@@ -15,8 +15,8 @@
       "livrables": "analyse du terrain, parcours usager",
       "exemples": [
         "ratp 15",
-        "ephemeride 7",
-        "ephemeride 8"
+        "ephemeride 15",
+        "ephemeride 16"
       ]
     },
     {
@@ -51,7 +51,7 @@
         "cylinder-chair 4",
         "le-jeu-de-la-grenouille 13",
         "le-jeu-de-la-grenouille 14",
-        "ephemeride 14",
+        "ephemeride 23",
         "recolteur-pomme-de-pin 8",
         "cafetiere-au-beurre 12"
       ]
@@ -73,7 +73,8 @@
         "ratp 19",
         "de-passager-a-equipier 29",
         "echappee 19",
-        "kai 13"
+        "kai 13",
+        "ephemeride 35"
       ]
     },
     {
@@ -92,7 +93,8 @@
         "open-mind 9",
         "cafetiere-au-beurre 14",
         "cylinder-chair 7",
-        "fish-eye 11"
+        "fish-eye 11",
+        "ephemeride 41"
       ]
     }
   ]

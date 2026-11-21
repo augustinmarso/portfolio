@@ -633,14 +633,14 @@
     "cover": {
       "src": "/projects/ephemeride/thumb.webp",
       "width": 560,
-      "height": 419
+      "height": 373
     },
     "images": [
       {
         "src": "/projects/ephemeride/01.webp",
         "sm": "/projects/ephemeride/01-sm.webp",
         "width": 2000,
-        "height": 1496
+        "height": 1333
       },
       {
         "src": "/projects/ephemeride/02.webp",
@@ -652,126 +652,269 @@
         "src": "/projects/ephemeride/03.webp",
         "sm": "/projects/ephemeride/03-sm.webp",
         "width": 2000,
-        "height": 1197
+        "height": 1333
       },
       {
         "src": "/projects/ephemeride/04.webp",
         "sm": "/projects/ephemeride/04-sm.webp",
         "width": 2000,
-        "height": 1197
+        "height": 1333
       },
       {
         "src": "/projects/ephemeride/05.webp",
         "sm": "/projects/ephemeride/05-sm.webp",
-        "width": 2000,
-        "height": 1214
+        "width": 1800,
+        "height": 1800
       },
       {
         "src": "/projects/ephemeride/06.webp",
-        "width": 1200,
-        "height": 800
+        "sm": "/projects/ephemeride/06-sm.webp",
+        "width": 1800,
+        "height": 1800
       },
       {
         "src": "/projects/ephemeride/07.webp",
         "sm": "/projects/ephemeride/07-sm.webp",
-        "width": 1440,
-        "height": 1092
+        "width": 1800,
+        "height": 1800
       },
       {
         "src": "/projects/ephemeride/08.webp",
         "sm": "/projects/ephemeride/08-sm.webp",
         "width": 2000,
-        "height": 1420
+        "height": 1333
       },
       {
         "src": "/projects/ephemeride/09.webp",
+        "sm": "/projects/ephemeride/09-sm.webp",
+        "width": 2000,
+        "height": 1333
+      },
+      {
+        "src": "/projects/ephemeride/10.webp",
+        "sm": "/projects/ephemeride/10-sm.webp",
+        "width": 2000,
+        "height": 1333
+      },
+      {
+        "src": "/projects/ephemeride/11.webp",
+        "sm": "/projects/ephemeride/11-sm.webp",
+        "width": 2000,
+        "height": 1496
+      },
+      {
+        "src": "/projects/ephemeride/12.webp",
+        "sm": "/projects/ephemeride/12-sm.webp",
+        "width": 2000,
+        "height": 1333
+      },
+      {
+        "src": "/projects/ephemeride/13.webp",
+        "sm": "/projects/ephemeride/13-sm.webp",
+        "width": 2000,
+        "height": 1214
+      },
+      {
+        "src": "/projects/ephemeride/14.webp",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "/projects/ephemeride/15.webp",
+        "sm": "/projects/ephemeride/15-sm.webp",
+        "width": 1440,
+        "height": 1092
+      },
+      {
+        "src": "/projects/ephemeride/16.webp",
+        "sm": "/projects/ephemeride/16-sm.webp",
+        "width": 2000,
+        "height": 1420
+      },
+      {
+        "src": "/projects/ephemeride/17.webp",
         "width": 954,
         "height": 641
       },
       {
-        "src": "/projects/ephemeride/10.webp",
+        "src": "/projects/ephemeride/18.webp",
         "width": 952,
         "height": 507
       },
       {
-        "src": "/projects/ephemeride/11.webp",
+        "src": "/projects/ephemeride/19.webp",
         "width": 954,
         "height": 411
       },
       {
-        "src": "/projects/ephemeride/12.webp",
+        "src": "/projects/ephemeride/20.webp",
         "width": 955,
         "height": 446
       },
       {
-        "src": "/projects/ephemeride/13.webp",
+        "src": "/projects/ephemeride/21.webp",
         "width": 955,
         "height": 468
       },
       {
-        "src": "/projects/ephemeride/14.webp",
-        "sm": "/projects/ephemeride/14-sm.webp",
+        "src": "/projects/ephemeride/22.webp",
+        "sm": "/projects/ephemeride/22-sm.webp",
         "width": 2000,
         "height": 1197
-      },
-      {
-        "src": "/projects/ephemeride/15.webp",
-        "width": 1085,
-        "height": 1450
-      },
-      {
-        "src": "/projects/ephemeride/16.webp",
-        "width": 939,
-        "height": 654
-      },
-      {
-        "src": "/projects/ephemeride/17.webp",
-        "width": 897,
-        "height": 651
-      },
-      {
-        "src": "/projects/ephemeride/18.webp",
-        "width": 800,
-        "height": 800
-      },
-      {
-        "src": "/projects/ephemeride/19.webp",
-        "width": 725,
-        "height": 970
-      },
-      {
-        "src": "/projects/ephemeride/20.webp",
-        "width": 887,
-        "height": 1350
-      },
-      {
-        "src": "/projects/ephemeride/21.webp",
-        "sm": "/projects/ephemeride/21-sm.webp",
-        "width": 2000,
-        "height": 997
-      },
-      {
-        "src": "/projects/ephemeride/22.webp",
-        "width": 385,
-        "height": 2000
       },
       {
         "src": "/projects/ephemeride/23.webp",
         "sm": "/projects/ephemeride/23-sm.webp",
         "width": 2000,
-        "height": 1500
+        "height": 1197
       },
       {
         "src": "/projects/ephemeride/24.webp",
-        "sm": "/projects/ephemeride/24-sm.webp",
+        "width": 1085,
+        "height": 1450
+      },
+      {
+        "src": "/projects/ephemeride/25.webp",
+        "width": 939,
+        "height": 654
+      },
+      {
+        "src": "/projects/ephemeride/26.webp",
+        "width": 897,
+        "height": 651
+      },
+      {
+        "src": "/projects/ephemeride/27.webp",
+        "sm": "/projects/ephemeride/27-sm.webp",
+        "width": 2000,
+        "height": 1197
+      },
+      {
+        "src": "/projects/ephemeride/28.webp",
+        "width": 800,
+        "height": 800
+      },
+      {
+        "src": "/projects/ephemeride/29.webp",
+        "sm": "/projects/ephemeride/29-sm.webp",
         "width": 2000,
         "height": 1500
       },
       {
-        "src": "/projects/ephemeride/25.webp",
-        "sm": "/projects/ephemeride/25-sm.webp",
+        "src": "/projects/ephemeride/30.webp",
+        "sm": "/projects/ephemeride/30-sm.webp",
+        "width": 2000,
+        "height": 1500
+      },
+      {
+        "src": "/projects/ephemeride/31.webp",
+        "sm": "/projects/ephemeride/31-sm.webp",
         "width": 2000,
         "height": 546
+      },
+      {
+        "src": "/projects/ephemeride/32.webp",
+        "width": 725,
+        "height": 970
+      },
+      {
+        "src": "/projects/ephemeride/33.webp",
+        "width": 887,
+        "height": 1350
+      },
+      {
+        "src": "/projects/ephemeride/34.webp",
+        "sm": "/projects/ephemeride/34-sm.webp",
+        "width": 2000,
+        "height": 1000
+      },
+      {
+        "src": "/projects/ephemeride/35.webp",
+        "sm": "/projects/ephemeride/35-sm.webp",
+        "width": 2000,
+        "height": 1333
+      },
+      {
+        "src": "/projects/ephemeride/36.webp",
+        "sm": "/projects/ephemeride/36-sm.webp",
+        "width": 1600,
+        "height": 2000
+      },
+      {
+        "src": "/projects/ephemeride/37.webp",
+        "sm": "/projects/ephemeride/37-sm.webp",
+        "width": 2000,
+        "height": 1333
+      },
+      {
+        "src": "/projects/ephemeride/38.webp",
+        "sm": "/projects/ephemeride/38-sm.webp",
+        "width": 2000,
+        "height": 1333
+      },
+      {
+        "src": "/projects/ephemeride/39.webp",
+        "sm": "/projects/ephemeride/39-sm.webp",
+        "width": 2000,
+        "height": 997
+      },
+      {
+        "src": "/projects/ephemeride/40.webp",
+        "sm": "/projects/ephemeride/40-sm.webp",
+        "width": 2000,
+        "height": 1000
+      },
+      {
+        "src": "/projects/ephemeride/41.webp",
+        "sm": "/projects/ephemeride/41-sm.webp",
+        "width": 2000,
+        "height": 1180
+      },
+      {
+        "src": "/projects/ephemeride/42.webp",
+        "sm": "/projects/ephemeride/42-sm.webp",
+        "width": 2000,
+        "height": 1349
+      },
+      {
+        "src": "/projects/ephemeride/43.webp",
+        "width": 820,
+        "height": 2000
+      },
+      {
+        "src": "/projects/ephemeride/44.webp",
+        "sm": "/projects/ephemeride/44-sm.webp",
+        "width": 1691,
+        "height": 2000
+      },
+      {
+        "src": "/projects/ephemeride/45.webp",
+        "sm": "/projects/ephemeride/45-sm.webp",
+        "width": 2000,
+        "height": 1338
+      },
+      {
+        "src": "/projects/ephemeride/46.webp",
+        "width": 385,
+        "height": 2000
+      },
+      {
+        "src": "/projects/ephemeride/47.webp",
+        "sm": "/projects/ephemeride/47-sm.webp",
+        "width": 1291,
+        "height": 2000
+      },
+      {
+        "src": "/projects/ephemeride/48.webp",
+        "sm": "/projects/ephemeride/48-sm.webp",
+        "width": 2000,
+        "height": 1250
+      },
+      {
+        "src": "/projects/ephemeride/49.webp",
+        "sm": "/projects/ephemeride/49-sm.webp",
+        "width": 2000,
+        "height": 1333
       }
     ]
   },
