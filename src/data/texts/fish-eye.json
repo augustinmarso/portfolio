@@ -26,7 +26,6 @@
     "Croquis de recherche de montures",
     "Recherche de formes et de matériaux, poissons et algues",
     "Fiche produit, vues cotées de la monture",
-    "Modèle 3D en fil de fer : la monture",
     "Modèle 3D sans matière : la monture, vue de trois quarts",
     "Trois vues du modèle 3D : face, côté, dessus"
   ],
@@ -40,15 +39,13 @@
     16,
     17,
     18,
-    19,
-    20
+    19
   ],
   "etapes": {
     "06.webp": 2,
     "07.webp": 2,
     "08.webp": 2,
     "09.webp": 5,
-    "10.webp": 3,
     "11.webp": 4,
     "12.webp": 5
   }
