@@ -35,7 +35,7 @@ export default function CvPage() {
       <SiteHeader active="/cv" className="print:hidden" />
       <p className="hidden text-5xl font-bold tracking-[-0.05em] print:block">augustin marsollier</p>
 
-      <div className="grid gap-x-10 gap-y-16 pt-10 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] print:grid-cols-[minmax(0,1fr)_minmax(0,2.2fr)] print:gap-y-6 print:pt-6 print:text-[10.5pt]">
+      <div className="grid gap-x-10 gap-y-16 pt-10 text-lg font-semibold leading-snug tracking-tight sm:text-xl lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] print:grid-cols-[minmax(0,1fr)_minmax(0,2.2fr)] print:gap-y-6 print:pt-4 print:text-[10.5pt]">
         <div className="grid content-start gap-8 print:gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element -- portrait fixe (photo LinkedIn), aussi imprimé */}
           <img
@@ -70,7 +70,7 @@ export default function CvPage() {
           </div>
         </div>
 
-        <div className="grid gap-14 print:gap-5">
+        <div className="grid gap-14 print:gap-3.5">
           {SECTIONS.map((s) => (
             <section key={s.title}>
               <h2 className="text-2xl sm:text-3xl print:text-[15pt]">{s.title}</h2>
