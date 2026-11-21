@@ -68,49 +68,55 @@
     "title": "Cafetiere au beurre",
     "cover": {
       "src": "/projects/cafetiere-au-beurre/thumb.webp",
-      "width": 396,
+      "width": 420,
       "height": 560
     },
     "images": [
       {
         "src": "/projects/cafetiere-au-beurre/01.webp",
-        "width": 840,
-        "height": 1188
+        "width": 1200,
+        "height": 1600
       },
       {
         "src": "/projects/cafetiere-au-beurre/02.webp",
-        "width": 840,
-        "height": 1188
+        "sm": "/projects/cafetiere-au-beurre/02-sm.webp",
+        "width": 2000,
+        "height": 1319
       },
       {
         "src": "/projects/cafetiere-au-beurre/03.webp",
-        "width": 840,
-        "height": 1188
+        "sm": "/projects/cafetiere-au-beurre/03-sm.webp",
+        "width": 1500,
+        "height": 1200
       },
       {
         "src": "/projects/cafetiere-au-beurre/04.webp",
-        "width": 840,
-        "height": 1188
+        "sm": "/projects/cafetiere-au-beurre/04-sm.webp",
+        "width": 1500,
+        "height": 1700
       },
       {
         "src": "/projects/cafetiere-au-beurre/05.webp",
-        "width": 840,
-        "height": 1188
+        "sm": "/projects/cafetiere-au-beurre/05-sm.webp",
+        "width": 1400,
+        "height": 1400
       },
       {
         "src": "/projects/cafetiere-au-beurre/06.webp",
-        "width": 840,
-        "height": 1188
+        "width": 1200,
+        "height": 1600
       },
       {
         "src": "/projects/cafetiere-au-beurre/07.webp",
-        "width": 840,
-        "height": 1188
+        "sm": "/projects/cafetiere-au-beurre/07-sm.webp",
+        "width": 833,
+        "height": 2000
       },
       {
         "src": "/projects/cafetiere-au-beurre/08.webp",
-        "width": 840,
-        "height": 1188
+        "sm": "/projects/cafetiere-au-beurre/08-sm.webp",
+        "width": 833,
+        "height": 2000
       },
       {
         "src": "/projects/cafetiere-au-beurre/09.webp",
@@ -134,19 +140,59 @@
       },
       {
         "src": "/projects/cafetiere-au-beurre/13.webp",
-        "sm": "/projects/cafetiere-au-beurre/13-sm.webp",
-        "width": 1500,
-        "height": 2000
+        "width": 840,
+        "height": 1188
       },
       {
         "src": "/projects/cafetiere-au-beurre/14.webp",
-        "sm": "/projects/cafetiere-au-beurre/14-sm.webp",
+        "width": 840,
+        "height": 1188
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/15.webp",
+        "width": 840,
+        "height": 1188
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/16.webp",
+        "width": 840,
+        "height": 1188
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/17.webp",
+        "width": 840,
+        "height": 1188
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/18.webp",
+        "width": 840,
+        "height": 1188
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/19.webp",
+        "width": 840,
+        "height": 1188
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/20.webp",
+        "width": 840,
+        "height": 1188
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/21.webp",
+        "sm": "/projects/cafetiere-au-beurre/21-sm.webp",
         "width": 1500,
         "height": 2000
       },
       {
-        "src": "/projects/cafetiere-au-beurre/15.webp",
-        "sm": "/projects/cafetiere-au-beurre/15-sm.webp",
+        "src": "/projects/cafetiere-au-beurre/22.webp",
+        "sm": "/projects/cafetiere-au-beurre/22-sm.webp",
+        "width": 1500,
+        "height": 2000
+      },
+      {
+        "src": "/projects/cafetiere-au-beurre/23.webp",
+        "sm": "/projects/cafetiere-au-beurre/23-sm.webp",
         "width": 2000,
         "height": 800
       }
