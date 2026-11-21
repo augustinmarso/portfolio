@@ -12,13 +12,12 @@
     "Logo Fish Eye",
     "Version finale : lunettes Fish Eye, monture translucide et vague en composite d'algues",
     "Version finale : les lunettes en suspension",
+    "Version finale : gros plan sur la vague d'algues",
     "Version finale : vue de face",
     "Version finale : les lunettes dans une boîte de sardines",
     "Version finale : les lunettes portées, essai sur une tête 3D",
     "Version finale : charnière rivetée à cinq charnons",
     "Version finale : logo Fish Eye dépoli sur la branche",
-    "Version finale : mise en scène sur sol blanc, bloc de sel et plaque transparente",
-    "Version finale : gros plan sur la vague d'algues",
     "Première version : lunettes translucides, rendu 3D",
     "Première version : lunettes vues de face, monture translucide et bord en algues",
     "Première version : lunettes dans une boîte de sardines",
@@ -32,6 +31,8 @@
     "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
+    10,
+    11,
     12,
     13,
     14,
@@ -40,8 +41,7 @@
     17,
     18,
     19,
-    20,
-    21
+    20
   ],
   "etapes": {
     "06.webp": 2,
