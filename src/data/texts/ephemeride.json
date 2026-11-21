@@ -11,11 +11,9 @@
   "captions": [
     "L'Éphéméride dans un couloir d'EHPAD, au-dessus de la main courante",
     "Le couloir : fauteuils, déambulateur, panneau d'affichage et les quatre plaques",
-    "Vue depuis un fauteuil : la hauteur de lecture d'un résident assis",
     "Les quatre plaques : Semainier, Éphéméride, Infos et Activités",
     "Semainier : chaque date est une étiquette accrochée à son pion",
     "Éphéméride : le jour, la date, le mois et l'année se changent pièce par pièce",
-    "Infos et Activités : météo, saison, cartes d'activités et ardoise à la craie",
     "Pour un atelier, les plaques se posent sur un support à rainure ; la dernière se glisse dans la fente",
     "L'étiquette du jour vient s'accrocher sur son pion",
     "La caisse de rangement : les plaques, le support en deux moitiés et toutes les cartes",
@@ -59,8 +57,10 @@
     "Détail des cases : queues droites aux angles, cloisons à tenons"
   ],
   "processus": [
-    10,
+    8,
+    9,
     11,
+    12,
     13,
     14,
     15,
@@ -78,19 +78,17 @@
     27,
     28,
     29,
-    30,
     31,
     33,
     35,
+    36,
     37,
     38,
     39,
     40,
-    41,
     42,
-    44,
-    45,
-    47
+    43,
+    45
   ],
   "etapes": {
     "14.webp": 1,

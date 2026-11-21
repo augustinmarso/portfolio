@@ -231,11 +231,6 @@
       "width": 440,
       "height": 560
     },
-    "hover": {
-      "src": "/projects/cylinder-chair/hover.webp",
-      "width": 440,
-      "height": 560
-    },
     "images": [
       {
         "src": "/projects/cylinder-chair/01.webp",
@@ -635,6 +630,11 @@
       "width": 560,
       "height": 373
     },
+    "hover": {
+      "src": "/projects/ephemeride/hover-mwq67v8q.webp",
+      "width": 560,
+      "height": 373
+    },
     "images": [
       {
         "src": "/projects/ephemeride/01.webp",
@@ -645,12 +645,6 @@
       {
         "src": "/projects/ephemeride/02.webp",
         "sm": "/projects/ephemeride/02-sm.webp",
-        "width": 2000,
-        "height": 1333
-      },
-      {
-        "src": "/projects/ephemeride/03.webp",
-        "sm": "/projects/ephemeride/03-sm.webp",
         "width": 2000,
         "height": 1333
       },
@@ -669,12 +663,6 @@
       {
         "src": "/projects/ephemeride/06.webp",
         "sm": "/projects/ephemeride/06-sm.webp",
-        "width": 1800,
-        "height": 1800
-      },
-      {
-        "src": "/projects/ephemeride/07.webp",
-        "sm": "/projects/ephemeride/07-sm.webp",
         "width": 1800,
         "height": 1800
       },
