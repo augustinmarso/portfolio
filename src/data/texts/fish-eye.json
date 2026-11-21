@@ -6,12 +6,22 @@
     "objet",
     "nature"
   ],
-  "intro": "Le projet répond à un concours du salon Silmo : concevoir une paire de lunettes avec de la bakélite et des matériaux naturels. Les formes viennent de l'œil et de la tête du poisson. La monture translucide porte un bord en matière à base d'algues.",
+  "intro": "Le projet répond à un concours du salon Silmo : concevoir une paire de lunettes avec de la bakélite et des matériaux naturels. Les formes viennent de l'œil et de la tête du poisson. La monture translucide porte un bord en matière à base d'algues. Les premières images montrent la version finale, redessinée en 2026 : proportions réalistes, charnières rivetées, branches épaisses en queue de poisson et logo dépoli.",
   "captions": [
     "Logo Fish Eye",
-    "Lunettes translucides, rendu 3D",
-    "Lunettes vues de face, monture translucide et bord en algues",
-    "Lunettes dans une boîte de sardines",
+    "Version finale : lunettes Fish Eye, monture translucide et vague en composite d'algues",
+    "Version finale : les lunettes en suspension",
+    "Version finale : vue de face",
+    "Version finale : les lunettes dans une boîte de sardines",
+    "Version finale : les lunettes portées, essai sur une tête 3D",
+    "Version finale : charnière rivetée à cinq charnons",
+    "Version finale : logo Fish Eye dépoli sur la branche",
+    "Version finale : mise en scène sur sol blanc, bloc de sel et plaque transparente",
+    "Version finale : mise en scène sur bloc sombre",
+    "Version finale : gros plan sur la vague d'algues",
+    "Première version : lunettes translucides, rendu 3D",
+    "Première version : lunettes vues de face, monture translucide et bord en algues",
+    "Première version : lunettes dans une boîte de sardines",
     "Lunettes portées, portrait en extérieur",
     "Photographie d'inspiration, deux poissons devant les yeux",
     "Croquis de recherche de montures",
@@ -22,13 +32,13 @@
     "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
   ],
   "etapes": {
     "06.webp": 2,
