@@ -53,11 +53,10 @@ export default function CvPage() {
             ))}
           </p>
           <p className="font-normal">
-            {contact.email}
-            <br />
-            {contact.telephone.affichage}
-            <br />
-            augustinmarso.github.io/portfolio
+            {/* Tout est cliquable, aussi dans le PDF imprimé. */}
+            <a href={`mailto:${contact.email}`} className="block hover:underline">{contact.email}</a>
+            <a href={`tel:${contact.telephone.international}`} className="block hover:underline">{contact.telephone.affichage}</a>
+            <a href="https://augustinmarso.github.io/portfolio/" target="_blank" rel="noreferrer" className="block hover:underline">augustinmarso.github.io/portfolio</a>
             {SOCIALS.map((s) => (
               <span key={s.label} className="block">
                 <a href={s.href} target="_blank" rel="noreferrer" className="hover:underline">
@@ -89,14 +88,15 @@ export default function CvPage() {
                         </span>
                       )}
                       {/* eslint-disable-next-line @next/next/no-img-element -- petit logo fixe, aussi imprimé */}
-                      {it.logo && <img src={asset(it.logo)} alt="ENSAAMA" className="mt-3 h-5 w-auto dark:invert print:h-3.5" />}
+                      {it.logo && <img src={asset(it.logo)} alt="ENSAAMA" className="mt-3 h-5 w-auto dark:invert print:hidden" />}
                     </dd>
                   </div>
                 ))}
               </dl>
             </section>
           ))}
-          <section>
+          {/* Logos des marques : à l'écran seulement, pas sur le CV imprimé. */}
+          <section className="print:hidden">
             <h2 className="text-2xl sm:text-3xl print:text-[15pt]">partenariats et concours</h2>
             {(["partenariat", "concours"] as const).map((type) => (
               <div key={type} className="mt-6 grid gap-1 sm:grid-cols-[11rem_1fr] sm:gap-6 print:mt-2 print:grid-cols-[7.5rem_1fr] print:gap-4">

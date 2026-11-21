@@ -174,15 +174,17 @@ export function ProjectPageView({ project, view }: { project: Project; view: Pro
 
 
           {/* Exception : le téléphone sous le texte ; une fois apparu, il reste fixe pendant le défilement. */}
-          {/* avec une vidéo 3D en dessous, le téléphone ne reste pas figé (il la recouvrirait) */}
+          {/* Avec une vidéo 3D en dessous : le téléphone reste accroché le long d'une piste haute (≈ 2 écrans
+              de défilement) ; la vidéo 3D n'arrive qu'à la fin de cette piste, puis reste accrochée à son tour. */}
           {video && (
-            <figure className={cn("mt-12", !project.boucle && "md:sticky md:top-[84px]")}>
-              <VideoPlayer src={video.src} poster={video.poster} label={`Vidéo de présentation — ${project.title}`} />
-            </figure>
+            <div className={cn("mt-12", project.boucle && "md:min-h-[260dvh]")}>
+              <figure className="md:sticky md:top-[84px]">
+                <VideoPlayer src={video.src} poster={video.poster} label={`Vidéo de présentation — ${project.title}`} />
+              </figure>
+            </div>
           )}
-          {/* téléphone + vidéo 3D : la vidéo 3D passe sous le téléphone, dans la colonne du texte */}
           {video && project.boucle && (
-            <figure className="mt-12">
+            <figure className="mt-12 md:sticky md:top-[84px]">
               <BoucleVideo video={project.boucle} label={`${project.title} en 3D`} />
             </figure>
           )}
