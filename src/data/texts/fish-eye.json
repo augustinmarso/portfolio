@@ -8,6 +8,7 @@
   ],
   "intro": "Le projet répond à un concours du salon Silmo : concevoir une paire de lunettes avec de la bakélite et des matériaux naturels. Les formes viennent de l'œil et de la tête du poisson. La monture translucide porte un bord en matière à base d'algues. Les premières images montrent la version finale, redessinée en 2026 : proportions réalistes, charnières rivetées, branches épaisses en queue de poisson et logo dépoli.",
   "captions": [
+    "Version finale : mise en scène sur bloc sombre",
     "Logo Fish Eye",
     "Version finale : lunettes Fish Eye, monture translucide et vague en composite d'algues",
     "Version finale : les lunettes en suspension",
@@ -17,7 +18,6 @@
     "Version finale : charnière rivetée à cinq charnons",
     "Version finale : logo Fish Eye dépoli sur la branche",
     "Version finale : mise en scène sur sol blanc, bloc de sel et plaque transparente",
-    "Version finale : mise en scène sur bloc sombre",
     "Version finale : gros plan sur la vague d'algues",
     "Première version : lunettes translucides, rendu 3D",
     "Première version : lunettes vues de face, monture translucide et bord en algues",
@@ -32,6 +32,9 @@
     "Trois vues du modèle 3D : face, côté, dessus"
   ],
   "processus": [
+    12,
+    13,
+    14,
     15,
     16,
     17,

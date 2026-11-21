@@ -14,11 +14,12 @@
     "le-choix-de-malo",
     "le-jeu-de-la-grenouille",
     "ludilove",
-    "points-de-vue",
     "open-mind",
     "porte-cle-jeton-de-caddie",
     "ratp",
-    "recolteur-pomme-de-pin"
+    "recolteur-pomme-de-pin",
+    "les-mauvais-lundis",
+    "points-de-vue"
   ],
   "titles": {
     "ephemeride": "Éphéméride",
@@ -41,7 +42,7 @@
     "kai": "11",
     "la-societe-de-jeux": "_covers",
     "le-jeu-de-la-grenouille": "10",
-    "ephemeride": "01",
+    "ephemeride": "09",
     "cylinder-chair": "_covers",
     "echappee": "_covers",
     "open-mind": "_covers",
@@ -53,7 +54,8 @@
     "le-choix-de-malo": "_covers",
     "gorillachoc": "_covers",
     "recolteur-pomme-de-pin": "_covers",
-    "porte-cle-jeton-de-caddie": "_covers"
+    "porte-cle-jeton-de-caddie": "_covers",
+    "fish-eye": "21"
   },
   "videos": [
     "ludilove",

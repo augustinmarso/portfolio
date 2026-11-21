@@ -631,7 +631,7 @@
     "slug": "ephemeride",
     "title": "Ephemeride",
     "cover": {
-      "src": "/projects/ephemeride/thumb.webp",
+      "src": "/projects/ephemeride/thumb-mwq5w7cc.webp",
       "width": 560,
       "height": 373
     },
@@ -790,11 +790,6 @@
         "height": 1197
       },
       {
-        "src": "/projects/ephemeride/28.webp",
-        "width": 800,
-        "height": 800
-      },
-      {
         "src": "/projects/ephemeride/29.webp",
         "sm": "/projects/ephemeride/29-sm.webp",
         "width": 2000,
@@ -922,11 +917,17 @@
     "slug": "fish-eye",
     "title": "FISH-EYE",
     "cover": {
-      "src": "/projects/fish-eye/thumb.webp",
-      "width": 560,
+      "src": "/projects/fish-eye/thumb-mwq5uajf.webp",
+      "width": 420,
       "height": 560
     },
     "images": [
+      {
+        "src": "/projects/fish-eye/21.webp",
+        "sm": "/projects/fish-eye/21-sm.webp",
+        "width": 1728,
+        "height": 2304
+      },
       {
         "src": "/projects/fish-eye/01.webp",
         "width": 596,
@@ -979,12 +980,6 @@
         "sm": "/projects/fish-eye/20-sm.webp",
         "width": 1600,
         "height": 2400
-      },
-      {
-        "src": "/projects/fish-eye/21.webp",
-        "sm": "/projects/fish-eye/21-sm.webp",
-        "width": 1728,
-        "height": 2304
       },
       {
         "src": "/projects/fish-eye/22.webp",
