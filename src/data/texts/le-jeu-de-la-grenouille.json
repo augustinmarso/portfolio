@@ -15,22 +15,23 @@
     "Enfant lançant une grenouille vers le plateau mural",
     "Plateau incliné et grenouilles en l'air, vue de côté",
     "Grenouille en silicone translucide tenue à la main",
-    "Grenouille verte lancée dans la main",
-    "Grenouille verte adhérant à une paroi en bois",
-    "Grenouille en silicone blanc, vue du dessus",
-    "Boîte kraft du jeu, illustration de silhouettes et de grenouilles",
     "Catalogue ancien de jeux de tonneau Allo",
     "Carte postale ancienne, jeux dans la cour d'un cercle militaire",
+    "Grenouille verte lancée dans la main",
+    "Boîte kraft du jeu, illustration de silhouettes et de grenouilles",
+    "Grenouille verte adhérant à une paroi en bois",
+    "Grenouille en silicone blanc, vue du dessus",
     "Croquis de recherche plateau, grenouilles et système de transport",
     "Formes de plateau découpées dans du carton, essais d'empilement",
     "Moule imprimé en 3D en deux parties",
     "Plan du plateau et d'une grenouille, dessin au trait",
     "Livret des règles ouvert, plateau illustré et grenouille",
-    "Modèle 3D en fil de fer : le plateau et les grenouilles",
-    "Modèle 3D sans matière : le plateau et les grenouilles, vue de trois quarts",
-    "Trois vues du modèle 3D : face, côté, dessus"
+    "Modèle 3D sans matière : le plateau et les grenouilles, vue de trois quarts"
   ],
   "processus": [
+    7,
+    8,
+    9,
     11,
     12,
     13,
@@ -38,9 +39,7 @@
     15,
     16,
     17,
-    18,
-    19,
-    20
+    18
   ],
   "etapes": {
     "12.webp": 2,
@@ -50,8 +49,6 @@
     "16.webp": 4,
     "17.webp": 5,
     "18.webp": 5,
-    "19.webp": 3,
-    "20.webp": 4,
-    "21.webp": 5
+    "20.webp": 4
   }
 }
